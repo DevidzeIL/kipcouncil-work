@@ -1,0 +1,1143 @@
+@import url("/css/fonts.css");
+
+body
+{
+    min-width: 400px;
+}
+
+@media all
+{
+/* -MULTI CLASSES */
+    /* usefull block */
+    .box-header
+    {
+        margin-bottom: 40px;
+    }
+
+    .box-dateitem
+    {
+        margin-bottom: 10px;
+    }
+
+    /* -BLOCK HIDER */
+    .hider
+    {
+        height: 10vh;
+    }
+    
+
+    
+    /* -BLOCK HEADER */
+    .header
+    {
+        margin-bottom: 130px;
+    }
+
+    .navbar-brand
+    {
+        margin: 0 0px;
+    }
+
+    .nav-item
+    {
+        margin-right: 75px;
+    }
+
+
+
+    /* -BLOCK PROMO */
+    .promo
+    {
+        margin-bottom: 50px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .promo-dateitem
+    {
+        text-align: right;
+    }
+
+    /* -BLOCK EVENTS */
+    .event-text
+    {
+        margin-top: 20px;
+    }
+
+    .event-more
+    {
+        margin-top: 20px;
+        margin-bottom: 60px;
+    }
+
+
+    /* -BLOCK INFO */
+    .info
+    {
+        margin-bottom: 100px;
+    }
+        /* -COLUMN INFO > TEXT */
+        .info-author-header
+        {
+            margin-bottom: 90px;
+        }
+
+        .info-box
+        {
+            margin-bottom: 50px;
+        }
+
+        /* -COLUMN INFO > IMG */
+        .info-user
+        {
+            margin-bottom: 60px;
+        }
+
+        .info-role
+        {
+            margin-top: 30px;
+        }
+
+        .info-fio
+        {
+            margin-top: 20px;
+        }
+
+
+                
+
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+
+        
+        .footer
+        {
+            margin-bottom: 25px;
+        }
+
+        .footer-logo
+        {
+            margin-bottom: 30px;
+        }
+
+        .footer-box
+        {
+            margin-bottom: 20px;
+        }
+
+        .footer-nav-header
+        {
+            margin-bottom: 20px;    
+        }
+
+        .footer-nav-item
+        {
+            margin-bottom: 15px;
+        }
+
+        .footer-line
+        {
+            border-right: black 5px solid;
+        }
+
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        .footer-main-box-dateitem
+        {
+            margin-bottom: 10px;
+        }
+    
+        .footer-main-box-text
+        {
+            margin-bottom: 35px;
+        }
+
+        .footer-btns
+        {
+            margin-bottom: 50px;
+        }
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        .footer-box-dateitem
+        {
+            margin-bottom: 25px;
+            background-color: white;
+        }
+    
+        .footer-box-dateitem-activated
+        {
+            margin-bottom: 25px;
+            background-color: black;
+        }
+    
+        .news-full-list
+        {
+            margin-top: 100px;
+        }
+
+
+
+    /* -BLOCK COPYRIGHT */
+    .copyright-item
+    {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+/*-----=============================----- */
+
+
+/* -PAGE MAIN */
+    /* -BLOCK HIDER */
+    /* .hider */
+    
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK PROMO */
+    /* .promo */
+    /* .promo-header */
+
+
+
+    /* -BLOCK DIRECTIONS */
+    .directions
+    {
+        margin-bottom: 70px;
+    }
+    /* .box-header */
+    .box-item
+    {
+        margin-bottom: 15px;
+    }
+    /* .box-dateitem */
+
+    /* -BLOCK BIG PROMO */
+    .big-promo
+    {
+        height: 100vh;
+        background: url(/img/events/pic-1.jpg);
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        margin-bottom: 150px;
+    }
+
+    .big-promo-text
+    {
+        position: absolute;
+        bottom: 0;
+    }
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer */
+        /* .footer-logo */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+        /* .footer-line */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-text */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright-item */
+
+
+
+/* -PAGE DIRECTION */
+    /* -BLOCK HIDER */
+    /* .hider */
+    
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK PROMO */
+    /* .promo */
+    /* .promo-header */
+
+    /* -BLOCK INFO */
+        /* -COLUMN INFO > TEXT */
+        /* .info-author-header */
+        /* .info-text */
+        /* .box-header */
+        .info-calendar
+        {
+            margin-bottom: 20px;
+        }
+
+        /* -COLUMN INFO > IMG */
+        /* .info-role */
+        /* .info-fio */
+
+    /* -BLOCK EVENTS */
+    /* .event-text */
+    /* .event-more */
+
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer */
+        /* .footer-logo */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+        /* .footer-line */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-text */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright-item */
+
+
+
+/* -PAGE ACCOUNT */
+/* -------------------------- */
+
+
+
+
+/* -PAGE CALENDAR */
+    /* -BLOCK HIDER */
+    /* .hider */
+    
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK PROMO */
+    /* .promo */
+    /* .promo-header */
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer */
+        /* .footer-logo */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+        /* .footer-line */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-text */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright-item */
+
+
+
+
+
+/* -PAGE DOCS_COLLEGE */
+/* -PAGE DOCS_COUNSIL */
+    /* -BLOCK HIDER */
+    /* .hider */
+    
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK PROMO */
+    /* .promo */
+    /* .promo-header */
+    
+    /* DOCS */
+    .docs
+    {
+        margin-bottom: 150px;
+    }
+    
+    .doc-header
+    {
+        margin-top: 100px;
+    }
+    
+    .doc-year-header
+    {
+        margin-left: 100px;
+        margin-top: 30px;
+    }
+    
+    .doc-document
+    {
+        margin-top: 30px;
+    }
+    
+    
+
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer */
+        /* .footer-logo */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+        /* .footer-line */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-text */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright-item */
+
+
+
+
+
+/* -PAGE GALLERY  */
+    /* -BLOCK HIDER */
+    /* .hider */
+    
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK PROMO */
+    /* .promo */
+    /* .promo-header */
+
+    /* -BLOCK GALLERY */
+    .gallery
+    {
+        margin-bottom: 150px;
+    }
+    
+    .gallery-image
+    {
+        padding: 10px;
+    }
+
+    .box-filter
+    {
+        margin-right: 50px;
+    }
+
+    .img-icon
+    {
+        margin-left: 75px;
+        margin-bottom: 10px;
+    }
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer */
+        /* .footer-logo */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+        /* .footer-line */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-text */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright-item */
+
+
+
+
+/* -PAGE ABOUT */
+    /* -BLOCK HIDER */
+    /* .hider */
+    
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK PROMO */
+    /* .promo */
+    /* .promo-header */
+
+    /* -BLOCK INFO */
+        /* -COLUMN INFO > TEXT */
+        /* .info-author-header */
+        /* .info-text */
+        /* .box-header */
+
+        /* -COLUMN INFO > IMG */
+        /* .info-role */
+        /* .info-fio */
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer */
+        /* .footer-logo */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+        /* .footer-line */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-text */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright-item */
+
+
+
+
+
+/* -PAGE NEWS-ABOUT */
+    /* -BLOCK HIDER */
+    /* .hider */
+    
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK PROMO */
+    /* .promo */
+    /* .promo-header */
+
+    /* -BLOCK BIG PROMO */
+    .news-promo
+    {
+        height: 70vh;
+        background: url(/img/events/pic-1.jpg);
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        margin-bottom: 150px;
+    }
+
+    /* -BLOCK INFO */
+        /* -COLUMN INFO > TEXT */
+        /* .info-author-header */
+        .info-about
+        {
+            margin-top: -70px;
+            margin-left: 70px;
+        }
+        /* box-header */
+        /* info-text */
+
+        /* -COLUMN INFO > LIST */
+        .info-group
+        {
+            margin-right: 50px;
+        }
+
+        .info-list
+        {
+            margin-bottom: 15px;
+        }
+                
+        /* .info-fio */
+    
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer */
+        /* .footer-logo */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+        /* .footer-line */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-text */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright-item */
+
+        
+
+/* -PAGE NEWS */
+    /* -BLOCK HIDER */
+    /* .hider */
+    
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK PROMO */
+    /* .promo */
+    /* .promo-header */
+
+    /* -BLOCK  EVENTS*/
+    .events
+    {
+        margin-bottom: 150px;
+    }
+    /* box-dateitem */
+    /* event-text */
+    /* event-more */
+
+
+/* -PAGE SEARCH */
+    /* -BLOCK HIDER */
+    /* .hider */
+
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK SEARCH */
+    .search
+    {
+        margin-bottom: 30vh;
+    }
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer */
+        /* .footer-logo */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+        /* .footer-line */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-text */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright-item */
+}
+
+
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+
+
+@media (max-width: 3840px)
+{
+    /* -MULTI CLASSES */   
+
+    
+    /* -BLOCK HEADER */
+    .nav-item
+    {
+        margin-right: 75px;
+    }
+
+
+    /* -BLOCK INFO */
+    .info
+    {
+        margin-bottom: 100px;
+    }
+        /* -COLUMN INFO > TEXT */
+        .info-box
+        {
+            margin-bottom: 100px;
+        }
+                
+
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        .footer-line
+        {
+            border-right: black 5px solid;
+        }
+
+/*-----=============================----- */
+
+
+/* -PAGE MAIN */
+
+
+
+/* -PAGE DIRECTION */
+    /* -BLOCK INFO */
+        /* -COLUMN INFO > TEXT */
+        /* .info-author-header */
+        /* .info-text */
+        /* .box-header */
+        .info-calendar
+        {
+            margin-bottom: 20px;
+        }
+
+
+
+/* -PAGE ACCOUNT */
+/* -------------------------- */
+
+
+
+
+/* -PAGE CALENDAR */
+
+
+
+/* -PAGE DOCS_COLLEGE */
+/* -PAGE DOCS_COUNSIL */
+    /* -BLOCK DOCS */    
+    .doc-header
+    {
+        margin-top: 100px;
+    }
+    
+    .doc-year-header
+    {
+        margin-left: 100px;
+        margin-top: 30px;
+    }
+    
+    .doc-document
+    {
+        margin-top: 30px;
+    }
+    
+
+
+
+/* -PAGE GALLERY  */
+
+
+
+/* -PAGE ABOUT */
+
+
+
+/* -PAGE NEWS-ABOUT */       
+
+
+
+/* -PAGE NEWS */
+
+
+
+/* -PAGE SEARCH */
+
+}
+
+
+
+@media (max-width: 1440px)
+{
+    /* -MULTI CLASSES */
+
+    
+    /* -BLOCK HEADER */
+    .nav-item
+    {
+        margin-right: 45px;
+    }
+
+
+    /* -BLOCK INFO */
+    .info
+    {
+        margin-bottom: 100px;
+    }
+        /* -COLUMN INFO > TEXT */
+        .info-box
+        {
+            margin-bottom: 50px;
+        }
+        
+        .info-text
+        {
+            margin-top: -20px;
+            margin-bottom: 30px;
+        }
+                
+
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        .footer-logo
+        {
+            width: 15vh;
+        }
+
+        .footer-line
+        {
+            margin-left: 6vh;
+            margin-right: -2vh;
+            border-right: black 5px solid;
+        }
+
+
+        .footer-box-dateitems
+        {
+            margin-top: 50px !important;  
+        }
+/*-----=============================----- */
+
+
+/* -PAGE MAIN */
+
+
+
+/* -PAGE DIRECTION */
+    /* -BLOCK INFO */
+        /* -COLUMN INFO > TEXT */
+        /* .info-author-header */
+        /* .info-text */
+        /* .box-header */
+        .info-calendar
+        {
+            margin-bottom: 20px;
+        }
+
+
+/* -PAGE ACCOUNT */
+/* -------------------------- */
+
+
+
+/* -PAGE CALENDAR */
+
+
+
+/* -PAGE DOCS_COLLEGE */
+/* -PAGE DOCS_COUNSIL */
+    /* -BLOCK DOCS */    
+    .doc-header
+    {
+        margin-top: 50px;
+    }
+    
+    .doc-year-header
+    {
+        margin-left: 100px;
+        margin-top: 15px;
+    }
+    
+    .doc-document
+    {
+        margin-top: 15px;
+    }
+
+
+
+/* -PAGE GALLERY  */
+
+
+
+/* -PAGE ABOUT */
+
+
+
+/* -PAGE NEWS-ABOUT */
+
+
+
+/* -PAGE NEWS */
+
+
+
+/* -PAGE SEARCH */
+    /* -BLOCK SEARCH */
+    .search
+    {
+        margin-bottom: 30vh;
+    }
+
+}
+
+
+
+@media (max-width: 992px)
+{
+    /* -MULTI CLASSES */
+        /* usefull block */
+        .box-header
+        {
+            margin-bottom: 20px;
+        }
+    
+        /* -BLOCK PROMO */
+        .promo-header
+        {
+            margin-left: 30px;
+        }
+    
+        /* -BLOCK INFO */
+            /* -COLUMN INFO > TEXT */    
+            .info-text
+            {
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+    
+            /* -COLUMN INFO > IMG */    
+            .info-role
+            {
+                margin-top: 15px;
+            }
+    
+            .info-fio
+            {
+                margin-top: 15px;
+            }
+    
+        /* -BLOCK FOOTER */
+            /* -COLUMN FOOTER > NAVIGATION */
+            .footer-logo
+            {
+                width: 20vh;
+            }
+
+            .footer-line
+            {
+                margin-left: -4vh;
+                margin-right: 0vh;
+                border-right: black 0px solid;
+            }
+    
+            /* -COLUMN FOOTER > NEWS LIST */
+            .footer-box-dateitems
+            {
+                margin-top: 35px !important;
+                margin-bottom: 30px;
+            }
+        
+            .news-full-list
+            {
+                text-align: center;
+                margin-bottom: 50px;
+            }
+    /*-----=============================----- */
+    
+    
+    /* -PAGE MAIN */
+        /* -BLOCK DIRECTIONS */
+        .box
+        {
+            margin-bottom: 15px;
+        }
+
+    
+    /* -PAGE DIRECTION */
+        /* -BLOCK INFO */
+            /* -COLUMN INFO > TEXT */
+
+            .info-calendar
+            {
+                margin-bottom: 40px;
+                text-align: center;
+            }
+    
+    
+    
+    /* -PAGE ACCOUNT */
+    
+    
+    /* -PAGE CALENDAR */
+    
+    
+    
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
+        
+    
+    
+    /* -PAGE GALLERY  */
+
+    
+    
+    /* -PAGE ABOUT */
+
+    
+    
+    /* -PAGE NEWS-ABOUT */
+            
+    
+    
+    /* -PAGE NEWS */
+
+
+    
+    /* -PAGE SEARCH */
+
+}
+
+
+
+@media (max-width: 576px)
+{
+    *
+    {
+        padding: 0 3px;
+    }
+
+    /* -MULTI CLASSES */
+        /* usefull block */
+        .box-header
+        {
+            margin-bottom: 25px;
+        }
+        
+        .promo-dateitem
+        {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+    
+        /* -BLOCK INFO */
+            /* -COLUMN INFO > TEXT */
+            .info-author-header
+            {
+                margin-bottom: 40px;
+            }
+    
+            /* -COLUMN INFO > IMG */
+            .info-role
+            {
+                margin-top: 10px;
+            }
+    
+            .info-fio
+            {
+                margin-top: 10px;
+            }
+
+        /* -BLOCK FOOTER */
+            /* -COLUMN FOOTER > MAIN NEWS*/
+            .footer-main-box-event
+            {
+                margin-bottom: 15px;
+            }
+    /*-----=============================----- */
+    
+    
+
+    /* -PAGE MAIN */
+        /* -BLOCK DIRECTIONS */
+        .directions
+        {
+            margin-bottom: 10px;
+        }
+        /* .box-header */
+        .box
+        {
+            margin-bottom: 40px;
+        }
+        .box-item
+        {
+            margin-bottom: 20px;
+        }
+    
+        /* -BLOCK BIG PROMO */
+        .big-promo
+        {
+            margin-bottom: 50px;
+        }
+    
+
+
+    /* -PAGE DIRECTION */
+        /* -BLOCK INFO */
+            /* -COLUMN INFO > TEXT */
+            .info-calendar
+            {
+                margin-bottom: 100px;
+            }
+    
+
+
+    /* -PAGE ACCOUNT */
+    
+
+    
+    /* -PAGE CALENDAR */
+    
+
+    
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
+    
+    
+
+    /* -PAGE GALLERY  */
+
+
+
+    /* -PAGE ABOUT */
+    
+    
+    
+    /* -PAGE NEWS-ABOUT */
+        /* -BLOCK BIG PROMO */
+        .news-promo
+        {
+            margin-bottom: 50px;
+        }
+    
+        /* -BLOCK INFO */
+            /* -COLUMN INFO > TEXT */
+            .info-about
+            {
+                margin-top: 10px;
+            }
+    
+            /* -COLUMN INFO > LIST */
+            .info-group
+            {
+                margin-right: 20px;
+            }
+    
+            .info-list
+            {
+                margin-bottom: 30px;
+            }
+            
+
+    
+    /* -PAGE NEWS */
+    
+
+
+    /* -PAGE SEARCH */
+
+}

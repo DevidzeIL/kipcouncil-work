@@ -1,0 +1,59 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<!-- PROMO -->        
+<section class="promo row">
+    <div class="col-12 col-sm-7 promo-header">{{event.name}}</div>
+    <div class="col-12 col-sm-7 box-dateitem">{{event.date}}</div>
+</section>
+
+
+<!-- INFO -->
+<section class="info row">
+    <div class="col-0 col-sm-1 col-md-1 col-lg-1"></div>
+    <!-- INFO > TEXT -->
+    <div class="col-sm-10 col-md-10 col-lg-4">
+        <div class="row">
+            <div class="info-box">
+                <div class="info-author-header"></div>
+                <div class="info-about">
+                    {{new.main_text}}
+                    <br>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="box-header">Цели</div>
+                <div class="info-text">
+                    {{new.common_text}}
+                    <br>
+                </div>
+                <div class="info-link"><a href="">Фото/Видео</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-1"></div>
+
+
+
+    <!-- INFO > LIST -->
+    <div class="col-sm-8 col-md-8 col-lg-5 info-list">
+        <div class="box-header">Участники</div>
+        <div class="row">
+            <div class="col-12 info-lists">
+
+                {% for member in members %}        
+                <div class="info-list">
+                    <span class="info-group">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</span>
+                    <span class="info-fio" >{{member.user}}</span>
+                </div>
+                {% endfor %} 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-0 col-md-1"></div>
+</section>  
+
+{% endblock %}

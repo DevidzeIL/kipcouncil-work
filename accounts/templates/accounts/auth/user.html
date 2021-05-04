@@ -1,0 +1,14 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<h1>USER PROFILE</h1>
+Список мероприятий:
+{% for event in events %}
+    {{event.event}}
+{% endfor %}
+
+
+<a href="{% url 'account' %}">Настройки аккаунта</a>
+<br>
+{% endblock content %}

@@ -1,0 +1,1299 @@
+/* {% load static %} */
+
+/* FONTS */
+/* Roman - 500 */
+/* @font-face 
+{
+    src:url({% static '/fonts/HelveticaNeueCyr' %});
+    font-family: HelveticaNeueCyr;
+    font-weight: 500;
+    font-style: normal;
+} */
+
+/* Medium - 600 */
+@font-face 
+{
+    src:url(/fonts/HelveticaNeueCyr-Medium.otf);
+    font-family: HelveticaNeueCyr;
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face /* Bold - 700 */
+{
+    src:url(/fonts/HelveticaNeueCyr-Bold.otf);
+    font-family: HelveticaNeueCyr;
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face /* Heavy - 800 */
+{
+    src:url(/fonts/HelveticaNeueCyr-Heavy.otf);
+    font-family: HelveticaNeueCyr;
+    font-weight: 800;
+    font-style: normal;
+}
+
+
+
+
+
+/* ALL CSS STYLES */
+@media all
+{
+/* HOVER */
+    .nav-item-link
+    {
+        color: red;
+        text-decoration: none;
+    }
+    
+    .nav-item-link:hover
+    {
+        color: black;
+        font-weight: 800;
+        font-style: italic;
+    }
+    
+    .nav-link
+    {
+        color: red !important;
+        text-decoration: none;
+    }
+    
+    .nav-link:hover
+    {
+        color: black;
+        font-weight: 800;
+        font-style: italic;
+    }
+
+
+
+/* ------------------------------------------------------------------------------------------------ */
+
+
+
+    /* -MULTI CLASSES */
+    /* usefull block */
+    .promo-header
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 96px;
+        line-height: 94px;
+        color: black;
+        text-transform: uppercase;
+    }
+
+    .box-header
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 32px;
+        color: black;
+        text-transform: uppercase;
+        border-bottom: black 5px solid;
+    }
+
+    .box-dateitem
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 20px;
+        color: black;
+        text-transform: uppercase;
+    }
+    
+
+
+    /* -BLOCK HEADER */
+    .nav-link
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 700;
+        font-size: 18px;   
+        /* color: black !important; */
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+
+
+    /* -BLOCK PROMO */
+    .promo-dateitem
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 20px;
+        color: black;
+        text-transform: lowercase;
+        text-decoration: underline;
+    }
+
+    /* -BLOCK EVENTS */
+    .event-header
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 32px;
+        color: black;
+        text-transform: uppercase;
+    }
+
+    .event-text
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 30px;
+        color: black;
+    }
+
+    .event-more
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 14px;
+        color: black;
+        text-transform: uppercase;
+        text-decoration: underline;
+    }
+
+
+    /* -BLOCK INFO */
+        /* -COLUMN INFO > TEXT */
+        .info-author-header
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size: 32px;
+            color: black;
+            text-transform: uppercase;
+            border-top: black 5px solid;
+        }
+
+        .info-text
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 600;
+            font-size: 18px;
+            color: black;
+            line-height: 35px;
+        }
+
+        /* -COLUMN INFO > IMG */
+        .info-role
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 600;
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+        }
+
+        .info-fio
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+        }
+
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        .footer-nav-header
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size: 32px;
+            color: black;
+            text-transform: uppercase;
+            border-bottom: black 5px solid;
+        }
+
+        .footer-nav-item
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 600;
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+        }
+
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        .footer-main-box-dateitem
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size:32px;
+            color: black;
+            text-transform: uppercase;
+        }
+
+        .footer-main-box-event
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size:32px;
+            color: black;
+            text-transform: uppercase;
+            border-bottom: black 5px solid;
+        }
+
+        .footer-main-box-text
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 600;
+            font-size: 20px;
+            color: black;
+            line-height: 30px;
+        }
+
+        .footer-btn
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size: 14px;
+            color: black;
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+            .btn-l
+            {
+                text-align: left;
+            }
+            .btn-c
+            {
+                text-align: center;
+            }
+            .btn-r
+            {
+                text-align: right;
+            }
+
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        .footer-box-dateitem
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size: 24px;
+            color: black;
+            text-transform: uppercase;
+            border-bottom: black 5px solid;
+        }
+
+        .footer-box-dateitem-activated
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size: 24px;
+            color: white;
+            text-transform: uppercase;
+            border-bottom: black 5px solid;
+        }
+
+        .news-full-list
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size: 24px;
+            color: black;
+            text-transform: uppercase;
+        }
+
+
+
+    /* -BLOCK COPYRIGHT */
+    .copyright
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 12px;
+        color: black;
+        text-transform: uppercase;
+    }
+
+
+/* -PAGE MAIN */
+    /* -BLOCK HEADER */
+    /* .nav-link */
+
+    /* -BLOCK PROMO */
+    /* .promo-dateitem */
+    /* .promo-header */
+
+    /* -BLOCK DIRECTIONS */
+    /* .box-header */
+    .box-item
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 600;
+        font-size: 18px;
+        color: black;
+        text-transform: uppercase;
+    }
+    /* .box-dateitem */
+
+    /* -BLOCK BIG PROMO */
+    .big-promo-text
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 96px;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-event */
+        /* .footer-main-box-text */
+        /* .footer-btn */
+            /* .btn-l */
+            /* .btn-c */
+            /* .btn-r */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright */
+
+
+
+/* -PAGE DIRECTION */
+    /* -BLOCK HEADER */
+    /* .nav-link */
+
+    /* -BLOCK PROMO */
+    /* .promo-dateitem */
+
+    /* -BLOCK INFO */
+        /* -COLUMN INFO > TEXT */
+        /* .info-author-header */
+        /* info-text */
+        /* box-header */
+        .info-calendar
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size: 24px;
+            color: black;
+            text-transform: uppercase;
+            text-decoration: underline;
+            line-height: 25px;
+        }
+
+        /* -COLUMN INFO > IMG */
+        /* .info-role */
+        /* .info-fio */
+
+    /* -BLOCK EVENTS */
+    /* .event-header */
+    /* .event-text */
+    /* .event-more */
+
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-event */
+        /* .footer-main-box-text */
+        /* .footer-btn */
+            /* .btn-l */
+            /* .btn-c */
+            /* .btn-r */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright */
+
+
+
+/* -PAGE ACCOUNT */
+/* -------------------------- */
+
+
+
+
+/* -PAGE CALENDAR */
+    /* -BLOCK HEADER */
+    /* .nav-link */
+    
+    /* -BLOCK PROMO */
+    /* .promo-header */
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-event */
+        /* .footer-main-box-text */
+        /* .footer-btn */
+            /* .btn-l */
+            /* .btn-c */
+            /* .btn-r */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright */
+
+
+
+
+
+/* -PAGE DOCS_COLLEGE */
+/* -PAGE DOCS_COUNSIL */
+    /* -BLOCK HEADER */
+    /* .nav-link */
+    
+    /* -BLOCK PROMO */
+    /* .promo-header */
+    .doc-header, 
+    .doc-year-header
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 32px;
+        color: black;
+        text-transform: uppercase;
+        border-bottom: black 5px solid;
+    }
+
+    .doc-file
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 24px;   
+        color: black !important;
+        text-transform: uppercase;
+        text-decoration: underline;
+    }
+
+    .doc-about
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 600;
+        font-size: 24px;   
+        color: black !important;
+        text-transform: uppercase;
+    }
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-event */
+        /* .footer-main-box-text */
+        /* .footer-btn */
+            /* .btn-l */
+            /* .btn-c */
+            /* .btn-r */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright */
+
+
+
+
+
+/* -PAGE GALLERY  */
+    /* -BLOCK HEADER */
+    /* .nav-link */
+    
+    /* -BLOCK PROMO */
+    /* .promo-header */
+
+    .box-filter
+    {
+        font-family: HelveticaNeueCyr;
+        font-weight: 800;
+        font-size: 18px;
+        color: black;
+        text-transform: uppercase;
+        border-bottom: black 5px solid;
+    }
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-event */
+        /* .footer-main-box-text */
+        /* .footer-btn */
+            /* .btn-l */
+            /* .btn-c */
+            /* .btn-r */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright */
+
+
+
+
+/* -PAGE ABOUT */
+    /* -BLOCK HEADER */
+    /* .nav-link */
+
+    /* -BLOCK PROMO */
+    /* .promo-header */
+    /* .box-dateitem */
+
+    /* -BLOCK INFO */
+        /* -COLUMN INFO > TEXT */
+        /* .info-author-header */
+        /* info-text */
+        /* box-header */
+
+        /* -COLUMN INFO > IMG */
+        /* .info-role */
+        /* .info-fio */
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-event */
+        /* .footer-main-box-text */
+        /* .footer-btn */
+            /* .btn-l */
+            /* .btn-c */
+            /* .btn-r */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright */
+
+
+
+
+
+/* -PAGE NEWS-ABOUT */
+    /* -BLOCK HEADER */
+    /* .nav-link */
+
+    /* -BLOCK PROMO */
+    /* .promo-header */
+    /* .box-dateitem */
+
+    /* -BLOCK INFO */
+        /* -COLUMN INFO > TEXT */
+        /* .info-author-header */
+        .info-about
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 600;
+            font-size: 18px;
+            color: black;
+            line-height: 24px;
+        }
+        /* box-header */
+        /* info-text */
+
+        /* -COLUMN INFO > LIST */
+        .info-group
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 600;
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+        }
+        /* .info-fio */
+    
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-event */
+        /* .footer-main-box-text */
+        /* .footer-btn */
+            /* .btn-l */
+            /* .btn-c */
+            /* .btn-r */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright */
+
+        
+
+
+
+/* -PAGE NEWS */
+    /* -BLOCK  EVENTS*/
+    /* .box-dateitem */
+    /* .event-header */
+    /* .event-text */
+    /* .event-more */
+
+
+
+
+
+/* -PAGE SEARCH */
+    /* -BLOCK HEADER */
+    /* .nav-link */
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        /* .footer-nav-header */
+        /* .footer-nav-item */
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        /* .footer-main-box-dateitem */
+        /* .footer-main-box-event */
+        /* .footer-main-box-text */
+        /* .footer-btn */
+            /* .btn-l */
+            /* .btn-c */
+            /* .btn-r */
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        /* .footer-box-dateitem */
+        /* .footer-box-dateitem-activated */
+        /* .news-full-list */
+
+
+    /* -BLOCK COPYRIGHT */
+    /* .copyright */
+}
+
+
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+
+
+@media (max-width: 3840px)
+{
+    /* -MULTI CLASSES */
+    /* usefull block */
+    .promo-header
+    {
+        font-size: 96px;
+    }
+
+    .box-header
+    {
+        font-size: 32px;
+    }
+
+    /* -BLOCK PROMO */
+    .promo-dateitem
+    {
+        font-size: 20px;
+    }
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        .footer-nav-header
+        {
+            font-size: 32px;
+        }
+
+        .footer-nav-item
+        {
+            font-size: 18px;
+        }
+
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        .footer-main-box-dateitem
+        {
+            font-size:32px;
+        }
+
+        .footer-main-box-event
+        {
+            font-size:32px;
+        }
+
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        .footer-box-dateitem
+        {
+            font-size: 24px;
+        }
+
+        .footer-box-dateitem-activated
+        {
+            font-size: 24px;
+        }
+
+        .news-full-list
+        {
+            font-size: 24px;
+        }
+
+
+/* -PAGE MAIN */
+    /* -BLOCK DIRECTIONS */
+    .box-item
+    {
+        font-size: 18px;
+    }
+
+    /* -BLOCK BIG PROMO */
+    .big-promo-text
+    {
+        font-size: 96px;
+    }
+
+
+
+/* -PAGE DIRECTION */
+
+
+
+/* -PAGE ACCOUNT */
+
+
+
+/* -PAGE CALENDAR */
+
+
+
+/* -PAGE DOCS_COLLEGE */
+/* -PAGE DOCS_COUNSIL */
+    /* -BLOCK PROMO */
+    .doc-header, 
+    .doc-year-header
+    {
+        font-size: 32px;
+    }
+
+    .doc-file
+    {
+        font-size: 24px;   
+    }
+
+    .doc-about
+    {
+        font-size: 24px;   
+    }
+
+
+
+/* -PAGE GALLERY  */
+
+
+
+/* -PAGE ABOUT */
+
+
+
+/* -PAGE NEWS-ABOUT */
+
+
+
+/* -PAGE NEWS */
+
+
+
+/* -PAGE SEARCH */
+
+}
+
+
+
+@media (max-width: 1440px)
+{
+    /* -MULTI CLASSES */
+    /* usefull block */
+    .promo-header
+    {
+        font-size: 64px;
+    }
+
+    .box-header
+    {
+        font-size: 28px;
+    }
+
+    /* -BLOCK PROMO */
+    .promo-dateitem
+    {
+        font-size: 18px;
+    }
+
+    /* -BLOCK FOOTER */
+        /* -COLUMN FOOTER > NAVIGATION */
+        .footer-nav-header
+        {
+            font-size: 20px;
+        }
+
+        .footer-nav-item
+        {
+            font-size: 14px;
+        }
+
+
+        /* -COLUMN FOOTER > MAIN NEWS*/
+        .footer-main-box-dateitem
+        {
+            font-size:28px;
+        }
+
+        .footer-main-box-event
+        {
+            font-size:28px;
+        }
+
+        .footer-main-box-text
+        {
+            font-size: 20px;
+        }
+
+
+        /* -COLUMN FOOTER > NEWS LIST */
+        .footer-box-dateitem
+        {
+            font-size: 20px;
+        }
+
+        .footer-box-dateitem-activated
+        {
+            font-size: 20px;
+        }
+
+        .news-full-list
+        {
+            font-size: 20px;
+        }
+
+
+/* -PAGE MAIN */
+    /* -BLOCK DIRECTIONS */
+    .box-item
+    {
+        font-size: 16px;
+    }
+
+    /* -BLOCK BIG PROMO */
+    .big-promo-text
+    {
+        font-size: 84px;
+    }
+
+
+/* -PAGE DIRECTION */
+
+
+
+/* -PAGE ACCOUNT */
+
+
+
+/* -PAGE CALENDAR */
+
+
+
+/* -PAGE DOCS_COLLEGE */
+/* -PAGE DOCS_COUNSIL */
+    /* -BLOCK PROMO */
+    .doc-header, 
+    .doc-year-header
+    {
+        font-size: 28px;
+    }
+
+    .doc-file
+    {
+        font-size: 20px;   
+    }
+
+    .doc-about
+    {
+        font-size: 20px;   
+    }
+
+
+
+/* -PAGE GALLERY  */
+
+
+
+/* -PAGE ABOUT */
+
+
+
+/* -PAGE NEWS-ABOUT */
+
+
+
+/* -PAGE NEWS */
+
+
+
+/* -PAGE SEARCH */
+}
+
+
+
+@media (max-width: 992px)
+{
+    /* -MULTI CLASSES */
+        /* usefull block */
+        .promo-header
+        {
+            font-size: 40px;
+            line-height: 40px;
+        }
+    
+        .box-header
+        {
+            font-size: 26px;
+        }
+    
+        .box-dateitem
+        {
+            font-size: 22px;
+            line-height: 30px !important;
+        }
+        
+    
+        /* -BLOCK HEADER */
+        .nav-link
+        {
+            font-size: 18px;   
+        }
+    
+        /* -BLOCK PROMO */
+        .promo-dateitem
+        {
+            font-size: 20px;
+            line-height: 25px;
+        }
+    
+        /* -BLOCK EVENTS */
+        .event-header
+        {
+            font-size: 32px;
+        }
+    
+        .event-text
+        {
+            font-size: 20px;
+            line-height: 30px;
+        }
+    
+        .event-more
+        {
+            font-size: 18px;
+        }
+    
+        /* -BLOCK FOOTER */
+            /* -COLUMN FOOTER > NAVIGATION */
+            .footer-nav-header
+            {
+                font-size: 28px;
+            }
+    
+            .footer-nav-item
+            {
+                font-family: HelveticaNeueCyr;
+                font-weight: 600;
+                font-size: 22px;
+                color: black;
+                text-transform: uppercase;
+            }
+    
+            .footer-btn
+            {
+                font-family: HelveticaNeueCyr;
+                font-weight: 800;
+                font-size: 20px;
+                color: black;
+                text-transform: uppercase;
+                text-decoration: underline;
+            }
+    
+    
+    /* -PAGE MAIN */
+        .box-item
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 600;
+            font-size: 22px;
+            color: black;
+            text-transform: uppercase;
+        }
+    
+        /* -BLOCK BIG PROMO */
+        .big-promo-text
+        {
+            font-family: HelveticaNeueCyr;
+            font-weight: 800;
+            font-size: 60px;
+            color: white;
+            text-transform: uppercase;
+        }
+    
+    
+    
+    /* -PAGE DIRECTION */
+    
+    
+    
+    /* -PAGE ACCOUNT */
+    
+    
+
+    /* -PAGE CALENDAR */
+
+    
+    
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
+
+    
+    
+    /* -PAGE GALLERY  */
+    
+    
+    
+    /* -PAGE ABOUT */
+
+    
+    
+    /* -PAGE NEWS-ABOUT */
+    
+    
+    
+    /* -PAGE NEWS */
+    
+    
+    
+    /* -PAGE SEARCH */
+
+}
+
+
+
+@media (max-width: 576px)
+{
+    /* -MULTI CLASSES */
+        /* usefull block */
+        .promo-header
+        {
+            font-size: 38px;
+            line-height: 48px;
+        }
+
+        .box-header
+        {
+            font-size: 22px;
+        }
+
+        .box-dateitem
+        {
+            font-size: 22px;
+        }
+        
+
+
+        /* -BLOCK EVENTS */
+        .event-text
+        {
+            font-size: 24px;
+            line-height: 36px;
+        }
+
+        .event-more
+        {
+            font-size: 24px;
+        }
+
+
+        /* -BLOCK INFO */
+            /* -COLUMN INFO > TEXT */
+            .info-author-header
+            {
+                font-size: 24px;
+            }
+
+            .info-text
+            {
+                font-size: 24px;
+                line-height: 36px;
+            }
+
+            /* -COLUMN INFO > IMG */
+            .info-role
+            {
+                font-size: 24px;
+            }
+
+            .info-fio
+            {
+                font-size: 24px;
+            }
+
+
+        /* -BLOCK FOOTER */
+            /* -COLUMN FOOTER > NAVIGATION */
+            .footer-nav-header
+            {
+                font-size: 22px;
+            }
+
+            .footer-nav-item
+            {
+                font-size: 24px;
+            }
+
+
+            /* -COLUMN FOOTER > MAIN NEWS*/
+            .footer-main-box-dateitem
+            {
+                font-size:24px;
+            }
+
+            .footer-main-box-event
+            {
+                font-size:24px;
+            }
+
+            .footer-main-box-text
+            {
+                font-size: 24px;
+                line-height: 30px;
+            }
+
+            .footer-btn
+            {
+                font-size: 20px;
+            }
+
+
+    /* -PAGE MAIN */
+        .box-item
+        {
+            font-size: 22px;
+        }
+
+        /* -BLOCK BIG PROMO */
+        .big-promo-text
+        {
+            font-size: 38px;
+        }
+
+
+
+    /* -PAGE DIRECTION */
+        
+        
+        
+    /* -PAGE ACCOUNT */
+
+
+
+    /* -PAGE CALENDAR */
+
+
+
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
+        .doc-header, 
+        .doc-year-header
+        {
+            font-size: 28px;
+        }
+
+
+
+    /* -PAGE GALLERY  */
+
+
+
+    /* -PAGE ABOUT */
+
+
+
+    /* -PAGE NEWS-ABOUT */
+        /* -BLOCK INFO */
+            /* -COLUMN INFO > TEXT */
+            .info-about
+            {
+                font-size: 24px;
+                line-height: 36px;
+            }
+            /* -COLUMN INFO > LIST */
+            .info-group
+            {
+                font-size: 24px;
+            }
+
+
+
+    /* -PAGE NEWS */
+
+
+
+    /* -PAGE SEARCH */
+
+}

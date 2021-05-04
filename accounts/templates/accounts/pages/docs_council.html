@@ -1,0 +1,91 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<!-- PROMO -->        
+<section class="promo row">
+    <div class="col-12 col-sm-7 promo-header">
+        Документы ССТ
+    </div>
+</section>
+
+
+
+<!-- DOCS -->
+<section class="docs row">
+    <div class="col-0 col-xs-0 col-sm-1 col-md-1 col-lg-2"></div>
+    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8">
+        <div class="doc-box-class">
+            <div class="doc-header">Общие документы</div>
+            {% for doc in docs_council_ALL %}
+            <div class="doc-document">
+                <a class="doc-file" href="">{{doc.name}}</a>
+                <span class="doc-about">— {{doc.description}}</span>
+            </div>
+            {% endfor %}                            
+        </div>
+
+        <div class="doc-box-class">
+            <div class="doc-header">Культмасс</div>
+            {% for doc in docs_council_CULTURE %}
+            <div class="doc-document">
+                <a class="doc-file" href="">{{doc.name}}</a>
+                <span class="doc-about">— {{doc.description}}</span>
+            </div>
+            {% endfor %}                            
+        </div>
+
+        <div class="doc-box-class">
+            <div class="doc-header">СПОРТ</div>
+            {% for doc in docs_council_SPORT %}
+            <div class="doc-document">
+                <a class="doc-file" href="">{{doc.name}}</a>
+                <span class="doc-about">— {{doc.description}}</span>
+            </div>
+            {% endfor %}                            
+        </div>
+
+        <div class="doc-box-class">
+            <div class="doc-header">ПРОФКА</div>
+            {% for doc in docs_council_PROF %}
+            <div class="doc-document">
+                <a class="doc-file" href="">{{doc.name}}</a>
+                <span class="doc-about">— {{doc.description}}</span>
+            </div>
+            {% endfor %}                            
+        </div>
+
+        <div class="doc-box-class">
+            <div class="doc-header">ИНФОРМ</div>
+            {% for doc in docs_council_INROFM %}
+            <div class="doc-document">
+                <a class="doc-file" href="">{{doc.name}}</a>
+                <span class="doc-about">— {{doc.description}}</span>
+            </div>
+            {% endfor %}                            
+        </div>
+
+        <div class="doc-box-class">
+            <div class="doc-header">МУЛЬТИМЕДИА</div>
+            {% for doc in docs_council_MEDIA %}
+            <div class="doc-document">
+                <a class="doc-file" href="">{{doc.name}}</a>
+                <span class="doc-about">— {{doc.description}}</span>
+            </div>
+            {% endfor %}                            
+        </div>
+
+        <div class="doc-box-class">
+            <div class="doc-header">КРУЖКИ</div>
+            {% for doc in docs_council_CLUBS %}
+            <div class="doc-document">
+                <a class="doc-file" href="">{{doc.name}}</a>
+                <span class="doc-about">— {{doc.description}}</span>
+            </div>
+            {% endfor %}                            
+        </div>
+    </div>
+    <div class="col-0 col-xs-0 col-sm-1 col-md-1 col-lg-2"></div>
+</section>
+
+{% endblock %}

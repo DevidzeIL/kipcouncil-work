@@ -1,0 +1,96 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<!-- PROMO -->        
+<section class="promo row" id="id_info">
+    <div class="col-12 col-sm-7 promo-header">
+        Направление
+    </div>
+</section>
+
+
+
+<!-- INFO -->
+<section class="info row">
+    <div class="col-1 col-xs-0 col-sm-1"></div>
+    
+    <!-- INFO > TEXT -->
+    <div class="col-xs-6 col-sm-10 col-md-5 col-lg-4 info-boxes">
+        <div class="row">
+            <div class="info-box">
+                <div class="info-author-header">{{text_about.goals}}</div>
+                <div class="info-text">{{text_about.main_text}}</div>
+            </div>
+            <div class="info-box">
+                <div class="box-header">Цели </div>
+                <div class="info-text">{{text_about.common_text}}</div>
+            </div>
+            <div class="info-calendar"><a class="nav-item-link" href="{% url 'calendar' %}">Календарный план</a></div>
+        </div>
+    </div>
+
+    <div class="col-xs-0 col-sm-2 col-md-1 col-lg-2"></div>
+
+    <!-- INFO > IMG -->
+    <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4 info-users">
+        <div class="box-header">Координаторство</div>
+        <div class="row">
+            {% for user in users %}
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 info-user">
+                <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
+                <div class="info-role">{{user.function}}</div>
+                <div class="info-fio">{{user.user}}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-xs-1 col-sm-1 col-md-1"></div>
+</section>  
+
+
+
+<!-- PROMO -->        
+<section class="promo row" id="id_events">
+    <div class="col-12 col-sm-7 promo-header">
+        Мероприятия
+    </div>
+</section>
+
+
+
+<!-- EVENTS -->
+<div class="container">
+    <section class="direction row">
+        {% for post in news %}
+        <div class="col-12 col-sm-12 col-md-6 col-lg-3 event">
+            <div class="box-dateitem">{{post.date_performance}}</div>
+            <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
+            <div class="event-header">{{post.name}}</div>
+            <div class="event-text">{{post.main_text}}</div>
+            <div class="event-more"><a class="nav-item-link" href="{% url 'news_about' post.id %}">Подробнее</a></div>
+        </div>
+        {% endfor %}
+    </section>
+</div>
+            
+<!-- GALLERY -->
+<div class="container">
+    <section class="gallery row" id="id_gallery">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 gallery-image">
+            <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 gallery-image">
+            <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 gallery-image">
+            <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 gallery-image">
+            <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
+        </div>
+    </section>
+</div>
+
+{% endblock %}
