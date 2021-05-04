@@ -28,10 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-sd*r!s3z^m=zt3wo$ko(v%^lw9!u!)9rh2*k*02bc)5)k62b(3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['test-kipcouncil.herokuapp.com/', '127.0.0.1']
 
 # Application definition
 
@@ -44,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts.apps.AccountsConfig',
+
+    'storage',
 ]
 
 MIDDLEWARE = [
@@ -130,7 +131,6 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 
-FONTS_URL = '/fonts/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
