@@ -9,8 +9,6 @@
     </div>
 </section>
 
-
-
 <!-- INFO -->
 <section class="info row">
     <div class="col-1 col-xs-0 col-sm-1"></div>
@@ -22,7 +20,7 @@
                 <div class="info-text">{{text_about.main_text}}</div>
             </div>
             <div class="info-box">
-                <div class="box-header">Доп. текст </div>
+                <div class="box-header">Sit amet </div>
                 <div class="info-text">{{text_about.common_text}}</div>
             </div>
             <div class="info-box">
@@ -42,7 +40,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 info-user">
                 <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
                 <div class="info-role">{{user.function}}</div>
-                <div class="info-fio">{{user.user}}</div>
+                <div class="info-fio">{{user.user.fio}}</div>
             </div>
             {% endfor %}
         </div>

@@ -13,9 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 
-import django_heroku
-import dj_database_url
-from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-sd*r!s3z^m=zt3wo$ko(v%^lw9!u!)9rh2*k*02bc)5)k62b(3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['test-kipcouncil.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -160,4 +157,4 @@ EMAIL_HOST_USER = 'timeofkip@gmail.com'
 EMAIL_HOST_PASSWORD = 'ZVA-69h-nps-Qg7'
 
 
-django_heroku.settings(locals())
+

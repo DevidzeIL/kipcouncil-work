@@ -23,21 +23,29 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'calendar' %}">Календарь</a>
                     </li>
-                    Привет, {{request.user}}
-                    {% if request.user.is_staff %}
-                        Админ
+
+                    {% if request.user.is_authenticated %}
+                        Привет, {{request.user}}
+                        {% if request.user.is_staff %}
+                            Админ
+                        {% else %}
+                            Пользователь
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user-page' %}">Аккаунт</a>
+                        </li>
+    
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                        </li>
                     {% else %}
-                        Пользователь
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                        </li>
                     {% endif %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user-page' %}">АККККККККККККК</a>
-                    </li>
+                    
 
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
-                    </li>
                     
                     
                     <li class="nav-item">

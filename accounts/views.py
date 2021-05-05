@@ -90,6 +90,7 @@ def accountSettings(request):
 
 
 def main(request):
+
     post_ALL = New.objects.filter(tags__name="Общее").last()
     post_CULTURE = New.objects.filter(tags__name="Культмасс").last()
     post_SPORT = New.objects.filter(tags__name="Спорт").last()
@@ -112,7 +113,7 @@ def main(request):
 def direction(request, tags):
     news = New.objects.filter(tags=tags)
     users = UserFunction.objects.filter(tags=tags)
-    text_about = About.objects.filter(tags=tags).first()
+    text_about = About.objects.filter(tags=tags).last()
 
     context = {
     'news':news, 'users':users, 'text_about':text_about
@@ -122,8 +123,8 @@ def direction(request, tags):
 
 
 def about(request):
-    users = UserFunction.objects.all()
-    text_about = About.objects.last()
+    users = UserFunction.objects.filter(tags__name="Общее")
+    text_about = About.objects.filter(tags__name="Общее").last()
 
     context = {
         'users':users, 'text_about':text_about

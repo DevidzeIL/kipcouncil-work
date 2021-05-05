@@ -56,6 +56,9 @@ class UserFunction(models.Model):
     user = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     function = models.CharField(max_length=200, null=True)  
 
+    def __str__(self):
+        return self.user.fio
+
 
 
 class UserAward(models.Model):
