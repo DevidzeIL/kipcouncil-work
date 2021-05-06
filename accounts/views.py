@@ -68,8 +68,14 @@ def logoutUser(request):
 @login_required(login_url='login')
 def userPage(request):
     events = request.user.student.member_set.all()
+
+    events_CULTURE_c = Event.objects.filter(tags__name="Культмасс").count()
+    events_SPORT_c = Event.objects.filter(tags__name="Спорт").count()
+
+
     context = {
-        'events':events
+        'events':events, 
+        'events_CULTURE_c':events_CULTURE_c, 'events_SPORT_c':events_SPORT_c
     }
     return render(request, 'accounts/auth/user.html', context)
 

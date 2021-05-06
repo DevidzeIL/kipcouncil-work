@@ -38,6 +38,7 @@ class Student(models.Model):
     fio = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
+    birthday = models.DateField(null=True)
     profile_pic = models.ImageField(default='avatar.png', null=True, blank=True)
     SEX = (
             ('М', 'М'),
@@ -84,7 +85,7 @@ class Event(models.Model):
 
     @property
     def get_html_url(self):
-        return f'<p>{self.name}</p><a href="{url}">edit</a>'
+        return f'<p>{self.name}</p><a href="{url}"></a>'
 
 
 
@@ -92,8 +93,6 @@ class Member(models.Model):
     user = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     event = models.ForeignKey(Event, null=True, on_delete=models.SET_NULL)
     comment = models.CharField(max_length=200, null=True) 
-    score = models.CharField(max_length=200, null=True)
-
 
 
 
