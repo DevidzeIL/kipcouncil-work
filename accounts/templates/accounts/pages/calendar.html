@@ -7,4 +7,10 @@
 
 {{ calendar }}
 
+{% for event in events %}
+{{event.date}}  - 
+{{event.name}}
+<br>
+{% endfor %}
+
 {% endblock %}

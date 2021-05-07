@@ -237,12 +237,14 @@ def calendar_view(request):
     mydate = get_date(request.GET.get('month', None))
     cal = Calendar(mydate.year, mydate.month)
     html_cal = mark_safe(cal.formatmonth(withyear=True))
+    events = Event.objects.all()
 
     p_month = prev_month(mydate)
     n_month = next_month(mydate)
 
     context = {
-        'calendar':html_cal, 'prev_month':p_month, 'next_month':n_month
+        'calendar':html_cal, 'prev_month':p_month, 'next_month':n_month,
+        'events':events
     }
     return render(request, 'accounts/pages/calendar.html', context)
 
