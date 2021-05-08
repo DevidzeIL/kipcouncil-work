@@ -114,12 +114,7 @@ def main(request):
         posts.append(
             New.objects.filter(tags=tag).last()
         )
-
-    for post in posts:
-        print('POOOOOOOOOST SUPER', post)
-
-
-
+        
     context = {
         'event_all':event_all, 'posts':posts, 'tags':tags
     }

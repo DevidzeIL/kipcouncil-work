@@ -20,7 +20,7 @@
             <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
             <div class="event-header">{{post.name}}</div>
             <div class="event-text">{{post.main_text}}</div>
-            <div class="event-more"><a class="nav-item-link">Подробнее</a></div>
+            <div class="event-more"><a class="nav-item-link" href="{% url 'news_about' post.id %}">Подробнее</a></div>
         </div>
         {% endfor %}
     </section>

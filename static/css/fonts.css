@@ -1,10 +1,9 @@
-
 /* ALL CSS STYLES */
 @media all
 {
 
     *{
-        font-family: 'HelveticaNeueCyr;';
+        font-family: 'HelveticaNeueCyr';
         font-size: 16px;
         font-weight: 400;
         line-height: 1.4;
