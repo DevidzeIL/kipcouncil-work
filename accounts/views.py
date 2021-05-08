@@ -16,10 +16,11 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import (
-    Company, Student, UserFunction, UserAward, 
-    UserComment, Tag, Event, Member, New,
-    DocsCollege, DocsCouncil, About
+    Specialty, Company, Student, UserFunction, UserAward, UserComment, 
+    Tag, Event, Member, New, About, 
+    DocsName, DocsCollege, DocsCouncil
 )
+
 from .forms import CreateUserForm, StudentForm
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
@@ -67,16 +68,25 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def userPage(request):
-    events = request.user.student.member_set.all()
+    tags = Tag.objects.all()
 
-    events_CULTURE_c = Event.objects.filter(tags__name="Культмасс").count()
-    events_SPORT_c = Event.objects.filter(tags__name="Спорт").count()
+    events = []
+    for tag in tags:
+        events.append(
+            Event.objects.filter(tags__name=tag.name).count()
+        )
 
+    events_member = []
+    for tag in tags:
+        events_member.append(
+            request.user.student.member_set.filter(event__tags__name=tag.name).count()
+        )
 
     context = {
-        'events':events, 
-        'events_CULTURE_c':events_CULTURE_c, 'events_SPORT_c':events_SPORT_c
+        'tags':tags,
+        'events': events, 'events_member':events_member
     }
+
     return render(request, 'accounts/auth/user.html', context)
 
 
@@ -96,21 +106,24 @@ def accountSettings(request):
 
 
 def main(request):
+    event_all = Event.objects.all().last()
 
-    post_ALL = New.objects.filter(tags__name="Общее").last()
-    post_CULTURE = New.objects.filter(tags__name="Культмасс").last()
-    post_SPORT = New.objects.filter(tags__name="Спорт").last()
-    post_PROF = New.objects.filter(tags__name="Профка").last()
-    post_INFORM = New.objects.filter(tags__name="Информ").last()
-    post_MEDIA = New.objects.filter(tags__name="Мультимедиа").last()
-    post_CLUBS = New.objects.filter(tags__name="Кружки").last()
+    tags = Tag.objects.all()
+    posts = []
+    for tag in tags:
+        posts.append(
+            New.objects.filter(tags=tag).last()
+        )
+
+    for post in posts:
+        print('POOOOOOOOOST SUPER', post)
+
+
 
     context = {
-        'post_ALL':post_ALL, 'post_CULTURE':post_CULTURE,
-        'post_SPORT':post_SPORT, 'post_PROF':post_PROF,
-        'post_INFORM':post_INFORM, 'post_MEDIA':post_MEDIA,
-        'post_CLUBS':post_CLUBS
+        'event_all':event_all, 'posts':posts, 'tags':tags
     }
+
 
     return render(request, 'accounts/pages/home.html', context)
 
@@ -140,46 +153,23 @@ def about(request):
 
 
 def docs_college(request):
-    docs_college_PCS_1 = DocsCollege.objects.filter(specialty="ПКС", cource="1 курс")
-    docs_college_PCS_2 = DocsCollege.objects.filter(specialty="ПКС", cource="2 курс")
-    docs_college_PCS_3 = DocsCollege.objects.filter(specialty="ПКС", cource="3 курс")
-    docs_college_PCS_4 = DocsCollege.objects.filter(specialty="ПКС", cource="4 курс")
-
-    docs_college_OIBS_1 = DocsCollege.objects.filter(specialty="ОИБАС", cource="1 курс")
-    docs_college_OIBS_2 = DocsCollege.objects.filter(specialty="ОИБАС", cource="2 курс")
-    docs_college_OIBS_3 = DocsCollege.objects.filter(specialty="ОИБАС", cource="3 курс")
-    docs_college_OIBS_4 = DocsCollege.objects.filter(specialty="ОИБАС", cource="4 курс")
-
-    docs_college_ISIP_1 = DocsCollege.objects.filter(specialty="ИСИП", cource="1 курс")
-    docs_college_ISIP_2 = DocsCollege.objects.filter(specialty="ИСИП", cource="2 курс")
-    docs_college_ISIP_3 = DocsCollege.objects.filter(specialty="ИСИП", cource="3 курс")
-    docs_college_ISIP_4 = DocsCollege.objects.filter(specialty="ИСИП", cource="4 курс")
+    specialties = Specialty.objects.all()
+    cources = ["1 курс", "2 курс", "3 курс", "4 курс"]
+    docs = DocsCollege.objects.all()
 
     context = {
-    'docs_college_PCS_1':docs_college_PCS_1, 'docs_college_PCS_2':docs_college_PCS_2,
-    'docs_college_PCS_3':docs_college_PCS_3, 'docs_college_PCS_4':docs_college_PCS_4,
-    'docs_college_OIBS_1':docs_college_OIBS_1, 'docs_college_OIBS_2':docs_college_OIBS_2,
-    'docs_college_OIBS_3':docs_college_OIBS_3, 'docs_college_OIBS_4':docs_college_OIBS_4,
-    'docs_college_ISIP_1':docs_college_ISIP_1, 'docs_college_ISIP_2':docs_college_ISIP_2,
-    'docs_college_ISIP_3':docs_college_ISIP_3, 'docs_college_ISIP_4':docs_college_ISIP_4}
+        'specialties':specialties, 'cources':cources, 'docs':docs
+    }
     return render(request, 'accounts/pages/docs_college.html', context)
 
 
 
 def docs_council(request):
-    docs_council_ALL = DocsCouncil.objects.filter(direction="ОБЩЕЕ")
-    docs_council_CULTURE = DocsCouncil.objects.filter(direction="КУЛЬТМАСС")
-    docs_council_SPORT = DocsCouncil.objects.filter(direction="СПОРТ")
-    docs_council_PROF = DocsCouncil.objects.filter(direction="ПРОФКА")
-    docs_council_INROFM = DocsCouncil.objects.filter(direction="ИНФОРМ")
-    docs_council_MEDIA = DocsCouncil.objects.filter(direction="МУЛЬТИМЕДИА")
-    docs_council_CLUBS = DocsCouncil.objects.filter(direction="КРУЖКИ")
+    tags = Tag.objects.all()
+    docs = DocsCouncil.objects.all()
 
     context = {
-    'docs_council_ALL':docs_council_ALL, 'docs_council_CULTURE':docs_council_CULTURE,
-    'docs_council_SPORT':docs_council_SPORT, 'docs_council_PROF':docs_council_PROF,
-    'docs_council_INROFM':docs_council_INROFM, 'docs_council_MEDIA':docs_council_MEDIA,
-    'docs_council_CLUBS':docs_council_CLUBS
+        'tags':tags, 'docs':docs
     }
     return render(request, 'accounts/pages/docs_council.html', context)
 
@@ -190,11 +180,9 @@ def news_about(request, pk_test):
     event = new.event
     members = Member.objects.filter(event = new.event)
 
-    
     context = {
         'members':members, 'new':new, 'event':event
     }
-    print('context:::', context)
     return render(request, 'accounts/pages/news_about.html', context)
 
 

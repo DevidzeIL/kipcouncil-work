@@ -15,137 +15,26 @@
 <section class="docs row">
     <div class="col-0 col-xs-0 col-sm-1 col-md-1 col-lg-2"></div>
     <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8">
+
+        {% for specialty in specialties %}
         <div class="doc-box-class">
-            <div class="doc-header">ПКС</div>
-            <div class="doc-year">
-                <div class="doc-year-header">1 КУРС</div>
-                {% for doc in docs_college_PCS_1 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
+            <div class="doc-header">{{specialty}}</div>
+            {% for cource in cources %}
+                <div class="doc-year">
+                    <div class="doc-year-header">{{cource}}</div>
+                    {% for doc in docs %}
+                        {% if doc.specialty == specialty and doc.cource == cource %}
+                        <div class="doc-document">
+                            <a class="doc-file" href="">{{doc.name}}</a>
+                            <span class="doc-about"> — {{doc.description}}</span>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
-
-            <div class="doc-year">
-                <div class="doc-year-header">2 КУРС</div>
-                {% for doc in docs_college_PCS_2 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="doc-year">
-                <div class="doc-year-header">3 КУРС</div>
-                {% for doc in docs_college_PCS_3 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="doc-year">
-                <div class="doc-year-header">4 КУРС</div>
-                {% for doc in docs_college_PCS_4 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
+            {% endfor %}
         </div>
+        {% endfor %}
 
-        <div class="doc-box-class">
-            <div class="doc-header">ОИБАС</div>
-            <div class="doc-year">
-                <div class="doc-year-header">1 ОИБАС</div>
-                {% for doc in docs_college_OIBS_1 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="doc-year">
-                <div class="doc-year-header">2 ОИБАС</div>
-                {% for doc in docs_college_OIBS_2 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="doc-year">
-                <div class="doc-year-header">3 ОИБАС</div>
-                {% for doc in docs_college_OIBS_3 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="doc-year">
-                <div class="doc-year-header">4 ОИБАС</div>
-                {% for doc in docs_college_OIBS_4 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-        </div>
-
-        <div class="doc-box-class">
-            <div class="doc-header">ИСИП</div>
-            <div class="doc-year">
-                <div class="doc-year-header">1 ИСИП</div>
-                {% for doc in docs_college_ISIP_1 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="doc-year">
-                <div class="doc-year-header">2 ИСИП</div>
-                {% for doc in docs_college_ISIP_2 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="doc-year">
-                <div class="doc-year-header">3 ИСИП</div>
-                {% for doc in docs_college_ISIP_3 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="doc-year">
-                <div class="doc-year-header">4 ИСИП</div>
-                {% for doc in docs_college_ISIP_4 %}
-                <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
-                    <span class="doc-about">— {{doc.description}}</span>
-                </div>
-                {% endfor %}
-            </div>
-
-        </div>
     </div>
     <div class="col-0 col-xs-0 col-sm-1 col-md-1 col-lg-2"></div>
 </section>

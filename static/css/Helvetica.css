@@ -1,0 +1,31 @@
+@font-face /* Roman - 500 */
+{
+    src:url('./HelveticaNeueCyr-Roman.otf');
+    font-family: HelveticaNeueCyr;
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face /* Medium - 600 */
+{
+    src:url('./HelveticaNeueCyr-Medium.otf');
+    font-family: HelveticaNeueCyr;
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face /* Bold - 700 */
+{
+    src:url('./HelveticaNeueCyr-Bold.otf');
+    font-family: HelveticaNeueCyr;
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face /* Heavy - 800 */
+{
+    src:url('./HelveticaNeueCyr-Heavy.otf');
+    font-family: HelveticaNeueCyr;
+    font-weight: 800;
+    font-style: normal;
+}

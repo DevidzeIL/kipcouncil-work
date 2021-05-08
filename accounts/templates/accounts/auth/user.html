@@ -4,8 +4,9 @@
 
 <h1>USER PROFILE</h1>
 Список мероприятий:
-{% for event in events %}
+{% for event in events_all %}
     {{event.event}}
+    <br>
 {% endfor %}
 
 
@@ -16,6 +17,28 @@
 
 <h2>Спортивные мероприятия - > </h2> {{events_SPORT_c}}
 <h2>Участник спортивных мероприятий - > </h2> {{member_SPORT_c}}
+
+
+
+
+<br>
+<br>
+<br>
+
+
+
+{% for tag in tags %}
+    {{tag.name}}
+{% endfor %}
+
+<br>
+
+{{events}}
+<br>
+{{events_member}}
+<br>
+<br>
+<br>
 
 
 <a href="{% url 'account' %}">Настройки аккаунта</a>

@@ -8,105 +8,58 @@
         актуальное
         на —
         <br>
-        <div class="promo-date">25.01.2021</div>
+        <div class="promo-date">{{event_all.date}}</div>
     </div>
     <div class="col-12 col-sm-7 promo-header">
-        ВЫПУСКНОЙ 2021
-        <br>ДЛЯ 4 КУРСОВ
+    {{event_all.name}}
     </div>
     <div class="col-1"></div>
 </section>
 
 
-
-<!-- DIRECTIONS  -->
-
-
 <div class="container">
     <section class="directions row">
-        <div class="col-6 col-md-4 col-lg-3 box">
-            <div class="box-header">Культмасс</div>
-            <div class="box-item"><a class="nav-item-link" href="{% url 'direction' tags='2' %}">Информация</a></div>
-            <div class="box-item"><a class="nav-item-link" href="">Мероприятия</a></div>
-            <div class="box-dateitem">
-                <a class="nav-item-link" href="{% url 'news_about' post_CULTURE.id %}">
-                    <div class="box-date">{{post_CULTURE.date_performance}}—</div>
-                    <div class="box-event">{{post_CULTURE.name}}</div>
-                </a>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3 box">
-            <div class="box-header">Спорт</div>
-            <div class="box-item"><a class="nav-item-link" href="{% url 'direction' tags='3' %}">Информация</a></div>
-            <div class="box-item">Мероприятия</div>
-            <div class="box-dateitem">
-                <a class="nav-item-link" href="{% url 'news_about' post_SPORT.id %}">
-                    <div class="box-date">{{post_SPORT.date_performance}}—</div>
-                    <div class="box-event">{{post_SPORT.name}}</div>
-                </a>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3 box">
-            <div class="box-header">Профка</div>
-            <div class="box-item">Информация</div>
-            <div class="box-item">Мероприятия</div>
-            <div class="box-item">Еще</div>
-            <div class="box-dateitem">
-                <a class="nav-item-link" href="{% url 'news_about' post_PROF.id %}">
-                    <div class="box-date">{{post_PROF.date_performance}}—</div>
-                    <div class="box-event">{{post_PROF.name}}</div>
-                </a>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3 box">
-            <div class="box-header">Информ</div>
-            <div class="box-item">Соц. сети</div>
-            <div class="box-item">Конкурсы</div>
-            <div class="box-item">Функции</div>
-            <div class="box-dateitem">
-                <a class="nav-item-link" href="{% url 'news_about' post_INFORM.id %}">
-                    <div class="box-date">{{post_INFORM.date_performance}}—</div>
-                    <div class="box-event">{{post_INFORM.name}}</div>
-                </a>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3 box">
-            <div class="box-header">Мультимедиа</div>
-            <div class="box-item">Аппаратура</div>
-            <div class="box-item">Функции</div>
-            <div class="box-dateitem">
-                <a class="nav-item-link" href="{% url 'news_about' post_MEDIA.id %}">
-                    <div class="box-date">{{post_MEDIA.date_performance}}—</div>
-                    <div class="box-event">{{post_MEDIA.name}}</div>
-                </a>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3 box">
-            <div class="box-header">А также</div>
-            <div class="box-item">Другие мероприятия</div>
-            <div class="box-item">МежССУЗ</div>
-            <div class="box-dateitem">
-                <a class="nav-item-link" href="{% url 'news_about' post_ALL.id %}">
-                    <div class="box-date">{{post_ALL.date_performance}}—</div>
-                    <div class="box-event">{{post_ALL.name}}</div>
-                </a>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3 box">
-            <div class="box-header">Кружки</div>
-            <div class="box-item">Клуб дебатов</div>
-            <div class="box-item">Английский клуб</div>
-            <div class="box-item">Литературный клуб</div>
-            <div class="box-dateitem">
-                <a class="nav-item-link" href="{% url 'news_about' post_CLUBS.id %}">
-                    <div class="box-date">{{post_CLUBS.date_performance}}—</div>
-                    <div class="box-event">{{post_CLUBS.name}}</div>
-                </a>
-            </div>
-        </div>
+        {% for tag in tags %}
+            {% for post in posts %}
+                {% if post.tags == tag %}
+                    <div class="col-6 col-md-4 col-lg-3 box">
+                        <div class="box-header">{{tag}}</div>
+                        <div class="box-item"><a class="nav-item-link" href="{% url 'direction' tag.id %}" >Информация</a></div>
+                        <div class="box-item"><a class="nav-item-link" >Календарь</a></div>
 
+                        {% if tag.name == "Культмасс" %}
+                        {% elif tag.name == "Спорт" %}
+                        {% elif tag.name == "Профка" %}
+                            <div class="box-item"><a class="nav-item-link" >Выставки</a></div>
+                            
+                        {% elif tag.name == "Информ" %}
+                            <div class="box-item"><a class="nav-item-link" >Соц. Сети</a></div>
+
+                        {% elif tag.name == "Мультимедиа" %}
+                            <div class="box-item"><a class="nav-item-link" >Аппаратура</a></div>
+
+                        {% elif tag.name == "Общее" %}
+                            <div class="box-item"><a class="nav-item-link" >Студент года</a></div>
+                            <div class="box-item"><a class="nav-item-link" >Дни самуправления</a></div>
+                            <div class="box-item"><a class="nav-item-link" >МежССУЗ</a></div>
+
+                        {% elif tag.name == "Клубы" %}
+                            <div class="box-item"><a class="nav-item-link" >Клуб дебатов</a></div>
+                            <div class="box-item"><a class="nav-item-link" >Английский клуб</a></div>
+                            <div class="box-item"><a class="nav-item-link" >Литературный клуб</a></div>
+                        {% endif %}
+                        
+                        <div class="box-dateitem">
+                            <a class="nav-item-link" href="{% url 'news_about' post.id %}">
+                                <div class="box-date">{{post.date_performance}}—</div>
+                                <div class="box-event">{{post.event.name}}</div>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
     </section>
-
 </div>
 
 

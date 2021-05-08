@@ -6,7 +6,7 @@
 <a style="margin-left: 50px;" href="{% url 'calendar' %}?{{ next_month }}"> Следующий месяц </a>
 
 {{ calendar }}
-
+<br>
 {% for event in events %}
 {{event.date}}  - 
 {{event.name}}
