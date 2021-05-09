@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django import forms
 
 from .models import (
-	Student
+	Student, UserAward
 )
 
 
@@ -19,3 +19,8 @@ class StudentForm(ModelForm):
 		model = Student
 		fields = '__all__'
 		exclude = ['user']
+
+class AwardForm(ModelForm):
+	class Meta:
+		model = UserAward
+		fields = '__all__'

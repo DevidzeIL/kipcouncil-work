@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<h1>USER PROFILE</h1>
+<h3>USER PROFILE</h3>
 Список мероприятий:
 {% for event in events_all %}
     {{event.event}}
@@ -10,32 +10,63 @@
 {% endfor %}
 
 
-<h2>Культмассовые мероприятия - > </h2> {{events_CULTURE_c}}
-<h2>Участник культмассовых мероприятий - > </h2> {{member_CULTURE_c}}
 
+<style>
+    th, td 
+    {
+    padding: 15px;
+    text-align: center;
+    border: 1px black solid;
+}
+</style>
+
+<table>
+    <tr>
+        <th>Результат</th>
+        {% for tag in tags %}
+        <th>{{tag}}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Общее кол-во</td>
+        {% for event in events %}
+        <td>{{event}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Кол-во моего участия</td>
+        {% for event_member in events_member %}
+        <td>{{event_member}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Процент от кол-ва</td>
+        {% for event_procent in event_procents %}
+        <td>{{event_procent}}</td>
+        {% endfor %}
+    </tr>
+</table>
+
+
+
+
+<h3>Портфолио</h3>
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.award}}
+    <input class="btn btn-primary" type="submit" name="Update Information" value="Сохранить">
+</form>
+
+
+    
+<br>
+<br>
 <br>
 
-<h2>Спортивные мероприятия - > </h2> {{events_SPORT_c}}
-<h2>Участник спортивных мероприятий - > </h2> {{member_SPORT_c}}
+
+<h3>Отзывы</h3>
 
 
-
-
-<br>
-<br>
-<br>
-
-
-
-{% for tag in tags %}
-    {{tag.name}}
-{% endfor %}
-
-<br>
-
-{{events}}
-<br>
-{{events_member}}
 <br>
 <br>
 <br>

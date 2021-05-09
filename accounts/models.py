@@ -63,6 +63,8 @@ class UserAward(models.Model):
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     award       = models.CharField(max_length=200, null=True)
 
+    def __str__(self):
+        return self.award
 
 
 class UserComment(models.Model):
@@ -71,7 +73,7 @@ class UserComment(models.Model):
 
 
 class Event(models.Model):
-    tags        = models.ManyToManyField(Tag)
+    tags        = models.ForeignKey(Tag, null=True, on_delete=models.SET_NULL)
     name        = models.CharField(max_length=200, null=True)
     date        = models.DateField(null=True)
 

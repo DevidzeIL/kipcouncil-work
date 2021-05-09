@@ -21,7 +21,7 @@ from .models import (
     DocsName, DocsCollege, DocsCouncil
 )
 
-from .forms import CreateUserForm, StudentForm
+from .forms import CreateUserForm, StudentForm, AwardForm
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
 
@@ -71,20 +71,24 @@ def userPage(request):
     tags = Tag.objects.all()
 
     events = []
+    events_member = []
     for tag in tags:
         events.append(
             Event.objects.filter(tags__name=tag.name).count()
         )
-
-    events_member = []
-    for tag in tags:
         events_member.append(
             request.user.student.member_set.filter(event__tags__name=tag.name).count()
         )
 
+    event_procents = []
+    for i in range(0, len(events)):
+        event_procents.append(events_member[i] * 100 / events[i])
+
     context = {
         'tags':tags,
-        'events': events, 'events_member':events_member
+        'events': events, 'events_member':events_member,
+        'event_procents':event_procents,
+        'form':form
     }
 
     return render(request, 'accounts/auth/user.html', context)
