@@ -68,6 +68,8 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def userPage(request):
+    user = request.user.student
+
     tags = Tag.objects.all()
 
     events = []
@@ -84,14 +86,74 @@ def userPage(request):
     for i in range(0, len(events)):
         event_procents.append(events_member[i] * 100 / events[i])
 
+
+    awards = request.user.student.useraward_set.all()
+
     context = {
-        'tags':tags,
+        'user':user, 'tags':tags, 'awards':awards,
         'events': events, 'events_member':events_member,
         'event_procents':event_procents,
-        'form':form
     }
 
     return render(request, 'accounts/auth/user.html', context)
+
+
+
+def createAward(request, pk_test):
+    user = Student.objects.get(id=pk_test)
+    form = AwardForm(initial={'user':user})
+
+    if request.method == 'POST':
+        form = AwardForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('user-page')
+
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/auth/award_form.html', context)
+
+def editAward(request, pk_test):
+    award = UserAward.objects.get(id=pk_test)
+    form = AwardForm(instance=award)
+
+    if request.method == 'POST':
+        form = AwardForm(request.POST, instance=award)
+        if form.is_valid():
+            form.save()
+            return redirect('user-page')
+
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/auth/award_form.html', context)
+
+def deleteAward(request, pk_test):
+    award = UserAward.objects.get(id=pk_test)
+
+
+    if request.method == 'POST':
+        award.delete()
+        return redirect('user-page')
+
+    context = {
+        'award':award
+    }
+    return render(request, 'accounts/auth/delete_award.html', context)
+
+
+
+def table(request, pk_test):
+    events = Event.objects.all()
+    members = Member.objects.filter(user__id = pk_test)
+
+    context = {
+        'events':events, 'members':members
+        
+    }
+    return render(request, 'accounts/auth/table.html', context)
+
 
 
 

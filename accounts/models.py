@@ -61,10 +61,13 @@ class UserFunction(models.Model):
 
 class UserAward(models.Model):
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
-    award       = models.CharField(max_length=200, null=True)
+    award       = models.ImageField(default='avatar.png', null=True, blank=True)
+    description = models.CharField(max_length=200, blank=True, null=True)
+    date_performance = models.DateField(blank=True, null=True)
+
 
     def __str__(self):
-        return self.award
+        return self.user.fio
 
 
 class UserComment(models.Model):
@@ -76,7 +79,6 @@ class Event(models.Model):
     tags        = models.ForeignKey(Tag, null=True, on_delete=models.SET_NULL)
     name        = models.CharField(max_length=200, null=True)
     date        = models.DateField(null=True)
-
 
     def __str__(self):
         return self.name
@@ -90,7 +92,8 @@ class Event(models.Model):
 class Member(models.Model):
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     event       = models.ForeignKey(Event, null=True, on_delete=models.SET_NULL)
-    comment     = models.CharField(max_length=200, null=True) 
+    role        = models.CharField(max_length=200, blank = True, null=True) 
+    comment     = models.CharField(max_length=200, blank = True, null=True) 
 
     def __str__(self):
         return self.user.fio
@@ -105,7 +108,7 @@ class New(models.Model):
     common_text = models.CharField(max_length=200, blank=True, null=True)
     link        = models.CharField(max_length=200, blank=True, null=True)
     date_performance = models.DateField(blank=True, null=True)
-    date_created= models.DateTimeField(auto_now_add=True, null=True)
+    date_created     = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.name

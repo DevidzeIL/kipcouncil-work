@@ -1,0 +1,13 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<p>Вы уверены, что хотите удалить {{award.description}}</p>
+
+<form method="POST" action="{% url 'delete_award' award.id %}">
+    {% csrf_token %}
+    <a href="{% url 'user-page' %}">Нет</a>
+    <input class="btn btn-primary" type="submit" name="Submit" value="Да">
+</form>
+
+{% endblock content %}

@@ -22,6 +22,13 @@ urlpatterns = [
     path('user/', views.userPage, name="user-page"),
     path('account/', views.accountSettings, name="account"),
 
+    path('create_award/<str:pk_test>/', views.createAward, name="create_award"),
+    path('edit_award/<str:pk_test>/', views.editAward, name="edit_award"),
+    path('delete_award/<str:pk_test>/', views.deleteAward, name="delete_award"),
+
+    
+    path('table/<str:pk_test>/', views.table, name="table"),
+
 
     path('reset_password/', 
     auth_views.PasswordResetView.as_view(template_name='accounts/auth/password_reset.html'),

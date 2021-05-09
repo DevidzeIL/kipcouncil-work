@@ -1,0 +1,48 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    table
+    {
+        width: 100%;
+    }
+
+    th, td 
+    {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px black solid;
+    }
+</style>
+
+
+<table >
+    <tr>
+        <th>Направление</th>
+        <th>Мероприятие</th>
+        <th>Роль</th>
+        <th>Комментарий</th>
+        <th>Дата</th>
+    </tr>
+
+    {% for event in events %}
+        {% for member in members %}
+            {% if member.event == event %}    
+                <tr>
+                    <td>{{event.tags}}</td>
+                    <td>{{event.name}}</td>
+                    <td>{{member.role}}</td>
+                    <td>{{member.comment}}</td>
+                    <td>{{event.date}}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</table>
+
+<br>
+<br>
+<br>
+
+{% endblock content %}

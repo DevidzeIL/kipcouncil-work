@@ -1,0 +1,16 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+        {{field.name}}
+        {{field}}
+        <br>
+        <br>
+    {% endfor %}
+    <input class="btn btn-primary" type="submit" name="Submit" value="Сохранить">
+</form>
+
+{% endblock content %}
