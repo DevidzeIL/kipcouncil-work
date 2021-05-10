@@ -2,6 +2,28 @@
 {% load static %}
 {% block content %}
 
+<h2>ОБО МНЕ</h2>
+{% for field in info %}
+    {{field.group.сourse}}
+    {{field.group.specialty}} -
+    {{field.group}}
+
+    <br>
+    {{field.email}}      
+    <br>
+    {{field.phone}}      
+    <br>
+    {{field.birthday}}      
+    <br>
+    <img width="350px" height="550px" class="profile-pic img-fluid"" src="{{field.profile_pic.url}}" >      
+    <br>
+    {{field.sex}}      
+    <br>
+{% endfor %}
+
+<br>
+
+
 <h3>USER PROFILE</h3>
 Список мероприятий:
 {% for event in events_all %}
@@ -50,6 +72,15 @@
 <br>
 <br>
 
+<script type="text/javascript">
+    function openImageWindow(src) {
+      var image = new Image();
+      image.src = src;
+      var width = image.width;
+      var height = image.height;
+      window.open(src,"Image","width=" + width + ",height=" + height);
+    }
+  </script>
 
 <!-- PORTFOLIO -->
 <div class="container">
@@ -57,8 +88,11 @@
         {% for award in awards %}
         <div class="col-12 col-sm-12 col-md-6 col-lg-3 event">
             <div class="box-dateitem">{{award.date_performance}}</div>
-            <img width="150px" height="350px" class="profile-pic img-fluid"" src="{{award.award.url}}" >
+            <img width="150px" height="350px" class="profile-pic img-fluid"  src="{{award.award.url}}"  onclick = 'openImageWindow(this.src);'>
             <div class="event-text">{{award.description}}</div>
+            <div class="">
+                <a class="nav-item-link" href="{{award.award.url}}" download>Скачать</a>
+            </div>
         </div>
         {% endfor %}
     </section>

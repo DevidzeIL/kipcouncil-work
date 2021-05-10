@@ -71,6 +71,7 @@ def logoutUser(request):
 def userPage(request):
     user = request.user.student
 
+    info = Student.objects.filter(fio = user)
     tags = Tag.objects.all()
 
     events = []
@@ -91,6 +92,7 @@ def userPage(request):
     awards = request.user.student.useraward_set.all()
 
     context = {
+        'info':info,
         'user':user, 'tags':tags, 'awards':awards,
         'events': events, 'events_member':events_member,
         'event_procents':event_procents,
@@ -182,6 +184,8 @@ def adminLookuser(request, pk_test):
 
     tags = Tag.objects.all()
 
+    info = Student.objects.filter(fio = user)
+
     events = []
     events_member = []
     for tag in tags:
@@ -199,6 +203,7 @@ def adminLookuser(request, pk_test):
 
     awards = UserAward.objects.filter(user = user)
     context = {
+        'info':info,
         'user':user, 'tags':tags, 'awards':awards,
         'events': events, 'events_member':events_member,
         'event_procents':event_procents,
