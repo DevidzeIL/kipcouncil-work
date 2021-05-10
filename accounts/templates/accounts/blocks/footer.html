@@ -1,90 +1,49 @@
-
-
 {% load static %}
 {% block content %}
+
 <!-- FOOTER -->
-<section class="footer row">
-    <div class="col-1"></div>
-    <!-- FOOTER > NAVIGATION -->
-    <div class="col-xs-6 col-sm-10 col-md-3 col-lg-2 col-xxl-2 footer-nav">
-        <div class="row">
+<div class="container-fluid">
+    <section class="footer row">
+        <!-- FOOTER > NAVIGATION -->
+        <div class="col-xs-12 col-sm-10 col-lg-3 footer-nav">
             <a href="{% url 'main' %}"><img class="footer-logo" src="{% static '/images/logo.svg' %}" alt="Логотип"></a>
+        </div>
+        
+        <div class="col-xs-12 col-sm-10 col-lg-2 footer-nav">
             <div class="footer-box">
                 <div class="footer-nav-header">Главное</div>
                 <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'news' %}"">Новости</a></div>
                 <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'about' %}">О нас</a></div>
-                <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user-page' %}">Аккаунт</a></div>
-                <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'search' %}">Поиск</a></div>
+
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff %}
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_users' %}">Студенты</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Мероприятия</a></div>
+                    {% endif %}
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user-page' %}">Аккаунт</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'logout' %}">Выйти</a></div>
+                {% else %}
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'login' %}">Войти</a></div>
+                {% endif %}
             </div>
+        </div>  
+
+        <div class="col-xs-12 col-sm-10 col-lg-2 footer-nav">
             <div class="footer-box">
                 <div class="footer-nav-header">Общее</div>
                 <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'docs_council' %}">Документы</a></div>
                 <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'calendar' %}">Календарный план</a></div>
                 <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'docs_college' %}">Колледж</a></div>
             </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-10 col-lg-2 footer-nav">
             <div class="footer-box">
                 <div class="footer-nav-header">Соц. сети</div>
                 <div class="footer-nav-item"><a class="nav-item-link" href="https://vk.com/timeofkip">vk</a></div>
                 <div class="footer-nav-item"><a class="nav-item-link" href="https://www.instagram.com/studsovet_kip/">instagram</a></div>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-1 col-lg-0 col-xxl-1 footer-line"></div>
-    <div class="col-sm-1 col-md-1 col-lg-0 col-xxl-1"></div>
-
-    <!-- FOOTER > MAIN NEW -->
-    <div class="col-sm-10 col-md-6 col-lg-5 col-xxl-3 footer-box">
-        <div class="row">
-            <div class="footer-main-box-dateitem">
-                <div class="footer-main-box-date">09 мая —</div> 
-                <div class="footer-main-box-event">День победы!</div>
-            </div>
-            <div class="footer-main-box-text">То страдание того: вы ни тех, простейшим счастливой которого открывший страдание избегает представление а некоей тех постигают. Никакого картину наслаждение — чтобы перед мог физическими избегает никакого постигают простейшим физическими тех когда чтобы — презирает неприятностей кто человек — постигают. 
-                <br>
-                Наслаждение презирает отвергает или когда никто немалое никого потому именно страдания этот перед истину пользы откуда избегал восхваляющих. Физическими, тех открывший — тягостными которое никакого раз лишь раз какими тягостными простейшим, что представление такие приносило разумно никто избегает никого, великие такие. Упрекнуть бы вы, некоей само, вы за равно всю что или действительно умеет отвергает — постигают а счастливой.
-            </div>
-        </div>
-        <div class="footer-btns row">
-            <div class="col footer-btn">
-                <div class="btn-l">Назад</div>
-            </div>
-            <div class="col footer-btn">
-                <div class="btn-c"><a class="nav-item-link" href="">Подробнее</a></div>
-            </div>
-            <div class="col footer-btn">
-                <div class="btn-r">Далее</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xs-1 col-sm-2 col-md-1 col-lg-2 col-xxl-1"></div>
-
-    <!-- FOOTER > LIST NEWS -->
-    <div class="col-xs-8 col-sm-8 col-md-10 col-lg-8 col-xxl-2 footer-news-list">
-        <div class="footer-box-dateitems row">
-            <div class="footer-box-dateitem">
-                <div class="footer-box-date">09 мая —</div>
-                <div class="footer-box-event">День победы!</div>
-            </div>
-            <div class="footer-box-dateitem">
-                <div class="footer-box-date">09 мая —</div>
-                <div class="footer-box-event">День победы!</div>
-            </div>
-            <div class="footer-box-dateitem-activated">
-                <div class="footer-box-date">09 мая —</div>
-                <div class="footer-box-event">День победы!</div>
-            </div>
-            <div class="footer-box-dateitem">
-                <div class="footer-box-date">09 мая —</div>
-                <div class="footer-box-event">День победы!</div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="news-full-list"><a class="nav-item-link" href="{% url 'news' %}">Все новости</a></div>
-        </div>
-    </div>
-    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-0 col-xxl-1"></div>
-</section>
-
+    </section>
+</div>
 {% endblock %}

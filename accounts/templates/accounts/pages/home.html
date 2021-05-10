@@ -62,17 +62,27 @@
     </section>
 </div>
 
+<style>
+    .profile-pic
+    {
+        margin: 0 -2%;
+        height: 100vh;
+    }
 
+</style>
 
 <!-- BIG PROMO -->
-<!-- <section class="big-promo row">
+<section class="big-promo row">
     <div class="col-0 col-md-1"></div>
     <div class="col-sm-8 col-lg-6">
         <div class="big-promo-text">
-            ВЫПУСКНОЙ 2020
-            <br>ДЛЯ 4 КУРСОВ
+            {{event_all.name}}
         </div>
+        
     </div>
-</section> -->
+    <div class="col-12">
+        <img class="profile-pic promo-image"  src="{{event_all.photo.url}}">
+    </div>
+</section>
 
 {% endblock %}

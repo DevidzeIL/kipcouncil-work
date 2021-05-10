@@ -17,13 +17,15 @@
         {% for post in news_list %}
         <div class="col-12 col-md-6 col-lg-6 event-box">
             <div class="box-dateitem">{{post.date_performance}}</div>
-            <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
+            <!-- <img class="img-fluid" src="{% static 'images/rec.png' %}" alt=""> -->
+            <img class="profile-pic img-fluid"  src="{{post.photo.url}}">
+            
             <div class="event-header">{{post.name}}</div>
-            <div class="event-text">{{post.main_text}}</div>
+            <div class="event-text">{{post.main_text | truncatewords:20}}</div>
             <div class="event-more"><a class="nav-item-link" href="{% url 'news_about' post.id %}">Подробнее</a></div>
         </div>
         {% endfor %}
-    </section>
+    </section>  
 </div>
 
 {% endblock %}

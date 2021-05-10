@@ -4,19 +4,26 @@
 
 <h2>ОБО МНЕ</h2>
 {% for field in info %}
+    {{field.fio}}
+    <br>
+
     {{field.group.сourse}}
     {{field.group.specialty}} -
     {{field.group}}
-
     <br>
+
     {{field.email}}      
     <br>
+
     {{field.phone}}      
     <br>
+
     {{field.birthday}}      
     <br>
+
     <img width="350px" height="550px" class="profile-pic img-fluid"" src="{{field.profile_pic.url}}" >      
     <br>
+    
     {{field.sex}}      
     <br>
 {% endfor %}

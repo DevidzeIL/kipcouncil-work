@@ -7,7 +7,6 @@
     {
         width: 100%;
     }
-
     th, td 
     {
         padding: 15px;
@@ -25,7 +24,6 @@
             </form>
 		</div>
 	</div>
-	
 </div>
 
 <table >
@@ -44,7 +42,14 @@
                 <tr>
                     <td>{{event.tags}}</td>
                     <td>{{event.name}}</td>
-                    <td><a href="{% url 'admin_lookuser' member.user.fio %}">{{member.user}}</a></td>
+                    
+                    {% if member.user == account %}
+                        <td><a href="{% url 'user-page' %}">{{member.user}}</a></td>
+                    {% else %}
+                        <td><a href="{% url 'admin_lookuser' member.user.fio %}">{{member.user}}</a></td>
+                    {% endif %}
+
+
                     <td>{{member.role}}</td>
                     <td>{{member.comment}}</td>
                     <td>{{event.date}}</td>

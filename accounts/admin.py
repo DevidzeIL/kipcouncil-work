@@ -18,7 +18,7 @@ admin.site.register(Event)
 admin.site.register(Member)
 admin.site.register(New)
 admin.site.register(About)
-
+admin.site.register(ListDirection)
 
 admin.site.register(DocsName)
 admin.site.register(DocsCollege)

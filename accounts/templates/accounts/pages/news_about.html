@@ -2,33 +2,38 @@
 {% load static %}
 {% block content %}
 
+
 <!-- PROMO -->        
 <section class="promo row">
-    <div class="col-12 col-sm-7 promo-header">{{event.name}}</div>
-    <div class="col-12 col-sm-7 box-dateitem">{{event.date}}</div>
+    <div class="col-0 col-md-1"></div>
+    <div class="col-sm-8 col-lg-6">
+        <div class="col-12 col-sm-7 promo-header">{{event.name}}</div>
+        <div class="col-12 col-sm-7 box-dateitem">{{event.date}}</div>
+    </div>
+    <div class="col-12">
+        <img width="500px" class="profile-pic promo-image"  src="{{new.photo.url}}">
+    </div>
 </section>
+
 
 
 <!-- INFO -->
 <section class="info row">
     <div class="col-0 col-sm-1 col-md-1 col-lg-1"></div>
     <!-- INFO > TEXT -->
-    <div class="col-sm-10 col-md-10 col-lg-4">
+    <div class="col-sm-10 col-md-10 col-lg-5">
         <div class="row">
             <div class="info-box">
-                <div class="info-author-header"></div>
+                <div class="info-author-header">{{new.main_text}}</div>
                 <div class="info-about">
-                    {{new.main_text}}
-                    <br>
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="box-header">Цели</div>
-                <div class="info-text">
                     {{new.common_text}}
                     <br>
+                    <br>
+                    {{new.common_text}}
+                    <br>
+                    <br>
+                    <div class="info-link"><a href="{{new.link}}">Фото/Видео</a></div>
                 </div>
-                <div class="info-link"><a href="">Фото/Видео</a></div>
             </div>
         </div>
     </div>
@@ -38,7 +43,7 @@
 
 
     <!-- INFO > LIST -->
-    <div class="col-sm-8 col-md-8 col-lg-5 info-list">
+    <div class="col-sm-8 col-md-8 col-lg-3 info-list">
         <div class="box-header">Участники</div>
         <div class="row">
             <div class="col-12 info-lists">

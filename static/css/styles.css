@@ -30,6 +30,11 @@ body
     {
         margin-bottom: 130px;
     }
+    
+    .header-logo
+    {
+        margin-left: 3.5vh;
+    }
 
     .navbar-brand
     {
@@ -111,7 +116,9 @@ body
         
         .footer
         {
-            margin-bottom: 25px;
+            margin-bottom: 25px; 
+            justify-content: space-around;
+            
         }
 
         .footer-logo
@@ -546,7 +553,6 @@ body
         .info-about
         {
             margin-top: -70px;
-            margin-left: 70px;
         }
         /* box-header */
         /* info-text */

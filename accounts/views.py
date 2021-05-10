@@ -17,7 +17,7 @@ from django.contrib.auth.models import Group
 # Create your views here.
 from .models import (
     Specialty, Company, Student, UserFunction, UserAward, UserComment, 
-    Tag, Event, Member, New, About, 
+    Tag, Event, Member, New, About, ListDirection,
     DocsName, DocsCollege, DocsCouncil
 )
 
@@ -165,6 +165,8 @@ def userTable(request, pk_test):
 
 
 def adminTable(request):
+    account = request.user.student
+
     events = Event.objects.all()
     members = Member.objects.all()
 
@@ -173,6 +175,7 @@ def adminTable(request):
     members = myFilter.qs
 
     context = {
+        'account':account,
         'events':events, 'members':members,
         'myFilter':myFilter
         
@@ -211,6 +214,15 @@ def adminLookuser(request, pk_test):
 
     return render(request, 'accounts/auth/admin_lookuser.html', context)
 
+def adminUsers(request):
+    account = request.user.student
+    users = ListDirection.objects.all()
+
+    context = {
+        'account':account,
+        'users':users
+    }
+    return render(request, 'accounts/auth/admin_users.html', context)
 
 
 @login_required(login_url='login')
@@ -228,7 +240,7 @@ def accountSettings(request):
 
 
 def main(request):
-    event_all = Event.objects.all().last()
+    event_all = New.objects.all().last()
 
     tags = Tag.objects.all()
     posts = []

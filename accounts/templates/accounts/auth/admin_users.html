@@ -1,0 +1,57 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    table
+    {
+        width: 100%;
+    }
+
+    th, td 
+    {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px black solid;
+    }
+</style>
+
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+				{{myFilter.form}}
+		        <button class="btn btn-primary" type="submit">Поиск</button>
+            </form>
+		</div>
+	</div>
+</div>
+
+<table >
+    <tr>
+        <th>Направление</th>
+        <th>Участник</th>
+        <th>Роль</th>
+        <th>Дата добавления</th>
+    </tr>
+
+    {% for user in users %}
+                <tr>
+                    <td>{{user.tags}}</td>
+
+                    {% if user.user == account %}
+                        <td><a href="{% url 'user-page' %}">{{user.user}}</a></td>
+                    {% else %}
+                        <td><a href="{% url 'admin_lookuser' user.user.fio %}">{{user.user}}</a></td>
+                    {% endif %}
+                    <td>{{user.role}}</td>
+                    <td>{{user.date_created}}</td>
+                </tr>
+    {% endfor %}
+</table>
+
+<br>
+<br>
+<br>
+
+{% endblock %}
