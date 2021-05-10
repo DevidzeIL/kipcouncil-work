@@ -27,7 +27,9 @@ urlpatterns = [
     path('delete_award/<str:pk_test>/', views.deleteAward, name="delete_award"),
 
     
-    path('table/<str:pk_test>/', views.table, name="table"),
+    path('user_table/<str:pk_test>/', views.userTable, name="user_table"),
+    path('admin_table/', views.adminTable, name="admin_table"),
+    path('admin_lookuser/<str:pk_test>/', views.adminLookuser, name="admin_lookuser"),
 
 
     path('reset_password/', 

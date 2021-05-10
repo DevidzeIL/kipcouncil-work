@@ -22,6 +22,7 @@ from .models import (
 )
 
 from .forms import CreateUserForm, StudentForm, AwardForm
+from .filters import MemberFilter, AdminFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
 
@@ -144,16 +145,66 @@ def deleteAward(request, pk_test):
 
 
 
-def table(request, pk_test):
+def userTable(request, pk_test):
     events = Event.objects.all()
     members = Member.objects.filter(user__id = pk_test)
 
+    myFilter = MemberFilter(request.GET, queryset = members)
+
+    members = myFilter.qs
+
     context = {
-        'events':events, 'members':members
+        'events':events, 'members':members,
+        'myFilter':myFilter
         
     }
-    return render(request, 'accounts/auth/table.html', context)
+    return render(request, 'accounts/auth/user_table.html', context)
 
+
+
+def adminTable(request):
+    events = Event.objects.all()
+    members = Member.objects.all()
+
+    myFilter = AdminFilter(request.GET, queryset = members)
+
+    members = myFilter.qs
+
+    context = {
+        'events':events, 'members':members,
+        'myFilter':myFilter
+        
+    }
+    return render(request, 'accounts/auth/admin_table.html', context)
+
+def adminLookuser(request, pk_test):
+    user = Student.objects.get(fio = pk_test)
+
+    tags = Tag.objects.all()
+
+    events = []
+    events_member = []
+    for tag in tags:
+        events.append(
+            Event.objects.filter(tags__name=tag.name).count()
+        )
+        events_member.append(
+            Member.objects.filter(user = user, event__tags__name=tag.name).count()
+        )
+
+    event_procents = []
+    for i in range(0, len(events)):
+        event_procents.append(events_member[i] * 100 / events[i])
+
+
+    awards = UserAward.objects.filter(user = user)
+    context = {
+        'user':user, 'tags':tags, 'awards':awards,
+        'events': events, 'events_member':events_member,
+        'event_procents':event_procents,
+    }
+
+    return render(request, 'accounts/auth/admin_lookuser.html', context)
 
 
 
