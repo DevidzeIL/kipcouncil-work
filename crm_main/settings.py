@@ -134,6 +134,8 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 
+MEDIA_URL = '/icons/'
+
 HEADLINE_FONTS_DIR = '/fonts/'
 
 STATICFILES_DIRS = [

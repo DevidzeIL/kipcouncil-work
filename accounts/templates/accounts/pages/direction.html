@@ -37,11 +37,13 @@
         <div class="box-header">Координаторство</div>
         <div class="row">
             {% for user in users %}
+            {% if user.status == "Правление" %}
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 info-user">
-                <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
-                <div class="info-role">{{user.function}}</div>
+                <img class="img-fluid" src="{{user.user.profile_pic.url}}" alt="">
+                <div class="info-role">{{user.role}}</div>
                 <div class="info-fio">{{user.user}}</div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>

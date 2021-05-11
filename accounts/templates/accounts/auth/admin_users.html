@@ -30,6 +30,7 @@
 <table >
     <tr>
         <th>Направление</th>
+        <th>Статус</th>
         <th>Участник</th>
         <th>Роль</th>
         <th>Дата добавления</th>
@@ -38,7 +39,7 @@
     {% for user in users %}
                 <tr>
                     <td>{{user.tags}}</td>
-
+                    <td>{{user.status}}</td>
                     {% if user.user == account %}
                         <td><a href="{% url 'user-page' %}">{{user.user}}</a></td>
                     {% else %}

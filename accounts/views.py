@@ -22,7 +22,7 @@ from .models import (
 )
 
 from .forms import CreateUserForm, StudentForm, AwardForm
-from .filters import MemberFilter, AdminFilter
+from .filters import MemberFilter, AdminMemberFilter, AdminUserFilter, NewsFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
 
@@ -170,7 +170,7 @@ def adminTable(request):
     events = Event.objects.all()
     members = Member.objects.all()
 
-    myFilter = AdminFilter(request.GET, queryset = members)
+    myFilter = AdminMemberFilter(request.GET, queryset = members)
 
     members = myFilter.qs
 
@@ -218,9 +218,14 @@ def adminUsers(request):
     account = request.user.student
     users = ListDirection.objects.all()
 
+    myFilter = AdminUserFilter(request.GET, queryset = users)
+
+    users = myFilter.qs
+
     context = {
-        'account':account,
-        'users':users
+        'account':account, 
+        'users':users,
+        'myFilter':myFilter
     }
     return render(request, 'accounts/auth/admin_users.html', context)
 
@@ -260,7 +265,7 @@ def main(request):
 
 def direction(request, tags):
     news = New.objects.filter(tags=tags)
-    users = UserFunction.objects.filter(tags=tags)
+    users = ListDirection.objects.filter(tags=tags)
     text_about = About.objects.filter(tags=tags).last()
 
     context = {
@@ -318,8 +323,12 @@ def news_about(request, pk_test):
 
 def news(request):
     news_list = New.objects.all()
+    myFilter = NewsFilter(request.GET, queryset = news_list)
+
+    news_list = myFilter.qs
+
     context = {
-        'news_list':news_list
+        'news_list':news_list, 'myFilter':myFilter
     }
     return render(request, 'accounts/pages/news.html', context)
 

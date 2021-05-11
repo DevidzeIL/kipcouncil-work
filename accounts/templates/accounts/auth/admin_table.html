@@ -42,7 +42,6 @@
                 <tr>
                     <td>{{event.tags}}</td>
                     <td>{{event.name}}</td>
-                    
                     {% if member.user == account %}
                         <td><a href="{% url 'user-page' %}">{{member.user}}</a></td>
                     {% else %}

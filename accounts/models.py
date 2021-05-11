@@ -48,8 +48,14 @@ class Student(models.Model):
         return self.fio
 
 class ListDirection(models.Model):
+    STATUS = (
+            ('Участник', 'Участник'),
+            ('Правление', 'Правление')
+    )
+
     tags        = models.ForeignKey(Tag, null=True, on_delete=models.SET_NULL)
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
+    status      = models.CharField(max_length=200, blank = True, null=True, choices=STATUS)
     role        = models.CharField(max_length=200, blank = True, null=True) 
     date_created= models.DateTimeField(auto_now_add=True, null=True)
 

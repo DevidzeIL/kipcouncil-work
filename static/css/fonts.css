@@ -1,11 +1,10 @@
 /* ALL CSS STYLES */
 @media all
 {
-
     *{
         font-family: 'HelveticaNeueCyr';
         font-size: 16px;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 1.4;
 
         box-sizing: border-box;
@@ -20,6 +19,7 @@
     a{
         text-decoration: none;
     }
+    
 /* HOVER */
     .nav-item-link
     {

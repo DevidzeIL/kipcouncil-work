@@ -223,7 +223,7 @@ body
     .big-promo
     {
         height: 100vh;
-        background: url(/img/events/pic-1.jpg);
+        background: url();
         background-size: cover;
         background-position: center;
         position: relative;
@@ -540,7 +540,6 @@ body
     .news-promo
     {
         height: 70vh;
-        background: url(/img/events/pic-1.jpg);
         background-size: cover;
         background-position: center;
         position: relative;
