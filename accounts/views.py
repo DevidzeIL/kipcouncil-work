@@ -22,7 +22,7 @@ from .models import (
 )
 
 from .forms import CreateUserForm, StudentForm, AwardForm
-from .filters import MemberFilter, AdminMemberFilter, AdminUserFilter, NewsFilter
+from .filters import MemberFilter, AdminMemberFilter, AdminUserFilter, NewsFilter, EventFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
 
@@ -68,7 +68,7 @@ def logoutUser(request):
 
 
 @login_required(login_url='login')
-def userPage(request):
+def mainUser(request):
     user = request.user.student
 
     info = Student.objects.filter(fio = user)
@@ -110,7 +110,7 @@ def createAward(request, pk_test):
         form = AwardForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('user-page')
+            return redirect('main_user')
 
     context = {
         'form':form
@@ -125,7 +125,7 @@ def editAward(request, pk_test):
         form = AwardForm(request.POST, instance=award)
         if form.is_valid():
             form.save()
-            return redirect('user-page')
+            return redirect('main_user')
 
     context = {
         'form':form
@@ -138,7 +138,7 @@ def deleteAward(request, pk_test):
 
     if request.method == 'POST':
         award.delete()
-        return redirect('user-page')
+        return redirect('main_user')
 
     context = {
         'award':award
@@ -334,12 +334,6 @@ def news(request):
 
 
 
-def search(request):
-    return render(request, 'accounts/pages/search.html')
-
-
-
-
 def get_date(req_month):
     if req_month:
         year, month = (int(x) for x in req_month.split('-'))
@@ -365,12 +359,17 @@ def calendar_view(request):
     html_cal = mark_safe(cal.formatmonth(withyear=True))
     events = Event.objects.all()
 
+    print ('ДОООООООООООООООООООО', events)
+
+
     p_month = prev_month(mydate)
     n_month = next_month(mydate)
 
+    myFilter = EventFilter(request.GET, queryset = events)
+
     context = {
         'calendar':html_cal, 'prev_month':p_month, 'next_month':n_month,
-        'events':events
+        'myFilter':myFilter, 'events':events
     }
     return render(request, 'accounts/pages/calendar.html', context)
 

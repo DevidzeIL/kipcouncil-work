@@ -29,3 +29,8 @@ class NewsFilter(django_filters.FilterSet):
     class Meta:
         model = New
         fields = ['tags', 'event', 'name', 'date_performance']
+
+class EventFilter(django_filters.FilterSet):
+    class Meta:
+        model = Event
+        fields = ['tags']

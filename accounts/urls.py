@@ -12,15 +12,14 @@ urlpatterns = [
     path('docs_council/', views.docs_council, name="docs_council"),
     path('news_about/<str:pk_test>/', views.news_about, name="news_about"),
     path('news/', views.news, name="news"),
-    
-    path('search/', views.search, name="search"),
+
     path('calendar/', views.calendar_view, name="calendar"),
 
     path('login/', views.loginPage, name="login"),
     path('logout/', views.logoutUser, name="logout"),
     path('register/', views.registerPage, name="register"),
-    path('user/', views.userPage, name="user-page"),
-    path('account/', views.accountSettings, name="account"),
+    path('user/', views.mainUser, name="main_user"),
+    path('account/', views.accountSettings, name="account_settings"),
 
     path('create_award/<str:pk_test>/', views.createAward, name="create_award"),
     path('edit_award/<str:pk_test>/', views.editAward, name="edit_award"),

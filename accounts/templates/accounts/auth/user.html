@@ -1,9 +1,9 @@
-{% extends 'accounts/main.html' %}
+{% extends 'accounts/auth/main_user.html' %}
 {% load static %}
 {% block content %}
 
 <!-- HEADER -->
-<div class="container-fluid">
+<div class="container-fluid header-user">
     <section class="header row">
         <nav class="navbar navbar-expand-xl navbar-light">
             <div class="container-fluid header-navs">
@@ -15,13 +15,13 @@
                 </button>
     
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">    
-                        <li>
-                            <h1><div class="promo-header" style="margin-right: 50vh;" href="{% url 'user-page' %}">Аккаунт</div></h1>
-                        </li>
+                    <h1><div class="promo-header" style="margin-left: 10vh;">Аккаунт</div></h1>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items"> 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account' %}">Настройки</a>
+                            <a class="nav-link" href="{% url 'main' %}">На главную</a>
+                        </li>   
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_settings' %}">Настройки</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
@@ -34,104 +34,82 @@
 </div>
 
 <!-- USER -->
-<section class="user-page row">
-    {% for field in info %}
-    <!-- USER > USER NAV -->
-    <div class="col-1"></div>
-
-    <div class="col-xs-6 col-sm-10 col-md-3 col-lg-2 col-xxl-2 footer-nav">
-        <div class="row">
-            <div class="footer-box">
-                <div class="footer-nav-header">Главное</div>
-                {% if request.user.is_staff %}
-                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Админ Таблица мероприятий</a></div>
-                {% endif %}
-                <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user_table' user.id %}">Таблица мероприятий</a></div>
-                <div class="footer-nav-item"><a class="nav-item-link" href="#portfolio">Портфолио</a></div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-nav-header">Общее</div>
-                <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'docs_council' %}">Документы</a></div>
-                <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'calendar' %}">Календарный план</a></div>
-                <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'docs_college' %}">Колледж</a></div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-nav-header">Аккаунт</div>
-                <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'logout' %}">Выйти</a></div>
+<div class="container-fluid user-page">
+    <section class="user-page row">
+        {% for field in info %}
+        <div class="col-1"></div>
+        <!-- USER > USER NAV -->
+        <div class="col-xs-6 col-sm-10 col-md-3 col-lg-2 col-xxl-2 footer-nav">
+            <div class="row">
+                <div class="footer-box">
+                    <div class="footer-nav-header">Главное</div>
+                    {% if request.user.is_staff %}
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Админ Таблица мероприятий</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_users' %}">Список студа</a></div>
+                    {% endif %}
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user_table' user.id %}">Таблица мероприятий</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="#portfolio">Портфолио</a></div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Общее</div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'docs_council' %}">Документы</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'calendar' %}">Календарный план</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'docs_college' %}">Колледж</a></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-1 col-md-1 col-lg-0 col-xxl-1"></div>
-
-    <!-- USER > USER PIC -->
-    <div class="col-sm-10 col-md-6 col-lg-5 col-xxl-3 footer-box">
-        <div class="row">
-            <div class="user-profile-pic">
-                <img width="350px" height="550px" class="profile-pic img-fluid"" src="{{field.profile_pic.url}}" >  
+        <!-- USER > USER PIC -->
+        <div class="col-sm-10 col-md-6 col-lg-5 col-xxl-4 footer-box">
+            <div class="row">
+                <img width="250px" class="profile-pic img-fluid"" src="{{field.profile_pic.url}}" >  
             </div>
         </div>
-    </div>
 
-    <div class="col-xs-1 col-sm-2 col-md-1 col-lg-2 col-xxl-1"></div>
 
-    <!-- USER > USER INFO -->
-    <div class="col-xs-8 col-sm-8 col-md-10 col-lg-8 col-xxl-2 footer-news-list">
-        <div class="row">
-            <div class="footer-box">
-                <div class="footer-nav-header">ФИО</div>
-                <div class="footer-nav-item">{{field.fio}}</div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-nav-header">Группа</div>
-                <div class="footer-nav-item">{{field.group.сourse}}{{field.group.specialty}} - {{field.group}}</div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-nav-header">День рождения</div>
-                <div class="footer-nav-item">{{field.birthday}}</div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-nav-header">Email</div>
-                <div class="footer-nav-item">{{field.email}}</div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-nav-header">Телефон</div>
-                <div class="footer-nav-item">{{field.phone}}</div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-nav-header">Гендер</div>
-                <div class="footer-nav-item">{{field.sex}}</div>
-            </div>
-            <div class="footer-box">
-                <div class="footer-nav-header">Соц. сети</div>
-                <div class="footer-nav-item"></div>
+        <!-- USER > USER INFO -->
+        <div class="col-xs-8 col-sm-8 col-md-10 col-lg-8 col-xxl-2 footer-news-list">
+            <div class="row">
+                <div class="footer-box">
+                    <div class="footer-nav-header">ФИО</div>
+                    <div class="footer-nav-item">{{field.fio}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Группа</div>
+                    <div class="footer-nav-item">{{field.group.сourse}}{{field.group.specialty}} - {{field.group}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">День рождения</div>
+                    <div class="footer-nav-item">{{field.birthday}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Email</div>
+                    <div class="footer-nav-item">{{field.email}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Телефон</div>
+                    <div class="footer-nav-item">{{field.phone}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Гендер</div>
+                    <div class="footer-nav-item">{{field.sex}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Соц. сети</div>
+                    <div class="footer-nav-item"></div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-1"></div>
-    {% endfor %}
-</section>  
-
+        <div class="col-1"></div>
+        {% endfor %}
+    </section>  
+</div>
 
 <br>
 <br>
 <br>
 
-<style>
-    table
-    {
-        width: 100%;
-    }
-
-    th, td 
-    {
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px black solid;
-}
-</style>
-
+<!-- TABLE -->
 <table>
     <tr>
         <th>Результат</th>
@@ -165,13 +143,13 @@
 
 <script type="text/javascript">
     function openImageWindow(src) {
-      var image = new Image();
-      image.src = src;
-      var width = image.width;
-      var height = image.height;
-      window.open(src,"Image","width=" + width + ",height=" + height);
+    var image = new Image();
+    image.src = src;
+    var width = image.width;
+    var height = image.height;
+    window.open(src,"Image","width=" + width + ",height=" + height);
     }
-  </script>
+</script>
 
 <!-- PORTFOLIO -->
 <div class="container" id="portfolio">
@@ -207,12 +185,7 @@
         </div>
         {% endfor %}
     </section>
-
     <a href="{% url 'create_award' user.id %}">Добавить</a>
 </div>
 
-<br>
-<br>
-<br>
-
-{% endblock content %}
+{% endblock %}

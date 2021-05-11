@@ -3,6 +3,25 @@ body
     min-width: 400px;
 }
 
+/* -------------------- */
+.user-page
+{
+    justify-content: space-around;
+}
+
+table
+{
+    width: 100%;
+}
+
+th, td 
+{
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px black solid;
+}
+/* -------------------- */
+
 @media all
 {
 /* -MULTI CLASSES */

@@ -1,19 +1,32 @@
-{% extends 'accounts/main.html' %}
+{% extends 'accounts/auth/main_user.html' %}
 {% load static %}
 {% block content %}
 
-<style>
-    table
-    {
-        width: 100%;
-    }
-    th, td 
-    {
-        padding: 15px;
-        text-align: center;
-        border-bottom: 1px black solid;
-    }
-</style>
+<!-- HEADER -->
+<div class="container-fluid header-user">
+    <section class="header row">
+        <nav class="navbar navbar-expand-xl navbar-light">
+            <div class="container-fluid header-navs">
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <h1><div class="promo-header" style="margin-left: 10vh;">Аккаунт</div></h1>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">    
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+</div>
+
 
 <div class="row">
 	<div class="col">
@@ -43,7 +56,7 @@
                     <td>{{event.tags}}</td>
                     <td>{{event.name}}</td>
                     {% if member.user == account %}
-                        <td><a href="{% url 'user-page' %}">{{member.user}}</a></td>
+                        <td><a href="{% url 'main_user' %}">{{member.user}}</a></td>
                     {% else %}
                         <td><a href="{% url 'admin_lookuser' member.user.fio %}">{{member.user}}</a></td>
                     {% endif %}

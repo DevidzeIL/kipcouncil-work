@@ -6,7 +6,7 @@
 
 <form method="POST" action="{% url 'delete_award' award.id %}">
     {% csrf_token %}
-    <a href="{% url 'user-page' %}">Нет</a>
+    <a href="{% url 'main_user' %}">Нет</a>
     <input class="btn btn-primary" type="submit" name="Submit" value="Да">
 </form>
 
