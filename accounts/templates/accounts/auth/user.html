@@ -18,7 +18,7 @@
                     <h1><div class="promo-header" style="margin-left: 10vh;">Аккаунт</div></h1>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items"> 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'main' %}">На главную</a>
+                            <a class="nav-link" href="{% url 'main' %}">Главная</a>
                         </li>   
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'account_settings' %}">Настройки</a>
@@ -46,6 +46,17 @@
                     {% if request.user.is_staff %}
                         <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Админ Таблица мероприятий</a></div>
                         <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_users' %}">Список студа</a></div>
+                        
+                        <br>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'register' %}">Зарегистировать нового студента</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_addtag' %}">Добавить направления</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_adduser' %}">Добавить студента в студ</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_addevent' %}">Добавить мероприятие</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_addmember' %}">Добавить участников мероприятия</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_addnew' %}">Добавить новость</a></div>
+                        
+                        <br>
+
                     {% endif %}
                     <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user_table' user.id %}">Таблица мероприятий</a></div>
                     <div class="footer-nav-item"><a class="nav-item-link" href="#portfolio">Портфолио</a></div>
@@ -91,12 +102,13 @@
                     <div class="footer-nav-item">{{field.phone}}</div>
                 </div>
                 <div class="footer-box">
-                    <div class="footer-nav-header">Гендер</div>
-                    <div class="footer-nav-item">{{field.sex}}</div>
-                </div>
-                <div class="footer-box">
                     <div class="footer-nav-header">Соц. сети</div>
-                    <div class="footer-nav-item"></div>
+                    {% if field.vk_url is not Null %}
+                        <div class="footer-nav-item"><a href="{{field.vk_url}}" target="_blank">vk</a></div>
+                    {% endif %}
+                    {% if field.instagram_url is not Null %}
+                        <div class="footer-nav-item"><a href="{{field.instagram_url}}" target="_blank">instagram</a></div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -136,6 +148,27 @@
         {% endfor %}
     </tr>
 </table>
+
+<br>
+<br>
+<br>
+
+<div class="container" id="portfolio">
+    <section class="direction row">
+        {% for tag in tags %}
+            {% for event in events %}
+                {% for event_member in events_member %}
+                    {% if tag.name == event__tags %}
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 event">
+                            <div class="box-dateitem">{{tag}}</div>
+                            <div class="event-header">{{event}}/{{event_member}}</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </section>
+</div>
 
 <br>
 <br>
@@ -182,7 +215,9 @@
                     </svg>
                 </a>
             </div>
-        </div>
+            <br>
+            <br>
+        </div>         
         {% endfor %}
     </section>
     <a href="{% url 'create_award' user.id %}">Добавить</a>

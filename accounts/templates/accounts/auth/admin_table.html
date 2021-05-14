@@ -32,21 +32,40 @@
 	<div class="col">
 		<div class="card card-body">
 			<form method="get">
-				{{myFilter.form}}
+                {{myFilterEvent.form}}
+                {{myFilterMember.form}}
 		        <button class="btn btn-primary" type="submit">Поиск</button>
             </form>
+            <a href="">Добавить</a>
 		</div>
 	</div>
 </div>
 
+
+
 <table >
+    <form method="get">
+        
+    <!-- <tr>
+        <th>{{myFilterEvent.tags}}</th>
+        <th>{{myFilterEvent.event}}</th>
+        <th>{{myFilterMember.user}}</th>
+        <th>{{myFilterMember.role}}</th>
+        <th>{{myFilterMember.comment}}</th>
+        <th>{{myFilterEvent.date}}}</th>
+    </tr>
+    <button class="btn btn-primary" type="submit">Поиск</button>
+    </form>
+    <a href="">Добавить</a> -->
+
+
     <tr>
         <th>Направление</th>
         <th>Мероприятие</th>
-        <th>Участник</th>
+        <th>Студент</th>
         <th>Роль</th>
-        <th>Комментарий</th>
-        <th>Дата</th>
+        <th>Комменатрий</th>
+        <th>Дата проведения</th>
     </tr>
 
     {% for event in events %}

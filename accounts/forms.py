@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 from django import forms
 
 from .models import (
-	Student, UserAward
+    ListDirection, Student, Tag, UserAward,
+    Event, Member, New,
+    DocsCollege, DocsCouncil
 )
 
 
@@ -23,4 +25,30 @@ class StudentForm(ModelForm):
 class AwardForm(ModelForm):
 	class Meta:
 		model = UserAward
+		fields = '__all__'
+
+
+class AddTagForm(ModelForm):
+	class Meta:
+		model = Tag
+		fields = ['name']
+
+class AddUserForm(ModelForm):
+	class Meta:
+		model = ListDirection
+		fields = ['user', 'tags', 'status', 'role']
+
+class AddEventForm(ModelForm):
+	class Meta:
+		model = Event
+		fields = '__all__'
+
+class AddMemberForm(ModelForm):
+	class Meta:
+		model = Member
+		fields = ['event', 'user', 'role', 'comment']
+
+class AddNewForm(ModelForm):
+	class Meta:
+		model = New
 		fields = '__all__'

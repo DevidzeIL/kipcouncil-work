@@ -19,13 +19,13 @@
 <div class="container">
     <section class="directions row">
         {% for tag in tags %}
-            {% for post in posts %}
-                {% if post.tags == tag %}
+
                     <div class="col-6 col-md-4 col-lg-3 box">
                         <div class="box-header">{{tag}}</div>
                         <div class="box-item"><a class="nav-item-link" href="{% url 'direction' tag.id %}" >Информация</a></div>
                         <div class="box-item"><a class="nav-item-link" >Календарь</a></div>
-
+                        {% for post in posts %}
+                        {% if post.tags == tag %}
                         {% if tag.name == "Культмасс" %}
                         {% elif tag.name == "Спорт" %}
                         {% elif tag.name == "Профка" %}

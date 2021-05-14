@@ -48,11 +48,25 @@
         <div class="row">
             <div class="col-12 info-lists">
 
-                {% for member in members %}        
-                <div class="info-list">
-                    <span class="info-group">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</span>
-                    <span class="info-fio" >{{member.user.fio}}</span>
-                </div>
+                {% for member in members %}  
+                    {% if request.user.is_staff %}
+                        {% if member.user.fio == account.fio %} 
+                            <div class="info-list"> 
+                                <span class="info-group"><a href="{% url 'main_user' %}">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</a></span>
+                                <span class="info-fio" ><a href="{% url 'main_user' %}">{{member.user.fio}}</a></span>
+                            </div>
+                        {% else %}
+                            <div class="info-list"> 
+                                <span class="info-group"><a href="{% url 'admin_lookuser' member.user.fio %}">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</a></span>
+                                <span class="info-fio" ><a href="{% url 'admin_lookuser' member.user.fio %}">{{member.user.fio}}</a></span>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="info-list">
+                            <span class="info-group">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</span>
+                            <span class="info-fio" >{{member.user.fio}}</span>
+                        </div>
+                    {% endif %}
                 {% endfor %} 
             </div>
         </div>

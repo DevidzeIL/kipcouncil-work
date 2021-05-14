@@ -16,13 +16,23 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import (
-    Specialty, Company, Student, UserFunction, UserAward, UserComment, 
+    Specialty, Company, Student, UserAward,  
     Tag, Event, Member, New, About, ListDirection,
     DocsName, DocsCollege, DocsCouncil
 )
 
-from .forms import CreateUserForm, StudentForm, AwardForm
-from .filters import MemberFilter, AdminMemberFilter, AdminUserFilter, NewsFilter, EventFilter
+from .forms import (
+    CreateUserForm, StudentForm, AwardForm,
+    AddUserForm, AddEventForm, AddMemberForm, AddNewForm,
+    AddTagForm
+)
+
+from .filters import (
+    MemberEventFilter, MemberFilter, 
+    AdminEventMemberFilter, AdminMemberFilter, AdminUserFilter, 
+    NewsFilter, EventFilter, DocsCollegeFilter, DocsCouncilFilter
+)
+
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
 
@@ -38,14 +48,13 @@ def registerPage(request):
             
             messages.success(request, username + ' был зарегистрирован!')
 
-            return redirect('login')
+            return redirect('main_user')
 
     context = {
         'form':form
     }
     return render(request, 'accounts/auth/register.html', context)
 
-@unauthenticated_user
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -67,7 +76,9 @@ def logoutUser(request):
     return redirect('login')
 
 
-@login_required(login_url='login')
+
+
+
 def mainUser(request):
     user = request.user.student
 
@@ -99,6 +110,109 @@ def mainUser(request):
     }
 
     return render(request, 'accounts/auth/user.html', context)
+
+def userTable(request, pk_test):
+    events = Event.objects.all()
+    members = Member.objects.filter(user__id = pk_test)
+    
+    myEventFilter = MemberEventFilter(request.GET, queryset = events)
+    myMemberFilter = MemberFilter(request.GET, queryset = members)
+    
+    events = myEventFilter.qs
+    members = myMemberFilter.qs
+
+    context = {
+        'events':events, 'members':members,
+        'myEventFilter':myEventFilter, 'myMemberFilter':myMemberFilter
+        
+    }
+    return render(request, 'accounts/auth/user_table.html', context)
+
+def accountSettings(request):
+    student = request.user.student
+    form = StudentForm(instance=student)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, request.FILES, instance=student)
+        if form.is_valid():
+            form.save()
+
+        
+    context = {'form':form}
+    return render(request, 'accounts/auth/account_settings.html', context)
+
+
+
+
+
+def adminTable(request):
+    account = request.user.student
+
+    events = Event.objects.all()
+    members = Member.objects.all()
+    
+    myFilterEvent = AdminEventMemberFilter(request.GET, queryset = events)
+    myFilterMember = AdminMemberFilter(request.GET, queryset = members)
+    
+    events = myFilterEvent.qs
+    members = myFilterMember.qs
+    
+
+    context = {
+        'account':account,
+        'events':events, 'members':members,
+        'myFilterEvent':myFilterEvent, 'myFilterMember':myFilterMember
+        
+    }
+    return render(request, 'accounts/auth/admin_table.html', context)
+
+def adminUsers(request):
+    account = request.user.student
+    users = ListDirection.objects.all()
+
+    myFilter = AdminUserFilter(request.GET, queryset = users)
+
+    users = myFilter.qs
+
+    context = {
+        'account':account, 
+        'users':users,
+        'myFilter':myFilter
+    }
+    return render(request, 'accounts/auth/admin_users.html', context)
+
+def adminLookuser(request, pk_test):
+    user = Student.objects.get(fio = pk_test)
+
+    tags = Tag.objects.all()
+
+    info = Student.objects.filter(fio = user)
+
+    events = []
+    events_member = []
+    for tag in tags:
+        events.append(
+            Event.objects.filter(tags__name=tag.name).count()
+        )
+        events_member.append(
+            Member.objects.filter(user = user, event__tags__name=tag.name).count()
+        )
+
+    event_procents = []
+    for i in range(0, len(events)):
+        event_procents.append(events_member[i] * 100 / events[i])
+
+
+    awards = UserAward.objects.filter(user = user)
+    context = {
+        'info':info,
+        'user':user, 'tags':tags, 'awards':awards,
+        'events': events, 'events_member':events_member,
+        'event_procents':event_procents,
+    }
+
+    return render(request, 'accounts/auth/admin_lookuser.html', context)
+
+
 
 
 
@@ -147,101 +261,81 @@ def deleteAward(request, pk_test):
 
 
 
-def userTable(request, pk_test):
-    events = Event.objects.all()
-    members = Member.objects.filter(user__id = pk_test)
-
-    myFilter = MemberFilter(request.GET, queryset = members)
-
-    members = myFilter.qs
-
-    context = {
-        'events':events, 'members':members,
-        'myFilter':myFilter
-        
-    }
-    return render(request, 'accounts/auth/user_table.html', context)
 
 
+def adminAddUser(request):
+    form = AddUserForm()
 
-def adminTable(request):
-    account = request.user.student
-
-    events = Event.objects.all()
-    members = Member.objects.all()
-
-    myFilter = AdminMemberFilter(request.GET, queryset = members)
-
-    members = myFilter.qs
-
-    context = {
-        'account':account,
-        'events':events, 'members':members,
-        'myFilter':myFilter
-        
-    }
-    return render(request, 'accounts/auth/admin_table.html', context)
-
-def adminLookuser(request, pk_test):
-    user = Student.objects.get(fio = pk_test)
-
-    tags = Tag.objects.all()
-
-    info = Student.objects.filter(fio = user)
-
-    events = []
-    events_member = []
-    for tag in tags:
-        events.append(
-            Event.objects.filter(tags__name=tag.name).count()
-        )
-        events_member.append(
-            Member.objects.filter(user = user, event__tags__name=tag.name).count()
-        )
-
-    event_procents = []
-    for i in range(0, len(events)):
-        event_procents.append(events_member[i] * 100 / events[i])
-
-
-    awards = UserAward.objects.filter(user = user)
-    context = {
-        'info':info,
-        'user':user, 'tags':tags, 'awards':awards,
-        'events': events, 'events_member':events_member,
-        'event_procents':event_procents,
-    }
-
-    return render(request, 'accounts/auth/admin_lookuser.html', context)
-
-def adminUsers(request):
-    account = request.user.student
-    users = ListDirection.objects.all()
-
-    myFilter = AdminUserFilter(request.GET, queryset = users)
-
-    users = myFilter.qs
-
-    context = {
-        'account':account, 
-        'users':users,
-        'myFilter':myFilter
-    }
-    return render(request, 'accounts/auth/admin_users.html', context)
-
-
-@login_required(login_url='login')
-def accountSettings(request):
-    student = request.user.student
-    form = StudentForm(instance=student)
     if request.method == 'POST':
-        form = StudentForm(request.POST, request.FILES, instance=student)
+        form = AddUserForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('main_user')
 
-        
-    context = {'form':form}
-    return render(request, 'accounts/auth/account_settings.html', context)
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/auth/admin_adduser.html', context)
+
+def adminAddTag(request):
+    form = AddTagForm()
+
+    if request.method == 'POST':
+        form = AddTagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main_user')
+
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/auth/admin_addtag.html', context)
+
+
+def adminAddEvent(request):
+    form = AddEventForm()
+
+    if request.method == 'POST':
+        form = AddEventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main_user')
+
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/auth/admin_addevent.html', context)
+
+def adminAddMember(request):
+    form = AddMemberForm()
+
+    if request.method == 'POST':
+        form = AddMemberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main_user')
+
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/auth/admin_adduser.html', context)
+
+def adminAddNew(request):
+    form = AddNewForm()
+
+    if request.method == 'POST':
+        form = AddNewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main_user')
+
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/auth/admin_addnew.html', context)
+
+
+
 
 
 def main(request):
@@ -261,8 +355,6 @@ def main(request):
 
     return render(request, 'accounts/pages/home.html', context)
 
-
-
 def direction(request, tags):
     news = New.objects.filter(tags=tags)
     users = ListDirection.objects.filter(tags=tags)
@@ -273,18 +365,15 @@ def direction(request, tags):
     }
     return render(request, 'accounts/pages/direction.html', context)
 
-
-
 def about(request):
-    users = UserFunction.objects.filter(tags__name="Общее")
+    users = ListDirection.objects.filter(status="Правление")
     text_about = About.objects.filter(tags__name="Общее").last()
+    account = request.user.student
 
     context = {
-        'users':users, 'text_about':text_about
+        'users':users, 'text_about':text_about, 'account':account
     }
     return render(request, 'accounts/pages/about.html', context)
-
-
 
 def docs_college(request):
     specialties = Specialty.objects.all()
@@ -296,8 +385,6 @@ def docs_college(request):
     }
     return render(request, 'accounts/pages/docs_college.html', context)
 
-
-
 def docs_council(request):
     tags = Tag.objects.all()
     docs = DocsCouncil.objects.all()
@@ -306,20 +393,6 @@ def docs_council(request):
         'tags':tags, 'docs':docs
     }
     return render(request, 'accounts/pages/docs_council.html', context)
-
-
-
-def news_about(request, pk_test):
-    new = New.objects.get(id=pk_test)
-    event = new.event
-    members = Member.objects.filter(event = new.event)
-
-    context = {
-        'members':members, 'new':new, 'event':event
-    }
-    return render(request, 'accounts/pages/news_about.html', context)
-
-
 
 def news(request):
     news_list = New.objects.all()
@@ -331,6 +404,19 @@ def news(request):
         'news_list':news_list, 'myFilter':myFilter
     }
     return render(request, 'accounts/pages/news.html', context)
+
+def news_about(request, pk_test):
+    new = New.objects.get(id=pk_test)
+    event = new.event
+    members = Member.objects.filter(event = new.event)
+    account = request.user.student
+
+    context = {
+        'members':members, 'new':new, 'event':event, 'account':account
+    }
+    return render(request, 'accounts/pages/news_about.html', context)
+
+
 
 
 
@@ -359,9 +445,6 @@ def calendar_view(request):
     html_cal = mark_safe(cal.formatmonth(withyear=True))
     events = Event.objects.all()
 
-    print ('ДОООООООООООООООООООО', events)
-
-
     p_month = prev_month(mydate)
     n_month = next_month(mydate)
 
@@ -372,5 +455,3 @@ def calendar_view(request):
         'myFilter':myFilter, 'events':events
     }
     return render(request, 'accounts/pages/calendar.html', context)
-
-

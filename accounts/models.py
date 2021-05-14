@@ -10,6 +10,7 @@ class Tag(models.Model):
 
 class Specialty(models.Model):
     name        = models.CharField(max_length=200, null=True)
+    
     def __str__(self):
         return self.name
 
@@ -37,11 +38,8 @@ class Student(models.Model):
     phone       = models.CharField(max_length=200, null=True)
     birthday    = models.DateField(null=True)
     profile_pic = models.ImageField(default='avatar.png', null=True, blank=True)
-    SEX = (
-            ('М', 'М'),
-            ('Ж', 'Ж')
-    )
-    sex         = models.CharField(max_length=200, null=True, choices=SEX)
+    vk_url      = models.CharField(max_length=200, blank=True, null=True)
+    instagram_url   = models.CharField(max_length=200, blank=True, null=True)
     date_created= models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -55,38 +53,24 @@ class ListDirection(models.Model):
 
     tags        = models.ForeignKey(Tag, null=True, on_delete=models.SET_NULL)
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
-    status      = models.CharField(max_length=200, blank = True, null=True, choices=STATUS)
-    role        = models.CharField(max_length=200, blank = True, null=True) 
+    status      = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
+    role        = models.CharField(max_length=200, blank=True, null=True) 
     date_created= models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.user.fio
         
-
-class UserFunction(models.Model):
-    tags        = models.ForeignKey(Tag, null=True, on_delete=models.SET_NULL)
-    user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
-    function    = models.CharField(max_length=200, null=True)  
-
-    def __str__(self):
-        return self.user.fio
-
-
-
 class UserAward(models.Model):
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     award       = models.ImageField(default='avatar.png', null=True, blank=True)
     description = models.CharField(max_length=200, blank=True, null=True)
-    date_performance = models.DateField(blank=True, null=True)
-
+    date_performance= models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.user.fio
 
 
-class UserComment(models.Model):
-    user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
-    comment     = models.CharField(max_length=200, null=True)
+
 
 
 class Event(models.Model):
@@ -101,8 +85,6 @@ class Event(models.Model):
     def get_html_url(self):
         return f'<p>{self.name}</p><a href="{url}"></a>'
 
-
-
 class Member(models.Model):
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     event       = models.ForeignKey(Event, null=True, on_delete=models.SET_NULL)
@@ -111,8 +93,6 @@ class Member(models.Model):
 
     def __str__(self):
         return self.user.fio
-
-
 
 class New(models.Model):
     tags        = models.ForeignKey(Tag, null = True, blank = True, on_delete = models.SET_NULL)
@@ -130,6 +110,9 @@ class New(models.Model):
         return self.name
 
 
+
+
+
 class About(models.Model):
     tags        = models.ForeignKey(Tag, null = True, blank = True, on_delete = models.SET_NULL)
     goals       = models.CharField(max_length=200, blank=True, null=True)
@@ -139,6 +122,9 @@ class About(models.Model):
 
     def __str__(self):
         return self.tags.name
+
+
+
 
 
 class DocsName(models.Model):
@@ -161,7 +147,6 @@ class DocsCollege(models.Model):
 
     def __str__(self):
         return self.name.name
-
 
 class DocsCouncil(models.Model):
     tag         = models.ForeignKey(Tag, null = True, blank = True, on_delete = models.SET_NULL)

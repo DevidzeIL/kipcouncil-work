@@ -15,7 +15,7 @@
                 </button>
     
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <h1><div class="promo-header" style="margin-left: 10vh;">Аккаунт</div></h1>
+                    <h1><div class="promo-header" style="margin-left: 10vh;">Добавление направления</div></h1>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">    
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
@@ -26,45 +26,15 @@
         </nav>
     </section>
 </div>
-
-<div class="row">
-	<div class="col">
-		<div class="card card-body">
-			<form method="get">
-                {{myEventFilter.form}}
-				{{myMemberFilter.form}}
-		        <button class="btn btn-primary" type="submit">Поиск</button>
-            </form>
-		</div>
-	</div>
-</div>
-
-<table >
-    <tr>
-        <th>Направление</th>
-        <th>Мероприятие</th>
-        <th>Роль</th>
-        <th>Комментарий</th>
-        <th>Дата</th>
-    </tr>
-
-    {% for event in events %}
-        {% for member in members %}
-            {% if member.event == event %}    
-                <tr>
-                    <td>{{event.tags}}</td>
-                    <td>{{event.name}}</td>
-                    <td>{{member.role}}</td>
-                    <td>{{member.comment}}</td>
-                    <td>{{event.date}}</td>
-                </tr>
-            {% endif %}
-        {% endfor %}
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+        {{field.name}}
+        {{field}}
+        <br>
+        <br>
     {% endfor %}
-</table>
-
-<br>
-<br>
-<br>
+    <input class="btn btn-primary" type="submit" name="Submit" value="Сохранить">
+</form>
 
 {% endblock content %}

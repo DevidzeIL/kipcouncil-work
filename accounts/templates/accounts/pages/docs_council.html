@@ -11,12 +11,23 @@
 
 
 
+<!-- SEARCH -->
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+		        <button class="btn btn-primary" type="submit">Поиск</button>
+            </form>
+		</div>
+	</div>
+</div>
+
+
+
 <!-- DOCS -->
 <section class="docs row">
     <div class="col-0 col-xs-0 col-sm-1 col-md-1 col-lg-2"></div>
     <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8">
-       
-        
         {% for tag in tags %}
         <div class="doc-box-class">
             <div class="doc-header">{{tag}}</div>
@@ -33,5 +44,4 @@
     </div>
     <div class="col-0 col-xs-0 col-sm-1 col-md-1 col-lg-2"></div>
 </section>
-
 {% endblock %}

@@ -39,8 +39,17 @@
             {% for user in users %}
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 info-user">
                 <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
-                <div class="info-role">{{user.function}}</div>
-                <div class="info-fio">{{user.user.fio}}</div>
+                {% if request.user.is_staff %}
+                <div class="info-role"><a href="{% url 'direction' user.tags.id %}">{{user.role}}</a></div>
+                    {% if user.user.fio == account.fio %}
+                        <div class="info-fio"><a href="{% url 'main_user' %}">{{user.user.fio}}</a></div>
+                    {% else %}
+                        <div class="info-fio"><a href="{% url 'admin_lookuser' user.user.fio %}">{{user.user.fio}}</a></div>
+                    {% endif %}
+                {% else %}
+                    <div class="info-role">{{user.role}}</div>
+                    <div class="info-fio">{{user.user.fio}}</div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
