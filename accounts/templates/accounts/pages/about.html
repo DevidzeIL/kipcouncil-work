@@ -38,7 +38,7 @@
         <div class="row">
             {% for user in users %}
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 info-user">
-                <img class="img-fluid" src="{% static 'images/rec.png' %}" alt="">
+                <img class="img-fluid" src="{{user.user.profile_pic.url}}" alt="">
                 {% if request.user.is_staff %}
                 <div class="info-role"><a href="{% url 'direction' user.tags.id %}">{{user.role}}</a></div>
                     {% if user.user.fio == account.fio %}

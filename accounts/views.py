@@ -291,7 +291,6 @@ def adminAddTag(request):
     }
     return render(request, 'accounts/auth/admin_addtag.html', context)
 
-
 def adminAddEvent(request):
     form = AddEventForm()
 
@@ -368,7 +367,11 @@ def direction(request, tags):
 def about(request):
     users = ListDirection.objects.filter(status="Правление")
     text_about = About.objects.filter(tags__name="Общее").last()
-    account = request.user.student
+
+    if unauthenticated_user == True:
+        account = request.user.student
+
+    account = None
 
     context = {
         'users':users, 'text_about':text_about, 'account':account
@@ -389,8 +392,12 @@ def docs_council(request):
     tags = Tag.objects.all()
     docs = DocsCouncil.objects.all()
 
+    myDocsCouncilFilter = DocsCouncilFilter(request.GET, queryset = docs)
+    
+    docs = myDocsCouncilFilter.qs
+
     context = {
-        'tags':tags, 'docs':docs
+        'tags':tags, 'docs':docs, 'myDocsCouncilFilter':myDocsCouncilFilter
     }
     return render(request, 'accounts/pages/docs_council.html', context)
 
@@ -409,7 +416,11 @@ def news_about(request, pk_test):
     new = New.objects.get(id=pk_test)
     event = new.event
     members = Member.objects.filter(event = new.event)
-    account = request.user.student
+
+    if unauthenticated_user == True:
+        account = request.user.student
+
+    account = None
 
     context = {
         'members':members, 'new':new, 'event':event, 'account':account

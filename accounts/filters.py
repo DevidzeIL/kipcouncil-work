@@ -1,5 +1,7 @@
 import django_filters
 
+from django_filters import CharFilter
+
 from .models import (
     ListDirection, Student, UserAward,
     Event, Member, New,
@@ -60,11 +62,13 @@ class EventFilter(django_filters.FilterSet):
 
 
 class DocsCollegeFilter(django_filters.FilterSet):
+    description = CharFilter(field_name='description', lookup_expr='icontainer')
     class Meta:
         model = DocsCollege
         fields = ['description']
 
 class DocsCouncilFilter(django_filters.FilterSet):
+    description = CharFilter(field_name='description')
     class Meta:
         model = DocsCouncil
         fields = ['description']
