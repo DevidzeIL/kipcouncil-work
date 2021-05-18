@@ -16,21 +16,25 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import (
-    Specialty, Company, Student, UserAward,  
-    Tag, Event, Member, New, About, ListDirection,
-    DocsName, DocsCollege, DocsCouncil
+    Tag, Specialty, Company, Student, ListDirection, UserAward,
+    Event, Member, New, About, DocsCollege, DocsCouncil
 )
 
 from .forms import (
     CreateUserForm, StudentForm, AwardForm,
     AddUserForm, AddEventForm, AddMemberForm, AddNewForm,
-    AddTagForm
+    AddTagForm,
+
+    ListDirectionForm, UserAwardForm, EventForm, MemberForm, NewForm, 
+    AboutForm, DocsCollegeForm, DocsCouncilForm, CompanyForm, TagForm
 )
 
 from .filters import (
     MemberEventFilter, MemberFilter, 
     AdminEventMemberFilter, AdminMemberFilter, AdminUserFilter, 
-    NewsFilter, EventFilter, DocsCollegeFilter, DocsCouncilFilter
+    NewsFilter, EventFilter,
+    StudentFilter, ListDirectionFilter, UserAwardFilter, EventsFilter, CompanyFilter, 
+    MembersFilter, NewFilter, AboutFilter, DocsCollegeFilter, DocsCouncilFilter
 )
 
 from .decorators import unauthenticated_user, allowed_users, admin_only
@@ -95,9 +99,6 @@ def mainUser(request):
             request.user.student.member_set.filter(event__tags__name=tag.name).count()
         )
 
-    event_procents = []
-    for i in range(0, len(events)):
-        event_procents.append(events_member[i] * 100 / events[i])
 
 
     awards = request.user.student.useraward_set.all()
@@ -106,7 +107,6 @@ def mainUser(request):
         'info':info,
         'user':user, 'tags':tags, 'awards':awards,
         'events': events, 'events_member':events_member,
-        'event_procents':event_procents,
     }
 
     return render(request, 'accounts/auth/user.html', context)
@@ -156,7 +156,6 @@ def adminTable(request):
     events = myFilterEvent.qs
     members = myFilterMember.qs
     
-
     context = {
         'account':account,
         'events':events, 'members':members,
@@ -197,17 +196,12 @@ def adminLookuser(request, pk_test):
             Member.objects.filter(user = user, event__tags__name=tag.name).count()
         )
 
-    event_procents = []
-    for i in range(0, len(events)):
-        event_procents.append(events_member[i] * 100 / events[i])
-
 
     awards = UserAward.objects.filter(user = user)
     context = {
         'info':info,
         'user':user, 'tags':tags, 'awards':awards,
-        'events': events, 'events_member':events_member,
-        'event_procents':event_procents,
+        'events': events, 'events_member':events_member
     }
 
     return render(request, 'accounts/auth/admin_lookuser.html', context)
@@ -249,7 +243,6 @@ def editAward(request, pk_test):
 def deleteAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
 
-
     if request.method == 'POST':
         award.delete()
         return redirect('main_user')
@@ -261,22 +254,13 @@ def deleteAward(request, pk_test):
 
 
 
+def adminCreateDB(request, pk_test): 
+    if (pk_test == 'Student'):
+        form = Student.objects.all()
 
 
-
-def adminEditDB(request, pk_test):   
-    if (pk_test == '1'):
-        form = AddNewForm()
-
-        if request.method == 'POST':
-            form = AddNewForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('main_user')
-
-    elif (pk_test == '2'):
+    elif (pk_test == 'Tag'):
         form = AddTagForm()
-
         if request.method == 'POST':
             form = AddTagForm(request.POST)
             if form.is_valid():
@@ -284,42 +268,311 @@ def adminEditDB(request, pk_test):
                 return redirect('main_user')
 
 
+    elif (pk_test == 'ListDirection'):
+        form = ListDirectionForm()
+        if request.method == 'POST':
+            form = ListDirectionForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test == 'Event'):
+        form = EventForm()
+        if request.method == 'POST':
+            form = EventForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test == 'Member'):
+        form = MemberForm()
+        if request.method == 'POST':
+            form = MemberForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test == 'New'):
+        form = NewForm()
+        if request.method == 'POST':
+            form = NewForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test == 'UserAward'):
+        form = UserAwardForm()
+        if request.method == 'POST':
+            form = UserAwardForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test == 'Company'):
+        form = CompanyForm()
+        if request.method == 'POST':
+            form = CompanyForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test == 'About'):
+        form = AboutForm()
+        if request.method == 'POST':
+            form = AboutForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test == 'DocsCollege'):
+        form = DocsCollegeForm()
+        if request.method == 'POST':
+            form = DocsCollegeForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test == 'DocsCouncil'):
+        form = DocsCouncilForm()
+        if request.method == 'POST':
+            form = DocsCouncilForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
 
 
     context = {
         'form':form
     }
-    return render(request, 'accounts/auth/admin_editdb.html', context)
+    return render(request, 'accounts/auth/admin_workdb.html', context)
+
+def adminEditDB(request, pk_test1, pk_test2): 
+    if (pk_test1 == 'Student'):
+        item = Student.objects.get(id=pk_test2)
+        
+
+    elif (pk_test1 == 'Tag'):
+        item = Tag.objects.get(id=pk_test2)
+        form = AddTagForm(instance=item)
+        if request.method == 'POST':
+            form = AddTagForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
 
 
-def adminWorkDB(request, pk_test):
-    if (pk_test == 'Student'):
-        form = Student.objects.all()
-    elif (pk_test == 'Tag'):
-        form = Tag.objects.all()
-    elif (pk_test == 'ListDirection'):
-        form = ListDirection.objects.all()
-    elif (pk_test == 'Event'):
-        form = Event.objects.all()
-    elif (pk_test == 'Member'):
-        form = Member.objects.all()
-    elif (pk_test == 'New'):
-        form = New.objects.all()
-    elif (pk_test == 'UserAward'):
-        form = UserAward.objects.all()
-    elif (pk_test == 'Company'):
-        form = Company.objects.all()
-    elif (pk_test == 'About'):
-        form = About.objects.all()
-    elif (pk_test == 'DocsCollege'):
-        form = DocsCollege.objects.all()
-    elif (pk_test == 'DocsCouncil'):
-        form = DocsCouncil.objects.all()
+    elif (pk_test1 == 'ListDirection'):
+        item = ListDirection.objects.get(id=pk_test2)
+        form = ListDirectionForm(instance=item)
+        if request.method == 'POST':
+            form = ListDirectionForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test1 == 'Event'):
+        item = Event.objects.get(id=pk_test2)
+        form = EventForm(instance=item)
+        if request.method == 'POST':
+            form = EventForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test1 == 'Member'):
+        item = Member.objects.get(id=pk_test2)
+
+        form = MemberForm(instance=item)
+        if request.method == 'POST':
+            form = MemberForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test1 == 'New'):
+        item = New.objects.get(id=pk_test2)
+
+        form = NewForm(instance=item)
+        if request.method == 'POST':
+            form = NewForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test1 == 'UserAward'):
+        item = UserAward.objects.get(id=pk_test2)
+
+        form = UserAwardForm(instance=item)
+        if request.method == 'POST':
+            form = UserAwardForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test1 == 'Company'):
+        item = Company.objects.get(id=pk_test2)
+
+        form = CompanyForm(instance=item)
+        if request.method == 'POST':
+            form = CompanyForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+    elif (pk_test1 == 'About'):
+        item = About.objects.get(id=pk_test2)
+
+        form = AboutForm(instance=item)
+        if request.method == 'POST':
+            form = AboutForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test1 == 'DocsCollege'):
+        item = DocsCollege.objects.get(id=pk_test2)
+
+        form = DocsCollegeForm(instance=item)
+        if request.method == 'POST':
+            form = DocsCollegeForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+    elif (pk_test1 == 'DocsCouncil'):
+        item = DocsCouncil.objects.get(id=pk_test2)
+
+        form = DocsCollegeForm(instance=item)
+        if request.method == 'POST':
+            form = DocsCollegeForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
 
     context = {
-        'form':form, 'pk_test':pk_test
+        'form':form
     }
     return render(request, 'accounts/auth/admin_workdb.html', context)
+
+def adminDeleteDB(request, pk_test1, pk_test2):   
+    if (pk_test1 == 'Student'):
+        item = Student.objects.get(id=pk_test2)
+    elif (pk_test1 == 'Tag'):
+        item = Tag.objects.get(id=pk_test2)
+    elif (pk_test1 == 'ListDirection'):
+        item = ListDirection.objects.get(id=pk_test2)
+    elif (pk_test1 == 'Event'):
+        item = Event.objects.get(id=pk_test2)
+    elif (pk_test1 == 'Member'):
+        item = Member.objects.get(id=pk_test2)
+    elif (pk_test1 == 'New'):
+        item = New.objects.get(id=pk_test2)
+    elif (pk_test1 == 'UserAward'):
+        item = UserAward.objects.get(id=pk_test2)
+    elif (pk_test1 == 'Company'):
+        item = Company.objects.get(id=pk_test2)
+    elif (pk_test1 == 'About'):
+        item = About.objects.get(id=pk_test2)
+    elif (pk_test1 == 'DocsCollege'):
+        item = DocsCollege.objects.get(id=pk_test2)
+    elif (pk_test1 == 'DocsCouncil'):
+        item = DocsCouncil.objects.get(id=pk_test2)
+
+    if request.method == 'POST':
+        item.delete()
+        return redirect('main_user')
+
+    context = {
+        'item':item, 'pk_test1':pk_test1
+    }
+    return render(request, 'accounts/auth/admin_deletedb.html', context)
+
+
+def adminTableDB(request, pk_test):
+    if (pk_test == 'Student'):
+        form = Student.objects.all()
+        myFilter = StudentFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+    elif (pk_test == 'Tag'):
+        form = Tag.objects.all()
+        myFilter = []
+
+    elif (pk_test == 'ListDirection'):
+        form = ListDirection.objects.all()
+        myFilter = ListDirectionFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'Event'):
+        form = Event.objects.all()
+        myFilter = EventsFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'Member'):
+        form = Member.objects.all()
+        myFilter = MembersFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'New'):
+        form = New.objects.all()
+        myFilter = NewFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'UserAward'):
+        form = UserAward.objects.all()
+        myFilter = UserAwardFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'Company'):
+        form = Company.objects.all()
+        myFilter = CompanyFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'About'):
+        form = About.objects.all()
+        myFilter = AboutFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'DocsCollege'):
+        form = DocsCollege.objects.all()
+        myFilter = DocsCollegeFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'DocsCouncil'):
+        form = DocsCouncil.objects.all()
+        myFilter = DocsCouncilFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    context = {
+        'form':form, 'pk_test':pk_test, 'myFilter':myFilter
+    }
+    return render(request, 'accounts/auth/admin_tabledb.html', context)
 
 
 

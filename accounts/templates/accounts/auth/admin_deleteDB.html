@@ -15,7 +15,7 @@
                 </button>
     
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <h1><div class="promo-header" style="margin-left: 10vh;">Добавление мероприятия</div></h1>
+                    <h1><div class="promo-header" style="margin-left: 10vh;">Портфолио</div></h1>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">    
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
@@ -26,15 +26,13 @@
         </nav>
     </section>
 </div>
-<form method="POST" action="" enctype="multipart/form-data">
+
+<p>Вы уверены, что хотите удалить эту запись?</p>
+
+<form method="POST" action="{% url 'admin_deletedb' pk_test1 item.id %}">
     {% csrf_token %}
-    {% for field in form %}
-        {{field.name}}
-        {{field}}
-        <br>
-        <br>
-    {% endfor %}
-    <input class="btn btn-primary" type="submit" name="Submit" value="Сохранить">
+    <a href="{% url 'main_user' %}">Нет</a>
+    <input class="btn btn-primary" type="submit" name="Submit" value="Да">
 </form>
 
 {% endblock content %}

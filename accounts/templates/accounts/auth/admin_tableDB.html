@@ -1,0 +1,284 @@
+{% extends 'accounts/auth/main_user.html' %}
+{% load static %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="container-fluid header-user">
+    <section class="header row">
+        <nav class="navbar navbar-expand-xl navbar-light">
+            <div class="container-fluid header-navs">
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <h1><div class="promo-header" style="margin-left: 10vh;">{{pk_test}}</div></h1>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+</div>
+
+{% if pk_test == 'Tag' %}
+
+{% else %}
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+                {{myFilter.form}}
+		        <button class="btn btn-primary" type="submit">Поиск</button>
+            </form>
+		</div>
+	</div>
+</div>
+{% endif %}
+<a href="{% url 'admin_createdb' pk_test %}">Добавить</a>
+
+<table >
+    {% if pk_test == 'Student'%}
+        <tr>
+            <th>Группа</th>
+            <th>ФИО</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Дата рождения</th>
+            <th>Фото</th>
+            <th>ВК</th>
+            <th>Инстаграмм</th>
+        </tr>
+        {% for field in form %}
+            <tr>
+                <td>{{field.group}}</td>
+                <td>{{field.fio}}</td>
+                <td>{{field.email}}</td>
+                <td>{{field.phone}}</td>
+                <td>{{field.birthday}}</td>
+                <td><img width="150px" height="350px" class="profile-pic img-fluid"  src="{{field.profile_pic.url}}"  onclick = 'openImageWindow(this.src);'></td>
+                <td><a href="{{field.vk_url}}">Ссылка</a></td>
+                <td><a href="{{field.instagram_url}}">Ссылка</a></td>
+                <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+                <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+            </tr>
+        {% endfor %}
+
+
+
+    {% elif pk_test == 'Tag' %}
+        <tr>
+            <th>Название направления</th>
+        </tr>
+        {% for field in form %}
+            <tr>
+                <td>{{field.name}}</td>
+                <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+                <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+            </tr>
+        {% endfor %}
+
+
+
+    {% elif pk_test == 'ListDirection' %}
+        <tr>
+            <th>Направление</th>
+            <th>Студент</th>
+            <th>Статус</th>
+            <th>Роль</th>
+            <th>Дата добавления</th>
+        </tr>
+
+        {% for field in form %}
+            <tr>
+                <td>{{field.tags}}</td>
+                <td>{{field.user}}</td>
+                <td>{{field.status}}</td>
+                <td>{{field.role}}</td>
+                <td>{{field.date_created}}</td>
+                <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+                <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+            </tr>
+        {% endfor %}
+
+
+
+    {% elif pk_test == 'Event' %}
+    <tr>
+        <th>Направление</th>
+        <th>Название мероприятия</th>
+        <th>Дата проведения</th>
+    </tr>.
+    {% for field in form %}
+        <tr>
+            <td>{{field.tags}}</td>
+            <td>{{field.name}}</td>
+            <td>{{field.date}}</td>
+            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+
+
+
+    {% elif pk_test == 'Member' %}
+    <tr>
+        <th>Студент</th>
+        <th>Мероприятие</th>
+        <th>Роль</th>
+        <th>Комментарий</th>
+    </tr>
+    {% for field in form %}
+        <tr>
+            <td>{{field.user}}</td>
+            <td>{{field.event}}</td>
+            <td>{{field.role}}</td>
+            <td>{{field.comment}}</td>
+            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+
+
+
+    {% elif pk_test == 'New' %}
+    <tr>
+        <th>Направление</th>
+        <th>Мероприятие</th>
+        <th>Название новости</th>
+        <th>Начальный текст</th>
+        <th>Основной текст</th>
+        <th>Дополнительный текст</th>
+        <th>Ссылка на Google Photo</th>
+        <th>Обложка</th>
+        <th>Дата проведения</th>
+        <th>Дата создания записи</th>
+    </tr>
+    {% for field in form %}
+        <tr>
+            <td>{{field.tags}}</td>
+            <td>{{field.event}}</td>
+            <td>{{field.name}}</td>
+            <td>{{field.main_text}}</td>
+            <td>{{field.common_text}}</td>
+            <td>{{field.third_text}}</td>
+            <td>{{field.link}}</td>
+            <td><img width="150px" height="350px" class="profile-pic img-fluid"  src="{{field.photo.url}}"  onclick = 'openImageWindow(this.src);'></td>
+            <td>{{field.date_performance}}</td>
+            <td>{{field.date_created}}</td>
+            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+
+
+
+    {% elif pk_test == 'UserAward' %}
+    <tr>
+        <th>Студент</th>
+        <th>Портфолио</th>
+        <th>Описание</th>
+        <th>Название направления</th>
+    </tr>
+    {% for field in form %}
+        <tr>
+            <td>{{field.user}}</td>
+            <td><img width="150px" height="350px" class="profile-pic img-fluid"  src="{{field.award.url}}"  onclick = 'openImageWindow(this.src);'></td>
+            <td>{{field.description}}</td>
+            <td>{{field.date_performance}}</td>
+            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+
+
+
+    {% elif pk_test == 'Company' %}
+    <tr>
+        <th>Курс</th>
+        <th>Специальность</th>
+        <th>Номер</th>
+    </tr>
+    {% for field in form %}
+        <tr>
+            <td>{{field.сourse}}</td>
+            <td>{{field.specialty}}</td>
+            <td>{{field.group_number}}</td>
+            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+
+
+
+    {% elif pk_test == 'About' %}
+    <tr>
+        <th>Направление</th>
+        <th>Цели</th>
+        <th>Основной текст</th>
+        <th>Дополнительный текст</th>
+        <th>Результаты</th>
+    </tr>
+    {% for field in form %}
+        <tr>
+            <td>{{field.tags}}</td>
+            <td>{{field.goals}}</td>
+            <td>{{field.main_text}}</td>
+            <td>{{field.common_text}}</td>
+            <td>{{field.result}}</td>
+            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+
+
+
+    {% elif pk_test == 'DocsCollege' %}
+    <tr>
+        <th>Название</th>
+        <th>Специальность</th>
+        <th>Курс</th>
+        <th>Описание</th>
+    </tr>
+    {% for field in form %}
+        <tr>
+            <td>{{field.name}}</td>
+            <td>{{field.specialty}}</td>
+            <td>{{field.cource}}</td>
+            <td>{{field.description}}</td>
+            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+
+
+
+    {% elif pk_test == 'DocsCouncil' %}
+    <tr>
+        <th>Направление</th>
+        <th>Название</th>
+        <th>Описание</th>
+    </tr>
+    {% for field in form %}
+        <tr>
+            <td>{{field.tag}}</td>
+            <td>{{field.name}}</td>
+            <td>{{field.description}}</td>
+            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+
+
+
+    {% endif %}
+
+</table>
+
+{% endblock content %}
