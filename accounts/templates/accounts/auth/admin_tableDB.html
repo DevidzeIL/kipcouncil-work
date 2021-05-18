@@ -30,23 +30,14 @@
 {% if pk_test == 'Tag' %}
 
 {% else %}
-<div class="row">
-	<div class="col">
-		<div class="card card-body">
-			<form method="get">
-                {{myFilter.form}}
-		        <button class="btn btn-primary" type="submit">Поиск</button>
-            </form>
-		</div>
-	</div>
-</div>
+
 {% endif %}
-<a href="{% url 'admin_createdb' pk_test %}">Добавить</a>
 
 <table >
     {% if pk_test == 'Student'%}
+    <form method="get">
         <tr>
-            <th>Группа</th>
+            <th>Группа:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.group}}</th>
             <th>ФИО</th>
             <th>Email</th>
             <th>Телефон</th>
@@ -54,7 +45,10 @@
             <th>Фото</th>
             <th>ВК</th>
             <th>Инстаграмм</th>
+            <th><button class="btn btn-primary" type="submit">Поиск</button></th>
+            <th><button class="btn btn-primary"><a href="{% url 'admin_createdb' pk_test %}"></a>Добавить</button></th> 
         </tr>
+    </form>
         {% for field in form %}
             <tr>
                 <td>{{field.group}}</td>
@@ -87,13 +81,17 @@
 
 
     {% elif pk_test == 'ListDirection' %}
+    <form method="get">
         <tr>
-            <th>Направление</th>
-            <th>Студент</th>
-            <th>Статус</th>
+            <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
+            <th>Студент:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.user}}</th>
+            <th>Статус:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.status}}</th>
             <th>Роль</th>
             <th>Дата добавления</th>
+            <th><button class="btn btn-primary" type="submit">Поиск</button></th>
+            <th><button class="btn btn-primary"><a href="{% url 'admin_createdb' pk_test %}"></a>Добавить</button></th> 
         </tr>
+    </form>
 
         {% for field in form %}
             <tr>
