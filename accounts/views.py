@@ -263,6 +263,71 @@ def deleteAward(request, pk_test):
 
 
 
+
+def adminEditDB(request, pk_test):   
+    if (pk_test == '1'):
+        form = AddNewForm()
+
+        if request.method == 'POST':
+            form = AddNewForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+    elif (pk_test == '2'):
+        form = AddTagForm()
+
+        if request.method == 'POST':
+            form = AddTagForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main_user')
+
+
+
+
+    context = {
+        'form':form
+    }
+    return render(request, 'accounts/auth/admin_editdb.html', context)
+
+
+def adminWorkDB(request, pk_test):
+    if (pk_test == 'Student'):
+        form = Student.objects.all()
+    elif (pk_test == 'Tag'):
+        form = Tag.objects.all()
+    elif (pk_test == 'ListDirection'):
+        form = ListDirection.objects.all()
+    elif (pk_test == 'Event'):
+        form = Event.objects.all()
+    elif (pk_test == 'Member'):
+        form = Member.objects.all()
+    elif (pk_test == 'New'):
+        form = New.objects.all()
+    elif (pk_test == 'UserAward'):
+        form = UserAward.objects.all()
+    elif (pk_test == 'Company'):
+        form = Company.objects.all()
+    elif (pk_test == 'About'):
+        form = About.objects.all()
+    elif (pk_test == 'DocsCollege'):
+        form = DocsCollege.objects.all()
+    elif (pk_test == 'DocsCouncil'):
+        form = DocsCouncil.objects.all()
+
+    context = {
+        'form':form, 'pk_test':pk_test
+    }
+    return render(request, 'accounts/auth/admin_workdb.html', context)
+
+
+
+
+
+
+
+
 def adminAddUser(request):
     form = AddUserForm()
 

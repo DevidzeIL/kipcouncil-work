@@ -1,0 +1,85 @@
+{% extends 'accounts/auth/main_user.html' %}
+{% load static %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="container-fluid header-user">
+    <section class="header row">
+        <nav class="navbar navbar-expand-xl navbar-light">
+            <div class="container-fluid header-navs">
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <h1><div class="promo-header" style="margin-left: 10vh;">{{pk_test}}</div></h1>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+</div>
+
+<table >
+    {% if pk_test == 'Student'%}
+        <tr>
+            <th>Группа</th>
+            <th>ФИО</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Дата рождения</th>
+            <th>Фото</th>
+            <th>ВК</th>
+            <th>Инстаграмм</th>
+        </tr>
+
+        {% for field in form %}
+            <tr>
+                <td>{{field.group}}</td>
+                <td>{{field.fio}}</td>
+                <td>{{field.email}}</td>
+                <td>{{field.phone}}</td>
+                <td>{{field.birthday}}</td>
+                <td><img width="150px" height="350px" class="profile-pic img-fluid"  src="{{field.profile_pic.url}}"  onclick = 'openImageWindow(this.src);'></td>
+                <td><a href="{{field.vk_url}}">Ссылка</a></td>
+                <td><a href="{{field.instagram_url}}">Ссылка</a></td>
+                <td><a href="{{field.instagram_url}}">Изменить</a></td>
+                <td><a href="{{field.instagram_url}}">Удалить</a></td>
+            </tr>
+        {% endfor %}
+
+
+    {% elif pk_test == 'Tag' %}
+        <tr>
+            <th>Название</th>
+        </tr>
+
+        {% for field in form %}
+            <tr>
+                <td>{{field.name}}</td>
+            </tr>
+        {% endfor %}
+
+
+    {% elif pk_test == 'ListDirection' %}
+    {% elif pk_test == 'Event' %}
+    {% elif pk_test == 'Member' %}
+    {% elif pk_test == 'New' %}
+    {% elif pk_test == 'UserAward' %}
+    {% elif pk_test == 'Company' %}
+    {% elif pk_test == 'About' %}
+    {% elif pk_test == 'DocsCollege' %}
+    {% elif pk_test == 'DocsCouncil' %}
+
+    {% endif %}
+
+</table>
+
+{% endblock content %}

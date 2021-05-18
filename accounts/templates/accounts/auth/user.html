@@ -46,17 +46,21 @@
                     {% if request.user.is_staff %}
                         <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Админ Таблица мероприятий</a></div>
                         <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_users' %}">Список студа</a></div>
-                        
-                        <br>
-                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'register' %}">Зарегистировать нового студента</a></div>
-                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_addtag' %}">Добавить направления</a></div>
-                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_adduser' %}">Добавить студента в студ</a></div>
-                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_addevent' %}">Добавить мероприятие</a></div>
-                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_addmember' %}">Добавить участников мероприятия</a></div>
-                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_addnew' %}">Добавить новость</a></div>
-                        
+                       
                         <br>
 
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'Student' %}">Список пользователей</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'Tag' %}">Список направлений</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'ListDirection' %}">Список участников направлений</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'Event' %}">Список мероприятий</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'Member' %}">Список участников мероприятий</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'New' %}">Список новостей</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'UserAward' %}">Список портфолио студентов</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'Company' %}">Список групп</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'About' %}">Список описаний страниц</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'DocsCollege' %}">Список документов колледжа</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_workdb' 'DocsCouncil' %}">Список документов студенческого совета</a></div>
+                        <br>
                     {% endif %}
                     <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user_table' user.id %}">Таблица мероприятий</a></div>
                     <div class="footer-nav-item"><a class="nav-item-link" href="#portfolio">Портфолио</a></div>

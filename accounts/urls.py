@@ -40,6 +40,11 @@ urlpatterns = [
     path('admin_addmember/', views.adminAddMember, name="admin_addmember"),
     path('admin_addnew/', views.adminAddNew, name="admin_addnew"),
 
+
+    path('admin_workdb/<str:pk_test>/', views.adminWorkDB, name="admin_workdb"),
+    path('admin_editdb/<str:pk_test>/', views.adminEditDB, name="admin_editdb"),
+    
+
     # path('admin_edituser/', views.adminEditUser, name="admin_edituser"),
     # path('admin_editevent/', views.adminEditEvent, name="admin_editevent"),
     # path('admin_editmember/', views.adminEditMember, name="admin_editmember"),
