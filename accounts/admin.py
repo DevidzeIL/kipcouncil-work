@@ -18,6 +18,5 @@ admin.site.register(New)
 
 admin.site.register(About)
 
-admin.site.register(DocsName)
 admin.site.register(DocsCollege)
 admin.site.register(DocsCouncil)

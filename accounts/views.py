@@ -33,7 +33,7 @@ from .filters import (
     MemberEventFilter, MemberFilter, 
     AdminEventMemberFilter, AdminMemberFilter, AdminUserFilter, 
     NewsFilter, EventFilter,
-    StudentFilter, ListDirectionFilter, UserAwardFilter, EventsFilter, CompanyFilter, 
+    StudentFilter, TagFilter, ListDirectionFilter, UserAwardFilter, EventsFilter, CompanyFilter, 
     MembersFilter, NewFilter, AboutFilter, DocsCollegeFilter, DocsCouncilFilter
 )
 
@@ -256,7 +256,16 @@ def deleteAward(request, pk_test):
 
 def adminCreateDB(request, pk_test): 
     if (pk_test == 'Student'):
-        form = Student.objects.all()
+        form = CreateUserForm()
+        form1 = StudentForm()
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            form1 = StudentForm(request.POST)
+            if form.is_valid() and form1.is_valid():
+                form.save()
+                form1.save()
+
+        
 
 
     elif (pk_test == 'Tag'):
@@ -298,7 +307,7 @@ def adminCreateDB(request, pk_test):
     elif (pk_test == 'New'):
         form = NewForm()
         if request.method == 'POST':
-            form = NewForm(request.POST)
+            form = NewForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect('main_user')
@@ -307,7 +316,7 @@ def adminCreateDB(request, pk_test):
     elif (pk_test == 'UserAward'):
         form = UserAwardForm()
         if request.method == 'POST':
-            form = UserAwardForm(request.POST)
+            form = UserAwardForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect('main_user')
@@ -334,7 +343,7 @@ def adminCreateDB(request, pk_test):
     elif (pk_test == 'DocsCollege'):
         form = DocsCollegeForm()
         if request.method == 'POST':
-            form = DocsCollegeForm(request.POST)
+            form = DocsCollegeForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect('main_user')
@@ -343,14 +352,14 @@ def adminCreateDB(request, pk_test):
     elif (pk_test == 'DocsCouncil'):
         form = DocsCouncilForm()
         if request.method == 'POST':
-            form = DocsCouncilForm(request.POST)
+            form = DocsCouncilForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect('main_user')
 
 
     context = {
-        'form':form
+        'form':form, 'form1':form1, 'pk_test':pk_test
     }
     return render(request, 'accounts/auth/admin_workdb.html', context)
 
@@ -457,9 +466,9 @@ def adminEditDB(request, pk_test1, pk_test2):
     elif (pk_test1 == 'DocsCouncil'):
         item = DocsCouncil.objects.get(id=pk_test2)
 
-        form = DocsCollegeForm(instance=item)
+        form = DocsCouncilForm(instance=item)
         if request.method == 'POST':
-            form = DocsCollegeForm(request.POST, instance=item)
+            form = DocsCouncilForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
                 return redirect('main_user')
@@ -467,7 +476,7 @@ def adminEditDB(request, pk_test1, pk_test2):
 
 
     context = {
-        'form':form
+        'form':form, 'pk_test':pk_test1
     }
     return render(request, 'accounts/auth/admin_workdb.html', context)
 
@@ -507,22 +516,23 @@ def adminDeleteDB(request, pk_test1, pk_test2):
 
 def adminTableDB(request, pk_test):
     if (pk_test == 'Student'):
-        form = Student.objects.all()
+        form = Student.objects.all().order_by('group')
         myFilter = StudentFilter(request.GET, queryset = form)
         form = myFilter.qs
 
     elif (pk_test == 'Tag'):
         form = Tag.objects.all()
-        myFilter = []
+        myFilter = TagFilter(request.GET, queryset = form)
+        form = myFilter.qs
 
     elif (pk_test == 'ListDirection'):
-        form = ListDirection.objects.all()
+        form = ListDirection.objects.all().order_by('date_created')
         myFilter = ListDirectionFilter(request.GET, queryset = form)
         form = myFilter.qs
 
 
     elif (pk_test == 'Event'):
-        form = Event.objects.all()
+        form = Event.objects.all().order_by('-date')
         myFilter = EventsFilter(request.GET, queryset = form)
         form = myFilter.qs
 
@@ -534,7 +544,7 @@ def adminTableDB(request, pk_test):
 
 
     elif (pk_test == 'New'):
-        form = New.objects.all()
+        form = New.objects.all().order_by('date_created')
         myFilter = NewFilter(request.GET, queryset = form)
         form = myFilter.qs
 
@@ -595,63 +605,6 @@ def adminAddUser(request):
     }
     return render(request, 'accounts/auth/admin_adduser.html', context)
 
-def adminAddTag(request):
-    form = AddTagForm()
-
-    if request.method == 'POST':
-        form = AddTagForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main_user')
-
-    context = {
-        'form':form
-    }
-    return render(request, 'accounts/auth/admin_addtag.html', context)
-
-def adminAddEvent(request):
-    form = AddEventForm()
-
-    if request.method == 'POST':
-        form = AddEventForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main_user')
-
-    context = {
-        'form':form
-    }
-    return render(request, 'accounts/auth/admin_addevent.html', context)
-
-def adminAddMember(request):
-    form = AddMemberForm()
-
-    if request.method == 'POST':
-        form = AddMemberForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main_user')
-
-    context = {
-        'form':form
-    }
-    return render(request, 'accounts/auth/admin_adduser.html', context)
-
-def adminAddNew(request):
-    form = AddNewForm()
-
-    if request.method == 'POST':
-        form = AddNewForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main_user')
-
-    context = {
-        'form':form
-    }
-    return render(request, 'accounts/auth/admin_addnew.html', context)
-
-
 
 
 
@@ -710,19 +663,14 @@ def docs_council(request):
     tags = Tag.objects.all()
     docs = DocsCouncil.objects.all()
 
-    myDocsCouncilFilter = DocsCouncilFilter(request.GET, queryset = docs)
-    
-    docs = myDocsCouncilFilter.qs
-
     context = {
-        'tags':tags, 'docs':docs, 'myDocsCouncilFilter':myDocsCouncilFilter
+        'tags':tags, 'docs':docs
     }
     return render(request, 'accounts/pages/docs_council.html', context)
 
 def news(request):
-    news_list = New.objects.all()
+    news_list = New.objects.all().order_by('date_created')
     myFilter = NewsFilter(request.GET, queryset = news_list)
-
     news_list = myFilter.qs
 
     context = {

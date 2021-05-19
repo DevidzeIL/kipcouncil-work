@@ -64,7 +64,6 @@ class UserAward(models.Model):
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     award       = models.ImageField(default='avatar.png', null=True, blank=True)
     description = models.CharField(max_length=200, blank=True, null=True)
-    date_performance= models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.user.fio
@@ -125,14 +124,6 @@ class About(models.Model):
 
 
 
-
-
-class DocsName(models.Model):
-    name        = models.CharField(max_length=200, null=True)
-
-    def __str__(self):
-        return self.name
-
 class DocsCollege(models.Model):
     COURCE = (
             ('1 курс', '1 курс'),
@@ -140,7 +131,8 @@ class DocsCollege(models.Model):
             ('3 курс', '3 курс'),
             ('4 курс', '4 курс')
     )
-    name        = models.ForeignKey(DocsName, null = True, blank = True, on_delete = models.SET_NULL)
+    name        = models.CharField(max_length=200, null=True, blank=True)
+    file        = models.FileField(null=True, blank=True)
     specialty   = models.ForeignKey(Specialty, null = True, blank = True, on_delete = models.SET_NULL)
     cource      = models.CharField(max_length=200, null=True,  blank = True,choices=COURCE)
     description = models.CharField(max_length=200, null=True, blank=True)
@@ -150,7 +142,8 @@ class DocsCollege(models.Model):
 
 class DocsCouncil(models.Model):
     tag         = models.ForeignKey(Tag, null = True, blank = True, on_delete = models.SET_NULL)
-    name        = models.ForeignKey(DocsName, null = True, blank = True, on_delete = models.SET_NULL)
+    file        = models.FileField(null=True, blank=True)
+    name        = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):

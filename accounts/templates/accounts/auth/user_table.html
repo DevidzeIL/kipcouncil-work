@@ -27,26 +27,18 @@
     </section>
 </div>
 
-<div class="row">
-	<div class="col">
-		<div class="card card-body">
-			<form method="get">
-                {{myEventFilter.form}}
-				{{myMemberFilter.form}}
-		        <button class="btn btn-primary" type="submit">Поиск</button>
-            </form>
-		</div>
-	</div>
-</div>
-
 <table >
-    <tr>
-        <th>Направление</th>
-        <th>Мероприятие</th>
-        <th>Роль</th>
-        <th>Комментарий</th>
-        <th>Дата</th>
-    </tr>
+    <form method="get">
+        <tr>
+            <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myEventFilter.form.tags}}</th>
+            <th>Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myMemberFilter.form.event}}</th>
+            <th>Роль</th>
+            <th>Комментарий</th>
+            <th>Дата</th>
+            <th><button class="btn btn-primary" type="submit">Поиск</button></th>
+        </tr>
+        
+    </form>
 
     {% for event in events %}
         {% for member in members %}

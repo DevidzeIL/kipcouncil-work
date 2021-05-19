@@ -9,22 +9,6 @@
     </div>
 </section>
 
-
-
-<!-- SEARCH -->
-<div class="row">
-	<div class="col">
-		<div class="card card-body">
-			<form method="get">
-                {{myDocsCouncilFilter.form}}
-		        <button class="btn btn-primary" type="submit">Поиск</button>
-            </form>
-		</div>
-	</div>
-</div>
-
-
-
 <!-- DOCS -->
 <section class="docs row">
     <div class="col-0 col-xs-0 col-sm-1 col-md-1 col-lg-2"></div>
@@ -35,7 +19,7 @@
             {% for doc in docs %}
                 {% if doc.tag == tag %}
                 <div class="doc-document">
-                    <a class="doc-file" href="">{{doc.name}}</a>
+                    <a class="doc-file" href="{{doc.file.url}}" download>{{doc.name}}</a>
                     <span class="doc-about"> — {{doc.description}}</span>
                 </div>
                 {% endif %}

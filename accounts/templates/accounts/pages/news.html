@@ -10,16 +10,20 @@
 </section>
 
 <div class="row">
-	<div class="col">
-		<div class="card card-body">
-			<form method="get">
-				{{myFilter.form}}
-		        <button class="btn btn-primary" type="submit">Поиск</button>
-            </form>
-		</div>
-	</div>
+    <form method="get">
+        <table>
+            <tr>
+                <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
+                <th>Название новости:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
+                <th><button class="btn btn-primary" type="submit">Поиск</button></th>
+            </tr>
+        </table>
+    </form>
 </div>
 
+<br>
+<br>
+<br>
 
 <!-- EVENTS -->
 <div class="container">
@@ -27,9 +31,7 @@
         {% for post in news_list %}
         <div class="col-12 col-md-6 col-lg-6 event-box">
             <div class="box-dateitem">{{post.date_performance}}</div>
-            <!-- <img class="img-fluid" src="{% static 'images/rec.png' %}" alt=""> -->
             <img class="profile-pic img-fluid"  src="{{post.photo.url}}">
-            
             <div class="event-header">{{post.name}}</div>
             <div class="event-text">{{post.main_text | truncatewords:20}}</div>
             <div class="event-more"><a class="nav-item-link" href="{% url 'news_about' post.id %}">Подробнее</a></div>

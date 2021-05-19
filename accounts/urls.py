@@ -35,11 +35,6 @@ urlpatterns = [
 
 
     path('admin_adduser/', views.adminAddUser, name="admin_adduser"),
-    path('admin_addtag/', views.adminAddTag, name="admin_addtag"),
-    path('admin_addevent/', views.adminAddEvent, name="admin_addevent"),
-    path('admin_addmember/', views.adminAddMember, name="admin_addmember"),
-    path('admin_addnew/', views.adminAddNew, name="admin_addnew"),
-
 
 
     path('admin_tabledb/<str:pk_test>/', views.adminTableDB, name="admin_tabledb"),
@@ -48,15 +43,6 @@ urlpatterns = [
     path('admin_editdb/<str:pk_test1>/<str:pk_test2>/', views.adminEditDB, name="admin_editdb"),
     path('admin_deletedb/<str:pk_test1>/<str:pk_test2>/', views.adminDeleteDB, name="admin_deletedb"),
 
-    # path('admin_workuser/', views.adminworkUser, name="admin_workuser"),
-    # path('admin_workevent/', views.adminworkEvent, name="admin_workevent"),
-    # path('admin_workmember/', views.adminworkMember, name="admin_workmember"),
-    # path('admin_worknew/', views.adminworkNew, name="admin_worknew"),
-
-    # path('admin_deleteuser/', views.adminDeleteUser, name="admin_deleteuser"),
-    # path('admin_deleteevent/', views.adminDeleteEvent, name="admin_deleteevent"),
-    # path('admin_deletemember/', views.adminDeleteMember, name="admin_deletemember"),
-    # path('admin_deletenew/', views.adminDeleteNew, name="admin_deletenew"),
 
 
 

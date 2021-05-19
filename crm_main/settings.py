@@ -134,7 +134,6 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 
-MEDIA_URL = '/icons/'
 
 HEADLINE_FONTS_DIR = '/fonts/'
 
@@ -143,8 +142,6 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
-
-FONTS_ROOT = os.path.join(BASE_DIR, 'static/fonts')
 
 
 
