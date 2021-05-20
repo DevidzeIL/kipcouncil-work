@@ -257,16 +257,13 @@ def deleteAward(request, pk_test):
 def adminCreateDB(request, pk_test): 
     if (pk_test == 'Student'):
         form = CreateUserForm()
-        form1 = StudentForm()
         if request.method == 'POST':
             form = CreateUserForm(request.POST)
-            form1 = StudentForm(request.POST)
-            if form.is_valid() and form1.is_valid():
-                form.save()
-                form1.save()
+            if form.is_valid():
+                return redirect('admin_tabledb', pk_test)
 
         
-
+    
 
     elif (pk_test == 'Tag'):
         form = AddTagForm()
@@ -274,7 +271,7 @@ def adminCreateDB(request, pk_test):
             form = AddTagForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'ListDirection'):
@@ -283,7 +280,7 @@ def adminCreateDB(request, pk_test):
             form = ListDirectionForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'Event'):
@@ -292,7 +289,7 @@ def adminCreateDB(request, pk_test):
             form = EventForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'Member'):
@@ -301,7 +298,7 @@ def adminCreateDB(request, pk_test):
             form = MemberForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'New'):
@@ -310,7 +307,7 @@ def adminCreateDB(request, pk_test):
             form = NewForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'UserAward'):
@@ -319,7 +316,7 @@ def adminCreateDB(request, pk_test):
             form = UserAwardForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'Company'):
@@ -328,7 +325,7 @@ def adminCreateDB(request, pk_test):
             form = CompanyForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'About'):
@@ -337,7 +334,7 @@ def adminCreateDB(request, pk_test):
             form = AboutForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'DocsCollege'):
@@ -346,7 +343,7 @@ def adminCreateDB(request, pk_test):
             form = DocsCollegeForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'DocsCouncil'):
@@ -355,11 +352,11 @@ def adminCreateDB(request, pk_test):
             form = DocsCouncilForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test)
 
 
     context = {
-        'form':form, 'form1':form1, 'pk_test':pk_test
+        'form':form, 'pk_test':pk_test
     }
     return render(request, 'accounts/auth/admin_workdb.html', context)
 
@@ -375,7 +372,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = AddTagForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
 
     elif (pk_test1 == 'ListDirection'):
@@ -385,7 +382,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = ListDirectionForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
 
     elif (pk_test1 == 'Event'):
@@ -395,7 +392,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = EventForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
 
     elif (pk_test1 == 'Member'):
@@ -406,7 +403,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = MemberForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
 
     elif (pk_test1 == 'New'):
@@ -417,7 +414,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = NewForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
 
     elif (pk_test1 == 'UserAward'):
@@ -428,7 +425,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = UserAwardForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
 
     elif (pk_test1 == 'Company'):
@@ -439,7 +436,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = CompanyForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
     elif (pk_test1 == 'About'):
         item = About.objects.get(id=pk_test2)
@@ -449,7 +446,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = AboutForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
 
     elif (pk_test1 == 'DocsCollege'):
@@ -460,7 +457,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = DocsCollegeForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
 
     elif (pk_test1 == 'DocsCouncil'):
@@ -471,7 +468,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             form = DocsCouncilForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
-                return redirect('main_user')
+                return redirect('admin_tabledb', pk_test1)
 
 
 
@@ -506,7 +503,7 @@ def adminDeleteDB(request, pk_test1, pk_test2):
 
     if request.method == 'POST':
         item.delete()
-        return redirect('main_user')
+        return redirect('admin_tabledb', pk_test1)
 
     context = {
         'item':item, 'pk_test1':pk_test1

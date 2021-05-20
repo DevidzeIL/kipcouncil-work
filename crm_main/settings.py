@@ -162,4 +162,26 @@ EMAIL_HOST_USER = 'timeofkip@gmail.com'
 EMAIL_HOST_PASSWORD = 'ZVA-69h-nps-Qg7'
 
 
+from django.conf.locale.ru import formats as ru_formats
+
+LANGUAGES = [
+    ('ru', 'Русский'),
+]
+
+LANGUAGE_CODE = 'ru-RU'
+
+TIME_ZONE = 'UTC'
+
+USE_TZ = True
+
+USE_I18N = True
+
+USE_L10N = False
+
+ru_formats.DATE_FORMAT = 'd.m.Y'
+ru_formats.TIME_FORMAT = 'H:i'
+ru_formats.DATETIME_FORMAT = 'd.m.Y H:i'
+DATE_FORMAT = 'j E Y'
+TIME_FORMAT = 'H:i'
+DATETIME_FORMAT = 'j E Y H:i'
 
