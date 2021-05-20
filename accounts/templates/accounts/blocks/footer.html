@@ -17,7 +17,7 @@
 
                 {% if request.user.is_authenticated %}
                     {% if request.user.is_staff %}
-                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_users' %}">Студенты</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_tabledb' 'ListDirection' %}">Студенты</a></div>
                     <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Мероприятия</a></div>
                     {% endif %}
                     <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'main_user' %}">Аккаунт</a></div>

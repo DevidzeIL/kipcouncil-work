@@ -115,11 +115,10 @@ class MembersFilter(django_filters.FilterSet):
 class NewFilter(django_filters.FilterSet):
 	name = CharFilter(field_name='name', lookup_expr='icontains')
 	main_text = CharFilter(field_name='main_text', lookup_expr='icontains')
-	common_text = CharFilter(field_name='common_text', lookup_expr='icontains')
-	third_text = CharFilter(field_name='third_text', lookup_expr='icontains')
+	text = CharFilter(field_name='text', lookup_expr='icontains')
 	class Meta:
 		model = New
-		fields = ['tags', 'event', 'name', 'main_text', 'common_text', 'third_text']
+		fields = ['tags', 'event', 'name', 'main_text', 'text']
 
 class AboutFilter(django_filters.FilterSet):
 	goals = CharFilter(field_name='goals', lookup_expr='icontains')

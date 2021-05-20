@@ -30,7 +30,6 @@ urlpatterns = [
     path('user_table/<str:pk_test>/', views.userTable, name="user_table"),
     path('admin_table/', views.adminTable, name="admin_table"),
     path('admin_lookuser/<str:pk_test>/', views.adminLookuser, name="admin_lookuser"),
-    path('admin_users/', views.adminUsers, name="admin_users"),
 
 
 

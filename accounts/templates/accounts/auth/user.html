@@ -44,11 +44,13 @@
                 <div class="footer-box">
                     <div class="footer-nav-header">Главное</div>
                     {% if request.user.is_staff %}
-                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Админ Таблица мероприятий</a></div>
-                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_users' %}">Список студа</a></div>
-                       
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'register' %}">Аккаунты</a></div>
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_tabledb' 'Registration' %}">Список пользователей</a></div>
+                        
                         <br>
-
+                        
+                        <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Список мероприятий и участников</a></div>
+                        
                         <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_tabledb' 'Student' %}">Список пользователей</a></div>
                         <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_tabledb' 'Tag' %}">Список направлений</a></div>
                         <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_tabledb' 'ListDirection' %}">Список участников направлений</a></div>

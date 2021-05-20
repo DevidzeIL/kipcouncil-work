@@ -35,17 +35,42 @@
 	</div>
 
 	<div class="col-md-9">
-		<div class="card card-body">
-
-			<form method="POST" action="" enctype="multipart/form-data">
+		<form method="POST" action="" enctype="multipart/form-data">
 				
-                {% csrf_token %}
-				{{form.as_p}}
-		
-			<input class="btn btn-primary" type="submit" name="Update Information" value="Сохранить">
-			</form>
-		</div>
+            {% csrf_token %}
+            <label>Группа:&nbsp&nbsp&nbsp&nbsp</label>{{form.group}}
+            <br>
+            <br>
+
+            <label>ФИО:&nbsp&nbsp&nbsp&nbsp</label>{{form.fio}}
+            <br>
+            <br>
+
+            <label>Телефон:&nbsp&nbsp&nbsp&nbsp</label>{{form.phone}}
+            <br>
+            <br>    
+
+            <label>Дата рождения  <em>(ГГГГ-ММ-ДД)</em>:&nbsp&nbsp&nbsp&nbsp</label>{{form.birthday}}            
+            <br>
+            <br>
+
+            <label>Фото:&nbsp&nbsp&nbsp&nbsp</label>{{form.profile_pic}}
+            <br>
+            <br>
+
+            <label>ВК:&nbsp&nbsp&nbsp&nbsp</label>{{form.vk_url}}
+            <br>
+            <br>
+
+            <label>Инстаграмм:&nbsp&nbsp&nbsp&nbsp</label>{{form.instagram_url}}
+            <br>
+            <br>
+    
+        <input class="btn btn-primary" type="submit" name="Update Information" value="Сохранить">
+        </form>
 	</div>
 </div>
 
 {% endblock content %}
+
+            

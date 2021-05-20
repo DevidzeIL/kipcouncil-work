@@ -19,7 +19,7 @@ class StudentForm(ModelForm):
 	class Meta:
 		model = Student
 		fields = '__all__'
-		exclude = ['user']
+		exclude = ['user', 'email']
 
 class AwardForm(ModelForm):
 	class Meta:

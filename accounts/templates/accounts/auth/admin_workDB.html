@@ -53,7 +53,7 @@
             <th>Пароль</th>
             <th>Подтверждение пароля</th>
             <th>Телефон</th>
-            <th>Дата рождения</th>
+            <th>Дата рождения <em>(ГГГГ-ММ-ДД)</em></th>
             <th>Фото</th>
             <th>ВК</th>
             <th>Инстаграмм</th>
@@ -67,7 +67,7 @@
             <td>{{form.password1}}</td>
             <td>{{form.password2}}</td>
             <td>{{form1.phone}}</td>
-            <td><input type="date" value="{{form1.birthday}}"></td>
+            <td>{{form1.birthday}}</td>
             <td>{{form1.profile_pic}}</td>
             <td>{{form1.vk_url}}</td>
             <td>{{form1.instagram_url}}</td>
@@ -116,13 +116,13 @@
         <tr>
             <th>Направление</th>
             <th>Название мероприятия</th>
-            <th>Дата проведения</th>
+            <th>Дата проведения <em>(ГГГГ-ММ-ДД)</em></th>
             <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
         </tr>
         <tr>
             <td>{{form.tags}}</td>
             <td>{{form.name}}</td>
-            <td><input type="date" value="{{form.date}}"></td>
+            <td>{{form.date}}</td>
         </tr>
     </form>
 

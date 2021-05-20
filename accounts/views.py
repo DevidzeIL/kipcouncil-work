@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm
 from datetime import datetime, timedelta, date
 import calendar
 
+from django.contrib.auth.models import User
+
 from django.utils.html import mark_safe
 
 from django.contrib.auth import authenticate, login, logout
@@ -131,10 +133,13 @@ def userTable(request, pk_test):
 def accountSettings(request):
     student = request.user.student
     form = StudentForm(instance=student)
+   
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES, instance=student)
+        
         if form.is_valid():
             form.save()
+            return redirect('main_user')
 
         
     context = {'form':form}
@@ -163,21 +168,6 @@ def adminTable(request):
         
     }
     return render(request, 'accounts/auth/admin_table.html', context)
-
-def adminUsers(request):
-    account = request.user.student
-    users = ListDirection.objects.all()
-
-    myFilter = AdminUserFilter(request.GET, queryset = users)
-
-    users = myFilter.qs
-
-    context = {
-        'account':account, 
-        'users':users,
-        'myFilter':myFilter
-    }
-    return render(request, 'accounts/auth/admin_users.html', context)
 
 def adminLookuser(request, pk_test):
     user = Student.objects.get(fio = pk_test)
@@ -363,6 +353,12 @@ def adminCreateDB(request, pk_test):
 def adminEditDB(request, pk_test1, pk_test2): 
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
+        form = StudentForm(instance=item)
+        if request.method == 'POST':
+            form = StudentForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_tabledb', pk_test1)
         
 
     elif (pk_test1 == 'Tag'):
@@ -512,15 +508,15 @@ def adminDeleteDB(request, pk_test1, pk_test2):
 
 
 def adminTableDB(request, pk_test):
-
     account = request.user.student
-
-    print('accccccccount', account)
 
     if (pk_test == 'Student'):
         form = Student.objects.all().order_by('group')
         myFilter = StudentFilter(request.GET, queryset = form)
         form = myFilter.qs
+
+    elif (pk_test == 'Registration'):
+        form = User.objects.all()
 
     elif (pk_test == 'Tag'):
         form = Tag.objects.all()
@@ -641,10 +637,13 @@ def about(request):
     users = ListDirection.objects.filter(status="Правление")
     text_about = About.objects.filter(tags__name="Общее").last()
 
-    if unauthenticated_user == True:
+    account = None
+
+    if unauthenticated_user != True:
         account = request.user.student
 
-    account = None
+   
+    print('ACCCCCCCCCCCCCCOUNT', account)
 
     context = {
         'users':users, 'text_about':text_about, 'account':account

@@ -40,8 +40,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 info-user">
                 <img class="img-fluid" src="{{user.user.profile_pic.url}}" alt="">
                 {% if request.user.is_staff %}
-                <div class="info-role"><a href="{% url 'direction' user.tags.id %}">{{user.role}}</a></div>
-                    {% if user.user.fio == account.fio %}
+                <div class="info-role">{{user.role}}</div>
+                    {% if user.user == account %}
                         <div class="info-fio"><a href="{% url 'main_user' %}">{{user.user.fio}}</a></div>
                     {% else %}
                         <div class="info-fio"><a href="{% url 'admin_lookuser' user.user.fio %}">{{user.user.fio}}</a></div>

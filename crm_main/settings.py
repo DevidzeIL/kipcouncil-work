@@ -186,3 +186,10 @@ DATE_FORMAT = 'j E Y'
 TIME_FORMAT = 'H:i'
 DATETIME_FORMAT = 'j E Y H:i'
 
+
+def gettext_noop(s):
+    return s
+
+LANGUAGES = (
+    ('ru', gettext_noop('Russian')),
+)

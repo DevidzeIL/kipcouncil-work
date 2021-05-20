@@ -23,7 +23,7 @@
 /* HOVER */
     .nav-item-link
     {
-        color: red;
+        color: black;
     }
     
     .nav-item-link:hover
@@ -34,7 +34,7 @@
     
     .nav-link
     {
-        color: red !important;
+        color: black !important;
     }
     
     .nav-link:hover
@@ -104,7 +104,7 @@
         font-size: 1.25rem;
 
         text-transform: lowercase;
-        text-decoration: underline;
+        
     }
 
     /* -BLOCK EVENTS */

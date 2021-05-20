@@ -60,6 +60,22 @@
         {% endfor %}
 
 
+        {% elif pk_test == 'Registration' %}
+        <form method="get">
+            <tr>
+                <th>Название направления:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
+                <th><button class="btn btn-primary" type="submit">Поиск</button></th>
+                <th><button class="btn btn-primary"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            </tr>
+        </form>
+            {% for field in form %}
+                <tr>
+                    <td>{{field.name}}</td>
+                    <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+                    <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+                </tr>
+            {% endfor %}
+
 
     {% elif pk_test == 'Tag' %}
     <form method="get">
@@ -96,10 +112,10 @@
             <tr>
                 <td>{{field.tags}}</td>
                 {% if field.user == account %}
-                        <td><a href="{% url 'main_user' %}">{{field.user}}</a></td>
-                    {% else %}
-                        <td><a href="{% url 'admin_lookuser' field.user.fio %}">{{field.user}}</a></td>
-                    {% endif %}
+                    <td><a href="{% url 'main_user' %}">{{field.user}}</a></td>
+                {% else %}
+                    <td><a href="{% url 'admin_lookuser' field.user.fio %}">{{field.user}}</a></td>
+                {% endif %}
                 <td>{{field.status}}</td>
                 <td>{{field.role}}</td>
                 <td>{{field.date_created}}</td>
