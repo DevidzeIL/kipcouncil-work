@@ -512,6 +512,11 @@ def adminDeleteDB(request, pk_test1, pk_test2):
 
 
 def adminTableDB(request, pk_test):
+
+    account = request.user.student
+
+    print('accccccccount', account)
+
     if (pk_test == 'Student'):
         form = Student.objects.all().order_by('group')
         myFilter = StudentFilter(request.GET, queryset = form)
@@ -577,7 +582,7 @@ def adminTableDB(request, pk_test):
 
 
     context = {
-        'form':form, 'pk_test':pk_test, 'myFilter':myFilter
+        'form':form, 'pk_test':pk_test, 'myFilter':myFilter, 'account':account
     }
     return render(request, 'accounts/auth/admin_tabledb.html', context)
 

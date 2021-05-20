@@ -19,17 +19,15 @@
 
 <!-- INFO -->
 <section class="info row">
-    <div class="col-0 col-sm-1 col-md-1 col-lg-1"></div>
+    <div class="col-0 col-sm-1 col-md-1 col-lg-2"></div>
     <!-- INFO > TEXT -->
-    <div class="col-sm-10 col-md-10 col-lg-5">
+    <div class="col-sm-10 col-md-10 col-lg-4">
         <div class="row">
             <div class="info-box">
                 <div class="info-author-header">{{new.main_text}}</div>
                 <div class="info-about">
-                    {{new.common_text}}
-                    <br>
-                    <br>
-                    {{new.common_text}}
+                    {{new.text | safe}}
+
                     <br>
                     <br>
                     <div class="info-link"><a href="{{new.link}}">Фото/Видео</a></div>

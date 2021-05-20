@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from ckeditor.fields import RichTextField
+
 
 class Tag(models.Model):
     name        = models.CharField(max_length=200, null=True)
@@ -98,11 +100,9 @@ class New(models.Model):
     event       = models.ForeignKey(Event, blank=True, null=True, on_delete=models.SET_NULL)
     name        = models.CharField(max_length=200,  blank=True, null=True)
     main_text   = models.CharField(max_length=300, blank=True, null=True)
-    common_text = models.CharField(max_length=700, blank=True, null=True)
-    third_text  = models.CharField(max_length=700, blank=True, null=True)
+    text        = RichTextField(max_length=1000, blank=True, null=True)
     link        = models.CharField(max_length=200, blank=True, null=True)
     photo       = models.ImageField(default='rec.png', null=True, blank=True)
-    date_performance = models.DateField(blank=True, null=True)
     date_created     = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):

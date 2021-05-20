@@ -45,9 +45,10 @@ class AdminUserFilter(django_filters.FilterSet):
 
 class NewsFilter(django_filters.FilterSet):
 	name = CharFilter(field_name='name', lookup_expr='icontains')
+	text = CharFilter(field_name='text', lookup_expr='icontains')
 	class Meta:
 		model = New
-		fields = ['tags', 'name', 'date_performance']
+		fields = ['tags', 'name', 'text']
 
 
 

@@ -156,11 +156,9 @@
             <th>Мероприятие</th>
             <th>Название новости</th>
             <th>Начальный текст</th>
-            <th>Основной текст</th>
-            <th>Дополнительный текст</th>
+            <th>Текст</th>
             <th>Ссылка на Google Photo</th>
             <th>Обложка</th>
-            <th>Дата проведения</th>
             <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
         </tr>
         <tr>
@@ -168,11 +166,10 @@
             <td>{{form.event}}</td>
             <td>{{form.name}}</td>
             <td>{{form.main_text}}</td>
-            <td>{{form.common_text}}</td>
-            <td>{{form.third_text}}</td>
+            {{form.media}}
+            <td>{{form.text}}</td>
             <td>{{form.link}}</td>
             <td>{{form.photo}}</td>
-            <td><input type="date" value="{{form.date_performance}}"></td>
         </tr>
     </form>
 
