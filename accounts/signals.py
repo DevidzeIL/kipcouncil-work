@@ -11,7 +11,6 @@ def student_profile(sender, instance, created, **kwargs):
         instance.groups.add(group)
         Student.objects.create(
                 user = instance,
-                email = instance.email,
                 fio = instance.username
             )
         print('Profile created')

@@ -24,10 +24,9 @@
     {% if pk_test == 'Student'%}
     <form method="get">
         <tr>
-            <th>Группа:&nbsp&nbsp&nbsp&nbsp{{myFilter.form1.group}}</th>
-            <th>ФИО:&nbsp&nbsp&nbsp&nbsp{{myFilter.form1.fio}}</th>
-            <th>Email:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.email}}</th>
-            <th>Телефон:&nbsp&nbsp&nbsp&nbsp{{myFilter.form1.phone}}</th>
+            <th>Группа:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.group}}</th>
+            <th>ФИО:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.fio}}</th>
+            <th>Телефон:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.phone}}</th>
             <th>Дата рождения</th>
             <th>Фото</th>
             <th>ВК</th>
@@ -37,40 +36,39 @@
         </tr>
     </form>
         {% for field in form %}
-            {% for field1 in form1 %}
-               
-                    <tr>
-                        <td>{{field1.group}}</td>
-                        <td>{{field1.fio}}</td>
-                        <td>{{field.email}}</td>
-                        <td>{{field1.phone}}</td>
-                        <td>{{field1.birthday}}</td>
-                        <td><img width="150px" height="350px" class="profile-pic img-fluid"  src="{{field1.profile_pic.url}}"  onclick = 'openImageWindow(this.src);'></td>
-                        <td><a href="{{field1.vk_url}}">Ссылка</a></td>
-                        <td><a href="{{field1.instagram_url}}">Ссылка</a></td>
-                        <td><a href="{% url 'admin_editdb' pk_test field1.id %}">Изменить</a></td>
-                        <td><a href="{% url 'admin_deletedb' pk_test field1.id %}">Удалить</a></td>
-                    </tr>
-            
-            {% endfor %}
+            <tr>
+                <td>{{field.group}}</td>
+                <td>{{field.fio}}</td>
+                <td>{{field.phone}}</td>
+                <td>{{field.birthday}}</td>
+                <td><img width="150px" height="350px" class="profile-pic img-fluid"  src="{{field.profile_pic.url}}"  onclick = 'openImageWindow(this.src);'></td>
+                <td><a href="{{field.vk_url}}">Ссылка</a></td>
+                <td><a href="{{field1.instagram_url}}">Ссылка</a></td>
+                <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+                <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+            </tr>
+        {% endfor %}
+        
+
+
+    {% elif pk_test == 'User' %}
+    <form method="get">
+        <tr>
+            <th>Фамилия</th>
+            <th>Email</th>
+            <th><button class="btn btn-light" type="submit">Поиск</button></th>
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+        </tr>
+    </form>
+        {% for field in form %}
+            <tr>
+                <td>{{field.username}}</td>
+                <td>{{field.email}}</td>
+                <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+                <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+            </tr>
         {% endfor %}
 
-
-        {% elif pk_test == 'Registration' %}
-        <form method="get">
-            <tr>
-                <th>Название направления:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
-                <th><button class="btn btn-light" type="submit">Поиск</button></th>
-                <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
-            </tr>
-        </form>
-            {% for field in form %}
-                <tr>
-                    <td>{{field.name}}</td>
-                    <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-                    <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-                </tr>
-            {% endfor %}
 
 
     {% elif pk_test == 'Tag' %}

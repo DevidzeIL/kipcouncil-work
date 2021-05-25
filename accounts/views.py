@@ -52,8 +52,7 @@ from .utils import Calendar
 
 
 # Регистрация
-@authenticated_user
-@admin_only
+
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -84,7 +83,7 @@ def loginPage(request):
             login(request, user)
             return redirect('main')
         else:
-            messages.info(request, 'Логин или пароль указан неверно')
+            messages.info(request, 'Email или пароль указан неверно')
 
     context = {}
     return render(request, 'accounts/auth/login.html', context)
@@ -225,6 +224,8 @@ def adminLookuser(request, pk_test):
 
 
 
+
+
 # ПОЛЬЗОВАТЕЛЬ Работа с БД (портфолио)
 ## ПОЛЬЗОВАТЕЛЬ Создание значений в БД
 @authenticated_user
@@ -250,7 +251,7 @@ def editAward(request, pk_test):
     form = AwardForm(instance=award)
 
     if request.method == 'POST':
-        form = AwardForm(request.POST, instance=award)
+        form = AwardForm(request.POST, request.FILES, instance=award)
         if form.is_valid():
             form.save()
             return redirect('main_user')
@@ -276,21 +277,113 @@ def deleteAward(request, pk_test):
 
 
 
+
+
+## АДМИН Выгрузка записей из БД в таблицу
+@authenticated_user
+@admin_only
+def adminTableDB(request, pk_test):
+    account = request.user.student
+
+    if (pk_test == 'Student'):
+        form = Student.objects.all().order_by('group')
+        myFilter = StudentFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+    elif (pk_test == 'User'):
+        form = User.objects.all()
+        myFilter = UserFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+    elif (pk_test == 'Tag'):
+        form = Tag.objects.all()
+        myFilter = TagFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+    elif (pk_test == 'ListDirection'):
+        form = ListDirection.objects.all().order_by('date_created')
+        myFilter = ListDirectionFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'Event'):
+        form = Event.objects.all().order_by('-date')
+        myFilter = EventsFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'Member'):
+        form = Member.objects.all()
+        myFilter = MembersFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'New'):
+        form = New.objects.all().order_by('-date_created')
+        myFilter = NewFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'UserAward'):
+        form = UserAward.objects.all()
+        myFilter = UserAwardFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'Company'):
+        form = Company.objects.all()
+        myFilter = CompanyFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'About'):
+        form = About.objects.all()
+        myFilter = AboutFilter(request.GET, queryset = form)
+        form = myFilter.qs
+    
+    elif (pk_test == 'More'):
+        form = More.objects.all()
+        myFilter = MoreFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'DocsCollege'):
+        form = DocsCollege.objects.all()
+        myFilter = DocsCollegeFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    elif (pk_test == 'DocsCouncil'):
+        form = DocsCouncil.objects.all()
+        myFilter = DocsCouncilFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
+
+    context = {
+        'form':form, 'pk_test':pk_test, 'myFilter':myFilter, 'account':account
+    }
+    return render(request, 'accounts/auth/admin_tabledb.html', context)
+
 # АДМИН Работа с БД
 ## АДМИН Создание записи в БД
 @authenticated_user
 @admin_only
 def adminCreateDB(request, pk_test):
-    form1 = []
     if (pk_test == 'Student'):
+        form = StudentForm()
+        if request.method == 'POST':
+            form = StudentForm(request.POST, request.FILES,)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_tabledb', pk_test)
+
+
+    elif (pk_test == 'User'):
         form = CreateUserForm()
-        form1 = StudentForm()
         if request.method == 'POST':
             form = CreateUserForm(request.POST)
-            form1 = StudentForm(request.POST)
-            if form1.is_valid() and form.is_valid():
+            if form.is_valid():
                 form.save()
-                form1.save()
                 return redirect('admin_tabledb', pk_test)
 
 
@@ -392,7 +485,7 @@ def adminCreateDB(request, pk_test):
 
 
     context = {
-        'form':form, 'form1':form1, 'pk_test':pk_test
+        'form':form, 'pk_test':pk_test
     }
     return render(request, 'accounts/auth/admin_workdb.html', context)
 
@@ -404,11 +497,19 @@ def adminEditDB(request, pk_test1, pk_test2):
         item = Student.objects.get(id=pk_test2)
         form = StudentForm(instance=item)
         if request.method == 'POST':
-            form = StudentForm(request.POST, instance=item)
+            form = StudentForm(request.POST, request.FILES, instance=item)
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test1)
-        
+    
+    elif (pk_test1 == 'User'):
+        item = User.objects.get(id=pk_test2)
+        form = CreateUserForm(instance=item)
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_tabledb', pk_test1)
 
     elif (pk_test1 == 'Tag'):
         item = Tag.objects.get(id=pk_test2)
@@ -456,7 +557,7 @@ def adminEditDB(request, pk_test1, pk_test2):
 
         form = NewForm(instance=item)
         if request.method == 'POST':
-            form = NewForm(request.POST, instance=item)
+            form = NewForm(request.POST, request.FILES, instance=item)
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test1)
@@ -467,7 +568,7 @@ def adminEditDB(request, pk_test1, pk_test2):
 
         form = UserAwardForm(instance=item)
         if request.method == 'POST':
-            form = UserAwardForm(request.POST, instance=item)
+            form = UserAwardForm(request.POST, request.FILES, instance=item)
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test1)
@@ -509,7 +610,7 @@ def adminEditDB(request, pk_test1, pk_test2):
 
         form = DocsCollegeForm(instance=item)
         if request.method == 'POST':
-            form = DocsCollegeForm(request.POST, instance=item)
+            form = DocsCollegeForm(request.POST, request.FILES, instance=item)
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test1)
@@ -520,7 +621,7 @@ def adminEditDB(request, pk_test1, pk_test2):
 
         form = DocsCouncilForm(instance=item)
         if request.method == 'POST':
-            form = DocsCouncilForm(request.POST, instance=item)
+            form = DocsCouncilForm(request.POST, request.FILES, instance=item)
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test1)
@@ -538,6 +639,8 @@ def adminEditDB(request, pk_test1, pk_test2):
 def adminDeleteDB(request, pk_test1, pk_test2):   
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
+    elif (pk_test1 == 'User'):
+        item = User.objects.get(id=pk_test2)
     elif (pk_test1 == 'Tag'):
         item = Tag.objects.get(id=pk_test2)
     elif (pk_test1 == 'ListDirection'):
@@ -570,96 +673,6 @@ def adminDeleteDB(request, pk_test1, pk_test2):
     }
     return render(request, 'accounts/auth/admin_deletedb.html', context)
 
-## АДМИН Выгрузка записей из БД в таблицу
-@authenticated_user
-@admin_only
-def adminTableDB(request, pk_test):
-    account = request.user.student
-    form1 = []  
-
-    if (pk_test == 'Student'):
-        form = User.objects.all()
-        form1 = Student.objects.all().order_by('group')
-
-        myFilter = UserFilter(request.GET, queryset = form)
-        myFilter1 = StudentFilter(request.GET, queryset = form1)
-
-        form = myFilter.qs
-        form1 = myFilter1.qs
-
-
-    elif (pk_test == 'Registration'):
-        form = User.objects.all()
-        myFilter = []
-
-    elif (pk_test == 'Tag'):
-        form = Tag.objects.all()
-        myFilter = TagFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-    elif (pk_test == 'ListDirection'):
-        form = ListDirection.objects.all().order_by('date_created')
-        myFilter = ListDirectionFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-
-    elif (pk_test == 'Event'):
-        form = Event.objects.all().order_by('-date')
-        myFilter = EventsFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-
-    elif (pk_test == 'Member'):
-        form = Member.objects.all()
-        myFilter = MembersFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-
-    elif (pk_test == 'New'):
-        form = New.objects.all().order_by('-date_created')
-        myFilter = NewFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-
-    elif (pk_test == 'UserAward'):
-        form = UserAward.objects.all()
-        myFilter = UserAwardFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-
-    elif (pk_test == 'Company'):
-        form = Company.objects.all()
-        myFilter = CompanyFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-
-    elif (pk_test == 'About'):
-        form = About.objects.all()
-        myFilter = AboutFilter(request.GET, queryset = form)
-        form = myFilter.qs
-    
-    elif (pk_test == 'More'):
-        form = More.objects.all()
-        myFilter = MoreFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-
-    elif (pk_test == 'DocsCollege'):
-        form = DocsCollege.objects.all()
-        myFilter = DocsCollegeFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-
-    elif (pk_test == 'DocsCouncil'):
-        form = DocsCouncil.objects.all()
-        myFilter = DocsCouncilFilter(request.GET, queryset = form)
-        form = myFilter.qs
-
-
-    context = {
-        'form':form, 'form1':form1, 'pk_test':pk_test, 'myFilter':myFilter, 'account':account
-    }
-    return render(request, 'accounts/auth/admin_tabledb.html', context)
 
 
 

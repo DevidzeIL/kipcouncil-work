@@ -87,6 +87,13 @@ td {
         margin-top: 20px;
     }
 
+    .event-image {
+        object-fit: cover;
+        width: 900px;
+        height: 450px;
+        object-fit: cover;
+    }
+
     .event-more {
         margin-top: 20px;
         margin-bottom: 60px;

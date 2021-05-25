@@ -42,10 +42,6 @@
         <tr>
             <th>Группа</th>
             <th>ФИО</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Пароль</th>
-            <th>Подтверждение пароля</th>
             <th>Телефон</th>
             <th>Дата рождения <em>(ГГГГ-ММ-ДД)</em></th>
             <th>Фото</th>
@@ -54,17 +50,33 @@
             <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
         </tr>
         <tr>
-            <td>{{form1.group}}</td>
-            <td>{{form1.fio}}</td>
+            <td>{{form.group}}</td>
+            <td>{{form.fio}}</td>
+            <td>{{form.phone}}</td>
+            <td>{{form.birthday}}</td>
+            <td>{{form.profile_pic}}</td>
+            <td>{{form.vk_url}}</td>
+            <td>{{form.instagram_url}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+    {% elif pk_test == 'User' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Фамилия</th>
+            <th>Email</th>
+            <th>Пароль</th>
+            <th>Подтверждение пароля</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
             <td>{{form.username}}</td>
             <td>{{form.email}}</td>
             <td>{{form.password1}}</td>
             <td>{{form.password2}}</td>
-            <td>{{form1.phone}}</td>
-            <td>{{form1.birthday}}</td>
-            <td>{{form1.profile_pic}}</td>
-            <td>{{form1.vk_url}}</td>
-            <td>{{form1.instagram_url}}</td>
         </tr>
     </form>
     {{form.errors}}
@@ -160,6 +172,7 @@
             <td>{{form.tags}}</td>
             <td>{{form.event}}</td>
             <td>{{form.name}}</td>
+            
             <td>{{form.main_text}}</td>
             {{form.media}}
             <td>{{form.text}}</td>
@@ -221,7 +234,8 @@
             <td>{{form.tags}}</td>
             <td>{{form.goals}}</td>
             <td>{{form.main_text}}</td>
-            <td>{{form.common_text}}</td>
+            {{form.media}}
+            <td>{{form.text}}</td>
             <td>{{form.result}}</td>
         </tr>
     </form>
@@ -243,6 +257,7 @@
         <tr>
             <td>{{form.tags}}</td>
             <td>{{form.name}}</td>
+            {{form.media}}
             <td>{{form.goals}}</td>
             <td>{{form.main_text}}</td>
             <td>{{form.text}}</td>
