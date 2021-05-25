@@ -191,32 +191,25 @@ def adminTable(request):
 @admin_only
 def adminLookuser(request, pk_test):
     user = Student.objects.get(fio = pk_test)
-
-    tags = Tag.objects.all()
-
     info = Student.objects.filter(fio = user)
-
-    events = []
-    events_member = []
+    tags = Tag.objects.all()
+    events_count = []
+    events_member_count = []
     for tag in tags:
-        events.append(
+        events_count.append(
             Event.objects.filter(tags__name=tag.name).count()
         )
-        events_member.append(
+        events_member_count.append(
             Member.objects.filter(user = user, event__tags__name=tag.name).count()
         )
-
-
-    awards = UserAward.objects.filter(user = user)
+    awards = UserAward.objects.filter(user = user).order_by('-date_created')
     context = {
         'info':info,
         'user':user, 'tags':tags, 'awards':awards,
-        'events': events, 'events_member':events_member
+        'events_count': events_count, 'events_member_count':events_member_count,
     }
 
     return render(request, 'accounts/auth/admin_lookuser.html', context)
-
-
 
 
 

@@ -7,9 +7,12 @@
     <section class="header row">
         <nav class="navbar navbar-expand-xl navbar-light">
             <div class="container-fluid header-navs">
-                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" src="{% static '/images/logo.svg' %}" alt="logo"></a>
-                <h1><div class="promo-header" style="margin-left: 10vh;">Работа с БД</div></h1>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items"> 
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo"
+                        src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <h1>
+                    <div class="promo-header" style="margin-left: 10vh;">Работа с БД</div>
+                </h1>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
                     </li>
@@ -17,10 +20,42 @@
             </div>
         </nav>
     </section>
+    <script type="text/javascript">
+        function exportTableToExcel(tableID, filename = '') {
+            var downloadLink;
+            var dataType = 'application/vnd.ms-excel';
+            var tableSelect = document.getElementById(tableID);
+            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            // Specify file name
+            filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+            // Create download link element
+            downloadLink = document.createElement("a");
+
+            document.body.appendChild(downloadLink);
+
+            if (navigator.msSaveOrOpenBlob) {
+                var blob = new Blob(['\ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                // Create a link to the file
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                // Setting the file name
+                downloadLink.download = filename;
+
+                //triggering the function
+                downloadLink.click();
+            }
+        }
+    </script>
 </div>
+<button class="btn btn-light" onclick="exportTableToExcel('tblData', '{{pk_test}}')">Экспортировать в Excel</button>
 
-
-<table >
+<table id="tblData">
     {% if pk_test == 'Student'%}
     <form method="get">
         <tr>
@@ -32,23 +67,24 @@
             <th>ВК</th>
             <th>Инстаграмм</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
-        {% for field in form %}
-            <tr>
-                <td>{{field.group}}</td>
-                <td>{{field.fio}}</td>
-                <td>{{field.phone}}</td>
-                <td>{{field.birthday}}</td>
-                <td><img width="150px" height="350px" class="profile-pic img-fluid"  src="{{field.profile_pic.url}}"  onclick = 'openImageWindow(this.src);'></td>
-                <td><a href="{{field.vk_url}}">Ссылка</a></td>
-                <td><a href="{{field1.instagram_url}}">Ссылка</a></td>
-                <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-                <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-            </tr>
-        {% endfor %}
-        
+    {% for field in form %}
+    <tr>
+        <td>{{field.group}}</td>
+        <td>{{field.fio}}</td>
+        <td>{{field.phone}}</td>
+        <td>{{field.birthday}}</td>
+        <td><img width="150px" height="350px" class="profile-pic img-fluid" src="{{field.profile_pic.url}}"
+                onclick='openImageWindow(this.src);'></td>
+        <td><a href="{{field.vk_url}}">Ссылка</a></td>
+        <td><a href="{{field1.instagram_url}}">Ссылка</a></td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
+    {% endfor %}
+
 
 
     {% elif pk_test == 'User' %}
@@ -57,17 +93,17 @@
             <th>Фамилия</th>
             <th>Email</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'register'  %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'register'  %}">Добавить</a></button></th>
         </tr>
     </form>
-        {% for field in form %}
-            <tr>
-                <td>{{field.username}}</td>
-                <td>{{field.email}}</td>
-                <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-                <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-            </tr>
-        {% endfor %}
+    {% for field in form %}
+    <tr>
+        <td>{{field.username}}</td>
+        <td>{{field.email}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
+    {% endfor %}
 
 
 
@@ -76,16 +112,16 @@
         <tr>
             <th>Название направления:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
-        {% for field in form %}
-            <tr>
-                <td>{{field.name}}</td>
-                <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-                <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-            </tr>
-        {% endfor %}
+    {% for field in form %}
+    <tr>
+        <td>{{field.name}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
+    {% endfor %}
 
 
 
@@ -98,25 +134,25 @@
             <th>Роль</th>
             <th>Дата добавления</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
 
-        {% for field in form %}
-            <tr>
-                <td>{{field.tags}}</td>
-                {% if field.user == account %}
-                    <td><a href="{% url 'main_user' %}">{{field.user}}</a></td>
-                {% else %}
-                    <td><a href="{% url 'admin_lookuser' field.user.fio %}">{{field.user}}</a></td>
-                {% endif %}
-                <td>{{field.status}}</td>
-                <td>{{field.role}}</td>
-                <td>{{field.date_created}}</td>
-                <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-                <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-            </tr>
-        {% endfor %}
+    {% for field in form %}
+    <tr>
+        <td>{{field.tags}}</td>
+        {% if field.user == account %}
+        <td><a href="{% url 'main_user' %}">{{field.user}}</a></td>
+        {% else %}
+        <td><a href="{% url 'admin_lookuser' field.user %}">{{field.user}}</a></td>
+        {% endif %}
+        <td>{{field.status}}</td>
+        <td>{{field.role}}</td>
+        <td>{{field.date_created}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
+    {% endfor %}
 
 
 
@@ -127,23 +163,23 @@
             <th>Название мероприятия:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
             <th>Дата проведения</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
     {% for field in form %}
-        <tr>
-            <td>{{field.tags}}</td>
-            <td>{{field.name}}</td>
-            <td>{{field.date}}</td>
-            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        </tr>
+    <tr>
+        <td>{{field.tags}}</td>
+        <td>{{field.name}}</td>
+        <td>{{field.date}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
     {% endfor %}
 
 
 
     {% elif pk_test == 'Member' %}
-        
+
     <form method="get">
         <tr>
             <th>Студент:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.user}}</th>
@@ -151,18 +187,18 @@
             <th>Роль:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.role}}</th>
             <th>Комментарий</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
-    {% for field in form %} 
-        <tr>
-            <td>{{field.user}}</td>
-            <td>{{field.event}}</td>
-            <td>{{field.role}}</td>
-            <td>{{field.comment}}</td>
-            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        </tr>
+    {% for field in form %}
+    <tr>
+        <td>{{field.user}}</td>
+        <td>{{field.event}}</td>
+        <td>{{field.role}}</td>
+        <td>{{field.comment}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
     {% endfor %}
 
 
@@ -179,22 +215,23 @@
             <th>Обложка</th>
             <th>Дата создания записи</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
     {% for field in form %}
-        <tr>
-            <td>{{field.tags}}</td>
-            <td>{{field.event}}</td>
-            <td>{{field.name}}</td>
-            <td>{{field.main_text | safe }}</td>
-            <td>{{field.text | safe }}</td>
-            <td><a href="{{field.link}}" target="_blank">Ссылка</a></td>
-            <td><img width="150px" height="350px" class="profile-pic img-fluid"  src="{{field.photo.url}}"  onclick = 'openImageWindow(this.src);'></td>
-            <td>{{field.date_created}}</td>
-            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        </tr>
+    <tr>
+        <td>{{field.tags}}</td>
+        <td>{{field.event}}</td>
+        <td>{{field.name}}</td>
+        <td>{{field.main_text | safe }}</td>
+        <td>{{field.text | safe }}</td>
+        <td><a href="{{field.link}}" target="_blank">Ссылка</a></td>
+        <td><img width="150px" height="350px" class="profile-pic img-fluid" src="{{field.photo.url}}"
+                onclick='openImageWindow(this.src);'></td>
+        <td>{{field.date_created}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
     {% endfor %}
 
 
@@ -206,17 +243,18 @@
             <th>Портфолио</th>
             <th>Описание:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.description}}</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
     {% for field in form %}
-        <tr>
-            <td>{{field.user}}</td>
-            <td><img width="150px" height="350px" class="profile-pic img-fluid"  src="{{field.award.url}}"  onclick = 'openImageWindow(this.src);'></td>
-            <td>{{field.description}}</td>
-            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        </tr>
+    <tr>
+        <td>{{field.user}}</td>
+        <td><img width="150px" height="350px" class="profile-pic img-fluid" src="{{field.award.url}}"
+                onclick='openImageWindow(this.src);'></td>
+        <td>{{field.description}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
     {% endfor %}
 
 
@@ -228,17 +266,17 @@
             <th>Специальность:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.specialty}}</th>
             <th>Номер:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.group_number}}</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
     {% for field in form %}
-        <tr>
-            <td>{{field.сourse}}</td>
-            <td>{{field.specialty}}</td>
-            <td>{{field.group_number}}</td>
-            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        </tr>
+    <tr>
+        <td>{{field.сourse}}</td>
+        <td>{{field.specialty}}</td>
+        <td>{{field.group_number}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
     {% endfor %}
 
 
@@ -252,19 +290,19 @@
             <th>Дополнительный текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.common_text}}</th>
             <th>Результаты:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.result}}</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
     {% for field in form %}
-        <tr>
-            <td>{{field.tags}}</td>
-            <td>{{field.goals | safe }}</td>
-            <td>{{field.main_text | safe }}</td>
-            <td>{{field.text | safe }}</td>
-            <td>{{field.result | safe }}</td>
-            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        </tr>
+    <tr>
+        <td>{{field.tags}}</td>
+        <td>{{field.goals | safe }}</td>
+        <td>{{field.main_text | safe }}</td>
+        <td>{{field.text | safe }}</td>
+        <td>{{field.result | safe }}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
     {% endfor %}
 
 
@@ -278,19 +316,19 @@
             <th>Начальный текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.main_text}}</th>
             <th>Основной текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.text}}</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
     {% for field in form %}
-        <tr>
-            <td>{{field.tags}}</td>
-            <td>{{field.name}}</td>
-            <td>{{field.goals | safe}}</td>
-            <td>{{field.main_text | safe}}</td>
-            <td>{{field.text | safe}}</td>
-            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        </tr>
+    <tr>
+        <td>{{field.tags}}</td>
+        <td>{{field.name}}</td>
+        <td>{{field.goals | safe}}</td>
+        <td>{{field.main_text | safe}}</td>
+        <td>{{field.text | safe}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
     {% endfor %}
 
 
@@ -303,20 +341,22 @@
             <th>Специальность:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.specialty}}</th>
             <th>Файл</th>
             <th>Описание:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.description}}</th>
+            <th>Дата добавления</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
-    {% for field in form %} 
-        <tr>
-            <td>{{field.name}}</td>
-            <td>{{field.cource}}</td>
-            <td>{{field.specialty}}</td>
-            <td><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></td>
-            <td>{{field.description}}</td>
-            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        </tr>
+    {% for field in form %}
+    <tr>
+        <td>{{field.name}}</td>
+        <td>{{field.cource}}</td>
+        <td>{{field.specialty}}</td>
+        <td><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></td>
+        <td>{{field.description}}</td>
+        <td>{{field.date_created}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
     {% endfor %}
 
 
@@ -328,19 +368,21 @@
             <th>Название:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
             <th>Файл</th>
             <th>Описание:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.description}}</th>
+            <th>Дата добавления</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
-            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th> 
+            <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
         </tr>
     </form>
     {% for field in form %}
-        <tr>
-            <td>{{field.tag}}</td>
-            <td>{{field.name}}</td>
-            <td><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></td>
-            <td>{{field.description}}</td>
-            <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-            <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        </tr>
+    <tr>
+        <td>{{field.tag}}</td>
+        <td>{{field.name}}</td>
+        <td><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></td>
+        <td>{{field.description}}</td>
+        <td>{{field.date_created}}</td>
+        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
+        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+    </tr>
     {% endfor %}
 
 

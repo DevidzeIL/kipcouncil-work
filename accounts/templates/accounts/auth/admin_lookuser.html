@@ -94,13 +94,13 @@
     </tr>
     <tr>
         <td>Общее кол-во</td>
-        {% for event in events %}
+        {% for event in events_count %}
         <td>{{event}}</td>
         {% endfor %}
     </tr>
     <tr>
         <td>Кол-во моего участия</td>
-        {% for event_member in events_member %}
+        {% for event_member in events_member_count  %}
         <td>{{event_member}}</td>
         {% endfor %}
     </tr>

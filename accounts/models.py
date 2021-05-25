@@ -152,6 +152,7 @@ class DocsCollege(models.Model):
     specialty   = models.ForeignKey(Specialty, null = True, blank = True, on_delete = models.SET_NULL)
     cource      = models.CharField(max_length=200, null=True,  blank = True,choices=COURCE)
     description = models.CharField(max_length=200, null=True, blank=True)
+    date_created= models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -161,6 +162,7 @@ class DocsCouncil(models.Model):
     file        = models.FileField(null=True, blank=True)
     name        = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
+    date_created= models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
         return self.name

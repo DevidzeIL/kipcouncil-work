@@ -29,17 +29,15 @@
         {% include 'accounts/blocks/hider.html'%}
         {% include 'accounts/blocks/header.html'%}
 
-        <div class="row">
+        <div class="container" style="text-align: center;">
             <div class="col">
                 <button class="btn btn-light"><a class="nav-item-link" href="{% url 'calendar' %}?{{ prev_month }}"> Прошлый месяц </a></button>
                 <button class="btn btn-light"><a class="nav-item-link" href="{% url 'calendar' %}?{{ next_month }}"> Следующий месяц </a></button>
             </div>
         </div>
         
-        
         {{ calendar }}
-        <br>
-        <br>
+        
         <br> 
 
     </div>

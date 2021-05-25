@@ -27,45 +27,16 @@
     </section>
 </div>
 
-
-<div class="row">
-	<div class="col">
-		<div class="card card-body">
-			<form method="get">
-                {{myFilterEvent.form}}
-                {{myFilterMember.form}}
-		        <button class="btn btn-primary" type="submit">Поиск</button>
-            </form>
-            <a href="">Добавить</a>
-		</div>
-	</div>
-</div>
-
-
-
 <table >
     <form method="get">
-        
-    <!-- <tr>
-        <th>{{myFilterEvent.tags}}</th>
-        <th>{{myFilterEvent.event}}</th>
-        <th>{{myFilterMember.user}}</th>
-        <th>{{myFilterMember.role}}</th>
-        <th>{{myFilterMember.comment}}</th>
-        <th>{{myFilterEvent.date}}}</th>
-    </tr>
-    <button class="btn btn-primary" type="submit">Поиск</button>
-    </form>
-    <a href="">Добавить</a> -->
-
-
     <tr>
-        <th>Направление</th>
-        <th>Мероприятие</th>
-        <th>Студент</th>
+        <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilterEvent.form.tags}}</th>
+        <th>Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myFilterMember.form.event}}</th>
+        <th>Студент:&nbsp&nbsp&nbsp&nbsp{{myFilterMember.form.user}}</th>
         <th>Роль</th>
         <th>Комменатрий</th>
         <th>Дата проведения</th>
+        <th><button class="btn btn-primary" type="submit">Поиск</button></th>
     </tr>
 
     {% for event in events %}
@@ -77,7 +48,7 @@
                     {% if member.user == account %}
                         <td><a href="{% url 'main_user' %}">{{member.user}}</a></td>
                     {% else %}
-                        <td><a href="{% url 'admin_lookuser' member.user.fio %}">{{member.user}}</a></td>
+                        <td><a href="{% url 'admin_lookuser' member.user %}">{{member.user}}</a></td>
                     {% endif %}
 
 
@@ -88,6 +59,7 @@
             {% endif %}
         {% endfor %}
     {% endfor %}
+    </form>
 </table>
 
 <br>

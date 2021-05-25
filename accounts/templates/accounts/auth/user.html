@@ -72,8 +72,7 @@
                     </div>
                     <br>
                     {% endif %}
-                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user_table' user.id %}">Таблица
-                            мероприятий</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user_table' user.id %}">Моя гиперактивность!!!</a></div>
                     <div class="footer-nav-item"><a class="nav-item-link" href="#portfolio">Портфолио</a></div>
                 </div>
                 <div class="footer-box">
@@ -251,7 +250,8 @@
         </div>
         {% endfor %}
         <br>
-        <button class="btn btn-light"><a href="{% url 'create_award' user.id %}">Добавить</a></button>
+        <div class="container" style="text-align: center;" ><button class="btn btn-light" ><a href="{% url 'create_award' user.id %}">Добавить</a></button></div>
+        
     </section>
     
     <br>

@@ -34,8 +34,10 @@
         <form method="POST" action="" enctype="multipart/form-data">
            
             {% csrf_token %}
-            <h3>Пользователь</h3>  {{form.user}}
+            <h3 style="visibility: hidden;" >Пользователь{{form.user}}</h3>  
             <h3>Название</h3>  {{form.description}}
+            <br>
+            <br>
             <h3>Файл (.png)</h3>  {{form.award}}
             <br>
             <br>
