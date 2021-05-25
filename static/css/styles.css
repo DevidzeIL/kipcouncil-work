@@ -3,10 +3,18 @@ body
     min-width: 400px;
 }
 
+
 /* -------------------- */
 .user-page
 {
     justify-content: space-around;
+}
+
+
+.profile-pic
+{
+    object-fit: cover;
+    width: 250px;
 }
 
 table
@@ -627,6 +635,13 @@ th, td
     .events
     {
         margin-bottom: 150px;
+    }
+
+    .event-image
+    {
+        object-fit: cover;
+        width: 900px;
+        height: 300px;
     }
     /* box-dateitem */
     /* event-text */

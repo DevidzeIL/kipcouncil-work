@@ -1,3 +1,22 @@
+{% extends 'accounts/auth/main_user.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid header-user">
+    <section class="header row">
+        <nav class="navbar navbar-expand-xl navbar-light">
+            <div class="container-fluid header-navs">
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <h1><div class="promo-header" style="margin-left: 10vh;">Вход</div></h1>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items"> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main' %}">Главная</a>
+                    </li>   
+                </ul>
+            </div>
+        </nav>
+    </section>
+</div>
 <!DOCTYPE html>
 <html>
     
@@ -8,12 +27,9 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 <body>
-	<div class="container h-100">
+	<div class="container h-100" style="margin-bottom: 200px;">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
-				<div class="d-flex justify-content-center">
-					<h3 id="form-title">Вход</h3>
-				</div>
 				<div class="d-flex justify-content-center form_container">
 					<form method="POST" action="">
                         {% csrf_token %}
@@ -31,7 +47,7 @@
 						</div>
 
 							<div class="d-flex justify-content-center mt-3 login_container">
-				 				<input class="btn login_btn" type="submit" value="Вход">
+				 				<input class="btn btn-light login_btn" type="submit" value="Войти">
 				   			</div>
 					</form>
 				</div>
@@ -39,12 +55,6 @@
                 {% for message in messages %}
                     <p id="messages">{{message}}</p>
                 {% endfor %}
-		
-				<div class="mt-4">
-					<div class="d-flex justify-content-center links">
-						<a href="{% url 'register' %}" class="ml-2">Нет аккаунта?</a>
-					</div>
-				</div>
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
 						<a href="{% url 'reset_password' %}" class="ml-2">Забыли пароль?</a>
@@ -54,5 +64,6 @@
 		</div>
 	</div>
 </body>
-
 </html>
+
+{% endblock %}

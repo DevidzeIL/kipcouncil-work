@@ -4,6 +4,8 @@ from django.contrib.auth import views as auth_views
 
 from . import views
 
+
+
 urlpatterns = [
     path('', views.main, name="main"),
     path('direction/<str:tags>/', views.direction, name="direction"),
@@ -12,6 +14,7 @@ urlpatterns = [
     path('docs_council/', views.docs_council, name="docs_council"),
     path('news_about/<str:pk_test>/', views.news_about, name="news_about"),
     path('news/', views.news, name="news"),
+    path('more/<str:pk_test>/', views.more, name="more"),
 
     path('calendar/', views.calendar_view, name="calendar"),
 
@@ -20,6 +23,8 @@ urlpatterns = [
     path('register/', views.registerPage, name="register"),
     path('user/', views.mainUser, name="main_user"),
     path('account/', views.accountSettings, name="account_settings"),
+
+    path('error_404/', views.error_404, name="error_404"),
 
     path('create_award/<str:pk_test>/', views.createAward, name="create_award"),
     path('edit_award/<str:pk_test>/', views.editAward, name="edit_award"),
@@ -32,15 +37,13 @@ urlpatterns = [
     path('admin_lookuser/<str:pk_test>/', views.adminLookuser, name="admin_lookuser"),
 
 
-
-    path('admin_adduser/', views.adminAddUser, name="admin_adduser"),
-
-
     path('admin_tabledb/<str:pk_test>/', views.adminTableDB, name="admin_tabledb"),
     
+
     path('admin_createdb/<str:pk_test>/', views.adminCreateDB, name="admin_createdb"),
     path('admin_editdb/<str:pk_test1>/<str:pk_test2>/', views.adminEditDB, name="admin_editdb"),
     path('admin_deletedb/<str:pk_test1>/<str:pk_test2>/', views.adminDeleteDB, name="admin_deletedb"),
+
 
 
 
@@ -60,4 +63,6 @@ urlpatterns = [
     path('reset_password_complete/', 
     auth_views.PasswordResetCompleteView.as_view(template_name='accounts/auth/password_reset_done.html'),
     name = 'password_reset_complete'),
+
+    path('secret/', views.secret, name="secret"),
 ]

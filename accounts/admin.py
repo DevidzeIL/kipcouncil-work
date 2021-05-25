@@ -15,6 +15,7 @@ admin.site.register(UserAward)
 admin.site.register(Event)
 admin.site.register(Member)
 admin.site.register(New)
+admin.site.register(More)
 
 admin.site.register(About)
 

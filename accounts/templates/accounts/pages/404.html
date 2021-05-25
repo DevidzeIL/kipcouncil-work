@@ -1,0 +1,482 @@
+{% extends 'accounts/main.html' %}
+
+
+{% block content %}
+<div style="text-align: center; margin-top: -100px">
+    <h4>Ты что-то потерялся O ‸ O</h4>
+    <h1>Ошибка 404. <br> Страница не найдена</h1>
+</div>
+<div class="container">
+    <div class="cat">
+        <div class="head">
+            <div class="plate-hotzone-trigger"></div>
+            <div class="plate-hotzone2-trigger"></div>
+            <div class="plate-trigger"></div>
+            <div class="wording">
+                <div class="z1">Z</div>
+                <div class="z2">Z</div>
+                <div class="z3">Z</div>
+            </div>
+            <div class="ear"></div>
+            <div class="eye eye-left"></div>
+            <div class="eyeopen eye-left-open"></div>
+            <div class="eye eye-right"></div>
+            <div class="eyeopen eye-right-open"></div>
+            <div class="mouth"></div>
+            <div class="mouthopen"></div>
+        </div>
+    </div>
+    <div class="plate">
+        <div class="fish-head"></div>
+        <div class="fish-spine">
+            <div class="fish-spine-outer1"></div>
+            <div class="fish-spine-outer2"></div>
+            <div class="fish-spine-outer3"></div>
+            <div class="fish-tail"></div>
+        </div>
+    </div>
+    <div class="floor-line"></div>
+</div>
+
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap");
+
+    :root {
+        --black: #000;
+        --white: #fff;
+        --grey: #d8d8d8;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        margin-top: 300px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        background: var(--purple);
+    }
+
+    .container {
+        position: relative;
+        width: 80vmin;
+        height: 80vmin;
+    }
+
+    .wording {
+        position: absolute;
+        left: -22vmin;
+        top: -20vmin;
+        width: 22vmin;
+        height: 25vmin;
+        font-family: "Open Sans", sans-serif;
+        user-select: none;
+    }
+
+    .z1 {
+        position: absolute;
+        font-size: 5vmin;
+        left: 17vmin;
+        top: 15vmin;
+        animation: blink-animation 2s steps(5, start) infinite;
+    }
+
+    .z2 {
+        position: absolute;
+        font-size: 9vmin;
+        left: 4vmin;
+        top: 12.5vmin;
+        animation: blink-animation 2s 1s steps(5, start) infinite;
+    }
+
+    .z3 {
+        position: absolute;
+        font-size: 15vmin;
+        top: -4vmin;
+        left: 2vmin;
+        animation: blink-animation 2s 2s steps(5, start) infinite;
+    }
+
+    .cat {
+        position: absolute;
+        width: 40vmin;
+        height: 0vmin;
+        top: 25vmin;
+        left: 20vmin;
+        border-left: 2vmin solid transparent;
+        border-right: 2vmin solid transparent;
+        border-bottom: 22vmin solid var(--black);
+    }
+
+    /* ear left */
+    .cat:before {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        top: -10.8vmin;
+        border-left: 5vmin solid transparent;
+        border-right: 5vmin solid transparent;
+        border-bottom: 11vmin solid var(--black);
+    }
+
+    /* ear right */
+    .cat:after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        top: -10.8vmin;
+        left: 26vmin;
+        border-left: 5vmin solid transparent;
+        border-right: 5vmin solid transparent;
+        border-bottom: 11vmin solid var(--black);
+    }
+
+    .floor-line {
+        position: absolute;
+        width: 80vmin;
+        height: 0.6vmin;
+        top: 47vmin;
+        background: var(--black);
+    }
+
+    .eye {
+        position: absolute;
+        width: 9vmin;
+        height: 1.1vmin;
+        top: 12vmin;
+        left: 4vmin;
+        border-radius: 5vmin;
+        background: var(--white);
+    }
+
+    .eyeopen {
+        position: absolute;
+        width: 9vmin;
+        height: 3.5vmin;
+        border-radius: 46% 54% 52% 48% / 0% 0% 100% 100%;
+        top: 12vmin;
+        left: 4vmin;
+        background: var(--white);
+        transform: rotate(15deg);
+        opacity: 0;
+    }
+
+    /* eyeball */
+    .eyeopen:before {
+        position: absolute;
+        content: "";
+        border-radius: 50%;
+        background: var(--black);
+        width: 1.5vmin;
+        height: 1.5vmin;
+        left: 3.4vmin;
+    }
+
+    .eye-right {
+        left: 23vmin;
+    }
+
+    .eye-right-open {
+        left: 23vmin;
+        transform: rotate(-15deg);
+    }
+
+    .mouth {
+        position: absolute;
+        width: 5vmin;
+        height: 5vmin;
+        top: 14vmin;
+        left: 13vmin;
+        border-radius: 50%;
+        border: 1vmin solid;
+        border-color: transparent transparent var(--white) var(--white);
+        transform: rotate(-45deg);
+    }
+
+    .mouthopen {
+        position: absolute;
+        width: 12vmin;
+        height: 0.8vmin;
+        background: var(--white);
+        left: 11.5vmin;
+        top: 17vmin;
+        opacity: 0;
+    }
+
+    /* fang left */
+    .mouthopen:before {
+        position: absolute;
+        content: "";
+        width: 0vmin;
+        height: 0vmin;
+        border-left: 1.5vmin solid transparent;
+        border-right: 1.5vmin solid transparent;
+        border-top: 3.5vmin solid var(--white);
+        left: -1vmin;
+    }
+
+    /* fang right */
+    .mouthopen:after {
+        position: absolute;
+        content: "";
+        width: 0vmin;
+        height: 0vmin;
+        border-left: 1.5vmin solid transparent;
+        border-right: 1.5vmin solid transparent;
+        border-top: 3.5vmin solid var(--white);
+        left: 10vmin;
+    }
+
+    .mouth:after {
+        position: absolute;
+        content: "";
+        width: 2.8vmin;
+        height: 2.8vmin;
+        top: 2vmin;
+        left: 1.8vmin;
+        border-radius: 50%;
+        border: 1vmin solid;
+        border-color: transparent transparent var(--white) var(--white);
+        transform: rotate(-3deg);
+    }
+
+    .plate {
+        position: absolute;
+        width: 40vmin;
+        height: 20vmin;
+        background: var(--black);
+        top: 52vmin;
+        left: 20vmin;
+        border-radius: 50%;
+        box-shadow: 0vmin 1vmin var(--grey);
+    }
+
+    .plate-trigger {
+        position: absolute;
+        width: 40vmin;
+        height: 20vmin;
+        background: var(--black);
+        top: 27vmin;
+        left: -2vmin;
+        border-radius: 50%;
+        background: transparent;
+        box-shadow: 0vmin 1vmin var(--grey);
+        z-index: 3;
+    }
+
+    .plate-hotzone-trigger {
+        position: absolute;
+        width: 80vmin;
+        height: 33vmin;
+        background: var(--black);
+        top: 22vmin;
+        left: -22vmin;
+        background: transparent;
+    }
+
+    .plate-hotzone2-trigger {
+        position: absolute;
+        width: 60vmin;
+        height: 33vmin;
+        background: red;
+        top: 22vmin;
+        left: -12vmin;
+        background: transparent;
+    }
+
+    .fish-head {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 6vmin solid transparent;
+        border-left: 9vmin solid var(--white);
+        border-bottom: 6vmin solid transparent;
+        left: 27vmin;
+        top: 3.8vmin;
+    }
+
+    /* fish eye */
+    .fish-head:after {
+        position: absolute;
+        content: "";
+        width: 2vmin;
+        height: 2vmin;
+        border-radius: 50%;
+        background: var(--black);
+        left: -8vmin;
+        top: -3vmin;
+    }
+
+    .fish-spine {
+        position: absolute;
+        width: 15vmin;
+        height: 0.8vmin;
+        background: var(--white);
+        top: 9.5vmin;
+        left: 11vmin;
+        border-radius: 10vmin;
+    }
+
+    .fish-spine-outer1 {
+        position: absolute;
+        width: 7vmin;
+        height: 0.8vmin;
+        background: var(--white);
+        top: -4vmin;
+        left: 7.5vmin;
+        transform: rotate(45deg);
+    }
+
+    .fish-spine-outer1:after {
+        position: absolute;
+        content: "";
+        width: 7vmin;
+        height: 0.8vmin;
+        background: var(--white);
+        top: 5.5vmin;
+        left: 5.5vmin;
+        transform: rotate(-90deg);
+    }
+
+    .fish-spine-outer2 {
+        position: absolute;
+        width: 4vmin;
+        height: 0.8vmin;
+        background: var(--white);
+        top: -3vmin;
+        left: 4.5vmin;
+        transform: rotate(45deg);
+    }
+
+    .fish-spine-outer2:after {
+        position: absolute;
+        content: "";
+        width: 4vmin;
+        height: 0.8vmin;
+        background: white;
+        top: 4vmin;
+        left: 4vmin;
+        transform: rotate(-90deg);
+    }
+
+    .fish-spine-outer3 {
+        position: absolute;
+        width: 2vmin;
+        height: 0.8vmin;
+        background: var(--white);
+        top: -2.2vmin;
+        left: 1vmin;
+        transform: rotate(45deg);
+    }
+
+    .fish-spine-outer3:after {
+        position: absolute;
+        content: "";
+        width: 2vmin;
+        height: 0.8vmin;
+        background: var(--white);
+        top: 3vmin;
+        left: 3vmin;
+        transform: rotate(-90deg);
+    }
+
+    .fish-tail {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 3.5vmin solid transparent;
+        border-left: 4.5vmin solid var(--white);
+        border-bottom: 3.5vmin solid transparent;
+        left: -5vmin;
+        top: -3.2vmin;
+    }
+
+    .plate-trigger:hover~.eyeopen {
+        opacity: 1;
+    }
+
+    .plate-hotzone-trigger:hover~.eyeopen {
+        opacity: 1;
+        transform: rotate(0deg);
+        height: 1vmin;
+    }
+
+    .plate-hotzone2-trigger:hover~.eyeopen {
+        opacity: 1;
+        transform: rotate(5deg);
+        height: 2vmin;
+    }
+
+    .plate-hotzone2-trigger:hover~.mouthopen {
+        opacity: 1;
+    }
+
+    .plate-hotzone2-trigger:hover~.mouth {
+        opacity: 0;
+    }
+
+    /* hide fang */
+    .plate-hotzone2-trigger:hover~.mouthopen:before {
+        opacity: 0;
+    }
+
+    /* hide fang */
+    .plate-hotzone2-trigger:hover~.mouthopen:after {
+        opacity: 0;
+    }
+
+    .plate-hotzone2-trigger:hover~.eye-right-open {
+        transform: rotate(-5deg);
+    }
+
+    .plate-trigger:hover~.eye {
+        opacity: 0;
+    }
+
+    .plate-hotzone-trigger:hover~.eye {
+        opacity: 0;
+    }
+
+    .plate-hotzone2-trigger:hover~.eye {
+        opacity: 0;
+    }
+
+    .plate-trigger:hover~.mouthopen {
+        opacity: 1;
+    }
+
+    .plate-trigger:hover~.mouth {
+        opacity: 0;
+    }
+
+    .plate-hotzone-trigger:hover~.wording {
+        visibility: hidden;
+    }
+
+    .plate-hotzone2-trigger:hover~.wording {
+        visibility: hidden;
+    }
+
+    .plate-trigger:hover~.wording {
+        visibility: hidden;
+    }
+
+    @keyframes blink-animation {
+        to {
+            opacity: 0;
+        }
+    }
+</style>
+
+
+{% endblock %}

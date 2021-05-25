@@ -5,7 +5,7 @@ from django import forms
 
 from .models import (
     Tag, Specialty, Company, Student, ListDirection, UserAward,
-    Event, Member, New, About, DocsCollege, DocsCouncil
+    Event, Member, New, About, More, DocsCollege, DocsCouncil
 )
 
 
@@ -19,12 +19,13 @@ class StudentForm(ModelForm):
 	class Meta:
 		model = Student
 		fields = '__all__'
-		exclude = ['user', 'email']
+		exclude = ['email']
 
 class AwardForm(ModelForm):
 	class Meta:
 		model = UserAward
 		fields = '__all__'
+
 
 
 # ---------------------------
@@ -69,6 +70,11 @@ class AboutForm(ModelForm):
 		model = About
 		fields = '__all__'
 
+class MoreForm(ModelForm):
+	class Meta:
+		model = More
+		fields = '__all__'
+
 class DocsCollegeForm(ModelForm):
 	class Meta:
 		model = DocsCollege
@@ -77,33 +83,4 @@ class DocsCollegeForm(ModelForm):
 class DocsCouncilForm(ModelForm):
 	class Meta:
 		model = DocsCouncil
-		fields = '__all__'
-
-
-# ---------------------------
-
-
-class AddTagForm(ModelForm):
-	class Meta:
-		model = Tag
-		fields = ['name']
-
-class AddUserForm(ModelForm):
-	class Meta:
-		model = ListDirection
-		fields = ['user', 'tags', 'status', 'role']
-
-class AddEventForm(ModelForm):
-	class Meta:
-		model = Event
-		fields = '__all__'
-
-class AddMemberForm(ModelForm):
-	class Meta:
-		model = Member
-		fields = ['event', 'user', 'role', 'comment']
-
-class AddNewForm(ModelForm):
-	class Meta:
-		model = New
 		fields = '__all__'

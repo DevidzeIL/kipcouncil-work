@@ -19,31 +19,33 @@ from django.contrib.auth.models import Group
 # Create your views here.
 from .models import (
     Tag, Specialty, Company, Student, ListDirection, UserAward,
-    Event, Member, New, About, DocsCollege, DocsCouncil
+    Event, Member, New, About, More, DocsCollege, DocsCouncil
 )
 
 from .forms import (
     CreateUserForm, StudentForm, AwardForm,
-    AddUserForm, AddEventForm, AddMemberForm, AddNewForm,
-    AddTagForm,
-
     ListDirectionForm, UserAwardForm, EventForm, MemberForm, NewForm, 
-    AboutForm, DocsCollegeForm, DocsCouncilForm, CompanyForm, TagForm
+    AboutForm, MoreForm, DocsCollegeForm, DocsCouncilForm, CompanyForm, TagForm
 )
 
 from .filters import (
     MemberEventFilter, MemberFilter, 
     AdminEventMemberFilter, AdminMemberFilter, AdminUserFilter, 
     NewsFilter, EventFilter,
-    StudentFilter, TagFilter, ListDirectionFilter, UserAwardFilter, EventsFilter, CompanyFilter, 
-    MembersFilter, NewFilter, AboutFilter, DocsCollegeFilter, DocsCouncilFilter
+    UserFilter, StudentFilter, TagFilter, ListDirectionFilter, UserAwardFilter, EventsFilter, CompanyFilter, 
+    MembersFilter, NewFilter, AboutFilter, MoreFilter, DocsCollegeFilter, DocsCouncilFilter
 )
 
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
 
 
+# 404 Страница
+def error_404(request):
+   return render(request, 'accounts/pages/404.html')
 
+
+# Регистрация
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -61,6 +63,7 @@ def registerPage(request):
     }
     return render(request, 'accounts/auth/register.html', context)
 
+# Вход
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -77,14 +80,18 @@ def loginPage(request):
     context = {}
     return render(request, 'accounts/auth/login.html', context)
 
+# Выход
 def logoutUser(request):
     logout(request)
-    return redirect('login')
+    context = {
+
+    }
+    return redirect('main')
 
 
 
 
-
+# Начальная странциа аккаунта пользователя
 def mainUser(request):
     user = request.user.student
 
@@ -101,9 +108,7 @@ def mainUser(request):
             request.user.student.member_set.filter(event__tags__name=tag.name).count()
         )
 
-
-
-    awards = request.user.student.useraward_set.all()
+    awards = request.user.student.useraward_set.all().order_by('-date_created')
 
     context = {
         'info':info,
@@ -113,6 +118,7 @@ def mainUser(request):
 
     return render(request, 'accounts/auth/user.html', context)
 
+# ПОЛЬЗОВАТЕЛЬ Выгрузка записей из БД Участников мероприятий конкретного пользователя
 def userTable(request, pk_test):
     events = Event.objects.all()
     members = Member.objects.filter(user__id = pk_test)
@@ -130,13 +136,13 @@ def userTable(request, pk_test):
     }
     return render(request, 'accounts/auth/user_table.html', context)
 
+# Настройки аккаунта пользователя 
 def accountSettings(request):
     student = request.user.student
     form = StudentForm(instance=student)
    
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES, instance=student)
-        
         if form.is_valid():
             form.save()
             return redirect('main_user')
@@ -148,7 +154,7 @@ def accountSettings(request):
 
 
 
-
+# АДМИН Выгрузка записей Мероприятий (Event) и Участников мероприятий (Member)
 def adminTable(request):
     account = request.user.student
 
@@ -169,6 +175,7 @@ def adminTable(request):
     }
     return render(request, 'accounts/auth/admin_table.html', context)
 
+# АДМИН Функция перехода на страницу пользователя 
 def adminLookuser(request, pk_test):
     user = Student.objects.get(fio = pk_test)
 
@@ -198,8 +205,8 @@ def adminLookuser(request, pk_test):
 
 
 
-
-
+# ПОЛЬЗОВАТЕЛЬ Работа с БД (портфолио)
+## ПОЛЬЗОВАТЕЛЬ Создание значений в БД
 def createAward(request, pk_test):
     user = Student.objects.get(id=pk_test)
     form = AwardForm(initial={'user':user})
@@ -215,6 +222,7 @@ def createAward(request, pk_test):
     }
     return render(request, 'accounts/auth/award_form.html', context)
 
+## ПОЛЬЗОВАТЕЛЬ Изменение значений в БД
 def editAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
     form = AwardForm(instance=award)
@@ -230,6 +238,7 @@ def editAward(request, pk_test):
     }
     return render(request, 'accounts/auth/award_form.html', context)
 
+## ПОЛЬЗОВАТЕЛЬ Удаление значений из БД
 def deleteAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
 
@@ -244,21 +253,26 @@ def deleteAward(request, pk_test):
 
 
 
-def adminCreateDB(request, pk_test): 
+# АДМИН Работа с БД
+## АДМИН Создание записи в БД
+def adminCreateDB(request, pk_test):
+    form1 = []
     if (pk_test == 'Student'):
         form = CreateUserForm()
+        form1 = StudentForm()
         if request.method == 'POST':
             form = CreateUserForm(request.POST)
-            if form.is_valid():
+            form1 = StudentForm(request.POST)
+            if form1.is_valid() and form.is_valid():
+                form.save()
+                form1.save()
                 return redirect('admin_tabledb', pk_test)
 
-        
-    
 
     elif (pk_test == 'Tag'):
-        form = AddTagForm()
+        form = TagForm()
         if request.method == 'POST':
-            form = AddTagForm(request.POST)
+            form = TagForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test)
@@ -326,6 +340,13 @@ def adminCreateDB(request, pk_test):
                 form.save()
                 return redirect('admin_tabledb', pk_test)
 
+    elif (pk_test == 'More'):
+        form = MoreForm()
+        if request.method == 'POST':
+            form = MoreForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_tabledb', pk_test)
 
     elif (pk_test == 'DocsCollege'):
         form = DocsCollegeForm()
@@ -346,10 +367,11 @@ def adminCreateDB(request, pk_test):
 
 
     context = {
-        'form':form, 'pk_test':pk_test
+        'form':form, 'form1':form1, 'pk_test':pk_test
     }
     return render(request, 'accounts/auth/admin_workdb.html', context)
 
+## АДМИН Изменение записи из БД
 def adminEditDB(request, pk_test1, pk_test2): 
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
@@ -363,9 +385,9 @@ def adminEditDB(request, pk_test1, pk_test2):
 
     elif (pk_test1 == 'Tag'):
         item = Tag.objects.get(id=pk_test2)
-        form = AddTagForm(instance=item)
+        form = TagForm(instance=item)
         if request.method == 'POST':
-            form = AddTagForm(request.POST, instance=item)
+            form = TagForm(request.POST, instance=item)
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test1)
@@ -444,6 +466,16 @@ def adminEditDB(request, pk_test1, pk_test2):
                 form.save()
                 return redirect('admin_tabledb', pk_test1)
 
+    elif (pk_test1 == 'More'):
+        item = More.objects.get(id=pk_test2)
+
+        form = MoreForm(instance=item)
+        if request.method == 'POST':
+            form = MoreForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_tabledb', pk_test1)
+
 
     elif (pk_test1 == 'DocsCollege'):
         item = DocsCollege.objects.get(id=pk_test2)
@@ -473,6 +505,7 @@ def adminEditDB(request, pk_test1, pk_test2):
     }
     return render(request, 'accounts/auth/admin_workdb.html', context)
 
+## АДМИН Удаление записи из БД
 def adminDeleteDB(request, pk_test1, pk_test2):   
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
@@ -492,6 +525,8 @@ def adminDeleteDB(request, pk_test1, pk_test2):
         item = Company.objects.get(id=pk_test2)
     elif (pk_test1 == 'About'):
         item = About.objects.get(id=pk_test2)
+    elif (pk_test1 == 'More'):
+        item = More.objects.get(id=pk_test2)
     elif (pk_test1 == 'DocsCollege'):
         item = DocsCollege.objects.get(id=pk_test2)
     elif (pk_test1 == 'DocsCouncil'):
@@ -506,17 +541,25 @@ def adminDeleteDB(request, pk_test1, pk_test2):
     }
     return render(request, 'accounts/auth/admin_deletedb.html', context)
 
-
+## АДМИН Выгрузка записей из БД в таблицу
 def adminTableDB(request, pk_test):
     account = request.user.student
+    form1 = []  
 
     if (pk_test == 'Student'):
-        form = Student.objects.all().order_by('group')
-        myFilter = StudentFilter(request.GET, queryset = form)
+        form = User.objects.all()
+        form1 = Student.objects.all().order_by('group')
+
+        myFilter = UserFilter(request.GET, queryset = form)
+        myFilter1 = StudentFilter(request.GET, queryset = form1)
+
         form = myFilter.qs
+        form1 = myFilter1.qs
+
 
     elif (pk_test == 'Registration'):
         form = User.objects.all()
+        myFilter = []
 
     elif (pk_test == 'Tag'):
         form = Tag.objects.all()
@@ -542,7 +585,7 @@ def adminTableDB(request, pk_test):
 
 
     elif (pk_test == 'New'):
-        form = New.objects.all().order_by('date_created')
+        form = New.objects.all().order_by('-date_created')
         myFilter = NewFilter(request.GET, queryset = form)
         form = myFilter.qs
 
@@ -563,6 +606,11 @@ def adminTableDB(request, pk_test):
         form = About.objects.all()
         myFilter = AboutFilter(request.GET, queryset = form)
         form = myFilter.qs
+    
+    elif (pk_test == 'More'):
+        form = More.objects.all()
+        myFilter = MoreFilter(request.GET, queryset = form)
+        form = myFilter.qs
 
 
     elif (pk_test == 'DocsCollege'):
@@ -578,7 +626,7 @@ def adminTableDB(request, pk_test):
 
 
     context = {
-        'form':form, 'pk_test':pk_test, 'myFilter':myFilter, 'account':account
+        'form':form, 'form1':form1, 'pk_test':pk_test, 'myFilter':myFilter, 'account':account
     }
     return render(request, 'accounts/auth/admin_tabledb.html', context)
 
@@ -586,28 +634,9 @@ def adminTableDB(request, pk_test):
 
 
 
-
-
-
-def adminAddUser(request):
-    form = AddUserForm()
-
-    if request.method == 'POST':
-        form = AddUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main_user')
-
-    context = {
-        'form':form
-    }
-    return render(request, 'accounts/auth/admin_adduser.html', context)
-
-
-
-
 def main(request):
     event_all = New.objects.all().last()
+    more = More.objects.all()
 
     tags = Tag.objects.all()
     posts = []
@@ -617,10 +646,8 @@ def main(request):
         )
         
     context = {
-        'event_all':event_all, 'posts':posts, 'tags':tags
+        'event_all':event_all, 'posts':posts, 'tags':tags, 'more':more
     }
-
-
     return render(request, 'accounts/pages/home.html', context)
 
 def direction(request, tags):
@@ -642,9 +669,6 @@ def about(request):
     if unauthenticated_user != True:
         account = request.user.student
 
-   
-    print('ACCCCCCCCCCCCCCOUNT', account)
-
     context = {
         'users':users, 'text_about':text_about, 'account':account
     }
@@ -659,7 +683,7 @@ def docs_college(request):
         'specialties':specialties, 'cources':cources, 'docs':docs
     }
     return render(request, 'accounts/pages/docs_college.html', context)
-
+    
 def docs_council(request):
     tags = Tag.objects.all()
     docs = DocsCouncil.objects.all()
@@ -684,16 +708,25 @@ def news_about(request, pk_test):
     event = new.event
     members = Member.objects.filter(event = new.event)
 
+    account = None
+
     if unauthenticated_user == True:
         account = request.user.student
 
-    account = None
+   
 
     context = {
         'members':members, 'new':new, 'event':event, 'account':account
     }
     return render(request, 'accounts/pages/news_about.html', context)
 
+def more(request, pk_test):
+    field = More.objects.get(id=pk_test)
+
+    context = {
+        'field':field
+    }
+    return render(request, 'accounts/pages/more.html', context)
 
 
 
@@ -733,3 +766,9 @@ def calendar_view(request):
         'myFilter':myFilter, 'events':events
     }
     return render(request, 'accounts/pages/calendar.html', context)
+
+
+
+# 404 Страница
+def secret(request):
+   return render(request, 'accounts/pages/secret.html')

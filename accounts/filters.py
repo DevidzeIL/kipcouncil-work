@@ -3,9 +3,11 @@ import django_filters
 
 from django_filters import CharFilter
 
+from django.contrib.auth.models import User
+
 from .models import (
     Tag, Specialty, Company, Student, ListDirection, UserAward,
-    Event, Member, New, About, DocsCollege, DocsCouncil
+    Event, Member, New, About, More, DocsCollege, DocsCouncil
 )
 
 
@@ -52,8 +54,6 @@ class NewsFilter(django_filters.FilterSet):
 
 
 
-
-
 class EventFilter(django_filters.FilterSet):
     class Meta:
         model = Event
@@ -69,13 +69,18 @@ class EventFilter(django_filters.FilterSet):
 
 # .......................
 
+class UserFilter(django_filters.FilterSet):
+	email = CharFilter(field_name='email', lookup_expr='icontains')
+	class Meta:
+		model = User
+		fields = ['email']
+
 class StudentFilter(django_filters.FilterSet):
 	fio = CharFilter(field_name='fio', lookup_expr='icontains')
-	email = CharFilter(field_name='email', lookup_expr='icontains')
 	phone = CharFilter(field_name='phone', lookup_expr='icontains')
 	class Meta:
 		model = Student
-		fields = ['group', 'fio', 'email', 'phone']
+		fields = ['group', 'fio', 'phone']
 
 class TagFilter(django_filters.FilterSet):
 	name = CharFilter(field_name='name', lookup_expr='icontains')
@@ -129,6 +134,14 @@ class AboutFilter(django_filters.FilterSet):
 		model = About
 		fields = '__all__'
 
+class MoreFilter(django_filters.FilterSet):
+	goals = CharFilter(field_name='goals', lookup_expr='icontains')
+	main_text = CharFilter(field_name='main_text', lookup_expr='icontains')
+	text = CharFilter(field_name='common_text', lookup_expr='icontains')
+	class Meta:
+		model = More
+		fields = '__all__'
+
 class DocsCollegeFilter(django_filters.FilterSet):
 	description = CharFilter(field_name='description', lookup_expr='icontains')
 	class Meta:
@@ -140,4 +153,3 @@ class DocsCouncilFilter(django_filters.FilterSet):
 	class Meta:
 		model = DocsCouncil
 		fields = ['tag', 'name', 'description']
-
