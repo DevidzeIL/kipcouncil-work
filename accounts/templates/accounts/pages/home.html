@@ -40,12 +40,13 @@
 </div>
 
 <style>
-    .profile-pic
+    .promo-image
     {
-        margin: 0 0%;
         width: 100%;
         height: 90vh;
         object-fit: cover;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .big-promo-text
@@ -63,9 +64,7 @@
             {{event_all.name}}
         </a>
     </div>
-    <div class="col-12">
-        <img class="profile-pic promo-image"  src="{{event_all.photo.url}}">
-    </div>
+    <img class="image-fluid profile-pic promo-image"  src="{{event_all.photo.url}}">
 </section>
 
 {% endblock %}

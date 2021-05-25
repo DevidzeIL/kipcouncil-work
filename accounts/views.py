@@ -728,13 +728,8 @@ def about(request):
     users = ListDirection.objects.filter(status="Правление")
     text_about = About.objects.filter(tags__name="Общее").last()
 
-    account = None
-
-    if authenticated_user == True:
-        account = request.user.student.fio
-
     context = {
-        'users':users, 'text_about':text_about, 'account':account
+        'users':users, 'text_about':text_about
     }
     return render(request, 'accounts/pages/about.html', context)
 
@@ -772,20 +767,8 @@ def news_about(request, pk_test):
     event = new.event
     members = Member.objects.filter(event = new.event)
 
-
-    if authenticated_user != True:
-        account = None
-    else:
-        account = request.user.student
-
-    print('', account)
-       
-
-
-   
-
     context = {
-        'members':members, 'new':new, 'event':event, 'account':account
+        'members':members, 'new':new, 'event':event
     }
     return render(request, 'accounts/pages/news_about.html', context)
 
