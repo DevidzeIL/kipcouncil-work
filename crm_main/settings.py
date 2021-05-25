@@ -193,3 +193,6 @@ def gettext_noop(s):
 LANGUAGES = (
     ('ru', gettext_noop('Russian')),
 )
+
+
+

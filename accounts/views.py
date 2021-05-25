@@ -39,14 +39,7 @@ from .filters import (
 from .decorators import authenticated_user, unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
 
-# Только для неавторизированных пользователей
-@unauthenticated_user
 
-# Только для авторизированных пользователей
-@authenticated_user
-
-# Только для администраторов
-@admin_only 
 
 
 
@@ -69,6 +62,7 @@ def registerPage(request):
         'form':form
     }
     return render(request, 'accounts/auth/register.html', context)
+
 
 # Вход
 @unauthenticated_user
