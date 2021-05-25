@@ -45,6 +45,9 @@ urlpatterns = [
     path('admin_editdb/<str:pk_test1>/<str:pk_test2>/', views.adminEditDB, name="admin_editdb"),
     path('admin_deletedb/<str:pk_test1>/<str:pk_test2>/', views.adminDeleteDB, name="admin_deletedb"),
 
+    path('admin_massivecreatedb/<str:pk_test1>/<str:pk_test2>/', views.adminMassiveCreateDB, name="admin_massivecreatedb"),
+    path('admin_massiveeditdb/<str:pk_test1>/<str:pk_test2>/', views.adminMassiveEditDB, name="admin_massiveeditdb"),
+    path('admin_massivedeletedb/<str:pk_test1>/<str:pk_test2>/', views.adminMassiveDeleteDB, name="admin_massivedeletedb"),
 
 
 

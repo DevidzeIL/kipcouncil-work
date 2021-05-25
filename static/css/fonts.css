@@ -28,7 +28,6 @@
     
     .nav-item-link:hover
     {
-        font-weight: 800;
         font-style: italic;
     }
     
@@ -39,7 +38,6 @@
     
     .nav-link:hover
     {
-        font-weight: 800;
         font-style: italic;
     }
 

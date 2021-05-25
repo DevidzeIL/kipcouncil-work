@@ -82,6 +82,7 @@
         <td><a href="{{field1.instagram_url}}">Ссылка</a></td>
         <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
         <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        
     </tr>
     {% endfor %}
 
@@ -164,6 +165,7 @@
             <th>Дата проведения</th>
             <th><button class="btn btn-light" type="submit">Поиск</button></th>
             <th><button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button></th>
+            
         </tr>
     </form>
     {% for field in form %}
@@ -173,6 +175,7 @@
         <td>{{field.date}}</td>
         <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
         <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><a href="{% url 'admin_createdb' 'Member' field.id %}">Добавить участников</a></td>
     </tr>
     {% endfor %}
 

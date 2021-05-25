@@ -1,3 +1,4 @@
+from django.core.files.base import File
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
@@ -22,6 +23,7 @@ from .models import (
     Event, Member, New, About, More, DocsCollege, DocsCouncil
 )
 
+from django.forms import inlineformset_factory
 from .forms import (
     CreateUserForm, StudentForm, AwardForm,
     ListDirectionForm, UserAwardForm, EventForm, MemberForm, NewForm, 
@@ -45,7 +47,6 @@ from .utils import Calendar
 
 
 # Регистрация
-
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -355,7 +356,10 @@ def adminTableDB(request, pk_test):
 ## АДМИН Создание записи в БД
 @authenticated_user
 @admin_only
-def adminCreateDB(request, pk_test):
+def adminCreateDB(request, pk_test, pk_test2):
+    pk_test2 = []
+    formset = []
+
     if (pk_test == 'Student'):
         form = StudentForm()
         if request.method == 'POST':
@@ -371,7 +375,7 @@ def adminCreateDB(request, pk_test):
             form = CreateUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('admin_tabledb', pk_test)
+                return redirect('admin_tCDabledb', pk_test)
 
 
     elif (pk_test == 'Tag'):
@@ -402,7 +406,11 @@ def adminCreateDB(request, pk_test):
 
 
     elif (pk_test == 'Member'):
+        FormFormSet = inlineformset_factory(Event, Member, fields=('role', 'comment'))
         form = MemberForm()
+        print('PKTEEEEEEEEEEEEEEEEEEEEEEEEST', pk_test)
+        event = Event.objects.get(id=pk_test2)
+        formset = FormFormSet(instance=event)
         if request.method == 'POST':
             form = MemberForm(request.POST)
             if form.is_valid():
@@ -445,6 +453,7 @@ def adminCreateDB(request, pk_test):
                 form.save()
                 return redirect('admin_tabledb', pk_test)
 
+
     elif (pk_test == 'More'):
         form = MoreForm()
         if request.method == 'POST':
@@ -452,6 +461,7 @@ def adminCreateDB(request, pk_test):
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test)
+
 
     elif (pk_test == 'DocsCollege'):
         form = DocsCollegeForm()
@@ -472,7 +482,7 @@ def adminCreateDB(request, pk_test):
 
 
     context = {
-        'form':form, 'pk_test':pk_test
+        'form':form, 'pk_test':pk_test, 'formset':formset, 'pk_test2':pk_test2
     }
     return render(request, 'accounts/auth/admin_workdb.html', context)
 
@@ -661,6 +671,29 @@ def adminDeleteDB(request, pk_test1, pk_test2):
     return render(request, 'accounts/auth/admin_deletedb.html', context)
 
 
+def adminMassiveCreateDB(request, pk_test1, pk_test2):
+
+    context = {
+        'pk_test1':pk_test1, 'pk_test2':pk_test2
+    }
+    return render(request, 'accounts/auth/admin_deletedb.html', context)
+
+def adminMassiveEditDB(request, pk_test1, pk_test2):
+
+    context = {
+        'pk_test1':pk_test1, 'pk_test2':pk_test2
+    }
+    return render(request, 'accounts/auth/admin_deletedb.html', context)
+
+
+def adminMassiveDeleteDB(request, pk_test1, pk_test2):
+
+    context = {
+        'pk_test1':pk_test1, 'pk_test2':pk_test2
+    }
+    return render(request, 'accounts/auth/admin_deletedb.html', context)
+
+
 
 
 
@@ -675,7 +708,7 @@ def main(request):
         posts.append(
             New.objects.filter(tags=tag).last()
         )
-        
+    
     context = {
         'event_all':event_all, 'posts':posts, 'tags':tags, 'more':more
     }

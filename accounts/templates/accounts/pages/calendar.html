@@ -35,6 +35,14 @@
                 <button class="btn btn-light"><a class="nav-item-link" href="{% url 'calendar' %}?{{ next_month }}"> Следующий месяц </a></button>
             </div>
         </div>
+
+        <style>
+            td
+            {
+                width: 14.3%;
+                text-align: center;
+            }
+        </style>
         
         {{ calendar }}
         

@@ -14,9 +14,9 @@ class Calendar(HTMLCalendar):
         events_per_day = events.filter(date__day=day)
         d = ''
         for event in events_per_day:
-            d += f'<div class="calendar_list" href=""> {event.name} </li> <br>'
+            d += f'<div class="calendar_list" href=""> {event.name} <br>'
         if day != 0:
-            return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
+            return f"<td><span class='date'>{day}</span> {d} </td>"
         return '<td></td>'
 
     def formatweek(self, theweek, events):
