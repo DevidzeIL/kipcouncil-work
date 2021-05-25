@@ -22,7 +22,7 @@
 <section class="big-promo row">
     <div class="col-0 col-md-1"></div>
     <div class="col-sm-8 col-lg-6">
-        <div class="col-12 col-sm-7 big-promo-text">{{event.name}}</div>
+        <div class="col-12 col-sm-7 big-promo-text">{{new.name}}</div>
     </div>
     <div class="col-12">
         <img width="500px" class="profile-pic promo-image"  src="{{new.photo.url}}">
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="info-box">
                 <div class="col-12 col-sm-7 box-dateitem">{{event.date}}</div>
-                <div class="info-author-header">{{new.main_text | safe}}</div>
+                <div class="info-author-header">{{new.main_text}}</div>
                 <div class="info-about">
                     {{new.text | safe}}
 
@@ -58,34 +58,41 @@
 
 
     <!-- INFO > LIST -->
-    <div class="col-sm-8 col-md-8 col-lg-3 info-list">
-        <div class="box-header">Участники</div>
-        <div class="row">
-            <div class="col-12 info-lists">
-
-                {% for member in members %}  
-                    {% if request.user.is_staff %}
-                        {% if member.user.fio == account.fio %} 
-                            <div class="info-list"> 
-                                <span class="info-group"><a href="{% url 'main_user' %}">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</a></span>
-                                <span class="info-fio" ><a href="{% url 'main_user' %}">{{member.user.fio}}</a></span>
-                            </div>
-                        {% else %}
-                            <div class="info-list"> 
-                                <span class="info-group"><a href="{% url 'admin_lookuser' member.user.fio %}">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</a></span>
-                                <span class="info-fio" ><a href="{% url 'admin_lookuser' member.user.fio %}">{{member.user.fio}}</a></span>
-                            </div>
+    
+    {% if members is Null %}
+        
+        
+        {% else %}
+        <div class="col-sm-8 col-md-8 col-lg-3 info-list">
+            <div class="box-header">Участники</div>
+            <div class="row">
+                <div class="col-12 info-lists">
+                    {% for member in members %}  
+                        {% if member is not Null %}
+                            {% if request.user.is_staff %}
+                                {% if member.user == account %} 
+                                    <div class="info-list"> 
+                                        <span class="info-group"><a>{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</a></span>
+                                        <span class="info-fio" ><a class="field_fio" href="{% url 'main_user' %}">{{member.user.fio}}</a></span>
+                                    </div>
+                                {% else %}
+                                    <div class="info-list"> 
+                                        <span class="info-group"><a>{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</a></span>
+                                        <span class="info-fio" ><a class="field_fio" href="{% url 'admin_lookuser' member.user.fio %}">{{member.user.fio}}</a></span>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class="info-list">
+                                    <span class="info-group">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</span>
+                                    <span class="info-fio" >{{member.user.fio}}</span>
+                                </div>
+                            {% endif %}
                         {% endif %}
-                    {% else %}
-                        <div class="info-list">
-                            <span class="info-group">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</span>
-                            <span class="info-fio" >{{member.user.fio}}</span>
-                        </div>
-                    {% endif %}
-                {% endfor %} 
+                    {% endfor %} 
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
     <div class="col-0 col-md-1"></div>
 </section>  

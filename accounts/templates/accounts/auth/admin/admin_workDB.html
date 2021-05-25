@@ -1,0 +1,311 @@
+{% extends 'accounts/auth/main_user.html' %}
+{% load static %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="container-fluid header-user">
+    <section class="header row">
+        <nav class="navbar navbar-expand-xl navbar-light">
+            <div class="container-fluid header-navs">
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <h1><div class="promo-header" style="margin-left: 10vh;">Работа с БД</div></h1>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+</div>
+
+
+<table>
+    {% if pk_test == 'Student'%}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Группа</th>
+            <th>ФИО</th>
+            <th>Телефон</th>
+            <th>Дата рождения <em>(ГГГГ-ММ-ДД)</em></th>
+            <th>Фото</th>
+            <th>ВК</th>
+            <th>Инстаграмм</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.group}}</td>
+            <td>{{form.fio}}</td>
+            <td>{{form.phone}}</td>
+            <td>{{form.birthday}}</td>
+            <td>{{form.profile_pic}}</td>
+            <td>{{form.vk_url}}</td>
+            <td>{{form.instagram_url}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+    {% elif pk_test == 'User' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Фамилия</th>
+            <th>Email</th>
+            <th>Пароль</th>
+            <th>Подтверждение пароля</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.username}}</td>
+            <td>{{form.email}}</td>
+            <td>{{form.password1}}</td>
+            <td>{{form.password2}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+    {% elif pk_test == 'Tag' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Название направления</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.name}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'ListDirection' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Направление</th>
+            <th>Студент</th>
+            <th>Статус</th>
+            <th>Роль</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.tags}}</td>
+            <td>{{form.user}}</td>
+            <td>{{form.status}}</td>
+            <td>{{form.role}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'Event' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <tr>
+            <th>Направление</th>
+            <th>Название мероприятия</th>
+            <th>Дата проведения <em>(ГГГГ-ММ-ДД)</em></th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.tags}}</td>
+            <td>{{form.name}}</td>
+            <td>{{form.date}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'Member' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Студент</th>
+            <th>Мероприятие</th>
+            <th>Роль</th>
+            <th>Комментарий</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.user}}</td>
+            <td>{{form.event}}</td>
+            <td>{{form.role}}</td>
+            <td>{{form.comment}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'New' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Направление</th>
+            <th>Мероприятие</th>
+            <th>Название новости</th>
+            <th>Начальный текст</th>
+            <th>Текст</th>
+            <th>Ссылка на Google Photo</th>
+            <th>Обложка</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.tags}}</td>
+            <td>{{form.event}}</td>
+            <td>{{form.name}}</td>
+            
+            <td>{{form.main_text}}</td>
+            {{form.media}}
+            <td>{{form.text}}</td>
+            <td>{{form.link}}</td>
+            <td>{{form.photo}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'UserAward' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Студент</th>
+            <th>Портфолио</th>
+            <th>Описание</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.user}}</td>
+            <td>{{form.award}}</td>
+            <td>{{form.description}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'Company' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Курс</th>
+            <th>Специальность</th>
+            <th>Номер</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.сourse}}</td>
+            <td>{{form.specialty}}</td>
+            <td>{{form.group_number}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'About' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Направление</th>
+            <th>Цели</th>
+            <th>Основной текст</th>
+            <th>Дополнительный текст</th>
+            <th>Результаты</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.tags}}</td>
+            <td>{{form.goals}}</td>
+            <td>{{form.main_text}}</td>
+            {{form.media}}
+            <td>{{form.text}}</td>
+            <td>{{form.result}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'More' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Направление</th>
+            <th>Название</th>
+            <th>Цели</th>
+            <th>Начальный текст</th>
+            <th>Основной текст</th>
+            
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.tags}}</td>
+            <td>{{form.name}}</td>
+            {{form.media}}
+            <td>{{form.goals}}</td>
+            <td>{{form.main_text}}</td>
+            <td>{{form.text}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'DocsCollege' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Название</th>
+            <th>Курс</th>
+            <th>Специальность</th>
+            <th>Файл</th>
+            <th>Описание</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.name}}</td>
+            <td>{{form.cource}}</td>
+            <td>{{form.specialty}}</td>
+            <td>{{form.file}}</td>
+            <td>{{form.description}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+
+
+
+    {% elif pk_test == 'DocsCouncil' %}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <tr>
+            <th>Направление</th>
+            <th>Название</th>
+            <th>Файл</th>
+            <th>Описание</th>
+            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+        </tr>
+        <tr>
+            <td>{{form.tag}}</td>
+            <td>{{form.name}}</td>
+            <td>{{form.file}}</td>
+            <td>{{form.description}}</td>
+        </tr>
+    </form>
+    {{form.errors}}
+    {% endif %}
+</table>
+
+<br>
+<br>
+<br>
+
+{% endblock content %}

@@ -1,0 +1,108 @@
+{% extends 'accounts/auth/main_user.html' %}
+{% load static %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="container-fluid header-user">
+    <section class="header row">
+        <nav class="navbar navbar-expand-xl navbar-light">
+            <div class="container-fluid header-navs">
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo"
+                        src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <h1>
+                        <div class="promo-header" style="margin-left: 10vh;">Аккаунт</div>
+                    </h1>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+</div>
+
+<script type="text/javascript">
+    function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+</script>
+</div>
+<button class="btn btn-light" onclick="exportTableToExcel('tblData', 'Мероприятия и участники')">Экспортировать в Excel</button>
+
+
+<table id="tblData">
+    <form method="get">
+        <tr>
+            <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilterEvent.form.tags}}</th>
+            <th>Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myFilterMember.form.event}}</th>
+            <th>Студент:&nbsp&nbsp&nbsp&nbsp{{myFilterMember.form.user}}</th>
+            <th>Роль</th>
+            <th>Комменатрий</th>
+            <th>Дата проведения</th>
+            <th><button class="btn btn-primary" type="submit">Поиск</button></th>
+        </tr>
+
+        {% for event in events %}
+        {% for member in members %}
+        {% if member.event == event %}
+        <tr>
+            <td>{{event.tags}}</td>
+            <td>{{event.name}}</td>
+
+            {% if member.user == account %}
+            <td><a class="field_fio" href="{% url 'main_user' %}">{{member.user}}</a></td>
+            {% else %}
+            <td><a class="field_fio" href="{% url 'admin_lookuser' member.user %}">{{member.user}}</a></td>
+            {% endif %}
+
+            <td>{{member.role}}</td>
+            <td>{{member.comment}}</td>
+            <td>{{event.date}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </form>
+</table>
+
+<br>
+<br>
+<br>
+
+{% endblock content %}

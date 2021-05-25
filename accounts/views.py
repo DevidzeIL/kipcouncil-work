@@ -23,7 +23,6 @@ from .models import (
     Event, Member, New, About, More, DocsCollege, DocsCouncil
 )
 
-from django.forms import inlineformset_factory
 from .forms import (
     CreateUserForm, StudentForm, AwardForm,
     ListDirectionForm, UserAwardForm, EventForm, MemberForm, NewForm, 
@@ -47,6 +46,8 @@ from .utils import Calendar
 
 
 # Регистрация
+@authenticated_user
+@admin_only
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -123,7 +124,7 @@ def mainUser(request):
         'events_count': events_count, 'events_member_count':events_member_count,
     }
 
-    return render(request, 'accounts/auth/user.html', context)
+    return render(request, 'accounts/auth/user/user.html', context)
 
 # ПОЛЬЗОВАТЕЛЬ Выгрузка записей из БД Участников мероприятий конкретного пользователя
 @authenticated_user
@@ -142,7 +143,7 @@ def userTable(request, pk_test):
         'myEventFilter':myEventFilter, 'myMemberFilter':myMemberFilter
         
     }
-    return render(request, 'accounts/auth/user_table.html', context)
+    return render(request, 'accounts/auth/user/user_table.html', context)
 
 # Настройки аккаунта пользователя 
 @authenticated_user
@@ -158,7 +159,7 @@ def accountSettings(request):
 
         
     context = {'form':form}
-    return render(request, 'accounts/auth/account_settings.html', context)
+    return render(request, 'accounts/auth/user/account_settings.html', context)
 
 
 
@@ -185,7 +186,7 @@ def adminTable(request):
         'myFilterEvent':myFilterEvent, 'myFilterMember':myFilterMember
         
     }
-    return render(request, 'accounts/auth/admin_table.html', context)
+    return render(request, 'accounts/auth/admin/admin_table.html', context)
 
 # АДМИН Функция перехода на страницу пользователя 
 @authenticated_user
@@ -210,7 +211,7 @@ def adminLookuser(request, pk_test):
         'events_count': events_count, 'events_member_count':events_member_count,
     }
 
-    return render(request, 'accounts/auth/admin_lookuser.html', context)
+    return render(request, 'accounts/auth/admin/admin_lookuser.html', context)
 
 
 
@@ -230,7 +231,7 @@ def createAward(request, pk_test):
     context = {
         'form':form
     }
-    return render(request, 'accounts/auth/award_form.html', context)
+    return render(request, 'accounts/auth/user/award_form.html', context)
 
 ## ПОЛЬЗОВАТЕЛЬ Изменение значений в БД
 @authenticated_user
@@ -247,7 +248,7 @@ def editAward(request, pk_test):
     context = {
         'form':form, 'award':award
     }
-    return render(request, 'accounts/auth/award_form.html', context)
+    return render(request, 'accounts/auth/user/award_form.html', context)
 
 ## ПОЛЬЗОВАТЕЛЬ Удаление значений из БД
 @authenticated_user
@@ -261,7 +262,7 @@ def deleteAward(request, pk_test):
     context = {
         'award':award
     }
-    return render(request, 'accounts/auth/delete_award.html', context)
+    return render(request, 'accounts/auth/user/delete_award.html', context)
 
 
 
@@ -350,16 +351,13 @@ def adminTableDB(request, pk_test):
     context = {
         'form':form, 'pk_test':pk_test, 'myFilter':myFilter, 'account':account
     }
-    return render(request, 'accounts/auth/admin_tabledb.html', context)
+    return render(request, 'accounts/auth/admin/admin_tabledb.html', context)
 
 # АДМИН Работа с БД
 ## АДМИН Создание записи в БД
 @authenticated_user
 @admin_only
-def adminCreateDB(request, pk_test, pk_test2):
-    pk_test2 = []
-    formset = []
-
+def adminCreateDB(request, pk_test):
     if (pk_test == 'Student'):
         form = StudentForm()
         if request.method == 'POST':
@@ -406,11 +404,7 @@ def adminCreateDB(request, pk_test, pk_test2):
 
 
     elif (pk_test == 'Member'):
-        FormFormSet = inlineformset_factory(Event, Member, fields=('role', 'comment'))
         form = MemberForm()
-        print('PKTEEEEEEEEEEEEEEEEEEEEEEEEST', pk_test)
-        event = Event.objects.get(id=pk_test2)
-        formset = FormFormSet(instance=event)
         if request.method == 'POST':
             form = MemberForm(request.POST)
             if form.is_valid():
@@ -482,9 +476,9 @@ def adminCreateDB(request, pk_test, pk_test2):
 
 
     context = {
-        'form':form, 'pk_test':pk_test, 'formset':formset, 'pk_test2':pk_test2
+        'form':form, 'pk_test':pk_test
     }
-    return render(request, 'accounts/auth/admin_workdb.html', context)
+    return render(request, 'accounts/auth/admin/admin_workdb.html', context)
 
 ## АДМИН Изменение записи из БД
 @authenticated_user
@@ -628,7 +622,7 @@ def adminEditDB(request, pk_test1, pk_test2):
     context = {
         'form':form, 'pk_test':pk_test1
     }
-    return render(request, 'accounts/auth/admin_workdb.html', context)
+    return render(request, 'accounts/auth/admin/admin_workdb.html', context)
 
 ## АДМИН Удаление записи из БД
 @authenticated_user
@@ -668,31 +662,41 @@ def adminDeleteDB(request, pk_test1, pk_test2):
     context = {
         'item':item, 'pk_test1':pk_test1
     }
-    return render(request, 'accounts/auth/admin_deletedb.html', context)
+    return render(request, 'accounts/auth/admin/admin_deletedb.html', context)
 
 
 def adminMassiveCreateDB(request, pk_test1, pk_test2):
+    formset = []
+    FormFormSet = []
+    name = []
+
+    if (pk_test1 == 'ListDirection'):
+        name = Tag.objects.get(id=pk_test2)
+        FormFormSet = inlineformset_factory(Tag, ListDirection, fields=('user', 'status', 'role'), extra=10)
+        tag = Tag.objects.get(id=pk_test2)
+        formset = FormFormSet(queryset=ListDirection.objects.none(), instance=tag)
+        if request.method == 'POST':
+            formset = FormFormSet(request.POST, instance=tag)
+            if formset.is_valid():
+                formset.save()
+                return redirect('admin_tabledb', pk_test1)
+    
+    elif (pk_test1 == 'Member'):
+        name = Event.objects.get(id=pk_test2)
+        FormFormSet = inlineformset_factory(Event, Member, fields=('user', 'role', 'comment'), extra=50)
+        event = Event.objects.get(id=pk_test2)
+        formset = FormFormSet(queryset=Member.objects.none(), instance=event)
+        if request.method == 'POST':
+            formset = FormFormSet(request.POST, instance=event)
+            if formset.is_valid():
+                formset.save()
+                return redirect('admin_tabledb', pk_test1)
+
 
     context = {
-        'pk_test1':pk_test1, 'pk_test2':pk_test2
+        'formset':formset, 'pk_test':pk_test1, 'pk_test2':pk_test2, 'name':name
     }
-    return render(request, 'accounts/auth/admin_deletedb.html', context)
-
-def adminMassiveEditDB(request, pk_test1, pk_test2):
-
-    context = {
-        'pk_test1':pk_test1, 'pk_test2':pk_test2
-    }
-    return render(request, 'accounts/auth/admin_deletedb.html', context)
-
-
-def adminMassiveDeleteDB(request, pk_test1, pk_test2):
-
-    context = {
-        'pk_test1':pk_test1, 'pk_test2':pk_test2
-    }
-    return render(request, 'accounts/auth/admin_deletedb.html', context)
-
+    return render(request, 'accounts/auth/admin/admin_massiveworkdb.html', context)
 
 
 
@@ -703,11 +707,7 @@ def main(request):
     more = More.objects.all()
 
     tags = Tag.objects.all()
-    posts = []
-    for tag in tags:
-        posts.append(
-            New.objects.filter(tags=tag).last()
-        )
+    posts = New.objects.all().order_by('-date_created')[:5]
     
     context = {
         'event_all':event_all, 'posts':posts, 'tags':tags, 'more':more
@@ -730,8 +730,8 @@ def about(request):
 
     account = None
 
-    if unauthenticated_user != True:
-        account = request.user.student
+    if authenticated_user == True:
+        account = request.user.student.fio
 
     context = {
         'users':users, 'text_about':text_about, 'account':account
@@ -772,10 +772,15 @@ def news_about(request, pk_test):
     event = new.event
     members = Member.objects.filter(event = new.event)
 
-    account = None
 
-    if unauthenticated_user == True:
+    if authenticated_user != True:
+        account = None
+    else:
         account = request.user.student
+
+    print('', account)
+       
+
 
    
 

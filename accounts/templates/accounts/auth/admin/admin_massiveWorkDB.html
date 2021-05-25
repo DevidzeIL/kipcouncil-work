@@ -19,22 +19,7 @@
     </section>
 </div>
 
-
-<form method="POST" action="" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% if pk_test == 'ListDirection' %}
-        
-            {{form.tags}}
-            {{form.user}}
-            <br>
-            <br>
-       
-    {% endif %}
-    
-</form>
-
-
-
+<h3>{{name}}</h3>
 <table>
     {% if pk_test == 'Student'%}
     <form method="POST" action="" enctype="multipart/form-data">
@@ -82,17 +67,6 @@
     {{form.errors}}
 
 
-    {% elif pk_test == 'Tag' %}
-    <form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <tr>
-            <th>Название направления</th>
-            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
-        </tr>
-        <tr>
-            <td>{{form.name}}</td>
-        </tr>
-    </form>
 
 
 
@@ -106,12 +80,15 @@
             <th>Роль</th>
             <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
         </tr>
+        {{ formset.management_form}}
+        {% for form in formset %}
         <tr>
             <td>{{form.tags}}</td>
             <td>{{form.user}}</td>
             <td>{{form.status}}</td>
             <td>{{form.role}}</td>
         </tr>
+        {% endfor %}
     </form>
 
 
@@ -136,49 +113,23 @@
 
 
     {% elif pk_test == 'Member' %}
-    <form method="POST" action="" enctype="multipart/form-data">
+    <form method="POST" action="">
+        
         {% csrf_token %}
         <tr>
             <th>Студент</th>
-            <th>Мероприятие</th>
             <th>Роль</th>
             <th>Комментарий</th>
             <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
         </tr>
+        {{ formset.management_form}}
+        {% for form in formset %}
         <tr>
             <td>{{form.user}}</td>
-            <td>{{form.event}}</td>
             <td>{{form.role}}</td>
             <td>{{form.comment}}</td>
         </tr>
-    </form>
-
-
-
-    {% elif pk_test == 'New' %}
-    <form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <tr>
-            <th>Направление</th>
-            <th>Мероприятие</th>
-            <th>Название новости</th>
-            <th>Начальный текст</th>
-            <th>Текст</th>
-            <th>Ссылка на Google Photo</th>
-            <th>Обложка</th>
-            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
-        </tr>
-        <tr>
-            <td>{{form.tags}}</td>
-            <td>{{form.event}}</td>
-            <td>{{form.name}}</td>
-            
-            <td>{{form.main_text}}</td>
-            {{form.media}}
-            <td>{{form.text}}</td>
-            <td>{{form.link}}</td>
-            <td>{{form.photo}}</td>
-        </tr>
+        {% endfor %}
     </form>
 
 
@@ -214,53 +165,6 @@
             <td>{{form.сourse}}</td>
             <td>{{form.specialty}}</td>
             <td>{{form.group_number}}</td>
-        </tr>
-    </form>
-
-
-
-    {% elif pk_test == 'About' %}
-    <form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <tr>
-            <th>Направление</th>
-            <th>Цели</th>
-            <th>Основной текст</th>
-            <th>Дополнительный текст</th>
-            <th>Результаты</th>
-            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
-        </tr>
-        <tr>
-            <td>{{form.tags}}</td>
-            <td>{{form.goals}}</td>
-            <td>{{form.main_text}}</td>
-            {{form.media}}
-            <td>{{form.text}}</td>
-            <td>{{form.result}}</td>
-        </tr>
-    </form>
-
-
-
-    {% elif pk_test == 'More' %}
-    <form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <tr>
-            <th>Направление</th>
-            <th>Название</th>
-            <th>Цели</th>
-            <th>Начальный текст</th>
-            <th>Основной текст</th>
-            
-            <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
-        </tr>
-        <tr>
-            <td>{{form.tags}}</td>
-            <td>{{form.name}}</td>
-            {{form.media}}
-            <td>{{form.goals}}</td>
-            <td>{{form.main_text}}</td>
-            <td>{{form.text}}</td>
         </tr>
     </form>
 

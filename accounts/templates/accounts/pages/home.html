@@ -17,21 +17,19 @@
     <section class="directions row">
         {% for tag in tags %}
             <div class="col-6 col-md-4 col-lg-3 box">
-                <div class="box-header">{{tag}}</div>
-                <div class="box-item"><a class="nav-item-link" href="{% url 'direction' tag.id %}" >Информация</a></div>
+                <a  href="{% url 'direction' tag.id %}"><div class="box-header">{{tag}}</div></a>
                 {% for field in more %}
                     {% if field.tags == tag %}
                         <div class="box-item"><a class="nav-item-link" href="{% url 'more' field.id %}" >{{field.name}}</a></div>
                     {% endif %}
                 {% endfor %}
                 
-
+                <div class="box-date">—</div>
                 {% for post in posts %}
                     {% if post.tags == tag %}
                     <div class="box-dateitem">
                         <a class="nav-item-link" href="{% url 'news_about' post.id %}">
-                            <div class="box-date">{{post.date_performance}}—</div>
-                            <div class="box-event">{{post.event.name}}</div>
+                            <div class="box-event">{{post.name}}</div>
                         </a>
                     </div>
                     {% endif %}

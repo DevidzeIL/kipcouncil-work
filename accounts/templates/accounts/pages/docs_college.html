@@ -5,10 +5,20 @@
 <!-- PROMO -->        
 <section class="promo row">
     <div class="col-12 col-sm-7 promo-header">
-        Колледж
+        Документы Колледжа
     </div>
 </section>
 
+
+<style>
+    .doc-header
+    {
+        font-weight: 800;
+        font-size: 2rem;
+        text-transform: uppercase;
+        border-bottom: black 5px solid;
+    }
+</style>
 
 <!-- DOCS -->
 <section class="docs row">
@@ -16,14 +26,22 @@
     <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8">
         {% for specialty in specialties %}
         <div class="doc-box-class">
-            <div class="doc-header">{{specialty}}</div>
+            <div class="doc-header">{{specialty}}</div> 
             {% for cource in cources %}
                 <div class="doc-year">
                     <div class="doc-year-header">{{cource}}</div>
                     {% for doc in docs %}
                         {% if doc.specialty == specialty and doc.cource == cource %}
                         <div class="doc-document">
-                            <a class="doc-file" href="{{doc.file.url}}" download>{{doc.name}}</a>
+                            <a class="nav-item-link"  href="{{doc.file.url}}" download>
+                                <svg width="32" height="32" style="margin-top: -10px" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M57 57H7V60H57V57Z" fill="black" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M29.6915 45.8996V5.5H34.3085V45.8996L45.0591 34.851C45.9606 33.9245 47.4223 33.9245 48.3238 34.851C49.2254 35.7775 49.2254 37.2797 48.3238 38.2063L33.6324 53.3051C32.7308 54.2316 31.2692 54.2316 30.3676 53.3051L15.6762 38.2063C14.7746 37.2797 14.7746 35.7775 15.6762 34.851C16.5777 33.9245 18.0394 33.9245 18.9409 34.851L29.6915 45.8996Z"
+                                        fill="black" />
+                                </svg>
+                            </a>
+                            <a class="doc-file">{{doc.name}}</a>
                             <span class="doc-about"> — {{doc.description}}</span>
                         </div>
                         {% endif %}

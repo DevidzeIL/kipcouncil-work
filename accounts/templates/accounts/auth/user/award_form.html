@@ -30,7 +30,6 @@
 
 <div class="container" style="text-align: center;">
     <div class="col">
-        <img class="profile-award" src="{{award.award.url}}" >
         <form method="POST" action="" enctype="multipart/form-data">
            
             {% csrf_token %}
@@ -38,7 +37,7 @@
             <h3>Название</h3>  {{form.description}}
             <br>
             <br>
-            <h3>Файл (.png)</h3>  {{form.award}}
+            <h3>Картинка (.png / .jpeg)</h3>  {{form.award}}
             <br>
             <br>
             <input class="btn btn-light" type="submit" name="Submit" value="Сохранить">

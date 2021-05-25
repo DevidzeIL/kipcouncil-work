@@ -89,9 +89,10 @@ class TagFilter(django_filters.FilterSet):
 		fields = ['name']
 
 class ListDirectionFilter(django_filters.FilterSet):
+	role = CharFilter(field_name='role', lookup_expr='icontains')
 	class Meta:
 		model = ListDirection
-		fields = '__all__'
+		fields = ['tags', 'user', 'status', 'role']
 
 class UserAwardFilter(django_filters.FilterSet):
 	description = CharFilter(field_name='description', lookup_expr='icontains')

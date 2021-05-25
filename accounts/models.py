@@ -106,7 +106,7 @@ class New(models.Model):
     tags        = models.ForeignKey(Tag, null = True, blank = True, on_delete = models.SET_NULL)
     event       = models.ForeignKey(Event, blank=True, null=True, on_delete=models.SET_NULL)
     name        = models.CharField(max_length=200,  blank=True, null=True)
-    main_text   = RichTextField(max_length=300, blank=True, null=True)
+    main_text   = models.CharField(max_length=300, blank=True, null=True)
     text        = RichTextField(max_length=1000, blank=True, null=True)
     link        = models.CharField(max_length=200, blank=True, null=True)
     photo       = models.ImageField(default='rec.png', null=True, blank=True)

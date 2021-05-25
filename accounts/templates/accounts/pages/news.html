@@ -9,10 +9,18 @@
     </div>
 </section>
 
+<style>
+    th
+    {
+        border-bottom: 1px solid white
+    }
+</style>
 <div class="row">
     <form method="get">
         <table>
+            
             <tr>
+                <th><h1>ПОИСК</h1></th>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
                 <th>Название новости:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
                 <th><button class="btn btn-primary" type="submit">Поиск</button></th>
@@ -25,8 +33,6 @@
 <br>
 <br>
 
-
-
 <!-- EVENTS -->
 <div class="container">
     <section class="events row">
@@ -35,7 +41,7 @@
             <div class="box-dateitem">{{post.date_performance}}</div>
             <img class="profile-pic event-image img-fluid"  src="{{post.photo.url}}">
             <div class="event-header">{{post.name}}</div>
-            <div class="event-text">{{post.main_text | truncatewords:20 | safe}}</div>
+            <div class="event-text">{{post.main_text | truncatewords:20}}</div>
             <div class="event-more"><a class="nav-item-link" href="{% url 'news_about' post.id %}">Подробнее</a></div>
         </div>
         {% endfor %}

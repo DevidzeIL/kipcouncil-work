@@ -35,6 +35,11 @@
         <!-- USER > USER NAV -->
         <div class="col-xs-6 col-sm-10 col-md-3 col-lg-2 col-xxl-2 footer-nav">
             <div class="row">
+                <div class="footer-box">
+                    <div class="footer-nav-header">Главное</div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user_table' user.id %}">Моя активность</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="#portfolio">Портфолио</a></div>
+                </div>
             </div>
         </div>
 
@@ -84,28 +89,37 @@
     </section>  
 </div>
 
-<!-- TABLE -->
-<table>
-    <tr>
-        <th>Результат</th>
-        {% for tag in tags %}
-        <th>{{tag}}</th>
-        {% endfor %}
-    </tr>
-    <tr>
-        <td>Общее кол-во</td>
-        {% for event in events_count %}
-        <td>{{event}}</td>
-        {% endfor %}
-    </tr>
-    <tr>
-        <td>Кол-во моего участия</td>
-        {% for event_member in events_member_count  %}
-        <td>{{event_member}}</td>
-        {% endfor %}
-    </tr>
-</table>
+<br>
+<br>
+<br>
 
+<!-- TABLE -->
+<div class="container">
+    <table>
+        <tr>
+            <th>Результат</th>
+            {% for tag in tags %}
+            <th>{{tag}}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Общее кол-во</td>
+            {% for event in events_count %}
+            <td>{{event}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Кол-во моего участия</td>
+            {% for event_member in events_member_count  %}
+            <td>{{event_member}}</td>
+            {% endfor %}
+        </tr>
+    </table>
+</div>
+
+<br>
+<br>
+<br>
 
 <script type="text/javascript">
     function openImageWindow(src) {
@@ -137,5 +151,9 @@
         {% endfor %}
     </section>
 </div>
+
+<br>
+<br>
+<br>
 
 {% endblock %}

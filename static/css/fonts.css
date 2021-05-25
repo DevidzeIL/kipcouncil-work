@@ -18,6 +18,7 @@
 
     a{
         text-decoration: none;
+        color: #000 !important;
     }
     
 /* HOVER */
@@ -26,20 +27,11 @@
         color: black;
     }
     
-    .nav-item-link:hover
-    {
-        font-style: italic;
-    }
-    
     .nav-link
     {
         color: black !important;
     }
     
-    .nav-link:hover
-    {
-        font-style: italic;
-    }
 
 
 
@@ -318,7 +310,7 @@
         
         font-weight: 800;
         font-size: 96px;
-        color: white;
+        color: white !important;
         text-transform: uppercase;
     }
 
@@ -407,10 +399,14 @@
 /* -PAGE ACCOUNT */
 /* -------------------------- */
 
+        .field_fio
+        {
+            text-decoration: underline;
+        }
 
 
 
-/* -PAGE CALENDAR */
+/* -PAGE CALENDAR */c
     /* -BLOCK HEADER */
     /* .nav-link */
     
@@ -450,13 +446,18 @@
     
     /* -BLOCK PROMO */
     /* .promo-header */
-    .doc-header, 
-    .doc-year-header
+    .doc-header
     {
-        
         font-weight: 800;
         font-size: 2rem;
-
+        text-transform: uppercase;
+        border-bottom: black 5px solid;
+    }
+    
+    .doc-year-header
+    {
+        font-weight: 800;
+        font-size: 2rem;
         text-transform: uppercase;
         border-bottom: black 5px solid;
     }
@@ -468,7 +469,7 @@
         font-size: 1.5rem;   
         color: black !important;
         text-transform: uppercase;
-        text-decoration: underline;
+
     }
 
     .doc-about
