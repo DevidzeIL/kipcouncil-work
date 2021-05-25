@@ -1,6 +1,7 @@
 from django.urls import path
 
 from django.contrib.auth import views as auth_views
+from .decorators import authenticated_user, unauthenticated_user, allowed_users, admin_only
 
 from . import views
 
@@ -24,7 +25,7 @@ urlpatterns = [
     path('user/', views.mainUser, name="main_user"),
     path('account/', views.accountSettings, name="account_settings"),
 
-    path('error_404/', views.error_404, name="error_404"),
+    path('error404/', views.error404, name="error404"),
 
     path('create_award/<str:pk_test>/', views.createAward, name="create_award"),
     path('edit_award/<str:pk_test>/', views.editAward, name="edit_award"),
@@ -59,7 +60,7 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', 
     auth_views.PasswordResetConfirmView.as_view(template_name='accounts/auth/password_reset_form.html'),
     name = 'password_reset_confirm'),
-
+    
     path('reset_password_complete/', 
     auth_views.PasswordResetCompleteView.as_view(template_name='accounts/auth/password_reset_done.html'),
     name = 'password_reset_complete'),

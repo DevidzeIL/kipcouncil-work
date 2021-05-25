@@ -123,7 +123,7 @@
         {% for award in awards %}
         <div class="col-12 col-sm-12 col-md-6 col-lg-3 event">
             <div class="box-dateitem">{{award.date_performance}}</div>
-            <img width="150px" height="350px" class="profile-pic img-fluid"  src="{{award.award.url}}"  onclick = 'openImageWindow(this.src);'>
+            <img width="150px" height="350px" class="profile-award img-fluid"  src="{{award.award.url}}"  onclick = 'openImageWindow(this.src);'>
             <div class="event-text">{{award.description}}</div>
             <div>
                 <a class="nav-item-link" href="{{award.award.url}}" download>

@@ -36,16 +36,24 @@ from .filters import (
     MembersFilter, NewFilter, AboutFilter, MoreFilter, DocsCollegeFilter, DocsCouncilFilter
 )
 
-from .decorators import unauthenticated_user, allowed_users, admin_only
+from .decorators import authenticated_user, unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
 
+# Только для неавторизированных пользователей
+@unauthenticated_user
 
-# 404 Страница
-def error_404(request):
-   return render(request, 'accounts/pages/404.html')
+# Только для авторизированных пользователей
+@authenticated_user
+
+# Только для администраторов
+@admin_only 
+
+
 
 
 # Регистрация
+@authenticated_user
+@admin_only
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -64,6 +72,7 @@ def registerPage(request):
     return render(request, 'accounts/auth/register.html', context)
 
 # Вход
+@unauthenticated_user
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -81,44 +90,49 @@ def loginPage(request):
     return render(request, 'accounts/auth/login.html', context)
 
 # Выход
+@authenticated_user
 def logoutUser(request):
     logout(request)
-    context = {
-
-    }
     return redirect('main')
+
+# 404 Страница
+def error404(request):
+   return render(request, 'accounts/pages/404.html')
+
 
 
 
 
 # Начальная странциа аккаунта пользователя
+@authenticated_user
 def mainUser(request):
     user = request.user.student
 
     info = Student.objects.filter(fio = user)
     tags = Tag.objects.all()
 
-    events = []
-    events_member = []
+    events_count = []
+    events_member_count = []
     for tag in tags:
-        events.append(
+        events_count.append(
             Event.objects.filter(tags__name=tag.name).count()
         )
-        events_member.append(
+        events_member_count.append(
             request.user.student.member_set.filter(event__tags__name=tag.name).count()
         )
 
     awards = request.user.student.useraward_set.all().order_by('-date_created')
-
+    
     context = {
         'info':info,
         'user':user, 'tags':tags, 'awards':awards,
-        'events': events, 'events_member':events_member,
+        'events_count': events_count, 'events_member_count':events_member_count,
     }
 
     return render(request, 'accounts/auth/user.html', context)
 
 # ПОЛЬЗОВАТЕЛЬ Выгрузка записей из БД Участников мероприятий конкретного пользователя
+@authenticated_user
 def userTable(request, pk_test):
     events = Event.objects.all()
     members = Member.objects.filter(user__id = pk_test)
@@ -137,6 +151,7 @@ def userTable(request, pk_test):
     return render(request, 'accounts/auth/user_table.html', context)
 
 # Настройки аккаунта пользователя 
+@authenticated_user
 def accountSettings(request):
     student = request.user.student
     form = StudentForm(instance=student)
@@ -154,7 +169,10 @@ def accountSettings(request):
 
 
 
+
 # АДМИН Выгрузка записей Мероприятий (Event) и Участников мероприятий (Member)
+@authenticated_user
+@admin_only
 def adminTable(request):
     account = request.user.student
 
@@ -176,6 +194,8 @@ def adminTable(request):
     return render(request, 'accounts/auth/admin_table.html', context)
 
 # АДМИН Функция перехода на страницу пользователя 
+@authenticated_user
+@admin_only
 def adminLookuser(request, pk_test):
     user = Student.objects.get(fio = pk_test)
 
@@ -207,6 +227,7 @@ def adminLookuser(request, pk_test):
 
 # ПОЛЬЗОВАТЕЛЬ Работа с БД (портфолио)
 ## ПОЛЬЗОВАТЕЛЬ Создание значений в БД
+@authenticated_user
 def createAward(request, pk_test):
     user = Student.objects.get(id=pk_test)
     form = AwardForm(initial={'user':user})
@@ -223,6 +244,7 @@ def createAward(request, pk_test):
     return render(request, 'accounts/auth/award_form.html', context)
 
 ## ПОЛЬЗОВАТЕЛЬ Изменение значений в БД
+@authenticated_user
 def editAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
     form = AwardForm(instance=award)
@@ -234,11 +256,12 @@ def editAward(request, pk_test):
             return redirect('main_user')
 
     context = {
-        'form':form
+        'form':form, 'award':award
     }
     return render(request, 'accounts/auth/award_form.html', context)
 
 ## ПОЛЬЗОВАТЕЛЬ Удаление значений из БД
+@authenticated_user
 def deleteAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
 
@@ -255,6 +278,8 @@ def deleteAward(request, pk_test):
 
 # АДМИН Работа с БД
 ## АДМИН Создание записи в БД
+@authenticated_user
+@admin_only
 def adminCreateDB(request, pk_test):
     form1 = []
     if (pk_test == 'Student'):
@@ -372,6 +397,8 @@ def adminCreateDB(request, pk_test):
     return render(request, 'accounts/auth/admin_workdb.html', context)
 
 ## АДМИН Изменение записи из БД
+@authenticated_user
+@admin_only
 def adminEditDB(request, pk_test1, pk_test2): 
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
@@ -506,6 +533,8 @@ def adminEditDB(request, pk_test1, pk_test2):
     return render(request, 'accounts/auth/admin_workdb.html', context)
 
 ## АДМИН Удаление записи из БД
+@authenticated_user
+@admin_only
 def adminDeleteDB(request, pk_test1, pk_test2):   
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
@@ -542,6 +571,8 @@ def adminDeleteDB(request, pk_test1, pk_test2):
     return render(request, 'accounts/auth/admin_deletedb.html', context)
 
 ## АДМИН Выгрузка записей из БД в таблицу
+@authenticated_user
+@admin_only
 def adminTableDB(request, pk_test):
     account = request.user.student
     form1 = []  
@@ -769,6 +800,7 @@ def calendar_view(request):
 
 
 
-# 404 Страница
+
+
 def secret(request):
    return render(request, 'accounts/pages/secret.html')

@@ -1,228 +1,203 @@
-body
-{
+body {
     min-width: 400px;
 }
 
 
 /* -------------------- */
-.user-page
-{
+.user-page {
     justify-content: space-around;
 }
 
 
-.profile-pic
-{
-    object-fit: cover;
-    width: 250px;
-}
 
-table
-{
+table {
     width: 100%;
 }
 
-th, td 
-{
+th,
+td {
     padding: 15px;
     text-align: center;
     border-bottom: 1px black solid;
 }
+
 /* -------------------- */
 
-@media all
-{
-/* -MULTI CLASSES */
+@media all {
+
+    /* -MULTI CLASSES */
     /* usefull block */
-    .box-header
-    {
+    .box-header {
         margin-bottom: 40px;
     }
 
-    .box-dateitem
-    {
+    .box-dateitem {
         margin-bottom: 10px;
     }
 
     /* -BLOCK HIDER */
-    .hider
-    {
+    .hider {
         height: 10vh;
     }
-    
 
-    
+
+
     /* -BLOCK HEADER */
-    .header
-    {
+    .header {
         margin-bottom: 130px;
     }
-    
-    .header-logo
-    {
+
+    .header-logo {
         margin-left: 3.5vh;
     }
 
-    .navbar-brand
-    {
+    .navbar-brand {
         margin: 0 0px;
     }
 
-    .nav-item
-    {
+    .nav-item {
         margin-right: 75px;
+    }
+
+    .profile-award {
+        object-fit: cover;
+        width: 200px;
+    }
+
+
+    .portfolio {
+        text-align: center;
     }
 
 
 
     /* -BLOCK PROMO */
-    .promo
-    {
+    .promo {
         margin-bottom: 50px;
         display: flex;
         justify-content: center;
     }
 
-    .promo-dateitem
-    {
+    .promo-dateitem {
         text-align: right;
     }
 
     /* -BLOCK EVENTS */
-    .event-text
-    {
+    .event-text {
         margin-top: 20px;
     }
 
-    .event-more
-    {
+    .event-more {
         margin-top: 20px;
         margin-bottom: 60px;
     }
 
 
     /* -BLOCK INFO */
-    .info
-    {
+    .info {
         margin-bottom: 100px;
     }
-        /* -COLUMN INFO > TEXT */
-        .info-author-header
-        {
-            margin-bottom: 90px;
-        }
 
-        .info-box
-        {
-            margin-bottom: 50px;
-        }
+    /* -COLUMN INFO > TEXT */
+    .info-author-header {
+        margin-bottom: 90px;
+    }
 
-        /* -COLUMN INFO > IMG */
-        .info-user
-        {
-            margin-bottom: 60px;
-        }
+    .info-box {
+        margin-bottom: 50px;
+    }
 
-        .info-role
-        {
-            margin-top: 30px;
-        }
+    /* -COLUMN INFO > IMG */
+    .info-user {
+        margin-bottom: 60px;
+    }
 
-        .info-fio
-        {
-            margin-top: 20px;
-        }
+    .info-role {
+        margin-top: 30px;
+    }
+
+    .info-fio {
+        margin-top: 20px;
+    }
 
 
-                
+
 
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-
-        
-        .footer
-        {
-            margin-bottom: 25px; 
-            justify-content: space-around;
-            
-        }
-
-        .footer-logo
-        {
-            margin-bottom: 30px;
-        }
-
-        .footer-box
-        {
-            margin-bottom: 20px;
-        }
-
-        .footer-nav-header
-        {
-            margin-bottom: 20px;    
-        }
-
-        .footer-nav-item
-        {
-            margin-bottom: 15px;
-        }
-
-        .footer-line
-        {
-            border-right: black 5px solid;
-        }
+    /* -COLUMN FOOTER > NAVIGATION */
 
 
-        /* -COLUMN FOOTER > MAIN NEWS*/
-        .footer-main-box-dateitem
-        {
-            margin-bottom: 10px;
-        }
-    
-        .footer-main-box-text
-        {
-            margin-bottom: 35px;
-        }
+    .footer {
+        margin-bottom: 25px;
+        justify-content: space-around;
 
-        .footer-btns
-        {
-            margin-bottom: 50px;
-        }
+    }
 
-        /* -COLUMN FOOTER > NEWS LIST */
-        .footer-box-dateitem
-        {
-            margin-bottom: 25px;
-            background-color: white;
-        }
-    
-        .footer-box-dateitem-activated
-        {
-            margin-bottom: 25px;
-            background-color: black;
-        }
-    
-        .news-full-list
-        {
-            margin-top: 100px;
-        }
+    .footer-logo {
+        margin-bottom: 30px;
+    }
+
+    .footer-box {
+        margin-bottom: 20px;
+    }
+
+    .footer-nav-header {
+        margin-bottom: 20px;
+    }
+
+    .footer-nav-item {
+        margin-bottom: 15px;
+    }
+
+    .footer-line {
+        border-right: black 5px solid;
+    }
+
+
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    .footer-main-box-dateitem {
+        margin-bottom: 10px;
+    }
+
+    .footer-main-box-text {
+        margin-bottom: 35px;
+    }
+
+    .footer-btns {
+        margin-bottom: 50px;
+    }
+
+    /* -COLUMN FOOTER > NEWS LIST */
+    .footer-box-dateitem {
+        margin-bottom: 25px;
+        background-color: white;
+    }
+
+    .footer-box-dateitem-activated {
+        margin-bottom: 25px;
+        background-color: black;
+    }
+
+    .news-full-list {
+        margin-top: 100px;
+    }
 
 
 
     /* -BLOCK COPYRIGHT */
-    .copyright-item
-    {
+    .copyright-item {
         text-align: center;
         margin-bottom: 25px;
     }
-/*-----=============================----- */
+
+    /*-----=============================----- */
 
 
-/* -PAGE MAIN */
+    /* -PAGE MAIN */
     /* -BLOCK HIDER */
     /* .hider */
-    
+
     /* -BLOCK HEADER */
     /* .header */
     /* .navbar-brand */
@@ -235,20 +210,19 @@ th, td
 
 
     /* -BLOCK DIRECTIONS */
-    .directions
-    {
+    .directions {
         margin-bottom: 70px;
     }
+
     /* .box-header */
-    .box-item
-    {
+    .box-item {
         margin-bottom: 15px;
     }
+
     /* .box-dateitem */
 
     /* -BLOCK BIG PROMO */
-    .big-promo
-    {
+    .big-promo {
         height: 100vh;
         background: url();
         background-size: cover;
@@ -257,38 +231,37 @@ th, td
         margin-bottom: 150px;
     }
 
-    .big-promo-text
-    {
+    .big-promo-text {
         position: absolute;
         bottom: 0;
     }
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        /* .footer */
-        /* .footer-logo */
-        /* .footer-nav-header */
-        /* .footer-nav-item */
-        /* .footer-line */
+    /* -COLUMN FOOTER > NAVIGATION */
+    /* .footer */
+    /* .footer-logo */
+    /* .footer-nav-header */
+    /* .footer-nav-item */
+    /* .footer-line */
 
-        /* -COLUMN FOOTER > MAIN NEWS*/
-        /* .footer-main-box-dateitem */
-        /* .footer-main-box-text */
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    /* .footer-main-box-dateitem */
+    /* .footer-main-box-text */
 
-        /* -COLUMN FOOTER > NEWS LIST */
-        /* .footer-box-dateitem */
-        /* .footer-box-dateitem-activated */
-        /* .news-full-list */
+    /* -COLUMN FOOTER > NEWS LIST */
+    /* .footer-box-dateitem */
+    /* .footer-box-dateitem-activated */
+    /* .news-full-list */
 
     /* -BLOCK COPYRIGHT */
     /* .copyright-item */
 
 
 
-/* -PAGE DIRECTION */
+    /* -PAGE DIRECTION */
     /* -BLOCK HIDER */
     /* .hider */
-    
+
     /* -BLOCK HEADER */
     /* .header */
     /* .navbar-brand */
@@ -299,18 +272,17 @@ th, td
     /* .promo-header */
 
     /* -BLOCK INFO */
-        /* -COLUMN INFO > TEXT */
-        /* .info-author-header */
-        /* .info-text */
-        /* .box-header */
-        .info-calendar
-        {
-            margin-bottom: 20px;
-        }
+    /* -COLUMN INFO > TEXT */
+    /* .info-author-header */
+    /* .info-text */
+    /* .box-header */
+    .info-calendar {
+        margin-bottom: 20px;
+    }
 
-        /* -COLUMN INFO > IMG */
-        /* .info-role */
-        /* .info-fio */
+    /* -COLUMN INFO > IMG */
+    /* .info-role */
+    /* .info-fio */
 
     /* -BLOCK EVENTS */
     /* .event-text */
@@ -318,37 +290,37 @@ th, td
 
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        /* .footer */
-        /* .footer-logo */
-        /* .footer-nav-header */
-        /* .footer-nav-item */
-        /* .footer-line */
+    /* -COLUMN FOOTER > NAVIGATION */
+    /* .footer */
+    /* .footer-logo */
+    /* .footer-nav-header */
+    /* .footer-nav-item */
+    /* .footer-line */
 
-        /* -COLUMN FOOTER > MAIN NEWS*/
-        /* .footer-main-box-dateitem */
-        /* .footer-main-box-text */
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    /* .footer-main-box-dateitem */
+    /* .footer-main-box-text */
 
-        /* -COLUMN FOOTER > NEWS LIST */
-        /* .footer-box-dateitem */
-        /* .footer-box-dateitem-activated */
-        /* .news-full-list */
+    /* -COLUMN FOOTER > NEWS LIST */
+    /* .footer-box-dateitem */
+    /* .footer-box-dateitem-activated */
+    /* .news-full-list */
 
     /* -BLOCK COPYRIGHT */
     /* .copyright-item */
 
 
 
-/* -PAGE ACCOUNT */
-/* -------------------------- */
+    /* -PAGE ACCOUNT */
+    /* -------------------------- */
 
 
 
 
-/* -PAGE CALENDAR */
+    /* -PAGE CALENDAR */
     /* -BLOCK HIDER */
     /* .hider */
-    
+
     /* -BLOCK HEADER */
     /* .header */
     /* .navbar-brand */
@@ -359,21 +331,21 @@ th, td
     /* .promo-header */
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        /* .footer */
-        /* .footer-logo */
-        /* .footer-nav-header */
-        /* .footer-nav-item */
-        /* .footer-line */
+    /* -COLUMN FOOTER > NAVIGATION */
+    /* .footer */
+    /* .footer-logo */
+    /* .footer-nav-header */
+    /* .footer-nav-item */
+    /* .footer-line */
 
-        /* -COLUMN FOOTER > MAIN NEWS*/
-        /* .footer-main-box-dateitem */
-        /* .footer-main-box-text */
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    /* .footer-main-box-dateitem */
+    /* .footer-main-box-text */
 
-        /* -COLUMN FOOTER > NEWS LIST */
-        /* .footer-box-dateitem */
-        /* .footer-box-dateitem-activated */
-        /* .news-full-list */
+    /* -COLUMN FOOTER > NEWS LIST */
+    /* .footer-box-dateitem */
+    /* .footer-box-dateitem-activated */
+    /* .news-full-list */
 
     /* -BLOCK COPYRIGHT */
     /* .copyright-item */
@@ -382,11 +354,11 @@ th, td
 
 
 
-/* -PAGE DOCS_COLLEGE */
-/* -PAGE DOCS_COUNSIL */
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
     /* -BLOCK HIDER */
     /* .hider */
-    
+
     /* -BLOCK HEADER */
     /* .header */
     /* .navbar-brand */
@@ -395,48 +367,44 @@ th, td
     /* -BLOCK PROMO */
     /* .promo */
     /* .promo-header */
-    
+
     /* DOCS */
-    .docs
-    {
+    .docs {
         margin-bottom: 150px;
     }
-    
-    .doc-header
-    {
+
+    .doc-header {
         margin-top: 100px;
     }
-    
-    .doc-year-header
-    {
+
+    .doc-year-header {
         margin-left: 100px;
         margin-top: 30px;
     }
-    
-    .doc-document
-    {
+
+    .doc-document {
         margin-top: 30px;
     }
-    
-    
+
+
 
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        /* .footer */
-        /* .footer-logo */
-        /* .footer-nav-header */
-        /* .footer-nav-item */
-        /* .footer-line */
+    /* -COLUMN FOOTER > NAVIGATION */
+    /* .footer */
+    /* .footer-logo */
+    /* .footer-nav-header */
+    /* .footer-nav-item */
+    /* .footer-line */
 
-        /* -COLUMN FOOTER > MAIN NEWS*/
-        /* .footer-main-box-dateitem */
-        /* .footer-main-box-text */
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    /* .footer-main-box-dateitem */
+    /* .footer-main-box-text */
 
-        /* -COLUMN FOOTER > NEWS LIST */
-        /* .footer-box-dateitem */
-        /* .footer-box-dateitem-activated */
-        /* .news-full-list */
+    /* -COLUMN FOOTER > NEWS LIST */
+    /* .footer-box-dateitem */
+    /* .footer-box-dateitem-activated */
+    /* .news-full-list */
 
     /* -BLOCK COPYRIGHT */
     /* .copyright-item */
@@ -445,10 +413,10 @@ th, td
 
 
 
-/* -PAGE GALLERY  */
+    /* -PAGE GALLERY  */
     /* -BLOCK HIDER */
     /* .hider */
-    
+
     /* -BLOCK HEADER */
     /* .header */
     /* .navbar-brand */
@@ -459,43 +427,39 @@ th, td
     /* .promo-header */
 
     /* -BLOCK GALLERY */
-    .gallery
-    {
+    .gallery {
         margin-bottom: 150px;
     }
-    
-    .gallery-image
-    {
+
+    .gallery-image {
         padding: 10px;
     }
 
-    .box-filter
-    {
+    .box-filter {
         margin-right: 50px;
     }
 
-    .img-icon
-    {
+    .img-icon {
         margin-left: 75px;
         margin-bottom: 10px;
     }
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        /* .footer */
-        /* .footer-logo */
-        /* .footer-nav-header */
-        /* .footer-nav-item */
-        /* .footer-line */
+    /* -COLUMN FOOTER > NAVIGATION */
+    /* .footer */
+    /* .footer-logo */
+    /* .footer-nav-header */
+    /* .footer-nav-item */
+    /* .footer-line */
 
-        /* -COLUMN FOOTER > MAIN NEWS*/
-        /* .footer-main-box-dateitem */
-        /* .footer-main-box-text */
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    /* .footer-main-box-dateitem */
+    /* .footer-main-box-text */
 
-        /* -COLUMN FOOTER > NEWS LIST */
-        /* .footer-box-dateitem */
-        /* .footer-box-dateitem-activated */
-        /* .news-full-list */
+    /* -COLUMN FOOTER > NEWS LIST */
+    /* .footer-box-dateitem */
+    /* .footer-box-dateitem-activated */
+    /* .news-full-list */
 
     /* -BLOCK COPYRIGHT */
     /* .copyright-item */
@@ -503,10 +467,10 @@ th, td
 
 
 
-/* -PAGE ABOUT */
+    /* -PAGE ABOUT */
     /* -BLOCK HIDER */
     /* .hider */
-    
+
     /* -BLOCK HEADER */
     /* .header */
     /* .navbar-brand */
@@ -517,31 +481,31 @@ th, td
     /* .promo-header */
 
     /* -BLOCK INFO */
-        /* -COLUMN INFO > TEXT */
-        /* .info-author-header */
-        /* .info-text */
-        /* .box-header */
+    /* -COLUMN INFO > TEXT */
+    /* .info-author-header */
+    /* .info-text */
+    /* .box-header */
 
-        /* -COLUMN INFO > IMG */
-        /* .info-role */
-        /* .info-fio */
+    /* -COLUMN INFO > IMG */
+    /* .info-role */
+    /* .info-fio */
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        /* .footer */
-        /* .footer-logo */
-        /* .footer-nav-header */
-        /* .footer-nav-item */
-        /* .footer-line */
+    /* -COLUMN FOOTER > NAVIGATION */
+    /* .footer */
+    /* .footer-logo */
+    /* .footer-nav-header */
+    /* .footer-nav-item */
+    /* .footer-line */
 
-        /* -COLUMN FOOTER > MAIN NEWS*/
-        /* .footer-main-box-dateitem */
-        /* .footer-main-box-text */
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    /* .footer-main-box-dateitem */
+    /* .footer-main-box-text */
 
-        /* -COLUMN FOOTER > NEWS LIST */
-        /* .footer-box-dateitem */
-        /* .footer-box-dateitem-activated */
-        /* .news-full-list */
+    /* -COLUMN FOOTER > NEWS LIST */
+    /* .footer-box-dateitem */
+    /* .footer-box-dateitem-activated */
+    /* .news-full-list */
 
     /* -BLOCK COPYRIGHT */
     /* .copyright-item */
@@ -550,10 +514,10 @@ th, td
 
 
 
-/* -PAGE NEWS-ABOUT */
+    /* -PAGE NEWS-ABOUT */
     /* -BLOCK HIDER */
     /* .hider */
-    
+
     /* -BLOCK HEADER */
     /* .header */
     /* .navbar-brand */
@@ -564,8 +528,7 @@ th, td
     /* .promo-header */
 
     /* -BLOCK BIG PROMO */
-    .news-promo
-    {
+    .news-promo {
         height: 70vh;
         background-size: cover;
         background-position: center;
@@ -574,54 +537,52 @@ th, td
     }
 
     /* -BLOCK INFO */
-        /* -COLUMN INFO > TEXT */
-        /* .info-author-header */
-        .info-about
-        {
-            margin-top: -70px;
-        }
-        /* box-header */
-        /* info-text */
+    /* -COLUMN INFO > TEXT */
+    /* .info-author-header */
+    .info-about {
+        margin-top: -70px;
+    }
 
-        /* -COLUMN INFO > LIST */
-        .info-group
-        {
-            margin-right: 50px;
-        }
+    /* box-header */
+    /* info-text */
 
-        .info-list
-        {
-            margin-bottom: 15px;
-        }
-                
-        /* .info-fio */
-    
+    /* -COLUMN INFO > LIST */
+    .info-group {
+        margin-right: 50px;
+    }
+
+    .info-list {
+        margin-bottom: 15px;
+    }
+
+    /* .info-fio */
+
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        /* .footer */
-        /* .footer-logo */
-        /* .footer-nav-header */
-        /* .footer-nav-item */
-        /* .footer-line */
+    /* -COLUMN FOOTER > NAVIGATION */
+    /* .footer */
+    /* .footer-logo */
+    /* .footer-nav-header */
+    /* .footer-nav-item */
+    /* .footer-line */
 
-        /* -COLUMN FOOTER > MAIN NEWS*/
-        /* .footer-main-box-dateitem */
-        /* .footer-main-box-text */
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    /* .footer-main-box-dateitem */
+    /* .footer-main-box-text */
 
-        /* -COLUMN FOOTER > NEWS LIST */
-        /* .footer-box-dateitem */
-        /* .footer-box-dateitem-activated */
-        /* .news-full-list */
+    /* -COLUMN FOOTER > NEWS LIST */
+    /* .footer-box-dateitem */
+    /* .footer-box-dateitem-activated */
+    /* .news-full-list */
 
     /* -BLOCK COPYRIGHT */
     /* .copyright-item */
 
-        
 
-/* -PAGE NEWS */
+
+    /* -PAGE NEWS */
     /* -BLOCK HIDER */
     /* .hider */
-    
+
     /* -BLOCK HEADER */
     /* .header */
     /* .navbar-brand */
@@ -632,23 +593,22 @@ th, td
     /* .promo-header */
 
     /* -BLOCK  EVENTS*/
-    .events
-    {
+    .events {
         margin-bottom: 150px;
     }
 
-    .event-image
-    {
+    .event-image {
         object-fit: cover;
         width: 900px;
         height: 300px;
     }
+
     /* box-dateitem */
     /* event-text */
     /* event-more */
 
 
-/* -PAGE SEARCH */
+    /* -PAGE SEARCH */
     /* -BLOCK HIDER */
     /* .hider */
 
@@ -658,27 +618,26 @@ th, td
     /* .nav-item */
 
     /* -BLOCK SEARCH */
-    .search
-    {
+    .search {
         margin-bottom: 30vh;
     }
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        /* .footer */
-        /* .footer-logo */
-        /* .footer-nav-header */
-        /* .footer-nav-item */
-        /* .footer-line */
+    /* -COLUMN FOOTER > NAVIGATION */
+    /* .footer */
+    /* .footer-logo */
+    /* .footer-nav-header */
+    /* .footer-nav-item */
+    /* .footer-line */
 
-        /* -COLUMN FOOTER > MAIN NEWS*/
-        /* .footer-main-box-dateitem */
-        /* .footer-main-box-text */
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    /* .footer-main-box-dateitem */
+    /* .footer-main-box-text */
 
-        /* -COLUMN FOOTER > NEWS LIST */
-        /* .footer-box-dateitem */
-        /* .footer-box-dateitem-activated */
-        /* .news-full-list */
+    /* -COLUMN FOOTER > NEWS LIST */
+    /* .footer-box-dateitem */
+    /* .footer-box-dateitem-activated */
+    /* .news-full-list */
 
     /* -BLOCK COPYRIGHT */
     /* .copyright-item */
@@ -692,231 +651,212 @@ th, td
 
 
 
-@media (max-width: 3840px)
-{
-    /* -MULTI CLASSES */   
+@media (max-width: 3840px) {
+    /* -MULTI CLASSES */
 
-    
+
     /* -BLOCK HEADER */
-    .nav-item
-    {
+    .nav-item {
         margin-right: 75px;
     }
 
 
     /* -BLOCK INFO */
-    .info
-    {
+    .info {
         margin-bottom: 100px;
     }
-        /* -COLUMN INFO > TEXT */
-        .info-box
-        {
-            margin-bottom: 100px;
-        }
-                
+
+    /* -COLUMN INFO > TEXT */
+    .info-box {
+        margin-bottom: 100px;
+    }
+
 
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        .footer-line
-        {
-            border-right: black 5px solid;
-        }
+    /* -COLUMN FOOTER > NAVIGATION */
+    .footer-line {
+        border-right: black 5px solid;
+    }
 
-/*-----=============================----- */
-
-
-/* -PAGE MAIN */
+    /*-----=============================----- */
 
 
+    /* -PAGE MAIN */
 
-/* -PAGE DIRECTION */
+
+
+    /* -PAGE DIRECTION */
     /* -BLOCK INFO */
-        /* -COLUMN INFO > TEXT */
-        /* .info-author-header */
-        /* .info-text */
-        /* .box-header */
-        .info-calendar
-        {
-            margin-bottom: 20px;
-        }
+    /* -COLUMN INFO > TEXT */
+    /* .info-author-header */
+    /* .info-text */
+    /* .box-header */
+    .info-calendar {
+        margin-bottom: 20px;
+    }
 
 
 
-/* -PAGE ACCOUNT */
-/* -------------------------- */
+    /* -PAGE ACCOUNT */
+    /* -------------------------- */
 
 
 
 
-/* -PAGE CALENDAR */
+    /* -PAGE CALENDAR */
 
 
 
-/* -PAGE DOCS_COLLEGE */
-/* -PAGE DOCS_COUNSIL */
-    /* -BLOCK DOCS */    
-    .doc-header
-    {
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
+    /* -BLOCK DOCS */
+    .doc-header {
         margin-top: 100px;
     }
-    
-    .doc-year-header
-    {
+
+    .doc-year-header {
         margin-left: 100px;
         margin-top: 30px;
     }
-    
-    .doc-document
-    {
+
+    .doc-document {
         margin-top: 30px;
     }
-    
 
 
 
-/* -PAGE GALLERY  */
+
+    /* -PAGE GALLERY  */
 
 
 
-/* -PAGE ABOUT */
+    /* -PAGE ABOUT */
 
 
 
-/* -PAGE NEWS-ABOUT */       
+    /* -PAGE NEWS-ABOUT */
 
 
 
-/* -PAGE NEWS */
+    /* -PAGE NEWS */
 
 
 
-/* -PAGE SEARCH */
+    /* -PAGE SEARCH */
 
 }
 
 
 
-@media (max-width: 1440px)
-{
+@media (max-width: 1440px) {
     /* -MULTI CLASSES */
 
-    
+
     /* -BLOCK HEADER */
-    .nav-item
-    {
+    .nav-item {
         margin-right: 45px;
     }
 
 
     /* -BLOCK INFO */
-    .info
-    {
+    .info {
         margin-bottom: 100px;
     }
-        /* -COLUMN INFO > TEXT */
-        .info-box
-        {
-            margin-bottom: 50px;
-        }
-        
-        .info-text
-        {
-            margin-top: -20px;
-            margin-bottom: 30px;
-        }
-                
+
+    /* -COLUMN INFO > TEXT */
+    .info-box {
+        margin-bottom: 50px;
+    }
+
+    .info-text {
+        margin-top: -20px;
+        margin-bottom: 30px;
+    }
+
 
 
     /* -BLOCK FOOTER */
-        /* -COLUMN FOOTER > NAVIGATION */
-        .footer-logo
-        {
-            width: 15vh;
-        }
+    /* -COLUMN FOOTER > NAVIGATION */
+    .footer-logo {
+        width: 15vh;
+    }
 
-        .footer-line
-        {
-            margin-left: 6vh;
-            margin-right: -2vh;
-            border-right: black 5px solid;
-        }
+    .footer-line {
+        margin-left: 6vh;
+        margin-right: -2vh;
+        border-right: black 5px solid;
+    }
 
 
-        .footer-box-dateitems
-        {
-            margin-top: 50px !important;  
-        }
-/*-----=============================----- */
+    .footer-box-dateitems {
+        margin-top: 50px !important;
+    }
+
+    /*-----=============================----- */
 
 
-/* -PAGE MAIN */
+    /* -PAGE MAIN */
 
 
 
-/* -PAGE DIRECTION */
+    /* -PAGE DIRECTION */
     /* -BLOCK INFO */
-        /* -COLUMN INFO > TEXT */
-        /* .info-author-header */
-        /* .info-text */
-        /* .box-header */
-        .info-calendar
-        {
-            margin-bottom: 20px;
-        }
+    /* -COLUMN INFO > TEXT */
+    /* .info-author-header */
+    /* .info-text */
+    /* .box-header */
+    .info-calendar {
+        margin-bottom: 20px;
+    }
 
 
-/* -PAGE ACCOUNT */
-/* -------------------------- */
-
-
-
-/* -PAGE CALENDAR */
+    /* -PAGE ACCOUNT */
+    /* -------------------------- */
 
 
 
-/* -PAGE DOCS_COLLEGE */
-/* -PAGE DOCS_COUNSIL */
-    /* -BLOCK DOCS */    
-    .doc-header
-    {
+    /* -PAGE CALENDAR */
+
+
+
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
+    /* -BLOCK DOCS */
+    .doc-header {
         margin-top: 50px;
     }
-    
-    .doc-year-header
-    {
+
+    .doc-year-header {
         margin-left: 100px;
         margin-top: 15px;
     }
-    
-    .doc-document
-    {
+
+    .doc-document {
         margin-top: 15px;
     }
 
 
 
-/* -PAGE GALLERY  */
+    /* -PAGE GALLERY  */
 
 
 
-/* -PAGE ABOUT */
+    /* -PAGE ABOUT */
 
 
 
-/* -PAGE NEWS-ABOUT */
+    /* -PAGE NEWS-ABOUT */
 
 
 
-/* -PAGE NEWS */
+    /* -PAGE NEWS */
 
 
 
-/* -PAGE SEARCH */
+    /* -PAGE SEARCH */
     /* -BLOCK SEARCH */
-    .search
-    {
+    .search {
         margin-bottom: 30vh;
     }
 
@@ -924,255 +864,231 @@ th, td
 
 
 
-@media (max-width: 992px)
-{
+@media (max-width: 992px) {
+
     /* -MULTI CLASSES */
-        /* usefull block */
-        .box-header
-        {
-            margin-bottom: 20px;
-        }
-    
-        /* -BLOCK PROMO */
-        .promo-header
-        {
-            margin-left: 30px;
-        }
-    
-        /* -BLOCK INFO */
-            /* -COLUMN INFO > TEXT */    
-            .info-text
-            {
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-    
-            /* -COLUMN INFO > IMG */    
-            .info-role
-            {
-                margin-top: 15px;
-            }
-    
-            .info-fio
-            {
-                margin-top: 15px;
-            }
-    
-        /* -BLOCK FOOTER */
-            /* -COLUMN FOOTER > NAVIGATION */
-            .footer-logo
-            {
-                width: 20vh;
-            }
+    /* usefull block */
+    .box-header {
+        margin-bottom: 20px;
+    }
 
-            .footer-line
-            {
-                margin-left: -4vh;
-                margin-right: 0vh;
-                border-right: black 0px solid;
-            }
-    
-            /* -COLUMN FOOTER > NEWS LIST */
-            .footer-box-dateitems
-            {
-                margin-top: 35px !important;
-                margin-bottom: 30px;
-            }
-        
-            .news-full-list
-            {
-                text-align: center;
-                margin-bottom: 50px;
-            }
+    /* -BLOCK PROMO */
+    .promo-header {
+        margin-left: 30px;
+    }
+
+    /* -BLOCK INFO */
+    /* -COLUMN INFO > TEXT */
+    .info-text {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    /* -COLUMN INFO > IMG */
+    .info-role {
+        margin-top: 15px;
+    }
+
+    .info-fio {
+        margin-top: 15px;
+    }
+
+    /* -BLOCK FOOTER */
+    /* -COLUMN FOOTER > NAVIGATION */
+    .footer-logo {
+        width: 20vh;
+    }
+
+    .footer-line {
+        margin-left: -4vh;
+        margin-right: 0vh;
+        border-right: black 0px solid;
+    }
+
+    /* -COLUMN FOOTER > NEWS LIST */
+    .footer-box-dateitems {
+        margin-top: 35px !important;
+        margin-bottom: 30px;
+    }
+
+    .news-full-list {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
     /*-----=============================----- */
-    
-    
+
+
     /* -PAGE MAIN */
-        /* -BLOCK DIRECTIONS */
-        .box
-        {
-            margin-bottom: 15px;
-        }
+    /* -BLOCK DIRECTIONS */
+    .box {
+        margin-bottom: 15px;
+    }
 
-    
+
     /* -PAGE DIRECTION */
-        /* -BLOCK INFO */
-            /* -COLUMN INFO > TEXT */
+    /* -BLOCK INFO */
+    /* -COLUMN INFO > TEXT */
 
-            .info-calendar
-            {
-                margin-bottom: 40px;
-                text-align: center;
-            }
-    
-    
-    
+    .info-calendar {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+
+
     /* -PAGE ACCOUNT */
-    
-    
+
+
     /* -PAGE CALENDAR */
-    
-    
-    
+
+
+
     /* -PAGE DOCS_COLLEGE */
     /* -PAGE DOCS_COUNSIL */
-        
-    
-    
+
+
+
     /* -PAGE GALLERY  */
 
-    
-    
+
+
     /* -PAGE ABOUT */
 
-    
-    
+
+
     /* -PAGE NEWS-ABOUT */
-            
-    
-    
+
+
+
     /* -PAGE NEWS */
 
 
-    
+
     /* -PAGE SEARCH */
 
 }
 
 
 
-@media (max-width: 576px)
-{
-    *
-    {
+@media (max-width: 576px) {
+    * {
         padding: 0 3px;
     }
 
     /* -MULTI CLASSES */
-        /* usefull block */
-        .box-header
-        {
-            margin-bottom: 25px;
-        }
-        
-        .promo-dateitem
-        {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-    
-        /* -BLOCK INFO */
-            /* -COLUMN INFO > TEXT */
-            .info-author-header
-            {
-                margin-bottom: 40px;
-            }
-    
-            /* -COLUMN INFO > IMG */
-            .info-role
-            {
-                margin-top: 10px;
-            }
-    
-            .info-fio
-            {
-                margin-top: 10px;
-            }
+    /* usefull block */
+    .box-header {
+        margin-bottom: 25px;
+    }
 
-        /* -BLOCK FOOTER */
-            /* -COLUMN FOOTER > MAIN NEWS*/
-            .footer-main-box-event
-            {
-                margin-bottom: 15px;
-            }
+    .promo-dateitem {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    /* -BLOCK INFO */
+    /* -COLUMN INFO > TEXT */
+    .info-author-header {
+        margin-bottom: 40px;
+    }
+
+    /* -COLUMN INFO > IMG */
+    .info-role {
+        margin-top: 10px;
+    }
+
+    .info-fio {
+        margin-top: 10px;
+    }
+
+    /* -BLOCK FOOTER */
+    /* -COLUMN FOOTER > MAIN NEWS*/
+    .footer-main-box-event {
+        margin-bottom: 15px;
+    }
+
     /*-----=============================----- */
-    
-    
+
+
 
     /* -PAGE MAIN */
-        /* -BLOCK DIRECTIONS */
-        .directions
-        {
-            margin-bottom: 10px;
-        }
-        /* .box-header */
-        .box
-        {
-            margin-bottom: 40px;
-        }
-        .box-item
-        {
-            margin-bottom: 20px;
-        }
-    
-        /* -BLOCK BIG PROMO */
-        .big-promo
-        {
-            margin-bottom: 50px;
-        }
-    
+    /* -BLOCK DIRECTIONS */
+    .directions {
+        margin-bottom: 10px;
+    }
+
+    /* .box-header */
+    .box {
+        margin-bottom: 40px;
+    }
+
+    .box-item {
+        margin-bottom: 20px;
+    }
+
+    /* -BLOCK BIG PROMO */
+    .big-promo {
+        margin-bottom: 50px;
+    }
+
 
 
     /* -PAGE DIRECTION */
-        /* -BLOCK INFO */
-            /* -COLUMN INFO > TEXT */
-            .info-calendar
-            {
-                margin-bottom: 100px;
-            }
-    
+    /* -BLOCK INFO */
+    /* -COLUMN INFO > TEXT */
+    .info-calendar {
+        margin-bottom: 100px;
+    }
+
 
 
     /* -PAGE ACCOUNT */
-    
 
-    
+
+
     /* -PAGE CALENDAR */
-    
 
-    
+
+
     /* -PAGE DOCS_COLLEGE */
     /* -PAGE DOCS_COUNSIL */
-    
-    
+
+
 
     /* -PAGE GALLERY  */
 
 
 
     /* -PAGE ABOUT */
-    
-    
-    
-    /* -PAGE NEWS-ABOUT */
-        /* -BLOCK BIG PROMO */
-        .news-promo
-        {
-            margin-bottom: 50px;
-        }
-    
-        /* -BLOCK INFO */
-            /* -COLUMN INFO > TEXT */
-            .info-about
-            {
-                margin-top: 10px;
-            }
-    
-            /* -COLUMN INFO > LIST */
-            .info-group
-            {
-                margin-right: 20px;
-            }
-    
-            .info-list
-            {
-                margin-bottom: 30px;
-            }
-            
 
-    
+
+
+    /* -PAGE NEWS-ABOUT */
+    /* -BLOCK BIG PROMO */
+    .news-promo {
+        margin-bottom: 50px;
+    }
+
+    /* -BLOCK INFO */
+    /* -COLUMN INFO > TEXT */
+    .info-about {
+        margin-top: 10px;
+    }
+
+    /* -COLUMN INFO > LIST */
+    .info-group {
+        margin-right: 20px;
+    }
+
+    .info-list {
+        margin-bottom: 30px;
+    }
+
+
+
     /* -PAGE NEWS */
-    
+
 
 
     /* -PAGE SEARCH */

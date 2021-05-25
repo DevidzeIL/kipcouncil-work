@@ -28,15 +28,17 @@
 </div>
 
 
-<div class="container" style="text-align: center; align-items: center;">
+<div class="container" style="text-align: center;">
     <div class="col">
-		
+        <img class="profile-award" src="{{award.award.url}}" >
         <form method="POST" action="" enctype="multipart/form-data">
-            <img class="profile-pic" src="{{form.award.url}}" >
+           
             {% csrf_token %}
-            <h3>Пользователь</h3>  {{form.award}}
-            <h3>Название</h3>  {{form.description}}
             <h3>Пользователь</h3>  {{form.user}}
+            <h3>Название</h3>  {{form.description}}
+            <h3>Файл (.png)</h3>  {{form.award}}
+            <br>
+            <br>
             <input class="btn btn-light" type="submit" name="Submit" value="Сохранить">
         </form>
 	</div>
