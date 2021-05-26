@@ -13,7 +13,7 @@ class Tag(models.Model):
 
 class Specialty(models.Model):
     name        = models.CharField(max_length=200, null=True)
-    
+
     def __str__(self):
         return self.name
 
@@ -30,7 +30,7 @@ class Company(models.Model):
 
     def __str__(self):
         return self.group_number
-     
+
 
 
 class Student(models.Model):
@@ -58,12 +58,12 @@ class ListDirection(models.Model):
     tags        = models.ForeignKey(Tag, null=True, on_delete=models.SET_NULL)
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     status      = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
-    role        = models.CharField(max_length=200, blank=True, null=True) 
+    role        = models.CharField(max_length=200, blank=True, null=True)
     date_created= models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.user.fio
-        
+
 
 
 class UserAward(models.Model):
@@ -94,8 +94,8 @@ class Event(models.Model):
 class Member(models.Model):
     user        = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     event       = models.ForeignKey(Event, null=True, on_delete=models.SET_NULL)
-    role        = models.CharField(max_length=200, blank = True, null=True) 
-    comment     = models.CharField(max_length=200, blank = True, null=True) 
+    role        = models.CharField(max_length=200, blank = True, null=True)
+    comment     = models.CharField(max_length=200, blank = True, null=True)
 
     def __str__(self):
         return self.user.fio
@@ -107,7 +107,7 @@ class New(models.Model):
     event       = models.ForeignKey(Event, blank=True, null=True, on_delete=models.SET_NULL)
     name        = models.CharField(max_length=200,  blank=True, null=True)
     main_text   = models.CharField(max_length=300, blank=True, null=True)
-    text        = RichTextField(max_length=1000, blank=True, null=True)
+    text        = RichTextField(max_length=3000, blank=True, null=True)
     link        = models.CharField(max_length=200, blank=True, null=True)
     photo       = models.ImageField(default='rec.png', null=True, blank=True)
     date_created     = models.DateTimeField(auto_now_add=True, null=True)

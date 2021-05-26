@@ -25,24 +25,20 @@ from .models import (
 
 from .forms import (
     CreateUserForm, StudentForm, AwardForm,
-    ListDirectionForm, UserAwardForm, EventForm, MemberForm, NewForm, 
+    ListDirectionForm, UserAwardForm, EventForm, MemberForm, NewForm,
     AboutForm, MoreForm, DocsCollegeForm, DocsCouncilForm, CompanyForm, TagForm
 )
 
 from .filters import (
-    MemberEventFilter, MemberFilter, 
-    AdminEventMemberFilter, AdminMemberFilter, AdminUserFilter, 
+    MemberEventFilter, MemberFilter,
+    AdminEventMemberFilter, AdminMemberFilter, AdminUserFilter,
     NewsFilter, EventFilter,
-    UserFilter, StudentFilter, TagFilter, ListDirectionFilter, UserAwardFilter, EventsFilter, CompanyFilter, 
+    UserFilter, StudentFilter, TagFilter, ListDirectionFilter, UserAwardFilter, EventsFilter, CompanyFilter,
     MembersFilter, NewFilter, AboutFilter, MoreFilter, DocsCollegeFilter, DocsCouncilFilter
 )
 
 from .decorators import authenticated_user, unauthenticated_user, allowed_users, admin_only
 from .utils import Calendar
-
-
-
-
 
 
 # Регистрация
@@ -53,7 +49,7 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            
+
             messages.success(request, username + ' был зарегистрирован!')
 
             return redirect('main_user')
@@ -88,7 +84,7 @@ def logoutUser(request):
 
 # 404 Страница
 def view_404(request, exception=None):
-   return render(request, 'accounts/404.html')
+   return redirect(request, 'accounts/404.html')
 
 
 
@@ -112,7 +108,7 @@ def mainUser(request):
         )
 
     awards = request.user.student.useraward_set.all().order_by('-date_created')
-    
+
     context = {
         'info':info,
         'user':user, 'tags':tags, 'awards':awards,
@@ -122,37 +118,34 @@ def mainUser(request):
     return render(request, 'accounts/auth/user/user.html', context)
 
 # ПОЛЬЗОВАТЕЛЬ Выгрузка записей из БД Участников мероприятий конкретного пользователя
-
 def userTable(request, pk_test):
     events = Event.objects.all()
     members = Member.objects.filter(user__id = pk_test)
-    
+
     myEventFilter = MemberEventFilter(request.GET, queryset = events)
     myMemberFilter = MemberFilter(request.GET, queryset = members)
-    
+
     events = myEventFilter.qs
     members = myMemberFilter.qs
 
     context = {
         'events':events, 'members':members,
         'myEventFilter':myEventFilter, 'myMemberFilter':myMemberFilter
-        
+
     }
     return render(request, 'accounts/auth/user/user_table.html', context)
 
-# Настройки аккаунта пользователя 
-
+# Настройки аккаунта пользователя
 def accountSettings(request):
     student = request.user.student
     form = StudentForm(instance=student)
-   
+
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES, instance=student)
         if form.is_valid():
             form.save()
             return redirect('main_user')
 
-        
     context = {'form':form}
     return render(request, 'accounts/auth/user/account_settings.html', context)
 
@@ -161,29 +154,27 @@ def accountSettings(request):
 
 
 # АДМИН Выгрузка записей Мероприятий (Event) и Участников мероприятий (Member)
-
 def adminTable(request):
     account = request.user.student
 
     events = Event.objects.all()
     members = Member.objects.all()
-    
+
     myFilterEvent = AdminEventMemberFilter(request.GET, queryset = events)
     myFilterMember = AdminMemberFilter(request.GET, queryset = members)
-    
+
     events = myFilterEvent.qs
     members = myFilterMember.qs
-    
+
     context = {
         'account':account,
         'events':events, 'members':members,
         'myFilterEvent':myFilterEvent, 'myFilterMember':myFilterMember
-        
+
     }
     return render(request, 'accounts/auth/admin/admin_table.html', context)
 
-# АДМИН Функция перехода на страницу пользователя 
-
+# АДМИН Функция перехода на страницу пользователя
 def adminLookuser(request, pk_test):
     user = Student.objects.get(fio = pk_test)
     info = Student.objects.filter(fio = user)
@@ -210,7 +201,6 @@ def adminLookuser(request, pk_test):
 
 # ПОЛЬЗОВАТЕЛЬ Работа с БД (портфолио)
 ## ПОЛЬЗОВАТЕЛЬ Создание значений в БД
-
 def createAward(request, pk_test):
     user = Student.objects.get(id=pk_test)
     form = AwardForm(initial={'user':user})
@@ -227,7 +217,6 @@ def createAward(request, pk_test):
     return render(request, 'accounts/auth/user/award_form.html', context)
 
 ## ПОЛЬЗОВАТЕЛЬ Изменение значений в БД
-
 def editAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
     form = AwardForm(instance=award)
@@ -321,7 +310,7 @@ def adminTableDB(request, pk_test):
         form = About.objects.all()
         myFilter = AboutFilter(request.GET, queryset = form)
         form = myFilter.qs
-    
+
     elif (pk_test == 'More'):
         form = More.objects.all()
         myFilter = MoreFilter(request.GET, queryset = form)
@@ -473,7 +462,7 @@ def adminCreateDB(request, pk_test):
 
 ## АДМИН Изменение записи из БД
 
-def adminEditDB(request, pk_test1, pk_test2): 
+def adminEditDB(request, pk_test1, pk_test2):
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
         form = StudentForm(instance=item)
@@ -482,7 +471,7 @@ def adminEditDB(request, pk_test1, pk_test2):
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test1)
-    
+
     elif (pk_test1 == 'User'):
         item = User.objects.get(id=pk_test2)
         form = CreateUserForm(instance=item)
@@ -616,7 +605,7 @@ def adminEditDB(request, pk_test1, pk_test2):
 
 ## АДМИН Удаление записи из БД
 
-def adminDeleteDB(request, pk_test1, pk_test2):   
+def adminDeleteDB(request, pk_test1, pk_test2):
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
     elif (pk_test1 == 'User'):
@@ -669,7 +658,7 @@ def adminMassiveCreateDB(request, pk_test1, pk_test2):
             if formset.is_valid():
                 formset.save()
                 return redirect('admin_tabledb', pk_test1)
-    
+
     elif (pk_test1 == 'Member'):
         name = Event.objects.get(id=pk_test2)
         FormFormSet = inlineformset_factory(Event, Member, fields=('user', 'role', 'comment'), extra=50)
@@ -697,7 +686,7 @@ def main(request):
 
     tags = Tag.objects.all()
     posts = New.objects.all().order_by('-date_created')[:5]
-    
+
     context = {
         'event_all':event_all, 'posts':posts, 'tags':tags, 'more':more
     }
@@ -731,7 +720,7 @@ def docs_college(request):
         'specialties':specialties, 'cources':cources, 'docs':docs
     }
     return render(request, 'accounts/pages/docs_college.html', context)
-    
+
 def docs_council(request):
     tags = Tag.objects.all()
     docs = DocsCouncil.objects.all()
@@ -754,10 +743,12 @@ def news(request):
 def news_about(request, pk_test):
     new = New.objects.get(id=pk_test)
     event = new.event
+
     members = Member.objects.filter(event = new.event)
+    members_count = Member.objects.filter(event = new.event).count()
 
     context = {
-        'members':members, 'new':new, 'event':event
+        'members':members, 'new':new, 'event':event, 'members_count':members_count
     }
     return render(request, 'accounts/pages/news_about.html', context)
 

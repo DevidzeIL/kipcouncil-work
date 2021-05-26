@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<!-- PROMO -->        
+<!-- PROMO -->
 <style>
     .promo-image
     {
@@ -57,28 +57,24 @@
 
 
     <!-- INFO > LIST -->
-    
-    {% if members is Null %}
-        
-    {% else %}
+
+    {% if members_count != 0 %}
         <div class="col-sm-8 col-md-8 col-lg-3 info-list">
             <div class="box-header">Участники</div>
             <div class="row">
                 <div class="col-12 info-lists">
-                    {% for member in members %}  
-                        {% if member is not Null %}
-                            <div class="info-list">
-                                <span class="info-group">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</span>
-                                <span class="info-fio" >{{member.user.fio}}</span>
-                            </div>
-                        {% endif %}
-                    {% endfor %} 
+                    {% for member in members %}
+                        <div class="info-list">
+                            <span class="info-group">{{member.user.group.сourse}}{{member.user.group.specialty}}-{{member.user.group.group_number}}</span>
+                            <span class="info-fio" >{{member.user.fio}}</span>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     {% endif %}
 
     <div class="col-0 col-md-1"></div>
-</section>  
+</section>
 
 {% endblock %}

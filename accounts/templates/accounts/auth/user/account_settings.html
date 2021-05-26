@@ -7,25 +7,21 @@
     <section class="header row">
         <nav class="navbar navbar-expand-xl navbar-light">
             <div class="container-fluid header-navs">
-                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" src="{% static '/images/logo.svg' %}" alt="logo"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-    
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <h1><div class="promo-header" style="margin-left: 10vh;">Настройки</div></h1>
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">    
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
-                        </li>
-                    </ul>
-                </div>
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" style="width: 300px;"
+                        src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <h1>
+                    <div class="promo-header" style="margin-left: 10vh;">Настройки</div>
+                </h1>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </section>
 </div>
+
 
 <div class="row">
 	<div class="col-md-3">
@@ -36,7 +32,7 @@
 
 	<div class="col-md-9">
 		<form method="POST" action="" enctype="multipart/form-data">
-				
+
             {% csrf_token %}
             <label>Группа:&nbsp&nbsp&nbsp&nbsp</label>{{form.group}}
             <br>
@@ -48,9 +44,9 @@
 
             <label>Телефон:&nbsp&nbsp&nbsp&nbsp</label>{{form.phone}}
             <br>
-            <br>    
+            <br>
 
-            <label>Дата рождения  <em>(ГГГГ-ММ-ДД)</em>:&nbsp&nbsp&nbsp&nbsp</label>{{form.birthday}}            
+            <label>Дата рождения  <em>(ГГГГ-ММ-ДД)</em>:&nbsp&nbsp&nbsp&nbsp</label>{{form.birthday}}
             <br>
             <br>
 
@@ -65,13 +61,11 @@
             <label>Инстаграмм:&nbsp&nbsp&nbsp&nbsp</label>{{form.instagram_url}}
             <br>
             <br>
-    
+
         <input class="btn btn-primary" type="submit" name="Update Information" value="Сохранить">
-        
+
         </form>
 	</div>
 </div>
 
 {% endblock content %}
-
-            

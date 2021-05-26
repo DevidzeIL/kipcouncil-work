@@ -7,7 +7,7 @@
     <section class="header row">
         <nav class="navbar navbar-expand-xl navbar-light">
             <div class="container-fluid header-navs">
-                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo"
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" style="width: 300px;"
                         src="{% static '/images/logo.svg' %}" alt="logo"></a>
                 <h1>
                     <div class="promo-header" style="margin-left: 10vh;">Работа с БД</div>
@@ -20,43 +20,45 @@
             </div>
         </nav>
     </section>
-    <script type="text/javascript">
-        function exportTableToExcel(tableID, filename = '') {
-            var downloadLink;
-            var dataType = 'application/vnd.ms-excel';
-            var tableSelect = document.getElementById(tableID);
-            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-
-            // Specify file name
-            filename = filename ? filename + '.xls' : 'excel_data.xls';
-
-            // Create download link element
-            downloadLink = document.createElement("a");
-
-            document.body.appendChild(downloadLink);
-
-            if (navigator.msSaveOrOpenBlob) {
-                var blob = new Blob(['\ufeff', tableHTML], {
-                    type: dataType
-                });
-                navigator.msSaveOrOpenBlob(blob, filename);
-            } else {
-                // Create a link to the file
-                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-
-                // Setting the file name
-                downloadLink.download = filename;
-
-                //triggering the function
-                downloadLink.click();
-            }
-        }
-    </script>
 </div>
+
+<script type="text/javascript">
+    function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+</script>
+
 
 <button class="btn btn-light" onclick="exportTableToExcel('tblData', '{{pk_test}}')">Экспортировать в Excel</button>
 
-<table id="tblData">
+<table id="tblData" style="margin-bottom: 50px;">
     {% if pk_test == 'Student'%}
     <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
     <form method="get">
@@ -68,29 +70,30 @@
             <th>Фото</th>
             <th>ВК</th>
             <th>Инстаграмм</th>
-            <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
+            <th colspan="3"><button class="btn btn-light" type="submit">Поиск</button></th>
 
         </tr>
     </form>
     {% for field in form %}
     <tr>
         <td>{{field.group}}</td>
-
-        {% if field.fio == account.fio %}
-            <td><a class="field_fio" href="{% url 'main_user' %}">{{field.fio}}</a></td>
-        {% else %}
-            <td><a class="field_fio" href="{% url 'admin_lookuser' field.fio %}">{{field.fio}}</a></td>
-        {% endif %}
-
+        <td>{{field.fio}}</td>
         <td>{{field.phone}}</td>
         <td>{{field.birthday}}</td>
         <td><img width="150px" height="350px" class="profile-pic img-fluid" src="{{field.profile_pic.url}}"
                 onclick='openImageWindow(this.src);'></td>
-        <td><a href="{{field.vk_url}}">Ссылка</a></td>
-        <td><a href="{{field1.instagram_url}}">Ссылка</a></td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        
+        <td></button><a href="{{field.vk_url}}">Ссылка</a></td>
+        <td></button><a href="{{field1.instagram_url}}">Ссылка</a></td>
+        <td><button class="btn btn-light" type="submit">
+            {% if field.fio == account.fio %}
+                <a href="{% url 'main_user' %}">
+            {% else %}
+                <a href="{% url 'admin_lookuser' field.fio %}">
+            {% endif %}
+            Открыть</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
+
     </tr>
     {% endfor %}
 
@@ -109,8 +112,8 @@
     <tr>
         <td>{{field.username}}</td>
         <td>{{field.email}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 
@@ -127,9 +130,9 @@
     {% for field in form %}
     <tr>
         <td>{{field.name}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        <td><a href="{% url 'admin_massivecreatedb' 'ListDirection' field.id %}">Добавить участников</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_massivecreatedb' 'ListDirection' field.id %}">Добавить участников</a></button></td>
     </tr>
     {% endfor %}
 
@@ -159,8 +162,8 @@
         <td>{{field.status}}</td>
         <td>{{field.role}}</td>
         <td>{{field.date_created}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 
@@ -174,7 +177,7 @@
             <th>Название мероприятия:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
             <th>Дата проведения</th>
             <th colspan="3"><button class="btn btn-light" type="submit">Поиск</button></th>
-            
+
         </tr>
     </form>
     {% for field in form %}
@@ -182,9 +185,9 @@
         <td>{{field.tags}}</td>
         <td>{{field.name}}</td>
         <td>{{field.date}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
-        <td><a href="{% url 'admin_massivecreatedb' 'Member' field.id %}">Добавить участников</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_massivecreatedb' 'ListDirection' field.id %}">Добавить участников</a></button></td>
     </tr>
     {% endfor %}
 
@@ -207,8 +210,8 @@
         <td>{{field.event}}</td>
         <td>{{field.role}}</td>
         <td>{{field.comment}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 
@@ -226,7 +229,7 @@
             <th>Ссылка на Google Photo</th>
             <th>Обложка</th>
             <th>Дата создания записи</th>
-            <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
+            <th colspan="3"><button class="btn btn-light" type="submit">Поиск</button></th>
         </tr>
     </form>
     {% for field in form %}
@@ -235,13 +238,14 @@
         <td>{{field.event}}</td>
         <td>{{field.name}}</td>
         <td>{{field.main_text}}</td>
-        <td>{{field.text | safe }}</td>
+        <td>{{field.text | truncatewords:20 | safe }}</td>
         <td><a href="{{field.link}}" target="_blank">Ссылка</a></td>
         <td><img width="150px" height="350px" class="profile-pic img-fluid" src="{{field.photo.url}}"
                 onclick='openImageWindow(this.src);'></td>
         <td>{{field.date_created}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'news_about' field.id %}">Открыть</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 
@@ -263,8 +267,8 @@
         <td><img width="150px" height="350px" class="profile-pic img-fluid" src="{{field.award.url}}"
                 onclick='openImageWindow(this.src);'></td>
         <td>{{field.description}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 
@@ -285,8 +289,8 @@
         <td>{{field.сourse}}</td>
         <td>{{field.specialty}}</td>
         <td>{{field.group_number}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 
@@ -311,8 +315,8 @@
         <td>{{field.main_text | safe }}</td>
         <td>{{field.text | safe }}</td>
         <td>{{field.result | safe }}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 
@@ -337,8 +341,8 @@
         <td>{{field.goals | safe}}</td>
         <td>{{field.main_text | safe}}</td>
         <td>{{field.text | safe}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 
@@ -365,8 +369,8 @@
         <td><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></td>
         <td>{{field.description}}</td>
         <td>{{field.date_created}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 
@@ -390,8 +394,8 @@
         <td><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></td>
         <td>{{field.description}}</td>
         <td>{{field.date_created}}</td>
-        <td><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></td>
-        <td><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+        <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
     </tr>
     {% endfor %}
 

@@ -7,45 +7,35 @@
     <section class="header row">
         <nav class="navbar navbar-expand-xl navbar-light">
             <div class="container-fluid header-navs">
-                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" src="{% static '/images/logo.svg' %}" alt="logo"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-    
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <h1><div class="promo-header" style="margin-left: 10vh;">Портфолио</div></h1>
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">    
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
-                        </li>
-                    </ul>
-                </div>
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" style="width: 300px;"
+                        src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <h1>
+                    <div class="promo-header" style="margin-left: 10vh;">Портфолио</div>
+                </h1>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </section>
 </div>
 
 
-<div class="container" style="text-align: center; align-items: center;">
+<div class="container" style="text-align: center; align-items: center; margin-bottom: 50px;">
     <div class="col">
 		<img class="profile-award" src="{{award.award.url}}" >
         <br>
         <br>
         <p>Вы уверены, что хотите удалить {{award.description}}</p>
-        
+
         <form method="POST" action="{% url 'delete_award' award.id %}">
             {% csrf_token %}
             <a href="{% url 'main_user' %}">Нет</a>
             <input class="btn btn-primary" type="submit" name="Submit" value="Да">
         </form>
 	</div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 </div>
 
 

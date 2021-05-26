@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<!-- PROMO -->        
+<!-- PROMO -->
 <section class="promo row">
     <div class="col-12 col-sm-7 promo-header">
         Новости
@@ -18,7 +18,7 @@
 <div class="row">
     <form method="get">
         <table>
-            
+
             <tr>
                 <th><h1>ПОИСК</h1></th>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
@@ -45,7 +45,7 @@
             <div class="event-more"><a class="nav-item-link" href="{% url 'news_about' post.id %}">Подробнее</a></div>
         </div>
         {% endfor %}
-    </section>  
+    </section>
 </div>
 
 {% endblock %}

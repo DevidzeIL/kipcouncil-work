@@ -7,7 +7,7 @@
     <section class="header row">
         <nav class="navbar navbar-expand-xl navbar-light">
             <div class="container-fluid header-navs">
-                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo"
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" style="width: 300px;"
                         src="{% static '/images/logo.svg' %}" alt="logo"></a>
                 <h1>
                     <div class="promo-header" style="margin-left: 10vh;">Аккаунт</div>
@@ -166,30 +166,6 @@
     </table>
 </div>
 
-
-<br>
-<br>
-<br>
-
-
-
-<div class="container portfolio" id="portfolio">
-    <section class="direction row">
-        {% for tag in tags %}
-        {% for event in events %}
-        {% for event_member in events_member %}
-        {% if tag.name == event__tags %}
-        <div class="col-12 col-sm-12 col-md-6 col-lg-3 event">
-            <div class="box-dateitem">{{tag}}</div>
-            <div class="event-header">{{event}}/{{event_member}}</div>
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-        {% endfor %}
-    </section>
-</div>
-
 <br>
 <br>
 <br>
@@ -208,7 +184,7 @@
 <div class="container" id="portfolio">
     <section class="direction row">
         {% for award in awards %}
-        <div class="col-12 col-sm-12 col-md-6 col-lg-3 portfolio">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-3 portfolio">
             <img width="150px" height="350px" class="profile-award img-fluid" src="{{award.award.url}}"
                 onclick='openImageWindow(this.src);'>
             <div class="event-text">{{award.description}}</div>
@@ -253,9 +229,9 @@
         {% endfor %}
         <br>
         <div class="container" style="text-align: center;" ><button class="btn btn-light" ><a href="{% url 'create_award' user.id %}">Добавить</a></button></div>
-        
+
     </section>
-    
+
     <br>
     <br>
     <br>

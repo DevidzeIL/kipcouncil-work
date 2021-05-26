@@ -7,9 +7,10 @@
     <section class="header row">
         <nav class="navbar navbar-expand-xl navbar-light">
             <div class="container-fluid header-navs">
-                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" style="width: 300px;"
+                    src="{% static '/images/logo.svg' %}" alt="logo"></a>
                 <h1><div class="promo-header" style="margin-left: 10vh;">Работа с БД</div></h1>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">    
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
                     </li>
@@ -106,7 +107,7 @@
     {% elif pk_test == 'Event' %}
     <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
-        
+
         <tr>
             <th>Направление</th>
             <th>Название мероприятия</th>
@@ -161,7 +162,7 @@
             <td>{{form.tags}}</td>
             <td>{{form.event}}</td>
             <td>{{form.name}}</td>
-            
+
             <td>{{form.main_text}}</td>
             {{form.media}}
             <td>{{form.text}}</td>
@@ -244,7 +245,7 @@
             <th>Цели</th>
             <th>Начальный текст</th>
             <th>Основной текст</th>
-            
+
             <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
         </tr>
         <tr>
