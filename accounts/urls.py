@@ -23,8 +23,6 @@ urlpatterns = [
     path('user/', views.mainUser, name="main_user"),
     path('account/', views.accountSettings, name="account_settings"),
 
-    path('error404/', views.error404, name="error404"),
-
     path('create_award/<str:pk_test>/', views.createAward, name="create_award"),
     path('edit_award/<str:pk_test>/', views.editAward, name="edit_award"),
     path('delete_award/<str:pk_test>/', views.deleteAward, name="delete_award"),
@@ -65,3 +63,6 @@ urlpatterns = [
 
     path('secret/', views.secret, name="secret"),
 ]
+
+
+handler404 = 'accounts.views.view_404'

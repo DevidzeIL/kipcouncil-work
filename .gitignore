@@ -12,3 +12,5 @@ env
 *.py[cod]
 
 db.sqlite3
+
+staticfiles
