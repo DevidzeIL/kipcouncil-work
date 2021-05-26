@@ -114,15 +114,38 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+
+
+LANGUAGES = [
+    ('ru', 'Русский'),
+]
+
+LANGUAGE_CODE = 'ru-ru'
+
+TIME_ZONE = 'Europe/Moscow'
+DATE_FORMAT = 'd E Y'
 
 USE_I18N = True
-
-USE_L10N = True
-
+USE_L10N = False
 USE_TZ = True
+
+from django.conf.locale.ru import formats as ru_formats
+ru_formats.DATE_FORMAT = 'd.m.Y'
+ru_formats.TIME_FORMAT = 'H:i'
+ru_formats.DATETIME_FORMAT = 'd.m.Y H:i'
+DATE_FORMAT = 'j E Y'
+TIME_FORMAT = 'H:i'
+DATETIME_FORMAT = 'j E Y H:i'
+
+
+def gettext_noop(s):
+    return s
+
+LANGUAGES = (
+    ('ru', gettext_noop('Russian')),
+)
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -145,8 +168,6 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -161,35 +182,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'timeofkip@gmail.com'
 EMAIL_HOST_PASSWORD = 'ZVA-69h-nps-Qg7'
-
-
-from django.conf.locale.ru import formats as ru_formats
-
-LANGUAGES = [
-    ('ru', 'Русский'),
-]
-
-LANGUAGE_CODE = 'ru-RU'
-
-TIME_ZONE = 'UTC'
-
-USE_TZ = True
-
-USE_I18N = True
-
-USE_L10N = False
-
-ru_formats.DATE_FORMAT = 'd.m.Y'
-ru_formats.TIME_FORMAT = 'H:i'
-ru_formats.DATETIME_FORMAT = 'd.m.Y H:i'
-DATE_FORMAT = 'j E Y'
-TIME_FORMAT = 'H:i'
-DATETIME_FORMAT = 'j E Y H:i'
-
-
-def gettext_noop(s):
-    return s
-
-LANGUAGES = (
-    ('ru', gettext_noop('Russian')),
-)

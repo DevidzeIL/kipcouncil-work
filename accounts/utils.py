@@ -20,7 +20,7 @@ class Calendar(HTMLCalendar):
         return '<td></td>'
 
     def formatweek(self, theweek, events):
-        week = '' 
+        week = ''
         for d, weekday in theweek:
             week += self.formatday(d, events)
         return f'<tr> {week} </tr>'
@@ -34,4 +34,5 @@ class Calendar(HTMLCalendar):
         cal += f'{self.formatweekheader()}\n'
         for week in self.monthdays2calendar(self.year, self.month):
             cal += f'{self.formatweek(week, events)}\n'
+
         return cal

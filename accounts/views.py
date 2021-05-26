@@ -779,6 +779,7 @@ def more(request, pk_test):
     }
     return render(request, 'accounts/pages/more.html', context)
 
+import locale
 
 
 # Функция определения сегодняшнего месяца
@@ -806,7 +807,9 @@ def next_month(d):
 # Страница с календарем мероприятий
 def calendar_view(request):
     mydate = get_date(request.GET.get('month', None))
+    locale.setlocale(category=locale.LC_ALL,locale="Russian")
     cal = Calendar(mydate.year, mydate.month)
+
     html_cal = mark_safe(cal.formatmonth(withyear=True))
     events = Event.objects.all()
 
