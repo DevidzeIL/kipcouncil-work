@@ -35,10 +35,10 @@ class Company(models.Model):
 
 class Student(models.Model):
     user        = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    group       = models.ForeignKey(Company, null=True, on_delete=models.SET_NULL)
-    fio         = models.CharField(max_length=200, null=True)
-    phone       = models.CharField(max_length=200, null=True)
-    birthday    = models.DateField(null=True)
+    group       = models.ForeignKey(Company, null=True, blank=True, on_delete=models.SET_NULL)
+    fio         = models.CharField(max_length=200, blank=True, null=True)
+    phone       = models.CharField(max_length=200, blank=True, null=True)
+    birthday    = models.DateField(blank=True, null=True)
     profile_pic = models.ImageField(default='avatar.png', null=True, blank=True)
     vk_url      = models.CharField(max_length=200, blank=True, null=True)
     instagram_url   = models.CharField(max_length=200, blank=True, null=True)
@@ -87,7 +87,7 @@ class Event(models.Model):
 
     @property
     def get_html_url(self):
-        return f'<p>{self.name}</p><a href="{url}"></a>'
+        return f'<p>{self.name}</p><a href=""></a>'
 
 
 

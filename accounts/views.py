@@ -42,6 +42,7 @@ from .utils import Calendar
 
 
 # Регистрация
+@admin_only
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -61,6 +62,7 @@ def registerPage(request):
 
 
 # Вход
+@unauthenticated_user
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -78,19 +80,15 @@ def loginPage(request):
     return render(request, 'accounts/auth/login.html', context)
 
 # Выход
+@authenticated_user
 def logoutUser(request):
     logout(request)
     return redirect('main')
 
-# 404 Страница
-def view_404(request, exception=None):
-   return redirect(request, 'accounts/404.html')
-
-
-
 
 
 # Начальная странциа аккаунта пользователя
+@authenticated_user
 def mainUser(request):
     user = request.user.student
 
@@ -118,6 +116,7 @@ def mainUser(request):
     return render(request, 'accounts/auth/user/user.html', context)
 
 # ПОЛЬЗОВАТЕЛЬ Выгрузка записей из БД Участников мероприятий конкретного пользователя
+@authenticated_user
 def userTable(request, pk_test):
     events = Event.objects.all()
     members = Member.objects.filter(user__id = pk_test)
@@ -136,6 +135,7 @@ def userTable(request, pk_test):
     return render(request, 'accounts/auth/user/user_table.html', context)
 
 # Настройки аккаунта пользователя
+@authenticated_user
 def accountSettings(request):
     student = request.user.student
     form = StudentForm(instance=student)
@@ -154,6 +154,8 @@ def accountSettings(request):
 
 
 # АДМИН Выгрузка записей Мероприятий (Event) и Участников мероприятий (Member)
+@authenticated_user
+@admin_only
 def adminTable(request):
     account = request.user.student
 
@@ -175,6 +177,8 @@ def adminTable(request):
     return render(request, 'accounts/auth/admin/admin_table.html', context)
 
 # АДМИН Функция перехода на страницу пользователя
+@authenticated_user
+@admin_only
 def adminLookuser(request, pk_test):
     user = Student.objects.get(fio = pk_test)
     info = Student.objects.filter(fio = user)
@@ -201,6 +205,7 @@ def adminLookuser(request, pk_test):
 
 # ПОЛЬЗОВАТЕЛЬ Работа с БД (портфолио)
 ## ПОЛЬЗОВАТЕЛЬ Создание значений в БД
+@authenticated_user
 def createAward(request, pk_test):
     user = Student.objects.get(id=pk_test)
     form = AwardForm(initial={'user':user})
@@ -217,6 +222,7 @@ def createAward(request, pk_test):
     return render(request, 'accounts/auth/user/award_form.html', context)
 
 ## ПОЛЬЗОВАТЕЛЬ Изменение значений в БД
+@authenticated_user
 def editAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
     form = AwardForm(instance=award)
@@ -233,7 +239,7 @@ def editAward(request, pk_test):
     return render(request, 'accounts/auth/user/award_form.html', context)
 
 ## ПОЛЬЗОВАТЕЛЬ Удаление значений из БД
-
+@authenticated_user
 def deleteAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
 
@@ -251,7 +257,8 @@ def deleteAward(request, pk_test):
 
 
 ## АДМИН Выгрузка записей из БД в таблицу
-
+@authenticated_user
+@admin_only
 def adminTableDB(request, pk_test):
     account = request.user.student
 
@@ -336,7 +343,8 @@ def adminTableDB(request, pk_test):
 
 # АДМИН Работа с БД
 ## АДМИН Создание записи в БД
-
+@authenticated_user
+@admin_only
 def adminCreateDB(request, pk_test):
     if (pk_test == 'Student'):
         form = StudentForm()
@@ -461,7 +469,8 @@ def adminCreateDB(request, pk_test):
     return render(request, 'accounts/auth/admin/admin_workdb.html', context)
 
 ## АДМИН Изменение записи из БД
-
+@authenticated_user
+@admin_only
 def adminEditDB(request, pk_test1, pk_test2):
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
@@ -604,7 +613,8 @@ def adminEditDB(request, pk_test1, pk_test2):
     return render(request, 'accounts/auth/admin/admin_workdb.html', context)
 
 ## АДМИН Удаление записи из БД
-
+@authenticated_user
+@admin_only
 def adminDeleteDB(request, pk_test1, pk_test2):
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
@@ -642,7 +652,9 @@ def adminDeleteDB(request, pk_test1, pk_test2):
     }
     return render(request, 'accounts/auth/admin/admin_deletedb.html', context)
 
-
+@authenticated_user
+@admin_only
+## АДМИН Создание большого количества записей в БД
 def adminMassiveCreateDB(request, pk_test1, pk_test2):
     formset = []
     FormFormSet = []
@@ -679,7 +691,7 @@ def adminMassiveCreateDB(request, pk_test1, pk_test2):
 
 
 
-
+# Главная страница
 def main(request):
     event_all = New.objects.all().last()
     more = More.objects.all()
@@ -692,6 +704,7 @@ def main(request):
     }
     return render(request, 'accounts/pages/home.html', context)
 
+# Страница направлений
 def direction(request, tags):
     news = New.objects.filter(tags=tags)
     users = ListDirection.objects.filter(tags=tags)
@@ -702,6 +715,7 @@ def direction(request, tags):
     }
     return render(request, 'accounts/pages/direction.html', context)
 
+# Страница О нас
 def about(request):
     users = ListDirection.objects.filter(status="Правление")
     text_about = About.objects.filter(tags__name="Общее").last()
@@ -711,6 +725,7 @@ def about(request):
     }
     return render(request, 'accounts/pages/about.html', context)
 
+# Страница с файлами Колледжа
 def docs_college(request):
     specialties = Specialty.objects.all()
     cources = ["1 курс", "2 курс", "3 курс", "4 курс"]
@@ -721,6 +736,7 @@ def docs_college(request):
     }
     return render(request, 'accounts/pages/docs_college.html', context)
 
+# Страница с файлами Студенческого совета
 def docs_council(request):
     tags = Tag.objects.all()
     docs = DocsCouncil.objects.all()
@@ -730,6 +746,7 @@ def docs_council(request):
     }
     return render(request, 'accounts/pages/docs_council.html', context)
 
+# Страница с новостями
 def news(request):
     news_list = New.objects.all().order_by('date_created')
     myFilter = NewsFilter(request.GET, queryset = news_list)
@@ -740,6 +757,7 @@ def news(request):
     }
     return render(request, 'accounts/pages/news.html', context)
 
+# Страница с описанием выбранной новости
 def news_about(request, pk_test):
     new = New.objects.get(id=pk_test)
     event = new.event
@@ -752,6 +770,7 @@ def news_about(request, pk_test):
     }
     return render(request, 'accounts/pages/news_about.html', context)
 
+# Страница с дополнительной информацией о направлениях
 def more(request, pk_test):
     field = More.objects.get(id=pk_test)
 
@@ -762,19 +781,21 @@ def more(request, pk_test):
 
 
 
-
+# Функция определения сегодняшнего месяца
 def get_date(req_month):
     if req_month:
         year, month = (int(x) for x in req_month.split('-'))
         return date(year, month, day=1)
     return datetime.today()
 
+# Функция нахождения прошлого месяца
 def prev_month(d):
     first = d.replace(day=1)
     prev_month = first - timedelta(days=1)
     month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
     return month
 
+# Функция нахождения следующего месяца
 def next_month(d):
     days_in_month = calendar.monthrange(d.year, d.month)[1]
     last = d.replace(day=days_in_month)
@@ -782,6 +803,7 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+# Страница с календарем мероприятий
 def calendar_view(request):
     mydate = get_date(request.GET.get('month', None))
     cal = Calendar(mydate.year, mydate.month)
@@ -801,7 +823,10 @@ def calendar_view(request):
 
 
 
+# 404 Страница
+def view_404(request):
+   return render(request, 'accounts/404.html')
 
-
+# Секретная страница
 def secret(request):
    return render(request, 'accounts/pages/secret.html')

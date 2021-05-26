@@ -35,7 +35,7 @@ urlpatterns = [
 
 
     path('admin_tabledb/<str:pk_test>/', views.adminTableDB, name="admin_tabledb"),
-    
+
 
     path('admin_createdb/<str:pk_test>/', views.adminCreateDB, name="admin_createdb"),
     path('admin_editdb/<str:pk_test1>/<str:pk_test2>/', views.adminEditDB, name="admin_editdb"),
@@ -45,22 +45,23 @@ urlpatterns = [
 
 
 
-    path('reset_password/', 
+    path('reset_password/',
     auth_views.PasswordResetView.as_view(template_name='accounts/auth/password/password_reset.html'),
      name = 'reset_password'),
 
-    path('reset_password_sent/', 
+    path('reset_password_sent/',
     auth_views.PasswordResetDoneView.as_view(template_name='accounts/auth/password/password_reset_sent.html'),
     name = 'password_reset_done'),
 
-    path('reset/<uidb64>/<token>/', 
+    path('reset/<uidb64>/<token>/',
     auth_views.PasswordResetConfirmView.as_view(template_name='accounts/auth/password/password_reset_form.html'),
     name = 'password_reset_confirm'),
-    
-    path('reset_password_complete/', 
+
+    path('reset_password_complete/',
     auth_views.PasswordResetCompleteView.as_view(template_name='accounts/auth/password/password_reset_done.html'),
     name = 'password_reset_complete'),
 
+    path('view_404/', views.view_404, name="view_404"),
     path('secret/', views.secret, name="secret"),
 ]
 
@@ -71,11 +72,11 @@ from django.shortcuts import render
 from django.template import RequestContext
 
 
-def handler404(request, *args, **argv):
-    response = render('404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
+# def handler404(request, *args, **argv):
+#     response = render('404.html', {},
+#                                   context_instance=RequestContext(request))
+#     response.status_code = 404
+#     return response
 
-    
-handler404 = handler404
+
+# handler404 = handler404
