@@ -46,6 +46,7 @@ urlpatterns = [
     path('admin_massivecreatedb/<str:pk_test1>/<str:pk_test2>/', views.adminMassiveCreateDB, name="admin_massivecreatedb"),
 
 
+
     path('reset_password/', 
     auth_views.PasswordResetView.as_view(template_name='accounts/auth/password/password_reset.html'),
      name = 'reset_password'),
