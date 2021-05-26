@@ -57,33 +57,35 @@
 </div>
 <button class="btn btn-light" onclick="exportTableToExcel('tblData', 'Активность')">Экспортировать в Excel</button>
 
-<table id="tblData">
-    <form method="get">
-        <tr>
-            <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myEventFilter.form.tags}}</th>
-            <th>Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myMemberFilter.form.event}}</th>
-            <th>Роль</th>
-            <th>Комментарий</th>
-            <th>Дата</th>
-            <th><button class="btn btn-primary" type="submit">Поиск</button></th>
-        </tr>
+<div class="container" style="overflow-x:auto;">
+    <table id="tblData">
+        <form method="get">
+            <tr>
+                <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myEventFilter.form.tags}}</th>
+                <th>Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myMemberFilter.form.event}}</th>
+                <th>Роль</th>
+                <th>Комментарий</th>
+                <th>Дата</th>
+                <th><button class="btn btn-primary" type="submit">Поиск</button></th>
+            </tr>
 
-    </form>
+        </form>
 
-    {% for event in events %}
-        {% for member in members %}
-            {% if member.event == event %}
-                <tr>
-                    <td>{{event.tags}}</td>
-                    <td>{{event.name}}</td>
-                    <td>{{member.role}}</td>
-                    <td>{{member.comment}}</td>
-                    <td>{{event.date}}</td>
-                </tr>
-            {% endif %}
+        {% for event in events %}
+            {% for member in members %}
+                {% if member.event == event %}
+                    <tr>
+                        <td>{{event.tags}}</td>
+                        <td>{{event.name}}</td>
+                        <td>{{member.role}}</td>
+                        <td>{{member.comment}}</td>
+                        <td>{{event.date}}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
-</table>
+    </table>
+</div>
 
 <br>
 <br>

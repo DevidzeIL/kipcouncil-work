@@ -697,7 +697,7 @@ def main(request):
     more = More.objects.all()
 
     tags = Tag.objects.all()
-    posts = New.objects.all().order_by('-date_created')[:5]
+    posts = New.objects.all().order_by('-date_created')[:3]
 
     context = {
         'event_all':event_all, 'posts':posts, 'tags':tags, 'more':more
