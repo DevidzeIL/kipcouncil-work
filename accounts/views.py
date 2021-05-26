@@ -46,8 +46,6 @@ from .utils import Calendar
 
 
 # Регистрация
-@authenticated_user
-@admin_only
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -67,7 +65,6 @@ def registerPage(request):
 
 
 # Вход
-@unauthenticated_user
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -85,7 +82,6 @@ def loginPage(request):
     return render(request, 'accounts/auth/login.html', context)
 
 # Выход
-@authenticated_user
 def logoutUser(request):
     logout(request)
     return redirect('main')
@@ -99,7 +95,6 @@ def error404(request):
 
 
 # Начальная странциа аккаунта пользователя
-@authenticated_user
 def mainUser(request):
     user = request.user.student
 
@@ -127,7 +122,7 @@ def mainUser(request):
     return render(request, 'accounts/auth/user/user.html', context)
 
 # ПОЛЬЗОВАТЕЛЬ Выгрузка записей из БД Участников мероприятий конкретного пользователя
-@authenticated_user
+
 def userTable(request, pk_test):
     events = Event.objects.all()
     members = Member.objects.filter(user__id = pk_test)
@@ -146,7 +141,7 @@ def userTable(request, pk_test):
     return render(request, 'accounts/auth/user/user_table.html', context)
 
 # Настройки аккаунта пользователя 
-@authenticated_user
+
 def accountSettings(request):
     student = request.user.student
     form = StudentForm(instance=student)
@@ -166,8 +161,7 @@ def accountSettings(request):
 
 
 # АДМИН Выгрузка записей Мероприятий (Event) и Участников мероприятий (Member)
-@authenticated_user
-@admin_only
+
 def adminTable(request):
     account = request.user.student
 
@@ -189,8 +183,7 @@ def adminTable(request):
     return render(request, 'accounts/auth/admin/admin_table.html', context)
 
 # АДМИН Функция перехода на страницу пользователя 
-@authenticated_user
-@admin_only
+
 def adminLookuser(request, pk_test):
     user = Student.objects.get(fio = pk_test)
     info = Student.objects.filter(fio = user)
@@ -217,7 +210,7 @@ def adminLookuser(request, pk_test):
 
 # ПОЛЬЗОВАТЕЛЬ Работа с БД (портфолио)
 ## ПОЛЬЗОВАТЕЛЬ Создание значений в БД
-@authenticated_user
+
 def createAward(request, pk_test):
     user = Student.objects.get(id=pk_test)
     form = AwardForm(initial={'user':user})
@@ -234,7 +227,7 @@ def createAward(request, pk_test):
     return render(request, 'accounts/auth/user/award_form.html', context)
 
 ## ПОЛЬЗОВАТЕЛЬ Изменение значений в БД
-@authenticated_user
+
 def editAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
     form = AwardForm(instance=award)
@@ -251,7 +244,7 @@ def editAward(request, pk_test):
     return render(request, 'accounts/auth/user/award_form.html', context)
 
 ## ПОЛЬЗОВАТЕЛЬ Удаление значений из БД
-@authenticated_user
+
 def deleteAward(request, pk_test):
     award = UserAward.objects.get(id=pk_test)
 
@@ -269,8 +262,7 @@ def deleteAward(request, pk_test):
 
 
 ## АДМИН Выгрузка записей из БД в таблицу
-@authenticated_user
-@admin_only
+
 def adminTableDB(request, pk_test):
     account = request.user.student
 
@@ -355,8 +347,7 @@ def adminTableDB(request, pk_test):
 
 # АДМИН Работа с БД
 ## АДМИН Создание записи в БД
-@authenticated_user
-@admin_only
+
 def adminCreateDB(request, pk_test):
     if (pk_test == 'Student'):
         form = StudentForm()
@@ -481,8 +472,7 @@ def adminCreateDB(request, pk_test):
     return render(request, 'accounts/auth/admin/admin_workdb.html', context)
 
 ## АДМИН Изменение записи из БД
-@authenticated_user
-@admin_only
+
 def adminEditDB(request, pk_test1, pk_test2): 
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
@@ -625,8 +615,7 @@ def adminEditDB(request, pk_test1, pk_test2):
     return render(request, 'accounts/auth/admin/admin_workdb.html', context)
 
 ## АДМИН Удаление записи из БД
-@authenticated_user
-@admin_only
+
 def adminDeleteDB(request, pk_test1, pk_test2):   
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
