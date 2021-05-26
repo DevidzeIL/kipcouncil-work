@@ -92,7 +92,7 @@ def logoutUser(request):
 
 # 404 Страница
 def error404(request):
-   return render(request, 'accounts/pages/404.html')
+   return render(request, 'accounts/404.html')
 
 
 

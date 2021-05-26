@@ -1,10 +1,8 @@
 from django.urls import path
 
 from django.contrib.auth import views as auth_views
-from .decorators import authenticated_user, unauthenticated_user, allowed_users, admin_only
 
 from . import views
-
 
 
 urlpatterns = [
