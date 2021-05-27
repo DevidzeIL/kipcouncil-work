@@ -64,7 +64,7 @@ def loginPage(request):
             login(request, user)
             return redirect('main')
         else:
-            messages.info(request, 'Email или пароль указан неверно')
+            messages.info(request, 'Логин или пароль указан неверно')
 
     context = {}
     return render(request, 'accounts/auth/login.html', context)
@@ -145,7 +145,7 @@ def accountSettings(request):
 
 # АДМИН Выгрузка записей Мероприятий (Event) и Участников мероприятий (Member)
 @authenticated_user
-@admin_only
+#@admin_only
 def adminTable(request):
     account = request.user.student
 
@@ -168,7 +168,7 @@ def adminTable(request):
 
 # АДМИН Функция перехода на страницу пользователя
 @authenticated_user
-@admin_only
+#@admin_only
 def adminLookuser(request, pk_test):
     user = Student.objects.get(fio = pk_test)
     info = Student.objects.filter(fio = user)
@@ -248,7 +248,7 @@ def deleteAward(request, pk_test):
 
 ## АДМИН Выгрузка записей из БД в таблицу
 @authenticated_user
-@admin_only
+#@admin_only
 def adminTableDB(request, pk_test):
     account = request.user.student
 
@@ -339,7 +339,7 @@ def adminTableDB(request, pk_test):
 # АДМИН Работа с БД
 ## АДМИН Создание записи в БД
 @authenticated_user
-@admin_only
+#@admin_only
 def adminCreateDB(request, pk_test):
     if (pk_test == 'Student'):
         form = StudentForm()
@@ -356,7 +356,7 @@ def adminCreateDB(request, pk_test):
             form = CreateUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('admin_tCDabledb', pk_test)
+                return redirect('admin_tabledb', pk_test)
 
 
     elif (pk_test == 'Tag'):
@@ -474,7 +474,7 @@ def adminCreateDB(request, pk_test):
 
 ## АДМИН Изменение записи из БД
 @authenticated_user
-@admin_only
+#@admin_only
 def adminEditDB(request, pk_test1, pk_test2):
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
@@ -628,7 +628,7 @@ def adminEditDB(request, pk_test1, pk_test2):
 
 ## АДМИН Удаление записи из БД
 @authenticated_user
-@admin_only
+#@admin_only
 def adminDeleteDB(request, pk_test1, pk_test2):
     if (pk_test1 == 'Student'):
         item = Student.objects.get(id=pk_test2)
@@ -669,7 +669,7 @@ def adminDeleteDB(request, pk_test1, pk_test2):
     return render(request, 'accounts/auth/admin/admin_deletedb.html', context)
 
 @authenticated_user
-@admin_only
+#@admin_only
 ## АДМИН Создание большого количества записей в БД
 def adminMassiveCreateDB(request, pk_test1, pk_test2):
     formset = []
@@ -823,7 +823,7 @@ def next_month(d):
 # Страница с календарем мероприятий
 def calendar_view(request):
     mydate = get_date(request.GET.get('month', None))
-    locale.setlocale(category=locale.LC_ALL,locale="Russian")
+    locale.setlocale(locale.LC_ALL,'en_US.UTF-8')
     cal = Calendar(mydate.year, mydate.month)
 
     html_cal = mark_safe(cal.formatmonth(withyear=True))

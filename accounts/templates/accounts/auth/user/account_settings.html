@@ -22,14 +22,14 @@
     </section>
 </div>
 
-
 <div class="row">
     <div class="col-3 col-xs-0"></div>
-	<div class="col-md-3">
-		<div class="card card-body">
-			<img class="profile-pic" src="{{request.user.student.profile_pic.url}}" >
-		</div>
+	<div class="col-md-3" style="margin-bottom:20px">
+		<img class="profile-pic img-fluid" src="{{request.user.student.profile_pic.url}}" >
 	</div>
+
+	<br>	
+
 	<div class="col-md-6">
 		<form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
@@ -53,11 +53,11 @@
             <br>
             <br>
 
-            <label>ВК:&nbsp&nbsp&nbsp&nbsp</label>{{form.vk_url}}
+            <label>ВК (Ссылка):&nbsp&nbsp&nbsp&nbsp</label>{{form.vk_url}}
             <br>
             <br>
 
-            <label>Инстаграмм:&nbsp&nbsp&nbsp&nbsp</label>{{form.instagram_url}}
+            <label>Инстаграмм (Ссылка):&nbsp&nbsp&nbsp&nbsp</label>{{form.instagram_url}}
             <br>
             <br>
 

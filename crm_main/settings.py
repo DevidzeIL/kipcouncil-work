@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-sd*r!s3z^m=zt3wo$ko(v%^lw9!u!)9rh2*k*02bc)5)k62b(3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -65,7 +65,7 @@ ROOT_URLCONF = 'crm_main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'accounts/templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,8 +86,12 @@ WSGI_APPLICATION = 'crm_main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'kipsovet',
+        'USER': 'kipadmin',
+        'PASSWORD': '64738291SifudE19283746',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
