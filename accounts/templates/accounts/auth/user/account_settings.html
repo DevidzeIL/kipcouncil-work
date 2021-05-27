@@ -24,15 +24,14 @@
 
 
 <div class="row">
+    <div class="col-3 col-xs-0"></div>
 	<div class="col-md-3">
 		<div class="card card-body">
 			<img class="profile-pic" src="{{request.user.student.profile_pic.url}}" >
 		</div>
 	</div>
-
-	<div class="col-md-9">
+	<div class="col-md-6">
 		<form method="POST" action="" enctype="multipart/form-data">
-
             {% csrf_token %}
             <label>Группа:&nbsp&nbsp&nbsp&nbsp</label>{{form.group}}
             <br>
@@ -46,7 +45,7 @@
             <br>
             <br>
 
-            <label>Дата рождения  <em>(ГГГГ-ММ-ДД)</em>:&nbsp&nbsp&nbsp&nbsp</label>{{form.birthday|date:'d-m-Y'}}
+            <label>Дата рождения  <em>(ГГГГ-ММ-ДД)</em>:&nbsp&nbsp&nbsp&nbsp</label>{{form.birthday}}
             <br>
             <br>
 
@@ -63,10 +62,12 @@
             <br>
 
         <input class="btn btn-primary" type="submit" name="Update Information" value="Сохранить">
-
         </form>
         {{form.errors}}
 	</div>
 </div>
+
+<br>
+<br>
 
 {% endblock content %}

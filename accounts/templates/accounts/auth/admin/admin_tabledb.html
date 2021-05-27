@@ -54,11 +54,14 @@
         }
     }
 </script>
+
 <button class="btn btn-light" onclick="exportTableToExcel('tblData', '{{pk_test}}')">Экспортировать в Excel</button>
-<div class="container" style="overflow-x:auto;">
+<button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
+<div class="container-fluid" style="overflow-x:auto;">
     <table id="tblData" style="margin-bottom: 50px;">
         {% if pk_test == 'Student'%}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Группа:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.group}}</th>
@@ -98,7 +101,7 @@
 
 
         {% elif pk_test == 'User' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Фамилия</th>
@@ -118,7 +121,6 @@
 
 
         {% elif pk_test == 'Tag' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
         <form method="get">
             <tr>
                 <th>Название направления:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
@@ -134,10 +136,25 @@
         </tr>
         {% endfor %}
 
+        {% elif pk_test == 'Specialty' %}
+        <form method="get">
+            <tr>
+                <th>Название специальности:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
+                <th colspan="3"><button class="btn btn-light" type="submit">Поиск</button></th>
+            </tr>
+        </form>
+        {% for field in form %}
+        <tr>
+            <td>{{field.name}}</td>
+            <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
+            <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
+            <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_massivecreatedb' 'ListDirection' field.id %}">Добавить участников</a></button></td>
+        </tr>
+        {% endfor %}
+
 
 
         {% elif pk_test == 'ListDirection' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
         <form method="get">
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
@@ -168,7 +185,7 @@
 
 
         {% elif pk_test == 'Event' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
@@ -192,7 +209,7 @@
 
 
         {% elif pk_test == 'Member' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Студент:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.user}}</th>
@@ -216,7 +233,7 @@
 
 
         {% elif pk_test == 'New' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
@@ -250,7 +267,7 @@
 
 
         {% elif pk_test == 'UserAward' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Студент:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.user}}</th>
@@ -273,7 +290,7 @@
 
 
         {% elif pk_test == 'Company' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Курс:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.сourse}}</th>
@@ -295,7 +312,7 @@
 
 
         {% elif pk_test == 'About' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
@@ -321,7 +338,7 @@
 
 
         {% elif pk_test == 'More' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
@@ -347,7 +364,7 @@
 
 
         {% elif pk_test == 'DocsCollege' %}
-        <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
         <form method="get">
             <tr>
                 <th>Название:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>

@@ -23,7 +23,7 @@
 </div>
 
 <p>Вы уверены, что хотите удалить эту запись?</p>
-<div class="container" style="text-align: center; align-items: center; margin-bottom: 50px;">
+<div class="container-fluid" style="text-align: center; align-items: center; margin-bottom: 50px;">
     <div class="col">
         <form method="POST" action="{% url 'admin_deletedb' pk_test1 item.id %}">
             {% csrf_token %}

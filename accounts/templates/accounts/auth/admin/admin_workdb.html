@@ -20,7 +20,7 @@
     </section>
 </div>
 
-<div class="container" style="overflow-x:auto;">
+<div class="container-fluid" style="overflow-x:auto;">
     <table>
         {% if pk_test == 'Student'%}
         <form method="POST" action="" enctype="multipart/form-data">
@@ -73,6 +73,19 @@
             {% csrf_token %}
             <tr>
                 <th>Название направления</th>
+                <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
+            </tr>
+            <tr>
+                <td>{{form.name}}</td>
+            </tr>
+        </form>
+        {{form.errors}}
+
+        {% elif pk_test == 'Specialty' %}
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <tr>
+                <th>Название специальности</th>
                 <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
             </tr>
             <tr>

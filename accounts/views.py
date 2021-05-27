@@ -1,45 +1,35 @@
-from django.core.files.base import File
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.forms import inlineformset_factory
-from django.contrib.auth.forms import UserCreationForm
 from datetime import datetime, timedelta, date
 import calendar
-
 from django.contrib.auth.models import User
-
 from django.utils.html import mark_safe
-
 from django.contrib.auth import authenticate, login, logout
-
 from django.contrib import messages
-
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import (
     Tag, Specialty, Company, Student, ListDirection, UserAward,
     Event, Member, New, About, More, DocsCollege, DocsCouncil
 )
-
 from .forms import (
     CreateUserForm, StudentForm, AwardForm,
-    ListDirectionForm, UserAwardForm, EventForm, MemberForm, NewForm,
+    ListDirectionForm, SpecialtyForm, UserAwardForm, EventForm, MemberForm, NewForm,
     AboutForm, MoreForm, DocsCollegeForm, DocsCouncilForm, CompanyForm, TagForm
 )
-
 from .filters import (
     MemberEventFilter, MemberFilter,
-    AdminEventMemberFilter, AdminMemberFilter, AdminUserFilter,
-    NewsFilter, EventFilter,
+    AdminEventMemberFilter, AdminMemberFilter,
+    NewsFilter, EventFilter, SpecialtyFilter,
     UserFilter, StudentFilter, TagFilter, ListDirectionFilter, UserAwardFilter, EventsFilter, CompanyFilter,
     MembersFilter, NewFilter, AboutFilter, MoreFilter, DocsCollegeFilter, DocsCouncilFilter
 )
-
-from .decorators import authenticated_user, unauthenticated_user, allowed_users, admin_only
+from .decorators import authenticated_user, unauthenticated_user, admin_only
 from .utils import Calendar
 
+@authenticated_user
+@unauthenticated_user
+@admin_only
 
 # Регистрация
 @admin_only
@@ -277,6 +267,11 @@ def adminTableDB(request, pk_test):
         myFilter = TagFilter(request.GET, queryset = form)
         form = myFilter.qs
 
+    elif (pk_test == 'Specialty'):
+        form = Specialty.objects.all()
+        myFilter = SpecialtyFilter(request.GET, queryset = form)
+        form = myFilter.qs
+
     elif (pk_test == 'ListDirection'):
         form = ListDirection.objects.all().order_by('date_created')
         myFilter = ListDirectionFilter(request.GET, queryset = form)
@@ -368,6 +363,15 @@ def adminCreateDB(request, pk_test):
         form = TagForm()
         if request.method == 'POST':
             form = TagForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_tabledb', pk_test)
+
+
+    elif (pk_test == 'Tag'):
+        form = SpecialtyForm()
+        if request.method == 'POST':
+            form = SpecialtyForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test)
@@ -499,6 +503,16 @@ def adminEditDB(request, pk_test1, pk_test2):
                 form.save()
                 return redirect('admin_tabledb', pk_test1)
 
+    elif (pk_test1 == 'Specialty'):
+        item = Tag.objects.get(id=pk_test2)
+        form = SpecialtyForm(instance=item)
+        if request.method == 'POST':
+            form = SpecialtyForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_tabledb', pk_test1)
+
+
 
     elif (pk_test1 == 'ListDirection'):
         item = ListDirection.objects.get(id=pk_test2)
@@ -622,6 +636,8 @@ def adminDeleteDB(request, pk_test1, pk_test2):
         item = User.objects.get(id=pk_test2)
     elif (pk_test1 == 'Tag'):
         item = Tag.objects.get(id=pk_test2)
+    elif (pk_test1 == 'Specialty'):
+        item = Specialty.objects.get(id=pk_test2)
     elif (pk_test1 == 'ListDirection'):
         item = ListDirection.objects.get(id=pk_test2)
     elif (pk_test1 == 'Event'):

@@ -37,6 +37,11 @@ class TagForm(ModelForm):
 		model = Tag
 		fields = ['name']
 
+class SpecialtyForm(ModelForm):
+	class Meta:
+		model = Specialty
+		fields = ['name']
+
 class ListDirectionForm(ModelForm):
 	class Meta:
 		model = ListDirection

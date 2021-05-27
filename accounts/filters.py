@@ -1,28 +1,22 @@
-from django.contrib.auth import decorators
 import django_filters
-
 from django_filters import CharFilter
 
 from django.contrib.auth.models import User
 
 from .models import (
-    Tag, Specialty, Company, Student, ListDirection, UserAward,
+	Tag, Specialty, Company, Student, ListDirection, UserAward,
     Event, Member, New, About, More, DocsCollege, DocsCouncil
 )
 
-
-
 class MemberEventFilter(django_filters.FilterSet):
-    class Meta: 
+    class Meta:
         model = Event
         fields = ['tags']
 
 class MemberFilter(django_filters.FilterSet):
-    class Meta: 
+    class Meta:
         model = Member
         fields = ['event']
-
-
 
 
 
@@ -42,9 +36,6 @@ class AdminUserFilter(django_filters.FilterSet):
         fields = ['tags', 'status', 'user']
 
 
-
-
-
 class NewsFilter(django_filters.FilterSet):
 	name = CharFilter(field_name='name', lookup_expr='icontains')
 	text = CharFilter(field_name='text', lookup_expr='icontains')
@@ -60,14 +51,7 @@ class EventFilter(django_filters.FilterSet):
         fields = ['tags']
 
 
-
-
-
-
-
-
-
-# .......................
+# for admin
 
 class UserFilter(django_filters.FilterSet):
 	email = CharFilter(field_name='email', lookup_expr='icontains')
@@ -85,7 +69,13 @@ class StudentFilter(django_filters.FilterSet):
 class TagFilter(django_filters.FilterSet):
 	name = CharFilter(field_name='name', lookup_expr='icontains')
 	class Meta:
-		model = Student
+		model = Tag
+		fields = ['name']
+
+class SpecialtyFilter(django_filters.FilterSet):
+	name = CharFilter(field_name='name', lookup_expr='icontains')
+	class Meta:
+		model = Specialty
 		fields = ['name']
 
 class ListDirectionFilter(django_filters.FilterSet):

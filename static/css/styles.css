@@ -8,7 +8,10 @@ body {
     justify-content: space-around;
 }
 
-
+li
+{
+    text-align: right;
+}
 
 table {
     width: 100%;
