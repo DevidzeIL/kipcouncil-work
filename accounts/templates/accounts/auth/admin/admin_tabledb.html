@@ -104,7 +104,7 @@
 
         <form method="get">
             <tr>
-                <th>Фамилия</th>
+                <th>Номер студ. билета</th>
                 <th>Email</th>
                 <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
             </tr>
@@ -148,7 +148,7 @@
             <td>{{field.name}}</td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
-            <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_massivecreatedb' 'ListDirection' field.id %}">Добавить участников</a></button></td>
+            <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_massivecreatedb' 'Company' field.id %}">Добавить группы</a></button></td>
         </tr>
         {% endfor %}
 
@@ -202,7 +202,7 @@
             <td>{{field.date}}</td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
-            <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_massivecreatedb' 'ListDirection' field.id %}">Добавить участников</a></button></td>
+            <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_massivecreatedb' 'Member' field.id %}">Добавить участников</a></button></td>
         </tr>
         {% endfor %}
 
@@ -230,6 +230,12 @@
         </tr>
         {% endfor %}
 
+        <style>
+       	select {
+    	    word-wrap: normal;
+    	    width: 100px !important;
+	}
+        </style>
 
 
         {% elif pk_test == 'New' %}
@@ -237,10 +243,10 @@
         <form method="get">
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
-                <th>Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.event}}</th>
+                <th>Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.event }}</th>
                 <th>Название новости:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
                 <th>Начальный текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.main_text}}</th>
-                <th>Текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.text}}</th>
+                <th>Текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.text | truncatewords:30 }}</th>
                 <th>Ссылка на Google Photo</th>
                 <th>Обложка</th>
                 <th>Дата создания записи</th>
@@ -316,20 +322,16 @@
         <form method="get">
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
-                <th>Цели:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.goals}}</th>
+                <th>Начальный текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.main_text}}</th>
                 <th>Основной текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.main_text}}</th>
-                <th>Дополнительный текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.common_text}}</th>
-                <th>Результаты:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.result}}</th>
-                <th><button class="btn btn-light" type="submit">Поиск</button></th>
+                <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
             </tr>
         </form>
         {% for field in form %}
         <tr>
             <td>{{field.tags}}</td>
-            <td>{{field.goals | safe }}</td>
-            <td>{{field.main_text | safe }}</td>
-            <td>{{field.text | safe }}</td>
-            <td>{{field.result | safe }}</td>
+            <td>{{field.main_text}}</td>
+            <td>{{field.text | safe | truncatewords:20 }}</td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
         </tr>
@@ -343,7 +345,6 @@
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tags}}</th>
                 <th>Название:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
-                <th>Цели:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.goals}}</th>
                 <th>Начальный текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.main_text}}</th>
                 <th>Основной текст:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.text}}</th>
                 <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
@@ -353,13 +354,13 @@
         <tr>
             <td>{{field.tags}}</td>
             <td>{{field.name}}</td>
-            <td>{{field.goals | safe}}</td>
-            <td>{{field.main_text | safe}}</td>
+            <td>{{field.main_text}}</td>
             <td>{{field.text | safe}}</td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
         </tr>
         {% endfor %}
+
 
 
 

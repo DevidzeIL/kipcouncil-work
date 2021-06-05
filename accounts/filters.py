@@ -117,16 +117,13 @@ class NewFilter(django_filters.FilterSet):
 		fields = ['tags', 'event', 'name', 'main_text', 'text']
 
 class AboutFilter(django_filters.FilterSet):
-	goals = CharFilter(field_name='goals', lookup_expr='icontains')
 	main_text = CharFilter(field_name='main_text', lookup_expr='icontains')
-	common_text = CharFilter(field_name='common_text', lookup_expr='icontains')
-	result = CharFilter(field_name='result', lookup_expr='icontains')
+	text = CharFilter(field_name='common_text', lookup_expr='icontains')
 	class Meta:
 		model = About
 		fields = '__all__'
 
 class MoreFilter(django_filters.FilterSet):
-	goals = CharFilter(field_name='goals', lookup_expr='icontains')
 	main_text = CharFilter(field_name='main_text', lookup_expr='icontains')
 	text = CharFilter(field_name='common_text', lookup_expr='icontains')
 	class Meta:

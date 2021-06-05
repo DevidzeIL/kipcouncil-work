@@ -19,11 +19,15 @@
         margin-bottom: 10vh;
     }
 
+    .info-link
+    {
+        text-decoration: underline;
+    }
 </style>
 <section class="big-promo row">
     <div class="col-0 col-md-1"></div>
     <div class="col-sm-8 col-lg-6">
-        <div class="col-12 col-sm-7 big-promo-text">{{new.name}}</div>
+        <div class="col-12 col-sm-7 big-promo-text" style="text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">{{new.name}}</div>
     </div>
     <img width="500px" class="profile-pic promo-image"  src="{{new.photo.url}}">
 </section>
@@ -44,8 +48,8 @@
 
                     <br>
                     <br>
-                    {% if new.link != None %}
-                        <div class="info-link"><a href="{{new.link}}">Фото/Видео</a></div>
+                    {% if new.link != None %} 
+			<div class="info-link"><a href="{{new.link}}" target="_blank"><h3>Фото/Видео</h3></a></div>
                     {% endif %}
                 </div>
             </div>

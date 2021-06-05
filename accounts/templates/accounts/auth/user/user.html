@@ -32,47 +32,82 @@
 <div class="container-fluid user-page">
     <section class="user-page row">
         {% for field in info %}
-        <div class="col-1"></div>
+        <div class="col-0 col-lg-1"></div>
         <!-- USER > USER NAV -->
-        <div class="col-xs-6 col-sm-10 col-md-3 col-lg-2 col-xxl-2 footer-nav">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 col-xl-2  footer-nav">
             <div class="row">
                 <div class="footer-box">
                     <div class="footer-nav-header">Главное</div>
                     {% if request.user.is_staff %}
-                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Мероприятия и
-                            участники</a></div>
-                    <br>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                        href="{% url 'admin_tabledb' 'User' %}">Аккаунты</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'Student' %}">Студенты</a></div>
-                    <br>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                        href="{% url 'admin_tabledb' 'Specialty' %}">Специальность</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'Tag' %}">Направления</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'ListDirection' %}">Участники направлений</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'Event' %}">Мероприятия</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'Member' %}">Участники мероприятий</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'New' %}">Новости</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'UserAward' %}">Портфолио студентов</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'Company' %}">Список групп</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'About' %}">Описания страниц</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'More' %}">Дополнительные страницы</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'DocsCollege' %}">Список документов колледжа</a></div>
-                    <div class="footer-nav-item"><a class="nav-item-link"
-                            href="{% url 'admin_tabledb' 'DocsCouncil' %}">Список документов студенческого совета</a>
+                                       <div class="footer-nav-item">
+                        <a class="nav-item-link" href="{% url 'admin_table' %}">Мероприятия и участники</a>
                     </div>
+
                     <br>
+
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'User' %}">Аккаунты</a>
+                    </div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'Student' %}">Студенты</a>
+                    </div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'UserAward' %}">Портфолио студентов</a>
+                    </div>
+
+                    <br>
+
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'Specialty' %}">Специальности</a>
+                    </div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'Company' %}">Список групп</a>
+                    </div>
+
+                    <br>
+
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'Tag' %}">Направления</a>
+                    </div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'ListDirection' %}">Участники направлений</a>
+                    </div>
+
+                    <br>
+
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'Event' %}">Мероприятия</a>
+                    </div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'Member' %}">Участники мероприятий</a>
+                    </div>
+
+                    <br>
+
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'New' %}">Новости</a>
+                    </div>
+
+                    <br>
+
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'About' %}">Описания страниц</a>
+                    </div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                         href="{% url 'admin_tabledb' 'More' %}">Дополнительные страницы</a>
+                    </div>
+
+                    <br>
+
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'DocsCollege' %}">Список документов колледжа</a>
+                    </div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'DocsCouncil' %}">Список документов студенческого совета</a>
+                    </div>
+
+                    <br>
+
                     {% endif %}
                     <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user_table' user.id %}">Моя активность</a></div>
                     <div class="footer-nav-item"><a class="nav-item-link" href="#portfolio">Портфолио</a></div>
@@ -90,7 +125,7 @@
         </div>
 
         <!-- USER > USER PIC -->
-        <div class="col-sm-10 col-md-6 col-lg-5 col-xxl-4 footer-box">
+        <div class="col-sm-10 col-md-6 col-lg-3 col-xl-4 footer-box">
             <div>
         	<img class="profile-pic img-fluid"" src=" {{field.profile_pic.url}}">
             </div>
@@ -98,7 +133,7 @@
 
 
         <!-- USER > USER INFO -->
-        <div class="col-xs-8 col-sm-8 col-md-10 col-lg-8 col-xxl-2 footer-news-list">
+        <div class="col-sm-8 col-md-10 col-lg-2 col-xl-2 footer-news-list">
             <div class="row">
                 <div class="footer-box">
                     <div class="footer-nav-header">ФИО</div>
@@ -131,7 +166,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-1"></div>
+        <div class="col-0 col-lg-1"></div>
         {% endfor %}
     </section>
 </div>

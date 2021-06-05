@@ -253,12 +253,12 @@ def adminTableDB(request, pk_test):
     account = request.user.student
 
     if (pk_test == 'Student'):
-        form = Student.objects.all().order_by('group')
+        form = Student.objects.all().order_by('-date_created')
         myFilter = StudentFilter(request.GET, queryset = form)
         form = myFilter.qs
 
     elif (pk_test == 'User'):
-        form = User.objects.all()
+        form = User.objects.all().order_by('-date_joined')
         myFilter = UserFilter(request.GET, queryset = form)
         form = myFilter.qs
 
@@ -273,7 +273,7 @@ def adminTableDB(request, pk_test):
         form = myFilter.qs
 
     elif (pk_test == 'ListDirection'):
-        form = ListDirection.objects.all().order_by('date_created')
+        form = ListDirection.objects.all().order_by('-date_created')
         myFilter = ListDirectionFilter(request.GET, queryset = form)
         form = myFilter.qs
 
@@ -285,7 +285,7 @@ def adminTableDB(request, pk_test):
 
 
     elif (pk_test == 'Member'):
-        form = Member.objects.all()
+        form = Member.objects.all().order_by('-date_created')
         myFilter = MembersFilter(request.GET, queryset = form)
         form = myFilter.qs
 
@@ -368,14 +368,13 @@ def adminCreateDB(request, pk_test):
                 return redirect('admin_tabledb', pk_test)
 
 
-    elif (pk_test == 'Tag'):
+    elif (pk_test == 'Specialty'):
         form = SpecialtyForm()
         if request.method == 'POST':
             form = SpecialtyForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect('admin_tabledb', pk_test)
-
 
     elif (pk_test == 'ListDirection'):
         form = ListDirectionForm()
@@ -504,7 +503,7 @@ def adminEditDB(request, pk_test1, pk_test2):
                 return redirect('admin_tabledb', pk_test1)
 
     elif (pk_test1 == 'Specialty'):
-        item = Tag.objects.get(id=pk_test2)
+        item = Specialty.objects.get(id=pk_test2)
         form = SpecialtyForm(instance=item)
         if request.method == 'POST':
             form = SpecialtyForm(request.POST, instance=item)
@@ -698,6 +697,17 @@ def adminMassiveCreateDB(request, pk_test1, pk_test2):
                 formset.save()
                 return redirect('admin_tabledb', pk_test1)
 
+    elif (pk_test1 == 'Company'):
+        name = Specialty.objects.get(id=pk_test2)
+        FormFormSet = inlineformset_factory(Specialty, Company, fields=('сourse', 'group_number'), extra=50)
+        specialty = Specialty.objects.get(id=pk_test2)
+        formset = FormFormSet(queryset=Company.objects.none(), instance=specialty)
+        if request.method == 'POST':
+            formset = FormFormSet(request.POST, instance=specialty)
+            if formset.is_valid():
+                formset.save()
+                return redirect('admin_tabledb', pk_test1)
+
 
     context = {
         'formset':formset, 'pk_test':pk_test1, 'pk_test2':pk_test2, 'name':name
@@ -764,7 +774,7 @@ def docs_council(request):
 
 # Страница с новостями
 def news(request):
-    news_list = New.objects.all().order_by('date_created')
+    news_list = New.objects.all().order_by('-date_created')
     myFilter = NewsFilter(request.GET, queryset = news_list)
     news_list = myFilter.qs
 

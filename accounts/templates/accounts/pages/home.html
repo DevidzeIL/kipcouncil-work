@@ -2,6 +2,18 @@
 
 {% block content %}
 
+<!-- PROMO -->
+<section class="promo row">
+    <div class="col-12 col-sm-2 promo-dateitem">
+        актуальное
+    </div>
+    <div class="col-12 col-sm-7 promo-header">
+        {{event_all.name}}
+    </div>
+    <div class="col-1"></div>
+</section>
+
+
 <div class="container">
     <section class="directions row">
         {% for tag in tags %}
@@ -13,7 +25,7 @@
                     {% endif %}
                 {% endfor %}
 
-                <div class="box-date">—</div>
+                <div class="box-date"></div>
                 {% for post in posts %}
                     {% if post.tags == tag %}
                     <div class="box-dateitem">
@@ -53,7 +65,7 @@
 <section class="big-promo row">
     <div class="col-0 col-md-1"></div>
     <div class="col-sm-8 col-lg-6">
-        <a class="big-promo-text" style="text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);" href="{% url 'news_about' event_all.id %}">
+        <a class="big-promo-text" style="text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);" href="{% url 'news_about' event_all.id %}">
             {{event_all.name}}
         </a>
     </div>

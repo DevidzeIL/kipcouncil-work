@@ -40,8 +40,8 @@
 
         <!-- USER > USER PIC -->
         <div class="col-sm-10 col-md-6 col-lg-5 col-xxl-4 footer-box">
-            <div class="row">
-                <img width="250px" class="profile-pic img-fluid"" src="{{field.profile_pic.url}}" >
+            <div>
+                <img class="profile-pic img-fluid"" src="{{field.profile_pic.url}}" >
             </div>
         </div>
 
@@ -63,13 +63,14 @@
                 </div>
                 <div class="footer-box">
                     <div class="footer-nav-header">Email</div>
-                    <div class="footer-nav-item">{{field.email}}</div>
+                    <div class="footer-nav-item">{{field.user.email}}</div>
                 </div>
                 <div class="footer-box">
                     <div class="footer-nav-header">Телефон</div>
                     <div class="footer-nav-item">{{field.phone}}</div>
                 </div>
                 <div class="footer-box">
+		    <div class="footer-nav-header">Соц. сети</div>
                     {% if field.vk_url is not Null %}
                         <div class="footer-nav-item"><a href="{{field.vk_url}}" target="_blank">vk</a></div>
                     {% endif %}

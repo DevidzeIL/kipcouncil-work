@@ -78,7 +78,6 @@
         <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <tr>
-                <th>Направление</th>
                 <th>Студент</th>
                 <th>Статус</th>
                 <th>Роль</th>
@@ -87,7 +86,6 @@
             {{ formset.management_form}}
             {% for form in formset %}
             <tr>
-                <td>{{form.tags}}</td>
                 <td>{{form.user}}</td>
                 <td>{{form.status}}</td>
                 <td>{{form.role}}</td>
@@ -102,13 +100,11 @@
             {% csrf_token %}
 
             <tr>
-                <th>Направление</th>
                 <th>Название мероприятия</th>
                 <th>Дата проведения <em>(ГГГГ-ММ-ДД)</em></th>
                 <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
             </tr>
             <tr>
-                <td>{{form.tags}}</td>
                 <td>{{form.name}}</td>
                 <td>{{form.date}}</td>
             </tr>
@@ -138,83 +134,23 @@
 
 
 
-        {% elif pk_test == 'UserAward' %}
-        <form method="POST" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            <tr>
-                <th>Студент</th>
-                <th>Портфолио</th>
-                <th>Описание</th>
-                <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
-            </tr>
-            <tr>
-                <td>{{form.user}}</td>
-                <td>{{form.award}}</td>
-                <td>{{form.description}}</td>
-            </tr>
-        </form>
-
-
-
         {% elif pk_test == 'Company' %}
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form method="POST" action="">
             {% csrf_token %}
             <tr>
                 <th>Курс</th>
-                <th>Специальность</th>
                 <th>Номер</th>
                 <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
             </tr>
+            {{ formset.management_form}}
+            {% for form in formset %}
             <tr>
                 <td>{{form.сourse}}</td>
-                <td>{{form.specialty}}</td>
                 <td>{{form.group_number}}</td>
             </tr>
+            {% endfor %}
         </form>
-
-
-
-        {% elif pk_test == 'DocsCollege' %}
-        <form method="POST" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            <tr>
-                <th>Название</th>
-                <th>Курс</th>
-                <th>Специальность</th>
-                <th>Файл</th>
-                <th>Описание</th>
-                <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
-            </tr>
-            <tr>
-                <td>{{form.name}}</td>
-                <td>{{form.cource}}</td>
-                <td>{{form.specialty}}</td>
-                <td>{{form.file}}</td>
-                <td>{{form.description}}</td>
-            </tr>
-
-        </form>
-
-
-
-        {% elif pk_test == 'DocsCouncil' %}
-        <form method="POST" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            <tr>
-                <th>Направление</th>
-                <th>Название</th>
-                <th>Файл</th>
-                <th>Описание</th>
-                <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
-            </tr>
-            <tr>
-                <td>{{form.tag}}</td>
-                <td>{{form.name}}</td>
-                <td>{{form.file}}</td>
-                <td>{{form.description}}</td>
-            </tr>
-        </form>
-        {% endif %}
+        {% endif %}        
     </table>
 </div>
 

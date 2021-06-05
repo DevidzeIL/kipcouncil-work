@@ -52,8 +52,8 @@
         <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <tr>
-                <th>Фамилия</th>
-                <th>Email</th>
+                <th>Номер студ. билета</th>
+                <th>Корп. почта</th>
                 <th>Пароль</th>
                 <th>Подтверждение пароля</th>
                 <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
@@ -230,19 +230,15 @@
             {% csrf_token %}
             <tr>
                 <th>Направление</th>
-                <th>Цели</th>
+                <th>Начальный текст</th>
                 <th>Основной текст</th>
-                <th>Дополнительный текст</th>
-                <th>Результаты</th>
                 <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
             </tr>
             <tr>
                 <td>{{form.tags}}</td>
-                <td>{{form.goals}}</td>
                 <td>{{form.main_text}}</td>
                 {{form.media}}
                 <td>{{form.text}}</td>
-                <td>{{form.result}}</td>
             </tr>
         </form>
         {{form.errors}}
@@ -255,23 +251,19 @@
             <tr>
                 <th>Направление</th>
                 <th>Название</th>
-                <th>Цели</th>
                 <th>Начальный текст</th>
                 <th>Основной текст</th>
-
                 <th><input class="btn btn-primary" type="submit" name="Submit" value="Сохранить"></th>
             </tr>
             <tr>
                 <td>{{form.tags}}</td>
                 <td>{{form.name}}</td>
-                {{form.media}}
-                <td>{{form.goals}}</td>
                 <td>{{form.main_text}}</td>
+                {{form.media}}
                 <td>{{form.text}}</td>
             </tr>
         </form>
         {{form.errors}}
-
 
 
         {% elif pk_test == 'DocsCollege' %}

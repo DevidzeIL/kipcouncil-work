@@ -1,0 +1,242 @@
+{% extends 'accounts/auth/main_user.html' %}
+{% load static %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="container-fluid header-user">
+    <section class="header row">
+        <nav class="navbar navbar-expand-xl navbar-light">
+            <div class="container-fluid header-navs">
+                <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" style="width: 300px;"
+                        src="{% static '/images/logo.svg' %}" alt="logo"></a>
+                <h1>
+                    <div class="promo-header" style="margin-left: 10vh;">Аккаунт</div>
+                </h1>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main' %}">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_settings' %}">Настройки</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+</div>
+
+<!-- USER -->
+<div class="container-fluid user-page">
+    <section class="user-page row">
+        {% for field in info %}
+        <div class="col-1"></div>
+        <!-- USER > USER NAV -->
+        <div class="col-xs-6 col-sm-10 col-md-3 col-lg-2 col-xxl-2 footer-nav">
+            <div class="row">
+                <div class="footer-box">
+                    <div class="footer-nav-header">Главное</div>
+                    {% if request.user.is_staff %}
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'admin_table' %}">Мероприятия и
+                            участники</a></div>
+                    <br>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'User' %}">Аккаунты</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'Student' %}">Студенты</a></div>
+                    <br>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                        href="{% url 'admin_tabledb' 'Specialty' %}">Специальность</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'Tag' %}">Направления</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'ListDirection' %}">Участники направлений</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'Event' %}">Мероприятия</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'Member' %}">Участники мероприятий</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'New' %}">Новости</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'UserAward' %}">Портфолио студентов</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'Company' %}">Список групп</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'About' %}">Описания страниц</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'More' %}">Дополнительные страницы</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'DocsCollege' %}">Список документов колледжа</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link"
+                            href="{% url 'admin_tabledb' 'DocsCouncil' %}">Список документов студенческого совета</a>
+                    </div>
+                    <br>
+                    {% endif %}
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'user_table' user.id %}">Моя активность</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="#portfolio">Портфолио</a></div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Общее</div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'docs_council' %}">Документы Студенческого совета</a>
+                    </div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'calendar' %}">Календарный
+                            план</a></div>
+                    <div class="footer-nav-item"><a class="nav-item-link" href="{% url 'docs_college' %}">Документы Колледжа</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- USER > USER PIC -->
+        <div class="col-sm-10 col-md-6 col-lg-5 col-xxl-4 footer-box">
+            <div class="row">
+                
+            </div>
+        </div>
+
+
+        <!-- USER > USER INFO -->
+        <div class="col-xs-8 col-sm-8 col-md-10 col-lg-8 col-xxl-2 footer-news-list">
+            <div class="row">
+                <div class="footer-box">
+                    <div class="footer-nav-header">ФИО</div>
+                    <div class="footer-nav-item">{{field.fio}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Группа</div>
+                    <div class="footer-nav-item">{{field.group.сourse}}{{field.group.specialty}} - {{field.group}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">День рождения</div>
+                    <div class="footer-nav-item">{{field.birthday}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Email</div>
+                    <div class="footer-nav-item">{{field.user.email}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Телефон</div>
+                    <div class="footer-nav-item">{{field.phone}}</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-nav-header">Соц. сети</div>
+                    {% if field.vk_url is not Null %}
+                    <div class="footer-nav-item"><a href="{{field.vk_url}}" target="_blank">vk</a></div>
+                    {% endif %}
+                    {% if field.instagram_url is not Null %}
+                    <div class="footer-nav-item"><a href="{{field.instagram_url}}" target="_blank">instagram</a></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        {% endfor %}
+    </section>
+</div>
+
+
+
+<br>
+<br>
+<br>
+
+
+
+<!-- TABLE -->
+<div class="container" style="overflow-x:auto;">
+    <table>
+        <tr>
+            <th>Результат</th>
+            {% for tag in tags %}
+            <th>{{tag}}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Общее кол-во</td>
+            {% for event in events_count %}
+            <td>{{event}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Кол-во моего участия</td>
+            {% for event_member in events_member_count %}
+            <td>{{event_member}}</td>
+            {% endfor %}
+        </tr>
+    </table>
+</div>
+
+<br>
+<br>
+<br>
+
+<script type="text/javascript">
+    function openImageWindow(src) {
+        var image = new Image();
+        image.src = src;
+        var width = image.width;
+        var height = image.height;
+        window.open(src, "Image", "width=" + width + ",height=" + height);
+    }
+</script>
+
+<!-- PORTFOLIO -->
+<div class="container" id="portfolio">
+    <section class="direction row">
+        {% for award in awards %}
+        <div class="col-6 col-sm-6 col-md-6 col-lg-3 portfolio">
+            <img width="150px" height="350px" class="profile-award img-fluid" src="{{award.award.url}}"
+                onclick='openImageWindow(this.src);'>
+            <div class="event-text">{{award.description}}</div>
+            <div class="">
+                <a class="nav-item-link" href="{% url 'edit_award' award.id %}">
+                    <svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12.4416 53H12.7258L26.4346 50.0203C26.7017 49.9759 26.9491 49.8523 27.1449 49.6656L50.3716 26.4664C52.0684 24.7753 53.015 22.4752 52.9998 20.0813C53.0029 17.6688 52.0594 15.3512 50.3716 13.6252C48.6787 11.9305 46.3759 10.985 43.979 11.0003C41.5668 10.979 39.2531 11.9547 37.5863 13.6963L14.4304 36.8954C14.2262 37.0595 14.0773 37.2824 14.0042 37.5339L11.021 51.2264C10.9396 51.718 11.0978 52.2188 11.4472 52.5744C11.7095 52.8417 12.0669 52.9947 12.4416 53ZM43.979 13.8382C47.3919 13.8379 50.1587 16.6012 50.159 20.01C50.159 20.0338 50.1589 20.0575 50.1586 20.0813C50.1819 21.7053 49.5404 23.2684 48.3829 24.4089L39.6462 15.6116C40.7972 14.4692 42.3562 13.831 43.979 13.8382ZM37.6573 17.6692L46.394 26.3955L26.1504 46.5439L17.4137 37.8886L37.6573 17.6692ZM16.2772 40.7265L23.3091 47.7501L14.2883 49.7366L16.2772 40.7265Z"
+                            fill="black" />
+                    </svg>
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="nav-item-link" href="{% url 'delete_award' award.id %}">
+                    <svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M47.25 10H39V8.5C39 6.01872 36.9813 4 34.5 4H28.5C26.0187 4 24 6.01872 24 8.5V10H15.75C13.6823 10 12 11.6823 12 13.75V19C12 19.8284 12.6716 20.5 13.5 20.5H14.3198L15.6157 47.714C15.7301 50.1174 17.7045 52 20.1105 52H42.8895C45.2956 52 47.27 50.1174 47.3843 47.714L48.6803 20.5H49.5C50.3284 20.5 51 19.8284 51 19V13.75C51 11.6823 49.3177 10 47.25 10ZM27 8.5C27 7.67294 27.6729 7 28.5 7H34.5C35.3271 7 36 7.67294 36 8.5V10H27V8.5ZM15 13.75C15 13.3365 15.3365 13 15.75 13H47.25C47.6635 13 48 13.3365 48 13.75V17.5C47.5377 17.5 16.9156 17.5 15 17.5V13.75ZM44.3877 47.5713C44.3496 48.3724 43.6914 49 42.8895 49H20.1105C19.3085 49 18.6503 48.3724 18.6123 47.5713L17.3231 20.5H45.6769L44.3877 47.5713Z"
+                            fill="black" />
+                        <path
+                            d="M31.5 46C32.3284 46 33 45.3284 33 44.5V25C33 24.1716 32.3284 23.5 31.5 23.5C30.6716 23.5 30 24.1716 30 25V44.5C30 45.3284 30.6715 46 31.5 46Z"
+                            fill="black" />
+                        <path
+                            d="M39 46C39.8284 46 40.5 45.3284 40.5 44.5V25C40.5 24.1716 39.8284 23.5 39 23.5C38.1716 23.5 37.5 24.1716 37.5 25V44.5C37.5 45.3284 38.1715 46 39 46Z"
+                            fill="black" />
+                        <path
+                            d="M24 46C24.8284 46 25.5 45.3284 25.5 44.5V25C25.5 24.1716 24.8284 23.5 24 23.5C23.1716 23.5 22.5 24.1716 22.5 25V44.5C22.5 45.3284 23.1715 46 24 46Z"
+                            fill="black" />
+                    </svg>
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="nav-item-link" href="{{award.award.url}}" download>
+                    <svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M57 57H7V60H57V57Z" fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M29.6915 45.8996V5.5H34.3085V45.8996L45.0591 34.851C45.9606 33.9245 47.4223 33.9245 48.3238 34.851C49.2254 35.7775 49.2254 37.2797 48.3238 38.2063L33.6324 53.3051C32.7308 54.2316 31.2692 54.2316 30.3676 53.3051L15.6762 38.2063C14.7746 37.2797 14.7746 35.7775 15.6762 34.851C16.5777 33.9245 18.0394 33.9245 18.9409 34.851L29.6915 45.8996Z"
+                            fill="black" />
+                    </svg>
+                </a>
+            </div>
+            <br>
+            <br>
+        </div>
+        {% endfor %}
+        <br>
+        <div class="container" style="text-align: center;" ><button class="btn btn-light" ><a href="{% url 'create_award' user.id %}">Добавить</a></button></div>
+
+    </section>
+
+    <br>
+    <br>
+    <br>
+</div>
+
+{% endblock %}
