@@ -81,7 +81,8 @@ def logoutUser(request):
 @authenticated_user
 def mainUser(request):
     user = request.user.student
-
+    user_role = request.user.groups.name
+    print("ROOOLE", user_role)
     info = Student.objects.filter(fio = user)
     tags = Tag.objects.all()
 
@@ -746,7 +747,7 @@ def direction(request, tags):
 # Страница О нас
 def about(request):
     users = ListDirection.objects.filter(status="Правление")
-    text_about = About.objects.filter(tags__name="Общее").last()
+    text_about = About.objects.filter(tags__name="Правление").last()
 
     context = {
         'users':users, 'text_about':text_about
