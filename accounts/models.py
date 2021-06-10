@@ -46,6 +46,9 @@ class Student(models.Model):
     def __str__(self):
         return str(self.fio)
 
+    class Meta:
+        ordering = ["fio"]
+
 
 
 class ListDirection(models.Model):

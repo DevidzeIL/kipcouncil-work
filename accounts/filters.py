@@ -54,10 +54,10 @@ class EventFilter(django_filters.FilterSet):
 # for admin
 
 class UserFilter(django_filters.FilterSet):
-	email = CharFilter(field_name='email', lookup_expr='icontains')
+	username = CharFilter(field_name='username', lookup_expr='icontains')
 	class Meta:
 		model = User
-		fields = ['email']
+		fields = ['username']
 
 class StudentFilter(django_filters.FilterSet):
 	fio = CharFilter(field_name='fio', lookup_expr='icontains')

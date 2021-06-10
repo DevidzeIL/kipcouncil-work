@@ -733,11 +733,13 @@ def main(request):
 # Страница направлений
 def direction(request, tags):
     news = New.objects.filter(tags=tags)
-    users = ListDirection.objects.filter(tags=tags)
+    news_count = New.objects.filter(tags=tags).count()
+    users = ListDirection.objects.filter(tags=tags).order_by('date_created')
     text_about = About.objects.filter(tags=tags).last()
 
     context = {
-    'news':news, 'users':users, 'text_about':text_about
+    'news':news, 'users':users, 'text_about':text_about,
+    'news_count':news_count
     }
     return render(request, 'accounts/pages/direction.html', context)
 

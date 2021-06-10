@@ -56,7 +56,10 @@
 </script>
 
 <button class="btn btn-light" onclick="exportTableToExcel('tblData', '{{pk_test}}')">Экспортировать в Excel</button>
-<button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+
+{% if pk_test != 'Student'%}
+    <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
+{% endif %}
 
 <div class="container-fluid" style="overflow-x:auto;">
     <table id="tblData" style="margin-bottom: 50px;">
@@ -83,9 +86,18 @@
             <td>{{field.birthday}}</td>
             <td><img width="150px" height="350px" class="profile-pic img-fluid" src="{{field.profile_pic.url}}"
                     onclick='openImageWindow(this.src);'></td>
-            <td></button><a href="{{field.vk_url}}">Ссылка</a></td>
-            <td></button><a href="{{field1.instagram_url}}">Ссылка</a></td>
-            <td><button class="btn btn-light" type="submit">
+	    {% if field.vk_url is not Null %}
+            	<td></button><a href="{{field.vk_url}}" target="_blank">Ссылка</a></td>
+	    {% else %}
+                    <td>Нет ссылки</td>
+	    {% endif %}
+            {% if field.instagram_url is not Null %}
+            	<td></button><a href="{{field.instagram_url}}" target="_blank">Ссылка</a></td>
+            {% else %}
+                    <td>Нет ссылки</td>
+	    {% endif %}
+
+	    <td><button class="btn btn-light" type="submit">
                 {% if field.fio == account.fio %}
                     <a href="{% url 'main_user' %}">
                 {% else %}
@@ -104,7 +116,7 @@
 
         <form method="get">
             <tr>
-                <th>Номер студ. билета</th>
+                <th>Номер студ. билета:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.username}}</th>
                 <th>Email</th>
                 <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
             </tr>
