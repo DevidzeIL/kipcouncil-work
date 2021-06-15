@@ -10,7 +10,7 @@
                 <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" style="width: 300px;"
                         src="{% static '/images/logo.svg' %}" alt="logo"></a>
                 <h1>
-                    <div class="promo-header" style="margin-left: 10vh;">Работа с БД</div>
+                    <div class="promo-header" style="margin-left: 10vh;">Мероприятия и участники</div>
                 </h1>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
                     <li class="nav-item">
@@ -57,12 +57,19 @@
 </div>
 <button class="btn btn-light" onclick="exportTableToExcel('tblData', 'Мероприятия и участники')">Экспортировать в Excel</button>
 
+        <style>
+            select
+            {
+                width: 100px;
+            }
+        </style>
+
 <div class="container-fluid" style="overflow-x:auto;">
     <table id="tblData">
         <form method="get">
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilterEvent.form.tags}}</th>
-                <th>Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myFilterMember.form.event}}</th>
+                <th style="width:100px;">Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myFilterMember.form.event}}</th>
                 <th>Студент:&nbsp&nbsp&nbsp&nbsp{{myFilterMember.form.user}}</th>
                 <th>Роль</th>
                 <th>Комменатрий</th>
@@ -86,6 +93,7 @@
                 <td>{{member.role}}</td>
                 <td>{{member.comment}}</td>
                 <td>{{event.date}}</td>
+		<td></td>
             </tr>
             {% endif %}
             {% endfor %}

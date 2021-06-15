@@ -57,6 +57,13 @@
 </div>
 <button class="btn btn-light" onclick="exportTableToExcel('tblData', 'Активность')">Экспортировать в Excel</button>
 
+        <style>
+            select
+            {
+                width: 100px;
+            }
+        </style>
+
 <div class="container-fluid" style="overflow-x:auto;">
     <table id="tblData">
         <form method="get">
@@ -80,6 +87,7 @@
                         <td>{{member.role}}</td>
                         <td>{{member.comment}}</td>
                         <td>{{event.date}}</td>
+			<td></td>
                     </tr>
                 {% endif %}
             {% endfor %}

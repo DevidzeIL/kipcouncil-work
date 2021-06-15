@@ -28,20 +28,22 @@
     <div class="col-xs-0 col-sm-2 col-md-1 col-lg-2"></div>
 
     <!-- INFO > IMG -->
+    {% if users_count != 0 %}
     <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4 info-users">
         <div class="box-header">Координаторство</div>
         <div class="row">
             {% for user in users %}
             {% if user.status == "Правление" %}
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 info-user">
-                <img class="img-fluid" src="{{user.user.profile_pic.url}}" alt="">
+                <img class="img-fluid" style="height: 30vh; width: 100%; object-fit: cover; object-position: top;" src="{{user.user.profile_pic.url}}" alt="">
+                <div class="info-fio">{{user.user.fio}}</div>
                 <div class="info-role">{{user.role}}</div>
-                <div class="info-fio">{{user.user}}</div>
             </div>
             {% endif %}
             {% endfor %}
         </div>
     </div>
+    {% endif %}
 
     <div class="col-xs-1 col-sm-1 col-md-1"></div>
 </section>  

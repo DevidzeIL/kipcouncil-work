@@ -81,8 +81,11 @@ def logoutUser(request):
 @authenticated_user
 def mainUser(request):
     user = request.user.student
-    user_role = request.user.groups.name
-    print("ROOOLE", user_role)
+
+    user_role_admin = request.user.groups.filter(name='admin').exists()
+    user_role_coordinator = request.user.groups.filter(name='coordinator').exists()
+    user_role_journalist = request.user.groups.filter(name='journalist').exists()
+
     info = Student.objects.filter(fio = user)
     tags = Tag.objects.all()
 
@@ -101,6 +104,7 @@ def mainUser(request):
     context = {
         'info':info,
         'user':user, 'tags':tags, 'awards':awards,
+	'user_role_admin':user_role_admin, 'user_role_coordinator':user_role_coordinator, 'user_role_journalist':user_role_journalist,
         'events_count': events_count, 'events_member_count':events_member_count,
     }
 
@@ -298,7 +302,7 @@ def adminTableDB(request, pk_test):
 
 
     elif (pk_test == 'UserAward'):
-        form = UserAward.objects.all()
+        form = UserAward.objects.all().order_by('-date_created')
         myFilter = UserAwardFilter(request.GET, queryset = form)
         form = myFilter.qs
 
@@ -738,9 +742,11 @@ def direction(request, tags):
     users = ListDirection.objects.filter(tags=tags).order_by('date_created')
     text_about = About.objects.filter(tags=tags).last()
 
+    users_count = ListDirection.objects.filter(tags=tags).count()
+
     context = {
     'news':news, 'users':users, 'text_about':text_about,
-    'news_count':news_count
+    'news_count':news_count, 'users_count':users_count
     }
     return render(request, 'accounts/pages/direction.html', context)
 

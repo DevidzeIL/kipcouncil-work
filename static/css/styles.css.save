@@ -124,7 +124,7 @@ td {
     }
 
     .info-role {
-        margin-top: 10px;
+        margin-top: 30px;
     }
 
     .info-fio {
@@ -205,6 +205,21 @@ td {
     /*-----=============================----- */
 
 
+    /* -PAGE MAIN */
+    /* -BLOCK HIDER */
+    /* .hider */
+
+    /* -BLOCK HEADER */
+    /* .header */
+    /* .navbar-brand */
+    /* .nav-item */
+
+    /* -BLOCK PROMO */
+    /* .promo */
+    /* .promo-header */
+
+
+
     /* -BLOCK DIRECTIONS */
     .directions {
         margin-bottom: 70px;
@@ -233,6 +248,7 @@ td {
     }
 
 
+
     /* DOCS */
     .docs {
         margin-bottom: 150px;
@@ -252,6 +268,7 @@ td {
     }
 
 
+
     /* -BLOCK GALLERY */
     .gallery {
         margin-bottom: 150px;
@@ -269,8 +286,6 @@ td {
         margin-left: 75px;
         margin-bottom: 10px;
     }
-
-
 
     /* -BLOCK BIG PROMO */
     .news-promo {
@@ -300,10 +315,6 @@ td {
         margin-bottom: 15px;
     }
 
-    /* .info-fio */
-
-
-
     /* -BLOCK  EVENTS*/
     .events {
         margin-bottom: 150px;
@@ -315,11 +326,13 @@ td {
         height: 300px;
     }
 
-
     /* -BLOCK SEARCH */
     .search {
         margin-bottom: 30vh;
     }
+
+}
+
 
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -361,11 +374,31 @@ td {
 
     /* -PAGE MAIN */
 
-    /* .box-header */
-    .info-calendar {
+
+
+    /* -PAGE DIRECTION */
+    /* -BLOCK INFO */
+    /* -COLUMN INFO > TEXT */
+    /* .info-author-header */
+    /* .info-text */
+    /* .box-header */    .info-calendar {
         margin-bottom: 20px;
     }
 
+
+
+    /* -PAGE ACCOUNT */
+    /* -------------------------- */
+
+
+
+
+    /* -PAGE CALENDAR */
+
+
+
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
     /* -BLOCK DOCS */
     .doc-header {
         margin-top: 100px;
@@ -380,6 +413,26 @@ td {
         margin-top: 30px;
     }
 
+
+
+
+    /* -PAGE GALLERY  */
+
+
+
+    /* -PAGE ABOUT */
+
+
+
+    /* -PAGE NEWS-ABOUT */
+
+
+
+    /* -PAGE NEWS */
+
+
+
+    /* -PAGE SEARCH */
 
 }
 
@@ -432,11 +485,32 @@ td {
     /*-----=============================----- */
 
 
+    /* -PAGE MAIN */
+
+
+
+    /* -PAGE DIRECTION */
+    /* -BLOCK INFO */
+    /* -COLUMN INFO > TEXT */
+    /* .info-author-header */
+    /* .info-text */
+    /* .box-header */
     .info-calendar {
         margin-bottom: 20px;
     }
 
 
+    /* -PAGE ACCOUNT */
+    /* -------------------------- */
+
+
+
+    /* -PAGE CALENDAR */
+
+
+
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
     /* -BLOCK DOCS */
     .doc-header {
         margin-top: 50px;
@@ -451,6 +525,26 @@ td {
         margin-top: 15px;
     }
 
+
+
+    /* -PAGE GALLERY  */
+
+
+
+    /* -PAGE ABOUT */
+
+
+
+    /* -PAGE NEWS-ABOUT */
+
+
+
+    /* -PAGE NEWS */
+
+
+
+    /* -PAGE SEARCH */
+    /* -BLOCK SEARCH */
     .search {
         margin-bottom: 30vh;
     }
@@ -529,6 +623,39 @@ td {
         margin-bottom: 40px;
         text-align: center;
     }
+
+
+
+    /* -PAGE ACCOUNT */
+
+
+    /* -PAGE CALENDAR */
+
+
+
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
+
+
+
+    /* -PAGE GALLERY  */
+
+
+
+    /* -PAGE ABOUT */
+
+
+
+    /* -PAGE NEWS-ABOUT */
+
+
+
+    /* -PAGE NEWS */
+
+
+
+    /* -PAGE SEARCH */
+
 }
 
 
@@ -603,6 +730,31 @@ td {
         margin-bottom: 100px;
     }
 
+
+
+    /* -PAGE ACCOUNT */
+
+
+
+    /* -PAGE CALENDAR */
+
+
+
+    /* -PAGE DOCS_COLLEGE */
+    /* -PAGE DOCS_COUNSIL */
+
+
+
+    /* -PAGE GALLERY  */
+
+
+
+    /* -PAGE ABOUT */
+
+
+
+    /* -PAGE NEWS-ABOUT */
+    /* -BLOCK BIG PROMO */
     .news-promo {
         margin-bottom: 50px;
     }
@@ -621,5 +773,13 @@ td {
     .info-list {
         margin-bottom: 30px;
     }
+
+
+
+    /* -PAGE NEWS */
+
+
+
+    /* -PAGE SEARCH */
 
 }

@@ -9,7 +9,7 @@
             <div class="container-fluid header-navs">
                 <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" style="width: 300px;"
                     src="{% static '/images/logo.svg' %}" alt="logo"></a>
-                <h1><div class="promo-header" style="margin-left: 10vh;">Работа с БД</div></h1>
+                <h1><div class="promo-header" style="margin-left: 10vh;">Работа с данными</div></h1>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'main_user' %}">Назад</a>
@@ -19,6 +19,13 @@
         </nav>
     </section>
 </div>
+
+        <style>
+            select
+            {
+                width: 100px;
+            }
+        </style>
 
 <div class="container-fluid" style="overflow-x:auto;">
     <table>
@@ -43,6 +50,7 @@
                 <td>{{form.profile_pic}}</td>
                 <td>{{form.vk_url}}</td>
                 <td>{{form.instagram_url}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
@@ -63,6 +71,7 @@
                 <td>{{form.email}}</td>
                 <td>{{form.password1}}</td>
                 <td>{{form.password2}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
@@ -77,6 +86,7 @@
             </tr>
             <tr>
                 <td>{{form.name}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
@@ -90,6 +100,7 @@
             </tr>
             <tr>
                 <td>{{form.name}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
@@ -97,7 +108,7 @@
 
 
         {% elif pk_test == 'ListDirection' %}
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form method="POST">
             {% csrf_token %}
             <tr>
                 <th>Направление</th>
@@ -111,6 +122,7 @@
                 <td>{{form.user}}</td>
                 <td>{{form.status}}</td>
                 <td>{{form.role}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
@@ -118,7 +130,7 @@
 
 
         {% elif pk_test == 'Event' %}
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form method="POST">
             {% csrf_token %}
 
             <tr>
@@ -131,6 +143,7 @@
                 <td>{{form.tags}}</td>
                 <td>{{form.name}}</td>
                 <td>{{form.date}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
@@ -138,7 +151,7 @@
 
 
         {% elif pk_test == 'Member' %}
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form method="POST">
             {% csrf_token %}
             <tr>
                 <th>Студент</th>
@@ -152,12 +165,12 @@
                 <td>{{form.event}}</td>
                 <td>{{form.role}}</td>
                 <td>{{form.comment}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
 
-
-
+   
         {% elif pk_test == 'New' %}
         <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
@@ -181,6 +194,7 @@
                 <td>{{form.text}}</td>
                 <td>{{form.link}}</td>
                 <td>{{form.photo}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
@@ -200,11 +214,10 @@
                 <td>{{form.user}}</td>
                 <td>{{form.award}}</td>
                 <td>{{form.description}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
-
-
 
         {% elif pk_test == 'Company' %}
         <form method="POST" action="" enctype="multipart/form-data">
@@ -239,6 +252,7 @@
                 <td>{{form.main_text}}</td>
                 {{form.media}}
                 <td>{{form.text}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}
@@ -283,6 +297,7 @@
                 <td>{{form.specialty}}</td>
                 <td>{{form.file}}</td>
                 <td>{{form.description}}</td>
+		<td></td>
             </tr>
         </form>
         {{form.errors}}

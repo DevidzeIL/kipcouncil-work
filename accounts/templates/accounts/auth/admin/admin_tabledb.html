@@ -10,7 +10,7 @@
                 <a class="navbar-brand" href="{% url 'main' %}"><img class="header-logo" style="width: 300px;"
                         src="{% static '/images/logo.svg' %}" alt="logo"></a>
                 <h1>
-                    <div class="promo-header" style="margin-left: 10vh;">Работа с БД</div>
+                    <div class="promo-header" style="margin-left: 10vh;">Работа с данными</div>
                 </h1>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-items">
                     <li class="nav-item">
@@ -60,6 +60,13 @@
 {% if pk_test != 'Student'%}
     <button class="btn btn-light"><a href="{% url 'admin_createdb' pk_test %}">Добавить</a></button>
 {% endif %}
+
+        <style>
+            select
+            {
+                width: 100px;
+            }
+        </style>
 
 <div class="container-fluid" style="overflow-x:auto;">
     <table id="tblData" style="margin-bottom: 50px;">
@@ -225,7 +232,7 @@
         <form method="get">
             <tr>
                 <th>Студент:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.user}}</th>
-                <th>Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.event}}</th>
+                <th style="width:150px;">Мероприятие:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.event}}</th>
                 <th>Роль:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.role}}</th>
                 <th>Комментарий</th>
                 <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
@@ -242,12 +249,7 @@
         </tr>
         {% endfor %}
 
-        <style>
-       	select {
-    	    word-wrap: normal;
-    	    width: 100px !important;
-	}
-        </style>
+
 
 
         {% elif pk_test == 'New' %}
@@ -290,7 +292,7 @@
             <tr>
                 <th>Студент:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.user}}</th>
                 <th>Портфолио</th>
-                <th>Описание:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.description}}</th>
+                <th style="width:150px;">Описание:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.description}}</th>
                 <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
             </tr>
         </form>
@@ -298,8 +300,8 @@
         <tr>
             <td>{{field.user}}</td>
             <td><img width="150px" height="350px" class="profile-pic img-fluid" src="{{field.award.url}}"
-                    onclick='openImageWindow(this.src);'></td>
-            <td>{{field.description}}</td>
+		onclick='openImageWindow(this.src);'></td>
+            <td style="width:150px;">{{field.description}}</td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
         </tr>
@@ -374,19 +376,16 @@
         {% endfor %}
 
 
-
-
-        {% elif pk_test == 'DocsCollege' %}
-
+	
+{% elif pk_test == 'DocsCollege' %}
         <form method="get">
             <tr>
                 <th>Название:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
                 <th>Курс:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.cource}}</th>
                 <th>Специальность:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.specialty}}</th>
-                <th>Файл</th>
                 <th>Описание:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.description}}</th>
                 <th>Дата добавления</th>
-                <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
+                <th colspan="3"><button class="btn btn-light" type="submit">Поиск</button></th>
             </tr>
         </form>
         {% for field in form %}
@@ -394,9 +393,9 @@
             <td>{{field.name}}</td>
             <td>{{field.cource}}</td>
             <td>{{field.specialty}}</td>
-            <td><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></td>
             <td>{{field.description}}</td>
             <td>{{field.date_created}}</td>
+            <td><button class="btn btn-light" type="submit"><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></button></td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
         </tr>
@@ -409,24 +408,24 @@
             <tr>
                 <th>Направление:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.tag}}</th>
                 <th>Название:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.name}}</th>
-                <th>Файл</th>
                 <th>Описание:&nbsp&nbsp&nbsp&nbsp{{myFilter.form.description}}</th>
                 <th>Дата добавления</th>
-                <th colspan="2"><button class="btn btn-light" type="submit">Поиск</button></th>
+                <th colspan="3"><button class="btn btn-light" type="submit">Поиск</button></th>
             </tr>
         </form>
         {% for field in form %}
         <tr>
             <td>{{field.tag}}</td>
             <td>{{field.name}}</td>
-            <td><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></td>
             <td>{{field.description}}</td>
             <td>{{field.date_created}}</td>
+            <td><button class="btn btn-light" type="submit"><a href="{{field.file.url}}" target="_blank" download="">Скачать</a></button></td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_editdb' pk_test field.id %}">Изменить</a></button></td>
             <td><button class="btn btn-light" type="submit"><a href="{% url 'admin_deletedb' pk_test field.id %}">Удалить</a></button></td>
         </tr>
         {% endfor %}
 
+        
         {% endif %}
 
     </table>
