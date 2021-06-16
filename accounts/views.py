@@ -842,7 +842,7 @@ def next_month(d):
 # Страница с календарем мероприятий
 def calendar_view(request):
     mydate = get_date(request.GET.get('month', None))
-    locale.setlocale(locale.LC_ALL,'en_US.UTF-8')
+    locale.setlocale(locale.LC_ALL,'ru_RU.UTF-8')
     cal = Calendar(mydate.year, mydate.month)
 
     html_cal = mark_safe(cal.formatmonth(withyear=True))

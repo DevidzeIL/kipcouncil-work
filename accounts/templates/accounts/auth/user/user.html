@@ -17,7 +17,7 @@
                         <a class="nav-link" href="{% url 'main' %}">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_settings' %}">Настройки</a>
+                        <a class="nav-link" href="{% url 'account_settings' %}">Настройки аккаунта</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
@@ -211,6 +211,16 @@
     </table>
 </div> -->
 
+
+<br>
+
+<!-- PROMO -->
+<section class="promo row">
+    <div class="col-12 col-sm-7 footer-nav-header" style="">
+        Портфолио
+    </div>
+</section>
+
 <script type="text/javascript">
     function openImageWindow(src) {
         var image = new Image();
@@ -224,7 +234,7 @@
 <!-- PORTFOLIO -->
 <div class="container" id="portfolio">
     <section class="direction row">
-	<div class="container" style="text-align: center;" ><button class="btn btn-light" ><a href="{% url 'create_award' user.id %}">Добавить</a></button></div>
+	<div class="container" style="text-align: center;"><button class="btn btn-light" ><a href="{% url 'create_award' user.id %}">Добавить портфолио</a></button></div>
 	<br>
 	<br>
 	<br>

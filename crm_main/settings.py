@@ -185,4 +185,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'timeofkip@gmail.com'
-EMAIL_HOST_PASSWORD = 'ZVA-69h-nps-Qg7'
+EMAIL_HOST_PASSWORD = '1'
